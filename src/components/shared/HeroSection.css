@@ -1,0 +1,62 @@
+.guia,
+.guia svg,
+.invierta,
+.invierta svg {
+  width: 300px;
+}
+
+.inversiones,
+.inversiones svg,
+.cartera .cartera svg {
+  width: 300px;
+  margin: auto;
+}
+
+@media (min-width: 1024px) {
+  .guia,
+  .guia svg,
+  .invierta,
+  .invierta svg {
+    width: 400px;
+  }
+
+  .inversiones,
+  .inversiones svg {
+    width: 400px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .guia,
+  .guia svg,
+  .invierta,
+  .invierta svg {
+    width: 519px !important;
+  }
+
+  .inversiones,
+  .inversiones svg,
+  .cartera,
+  .cartera svg {
+    width: 500px;
+  }
+}
+
+@media (min-width: 1500px) {
+  .guia,
+  .guia svg,
+  .invierta,
+  .invierta svg {
+    width: 750px !important;
+  }
+
+  .inversiones,
+  .inversiones svg {
+    width: 700px;
+  }
+
+  .cartera,
+  .cartera svg {
+    width: 750px !important;
+  }
+}

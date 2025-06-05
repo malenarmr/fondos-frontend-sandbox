@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 170 170">
+  <!-- Generator: Adobe Illustrator 29.5.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 137)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #00c3b3;
+      }
+
+      .st1 {
+        stroke: #3c3c3b;
+      }
+
+      .st1, .st2 {
+        fill: none;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .st2 {
+        filter: url(#drop-shadow-1);
+        stroke: #36b5ac;
+        stroke-dasharray: 8 21;
+      }
+
+      .st3 {
+        fill: #3c3c3b;
+      }
+    </style>
+    <filter id="drop-shadow-1" x="-47.1" y="-47.2" width="274.32" height="274.32" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5"/>
+      <feGaussianBlur result="blur" stdDeviation="17"/>
+      <feFlood flood-color="#909191" flood-opacity=".33"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path class="st2" d="M85.38,170h-1.49C37.36,169.81-.2,131.6,0,84.66h0C.2,37.72,38.09-.18,84.62,0h1.49c46.53.19,84.09,38.4,83.89,85.34h0c-.2,46.94-38.09,84.85-84.62,84.66Z"/>
+  <g>
+    <path class="st0" d="M118.51,45.03c1.84-.03,3.35,1.43,3.38,3.27l.73,41.97c.42,24.33-36.43,44.7-36.43,44.7h-.13s-37.54-19.07-37.97-43.4l-.73-41.97c-.03-1.84,1.44-3.35,3.27-3.39l67.86-1.18Z"/>
+    <rect class="st3" x="66.55" y="84.19" width="37.72" height="18.71" rx="4.1" ry="4.1" transform="translate(-1.62 1.5) rotate(-1)"/>
+    <path class="st1" d="M73.15,88.82l-.24-13.86c-.12-6.72,5.24-12.26,11.96-12.38,6.73-.12,12.27,5.24,12.39,11.96l.24,13.86"/>
+  </g>
+</svg>
