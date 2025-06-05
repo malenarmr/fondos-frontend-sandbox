@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 170 170">
+  <!-- Generator: Adobe Illustrator 29.5.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 137)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #fff;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .st2 {
+        fill: #40b17c;
+      }
+
+      .st1 {
+        stroke: #38b6ad;
+        stroke-dasharray: 8 21;
+      }
+    </style>
+  </defs>
+  <g>
+    <circle class="st2" cx="85" cy="85" r="50.16"/>
+    <g>
+      <circle class="st0" cx="83.76" cy="85.17" r="22.65"/>
+      <line class="st0" x1="55.34" y1="55.53" x2="60.75" y2="60.94"/>
+      <line class="st0" x1="85" y1="44.1" x2="85" y2="51.76"/>
+      <line class="st0" x1="114.66" y1="55.53" x2="109.25" y2="60.94"/>
+      <g>
+        <line class="st0" x1="114.66" y1="114.47" x2="109.25" y2="109.06"/>
+        <line class="st0" x1="85" y1="125.9" x2="85" y2="118.24"/>
+        <line class="st0" x1="55.34" y1="114.47" x2="60.75" y2="109.06"/>
+      </g>
+    </g>
+  </g>
+  <path class="st1" d="M85.38,170h-1.49C37.36,169.81-.2,131.6,0,84.66h0C.2,37.72,38.09-.18,84.62,0h1.49c46.53.19,84.09,38.4,83.89,85.34h0c-.2,46.94-38.09,84.85-84.62,84.66Z"/>
+</svg>

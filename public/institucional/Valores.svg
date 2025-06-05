@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 170 170">
+  <!-- Generator: Adobe Illustrator 29.5.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 137)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #00c3b3;
+      }
+
+      .st1 {
+        filter: url(#drop-shadow-1);
+        stroke: #36b5ac;
+        stroke-dasharray: 8 21;
+      }
+
+      .st1, .st2, .st3 {
+        fill: none;
+        stroke-width: 2px;
+      }
+
+      .st1, .st3 {
+        stroke-miterlimit: 10;
+      }
+
+      .st2 {
+        stroke-linejoin: round;
+      }
+
+      .st2, .st3 {
+        stroke: #fff;
+        stroke-linecap: round;
+      }
+    </style>
+    <filter id="drop-shadow-1" x="-47.1" y="-47.2" width="274.32" height="274.32" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5"/>
+      <feGaussianBlur result="blur" stdDeviation="17"/>
+      <feFlood flood-color="#909191" flood-opacity=".33"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path class="st1" d="M85.38,170h-1.49C37.36,169.81-.2,131.6,0,84.66h0C.2,37.72,38.09-.18,84.62,0h1.49c46.53.19,84.09,38.4,83.89,85.34h0c-.2,46.94-38.09,84.85-84.62,84.66Z"/>
+  <g>
+    <polygon class="st0" points="84.81 135.96 29.74 72.31 48.75 44.04 122.17 44.04 140.26 72.31 84.81 135.96"/>
+    <polyline class="st2" points="49.96 46.75 62.9 68.07 84.81 46.11 107.47 68.07 121.42 46.59"/>
+    <polyline class="st2" points="66.67 79.58 84.81 131.95 103.25 79.58"/>
+    <line class="st3" x1="35.31" y1="72.31" x2="135.7" y2="72.31"/>
+  </g>
+</svg>
