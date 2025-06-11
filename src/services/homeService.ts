@@ -85,7 +85,7 @@ export interface Destacado {
 }
 
 export async function fetchHomeCards(): Promise<HomeCard[]> {
-  const resp = await apiClient.get<RawHomeResponse>('/home-bursatils');
+  const resp = await apiClient.get<RawHomeResponse>('/home-fondos');
   const block = resp.data.data[0];
   if (!block) return [];
 

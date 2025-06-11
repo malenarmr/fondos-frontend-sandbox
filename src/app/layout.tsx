@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Provincia bursátil',
-  description: 'Provincia bursátil',
+  title: 'Provincia fondos',
+  description: 'Provincia fondos',
 };
 
 export default function RootLayout({

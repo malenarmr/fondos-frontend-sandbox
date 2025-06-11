@@ -2,7 +2,7 @@
 
 import { useAppContext } from '@/context/AppContext';
 import { MinusIcon, PlusIcon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Faq {
   question: string;
@@ -39,7 +39,7 @@ export default function AccordionFaq() {
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-[200px]">
-        <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
 
@@ -55,7 +55,7 @@ export default function AccordionFaq() {
         <div
           key={index}
           onClick={() => handleOpen(index)}
-          className={`text-primary px-4 md:px-16 border-black border-t ${index + 1 === faqs.length && 'border-b'}`}
+          className={`text-white px-4 md:px-16 border-black border-t ${index + 1 === faqs.length && 'border-b'}`}
         >
           <h2 id={`accordion-collapse-heading-${index} rounded-xl`}>
             <button

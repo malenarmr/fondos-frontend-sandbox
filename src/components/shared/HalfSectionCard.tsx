@@ -10,6 +10,7 @@ interface HalfSectionCardProps {
   textButton: string;
   borderRadius?: string;
   link?: string;
+  animation?: React.ReactNode;
   onClick?: () => void;
 }
 
@@ -21,6 +22,7 @@ const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
   textButton,
   borderRadius = '10px 50px 10px 0',
   link,
+  animation,
   onClick,
 }) => {
   return (
@@ -34,6 +36,9 @@ const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
       }}
     >
       <div className="w-full h-full flex flex-col justify-between items-start align-start text-start">
+        {animation && (
+          <div className="mb-4 flex justify-center">{animation}</div>
+        )}
         <h2 className="text-4xl font-black mb-8">{title}</h2>
         {children}
         <a href={link} target="_blank" rel="noopener noreferrer">

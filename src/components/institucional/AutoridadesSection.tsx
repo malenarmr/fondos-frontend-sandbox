@@ -22,7 +22,7 @@ export default function AutoridadesSection() {
   const renderTeamMemberCard = (member: any) => (
     <div
       key={member.id}
-      className="bg-[#005A63] text-white font-encode-sans font-semibold text-center
+      className="bg-primary-light text-white font-encode-sans font-semibold text-center
                  px-6 py-6 rounded-[12px] w-full max-w-xs min-h-[120px]
                  flex flex-col justify-center mx-auto"
       // agregamos mx-auto para centrar en mobile
@@ -43,7 +43,7 @@ export default function AutoridadesSection() {
         {/* CABA Section */}
         {cabaArea && (
           <div>
-            <h3 className="text-2xl font-bold mb-8 text-primary">CABA</h3>
+            <h3 className="text-2xl font-bold mb-8 text-secondary">CABA</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {cabaArea.member_team_bursatil.map((member) =>
                 renderTeamMemberCard(member)
@@ -55,7 +55,7 @@ export default function AutoridadesSection() {
         {/* La Plata Section */}
         {laplataArea && (
           <div>
-            <h3 className="text-2xl font-bold mb-8 text-primary">La Plata</h3>
+            <h3 className="text-2xl font-bold mb-8 text-secondary">La Plata</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {laplataArea.member_team_bursatil.map((member) =>
                 renderTeamMemberCard(member)
@@ -69,7 +69,7 @@ export default function AutoridadesSection() {
 
   return (
     <section className="mt-32 mb-32 font-encode-sans">
-      <h2 className="text-3xl font-bold mb-12 text-center">
+      <h2 className="text-3xl font-bold mb-12 text-center text-primary">
         {selectedFilter === 'Nuestro equipo' ? 'Nuestro equipo' : 'Autoridades'}
       </h2>
 

@@ -69,12 +69,7 @@ export default function AutoridadDetailPage() {
     <main>
       <Navbar />
 
-      <div
-        className="py-8 md:py-16 font-encode-sans"
-        style={{
-          background: 'linear-gradient(124deg, #008996 22.18%, #00C3B3 70.32%)',
-        }}
-      >
+      <div className="py-8 md:py-16 font-encode-sans">
         <div className="container mx-auto px-4">
           <div
             className="p-12 sm:p-24 max-w-3xl mx-auto font-encode-sans"

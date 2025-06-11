@@ -49,47 +49,35 @@ export default function InstitucionalPage() {
       </div>
 
       {/* Sección de Misión, Visión y Valores - Carousel on mobile */}
-      <section className="mt-16 px-4 md:px-36">
+      <section className="mt-16 bg-primary-light py-12 px-4 md:px-36">
         {isMobile ? (
           <MobileCarousel>
             <InstitucionalCard
               title="Misión"
-              imageSrc="/institucional/Mision.svg"
-              hoverDescription={institucionalData?.mision || ''}
-              hoverColor="#005A63"
+              description={institucionalData?.mision || ''}
             />
             <InstitucionalCard
               title="Visión"
-              imageSrc="/institucional/Vision.svg"
-              hoverDescription={institucionalData?.vision || ''}
-              hoverColor="#00E89A"
+              description={institucionalData?.vision || ''}
             />
             <InstitucionalCard
               title="Valores"
-              imageSrc="/institucional/Valores.svg"
-              hoverDescription={institucionalData?.values || ''}
-              hoverColor="#008996"
+              description={institucionalData?.values || ''}
             />
           </MobileCarousel>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
             <InstitucionalCard
               title="Misión"
-              imageSrc="/institucional/Mision.svg"
-              hoverDescription={institucionalData?.mision || ''}
-              hoverColor="#005A63"
+              description={institucionalData?.mision || ''}
             />
             <InstitucionalCard
               title="Visión"
-              imageSrc="/institucional/Vision.svg"
-              hoverDescription={institucionalData?.vision || ''}
-              hoverColor="#00E89A"
+              description={institucionalData?.vision || ''}
             />
             <InstitucionalCard
               title="Valores"
-              imageSrc="/institucional/Valores.svg"
-              hoverDescription={institucionalData?.values || ''}
-              hoverColor="#008996"
+              description={institucionalData?.values || ''}
             />
           </div>
         )}
