@@ -49,7 +49,7 @@ export default function NewsGrid({ filters }: NewsGridProps) {
 
     const matchesCategory =
       !filters.category ||
-      n.category_blog_bursatil.name
+      n.category_blog_fondos.name
         .toLowerCase()
         .includes(filters.category.toLowerCase());
 
@@ -59,7 +59,7 @@ export default function NewsGrid({ filters }: NewsGridProps) {
 
     const matchesTheme =
       !filters.theme ||
-      n.topic_blog_bursatils.some((t) =>
+      n.topic_blog_fondos.some((t) =>
         t.topic.toLowerCase().includes(filters.theme.toLowerCase())
       );
 
@@ -103,12 +103,12 @@ export default function NewsGrid({ filters }: NewsGridProps) {
               <NewsCard
                 key={n.id}
                 id={n.id}
-                category={n.category_blog_bursatil.name.toUpperCase()}
+                category={n.category_blog_fondos.name.toUpperCase()}
                 title={n.title}
                 author={n.author ?? 'Provincia Bursátil'}
                 description={n.shortContent || n.content.slice(0, 120) + '...'}
                 date={formattedDate}
-                bgColor={n.category_blog_bursatil.colors_bursatil.value}
+                bgColor={n.category_blog_fondos.colors_fondo.value}
                 textColor="#3C3C3B"
               />
             );

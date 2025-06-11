@@ -1,11 +1,9 @@
-// src/components/shared/NavBar.tsx
 'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
-import Button from './Button';
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -13,7 +11,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="bg-navbar">
-      <div className="w-full px-4 lg:px-[50px] flex justify-between items-center py-5 relative">
+      <div className="w-full px-4 lg:px-[50px] flex justify-evenly items-center py-5 relative">
         {/* Logo */}
         <div className="w-60 max-w-full">
           <Link href="/" legacyBehavior>
@@ -45,53 +43,22 @@ const Navbar: React.FC = () => {
           className={`${open ? 'block' : 'hidden'} absolute top-full left-0 right-0 bg-white shadow-md rounded-lg p-6 lg:static lg:block lg:bg-transparent lg:shadow-none lg:p-0 lg:right-auto lg:left-auto`}
           style={{ zIndex: 3 }}
         >
-          <ul className="flex flex-col space-y-4 text-primary lg:flex-row lg:space-y-0 lg:space-x-5 lg:items-center lg:whitespace-nowrap">
-            <ListItem href="/invierta" currentPath={pathname}>
-              App Invierta
-            </ListItem>
-            <ListItem href="/inversiones" currentPath={pathname}>
-              Inversiones
-            </ListItem>
-            <ListItem href="/guia" currentPath={pathname}>
-              Guía del inversor
-            </ListItem>
+          <ul className="flex flex-col space-y-4 gap-10 text-secondary lg:flex-row lg:space-y-0 lg:space-x-5 lg:items-center lg:whitespace-nowrap">
             <ListItem href="/institucional" currentPath={pathname}>
               Institucional
+            </ListItem>
+            <ListItem href="/nuestros-fondos" currentPath={pathname}>
+              Nuestros Fondos
+            </ListItem>
+            <ListItem href="/info" currentPath={pathname}>
+              Info para el inversor
+            </ListItem>
+            <ListItem href="/contacto" currentPath={pathname}>
+              Contacto
             </ListItem>
             <ListItem href="/noticias" currentPath={pathname}>
               Noticias
             </ListItem>
-            <li>
-              <Link
-                href="https://app.provinciabursatil.com.ar/#!/login?originalUrl="
-                target="_blank"
-                rel="noopener noreferrer"
-                legacyBehavior
-              >
-                <a>
-                  <Button
-                    variant="secondary"
-                    style={{ fontWeight: '600', height: 35, width: 150 }}
-                  >
-                    Ingresar
-                  </Button>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="https://app.provinciabursatil.com.ar/#!/registration/email?originalUrl="
-                target="_blank"
-                rel="noopener noreferrer"
-                legacyBehavior
-              >
-                <a>
-                  <Button style={{ fontWeight: '600', height: 35, width: 150 }}>
-                    Abrir cuenta
-                  </Button>
-                </a>
-              </Link>
-            </li>
           </ul>
         </nav>
       </div>
@@ -113,8 +80,8 @@ const ListItem: React.FC<ListItemProps> = ({ href, children, currentPath }) => {
     <li>
       <Link href={href} legacyBehavior>
         <a
-          className={`flex py-2 text-sm font-medium whitespace-nowrap hover:text-dark ${
-            isActive ? 'text-secondary' : ''
+          className={`flex py-2 text-md  whitespace-nowrap hover:text-dark ${
+            isActive ? 'font-bold' : 'font-medium'
           }`}
         >
           {children}

@@ -1,38 +1,41 @@
+'use client';
+
 import Button from '@/components/shared/Button';
+import Image from 'next/image';
 import Link from 'next/link';
-import JsonAnimation from '../shared/LottieAnimation';
 
 export default function AnimationSection() {
   return (
-    <section className="lg:rounded-t-[50px] lg:bg-light-aqua-green py-[30px] lg:pb-[70px] lg:mt-20 flex flex-col items-center mb-5 lg:mb-[-50px]">
-      <div className="container flex flex-col lg:flex-row items-center lg:justify-between lg:items-center">
-        <div className={'hidden lg:block lg:mr-20 lg:px-16 py-16'}>
-          {/* <LottieAnimation
-            animationData={animationData}
-            loop={true}
-            autoplay={true}
-          /> */}
-          <JsonAnimation src="/invierta/06_Destacado.json" />
+    <section className="lg:rounded-t-[50px] py-[30px] lg:pb-[70px] lg:mt-20 flex flex-col items-center mb-5 lg:mb-[-50px] px-4 lg:px-20">
+      <div className="container flex flex-col lg:flex-row items-center lg:justify-between">
+        {/* GIF hardcodeado */}
+        <div className="mb-8 lg:mb-0 lg:mr-10">
+          <Image
+            src="/home/01_Binoculares.gif"
+            alt="Binoculares simulador"
+            className="max-w-full h-auto"
+            width={500}
+            height={500}
+          />
         </div>
-        <div className=" flex flex-col justify-center lg:justify-end items-center lg:items-start lg:w-[50%] lg:ml-[30px] lg:pl-7">
-          <h1 className="font-encode-sans text-xl lg:text-4xl text-primary leading-7 mb-5 font-bold">
-            ¡No pierdas más tiempo!
-            <br />
-            Invertí con Invierta
+
+        {/* Texto y botón */}
+        <div className="flex flex-col text-center lg:text-left lg:w-1/2">
+          <h1 className="font-encode-sans text-xl lg:text-4xl text-primary-light leading-tight mb-5 font-bold">
+            Proyectá con el simulador de <br />
+            rendimientos
           </h1>
-          <p className="font-encode-sans text-lg text-primary leading-6 mb-16 font-400 px-14 lg:px-0">
-            Cambiá tu forma de invertir y potenciá tus ahorros.
-            <br />
-            Accedé a una amplia variedad de productos financieros
-            <br />
-            para todos los perfiles.
+          <p className="font-encode-sans text-lg text-secondary leading-6 mb-8">
+            Enterate de cómo operaron los fondos en los últimos períodos. Podés
+            compararlos y analizar cómo rindieron para tomar las mejores
+            decisiones
           </p>
-          <div className="flex justify-center">
+          <div className="flex justify-center lg:justify-start">
             <Link
               href="https://app.provinciabursatil.com.ar/#!/registration/email?originalUrl="
               passHref
             >
-              <Button>Crear cuenta</Button>
+              <Button variant="light">Ir al simulador</Button>
             </Link>
           </div>
         </div>

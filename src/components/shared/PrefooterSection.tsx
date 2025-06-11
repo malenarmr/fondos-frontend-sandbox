@@ -89,20 +89,43 @@ export default function PreFooterSection({ items }: Props) {
 
       {/* BEGINS DESKTOP */}
       <div className="hidden md:flex w-full">
-        {items.map((item, index) => (
-          <HalfSectionCard
-            key={index}
-            title={item.title}
-            bgColor={item.bgColor}
-            textColor={item.textColor}
-            textButton={item.textButton}
-            borderRadius={item.borderRadius}
-            link={item.link}
-            onClick={item.popup ? handleOpenPopup : undefined}
-          >
-            {item.description}
-          </HalfSectionCard>
-        ))}
+        {items.map((item, index) => {
+          // Elige la animación según la posición (0 = izquierda, 1 = derecha)
+          const animation =
+            index === 0 ? (
+              <Image
+                src="/home/01_Binoculares.gif"
+                alt="Binoculares simulador"
+                className="max-w-full h-auto"
+                width={500}
+                height={500}
+              />
+            ) : (
+              <Image
+                src="/home/05_Check.gif"
+                alt="Check simulador"
+                className="max-w-full h-auto"
+                width={500}
+                height={500}
+              />
+            );
+
+          return (
+            <HalfSectionCard
+              key={index}
+              animation={animation}
+              title={item.title}
+              bgColor={item.bgColor}
+              textColor={item.textColor}
+              textButton={item.textButton}
+              borderRadius={item.borderRadius}
+              link={item.link}
+              onClick={item.popup ? handleOpenPopup : undefined}
+            >
+              {item.description}
+            </HalfSectionCard>
+          );
+        })}
       </div>
       {/* END DESKTOP */}
       {showPopup && <Popup onClose={handleClosePopup} />}

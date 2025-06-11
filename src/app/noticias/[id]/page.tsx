@@ -132,7 +132,7 @@ export default function NewsDetailPage() {
             {/* Badge de categoría */}
             <div className="flex justify-end mb-6">
               <span className="bg-[#00C3B3] text-white px-4 py-2 rounded-lg text-sm font-encode-sans">
-                {noticia.category_blog_bursatil.name}
+                {noticia.category_blog_fondos.name}
               </span>
             </div>
 
@@ -216,14 +216,14 @@ export default function NewsDetailPage() {
                   );
                   const desc =
                     n.shortContent || `${n.content.slice(0, 120)}...`;
-                  const bg = n.category_blog_bursatil.colors_bursatil.value;
+                  const bg = n.category_blog_fondos.colors_fondo.value;
                   const textColor = '#3C3C3B';
 
                   return (
                     <NewsCard
                       key={n.id}
                       id={n.id}
-                      category={n.category_blog_bursatil.name.toUpperCase()}
+                      category={n.category_blog_fondos.name.toUpperCase()}
                       title={n.title}
                       author={n.author ?? 'Provincia Bursátil'}
                       description={desc}
