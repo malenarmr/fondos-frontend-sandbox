@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
             height={24}
           />
           <Image
-            src="/footer/BancoProvinciaBursatil.svg"
+            src="/footer/BancoProvinciaFondos.svg"
             alt="Bursátil"
             width={80}
             height={24}
@@ -165,7 +165,7 @@ const Footer: React.FC = () => {
               height={170}
             />
             <Image
-              src="/footer/BancoProvinciaBursatil.svg"
+              src="/footer/BancoProvinciaFondos.svg"
               alt="Logo 3"
               width={120}
               height={120}
