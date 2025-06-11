@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Video {
   Name: string;
@@ -28,7 +28,6 @@ export default function VideosSection() {
       try {
         const response =
           await provinciaApiClient.bursatil.videoTutorial.getAll();
-
         setVideos(response.data.data as Video[]);
       } catch {
         setError('Error al cargar preguntas frecuentes');
@@ -36,7 +35,6 @@ export default function VideosSection() {
         setLoading(false);
       }
     }
-
     fetchVideos();
   }, [provinciaApiClient]);
 
@@ -49,13 +47,9 @@ export default function VideosSection() {
 
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
-  const next = () => {
-    setCurrent((prev) => (prev + 1) % videos.length);
-  };
-
-  const prev = () => {
+  const next = () => setCurrent((prev) => (prev + 1) % videos.length);
+  const prev = () =>
     setCurrent((prev) => (prev - 1 + videos.length) % videos.length);
-  };
 
   const extractYouTubeId = (url: string) => {
     const regex =
@@ -70,19 +64,16 @@ export default function VideosSection() {
     startX.current = e.pageX - scrollRef.current.offsetLeft;
     scrollLeft.current = scrollRef.current.scrollLeft;
   };
-
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!isDown.current || !scrollRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1; // Ajustá la velocidad si querés
+    const walk = (x - startX.current) * 1;
     scrollRef.current.scrollLeft = scrollLeft.current - walk;
   };
-
   const handleMouseUp = () => {
     isDown.current = false;
   };
-
   const handleMouseLeave = () => {
     isDown.current = false;
   };
@@ -100,13 +91,14 @@ export default function VideosSection() {
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseLeave}
         >
-          {videos.map((video, index) => (
-            <>
+          {videos.map((video) => {
+            const thumb = extractYouTubeId(video.url);
+            return (
               <div
-                key={'desktop' + index}
+                key={video.url} // key único
                 className="text-white p-5 h-[314px] w-1/3 min-w-[500px] flex items-start flex-col justify-end gap-2 shadow-xl text-start"
                 style={{
-                  backgroundImage: `url(https://img.youtube.com/vi/${extractYouTubeId(video.url)}/hqdefault.jpg)`,
+                  backgroundImage: `url(https://img.youtube.com/vi/${thumb}/hqdefault.jpg)`,
                   backgroundPosition: 'center center',
                   backgroundSize: 'cover',
                   backgroundColor: 'rgba(0, 0, 0, 0.1)',
@@ -114,14 +106,14 @@ export default function VideosSection() {
                 }}
               >
                 <div className="flex gap-4">
-                  {video.categories_videos.map((category, i) => (
-                    <span key={i}># {category.categoryName}</span>
+                  {video.categories_videos.map((cat) => (
+                    <span key={cat.categoryName}># {cat.categoryName}</span>
                   ))}
                 </div>
                 <h4 className="text-xl font-medium">{video.Name}</h4>
               </div>
-            </>
-          ))}
+            );
+          })}
         </div>
         <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-gray-300 to-transparent pointer-events-none z-10" />
       </div>
@@ -133,7 +125,7 @@ export default function VideosSection() {
         </button>
         <div className="w-full">
           <div
-            key={current}
+            key={current} // mantiene el key para slide actual
             className="text-white p-5 h-48 w-full flex items-start flex-col justify-end text-start"
             style={{
               backgroundImage: `url(https://img.youtube.com/vi/${extractYouTubeId(videos[current].url)}/hqdefault.jpg)`,
@@ -143,9 +135,9 @@ export default function VideosSection() {
             }}
           >
             <div className="flex gap-2 items-start flex-wrap">
-              {videos[current].categories_videos.map((category, i) => (
-                <span key={i} className="text-sm">
-                  # {category.categoryName}
+              {videos[current].categories_videos.map((cat) => (
+                <span key={cat.categoryName} className="text-sm">
+                  # {cat.categoryName}
                 </span>
               ))}
             </div>

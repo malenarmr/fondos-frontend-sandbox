@@ -10,12 +10,11 @@ interface HeroSectionGenericoProps {
 export default function HeroSectionGenerico({
   title,
   description,
-  bgColor = 'bg-light-aqua-green',
   showImage = false,
 }: HeroSectionGenericoProps) {
   return (
     <section
-      className={`rounded-b-[50px] ${bgColor} py-8 xl:py-16 dark:bg-dark font-encode-sans`}
+      className={`rounded-b-[50px] py-8 xl:py-16 dark:bg-dark font-encode-sans`}
     >
       <div className="flex flex-col-reverse xl:flex-row items-center">
         <div className="flex flex-col text-primary xl:ml-[145px]">

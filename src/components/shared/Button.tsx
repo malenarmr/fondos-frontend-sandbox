@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 type CommonProps = {
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'light' | 'sky';
   children: React.ReactNode;
 };
 
@@ -20,6 +20,7 @@ const Button: React.FC<Props> = (props) => {
 
   const base = `
     flex items-center justify-center
+    font-encode-sans font-medium
     px-[25px] py-[9px]
     rounded-tl-[6px] rounded-tr-[12px]
     rounded-br-[6px] rounded-bl-[12px]
@@ -33,6 +34,14 @@ const Button: React.FC<Props> = (props) => {
       bg-primary border border-primary text-white
       hover:bg-secondary hover:border-secondary focus:ring-primary
     `,
+    light: `
+    bg-primary-light border border-primary-light text-white
+    hover:bg-primary hover:border-primary focus:ring-primary
+  `,
+    sky: `
+    bg-sky border border-sky text-secondary font-semibold
+    hover:bg-primary hover:border-primary focus:ring-primary
+  `,
     secondary: `
       bg-transparent border border-primary text-primary
       hover:bg-primary hover:text-white focus:ring-primary

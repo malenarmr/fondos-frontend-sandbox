@@ -253,7 +253,7 @@ const Footer: React.FC = () => {
       </footer>
 
       {/* DESKTOP SKY BAR */}
-      <div className="hidden sm:block w-full bg-sky py-4">
+      <div className="hidden sm:block w-full bg-white py-4">
         <div className="mx-auto px-4 text-center font-encode-sans font-semibold text-[12px] leading-[100%] tracking-normal text-primary">
           © 2025 Banco de la Provincia de Buenos Aires – Casa Matriz: Calle 7
           N° 726 (B1900TFS) La Plata, Buenos Aires, Argentina

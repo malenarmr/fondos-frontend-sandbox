@@ -4,7 +4,7 @@ import apiClient from './apiClient';
 export interface Categoria {
   id: number;
   name: string;
-  colors_bursatil: { value: string };
+  colors_fondo: { value: string };
 }
 
 export interface Topic {
@@ -20,10 +20,9 @@ export interface NoticiaBackend {
   shortContent: string | null;
   createdAt: string;
   publishedAt: string;
-  image: { url: string } | null; // <-- si tu API devuelve algo así para la imagen
-  category_blog_bursatil: Categoria;
-  topic_blog_bursatils: Topic[];
-  // … otros campos …
+  image: { url: string } | null;
+  category_blog_fondos: Categoria;
+  topic_blog_fondos: Topic[];
 }
 
 interface SingleApiResponse<T> {
@@ -39,7 +38,7 @@ export async function fetchNoticias(
   pageSize: number = 100
 ): Promise<{ data: NoticiaBackend[]; meta: any }> {
   const response = await apiClient.get<{ data: NoticiaBackend[]; meta: any }>(
-    '/blog-bursatils',
+    '/blog-fondos',
     {
       params: {
         'pagination[page]': page,
@@ -55,7 +54,7 @@ export async function fetchNoticias(
  */
 export async function fetchNoticiaById(id: number): Promise<NoticiaBackend> {
   const response = await apiClient.get<SingleApiResponse<NoticiaBackend>>(
-    `/blog-bursatils/${id}`,
+    `/blog-fondos/${id}`,
     {
       params: {
         populate: '*', // si querés que Strapi te incluya el campo image, topics, etc.

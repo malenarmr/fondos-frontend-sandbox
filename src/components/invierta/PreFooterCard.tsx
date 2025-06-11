@@ -1,6 +1,6 @@
 'use client';
-import React from 'react';
 import Button from '@/components/shared/Button';
+import React from 'react';
 
 interface PreFooterCardProps {
   title: string;
@@ -10,6 +10,7 @@ interface PreFooterCardProps {
   textButton: string;
   borderRadius?: string;
   link?: string;
+  animation?: React.ReactNode;
 }
 
 const PreFooterCard: React.FC<PreFooterCardProps> = ({
@@ -18,6 +19,7 @@ const PreFooterCard: React.FC<PreFooterCardProps> = ({
   bgColor,
   textColor,
   textButton,
+  animation,
   borderRadius = '10px 50px 10px 0',
   link,
 }) => {
@@ -31,6 +33,9 @@ const PreFooterCard: React.FC<PreFooterCardProps> = ({
       }}
     >
       <div className="w-full max-w-full md:w-50 h-full flex flex-col justify-start items-start align-start text-start">
+        {animation && (
+          <div className="mb-4 flex justify-center">{animation}</div>
+        )}
         <h2 className="text-2xl font-black my-5">{title}</h2>
         {children}
         <div

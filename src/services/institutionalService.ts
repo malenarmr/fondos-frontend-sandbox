@@ -72,7 +72,7 @@ export interface InstitucionalData {
 export const getInstitucionalData = async (
   apiClient: AxiosInstance
 ): Promise<InstitucionalData> => {
-  const resp = await apiClient.get('/institutional-bursatil');
+  const resp = await apiClient.get('/institutional-fondo');
   const data = resp.data.data as InstitucionalData;
 
   // 1) Base completa de la API (p.ej. "https://.../api")

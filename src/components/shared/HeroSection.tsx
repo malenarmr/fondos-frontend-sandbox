@@ -1,6 +1,6 @@
 import React from 'react';
-import './HeroSection.css';
 import JsonAnimation from '../shared/LottieAnimation';
+import './HeroSection.css';
 
 interface Hero {
   title: string;
@@ -11,7 +11,7 @@ interface Hero {
 
 const HeroSection: React.FC<Hero> = ({ title, children, animation, id }) => {
   return (
-    <section className="rounded-b-[50px] bg-light-aqua-green py-12 dark:bg-dark md:px-[100px] xl:px-[145px]">
+    <section className="bg-light-aqua-green py-12 dark:bg-dark md:px-[100px] xl:px-[145px]">
       <div
         className={`flex flex-col-reverse xl:flex-row items-center justify-between mx-auto`}
       >

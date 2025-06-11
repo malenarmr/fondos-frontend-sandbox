@@ -5,15 +5,15 @@ import NewsGrid from '@/components/noticias/NewsGrid';
 import Footer from '@/components/shared/Footer';
 import HeroSectionGenerico from '@/components/shared/HeroSectionGenerico';
 import Navbar from '@/components/shared/NavBar';
-import PromoSection from '@/components/shared/PromoSection';
+import PreFooterSection from '@/components/shared/PrefooterSection';
 import { NoticiaBackend, fetchNoticias } from '@/services/noticiasService';
 import { useEffect, useMemo, useState } from 'react';
 
 export default function NoticiasPage() {
   // 1) Estado para todas las noticias
   const [allNews, setAllNews] = useState<NoticiaBackend[]>([]);
-  const [loadingNews, setLoadingNews] = useState(false);
   const [errorNews, setErrorNews] = useState<string | null>(null);
+  const APP_STORE_LINK = 'https://apps.apple.com/us/app/invierta/id6448729005';
 
   // 2) Estado para los filtros actuales seleccionados
   const [filters, setFilters] = useState({
@@ -22,11 +22,43 @@ export default function NoticiasPage() {
     year: '',
     theme: '',
   });
-
+  const items = [
+    {
+      title: 'Proyectá con el simulador de rendimientos',
+      bgColor: '#009B67',
+      textColor: '#FFFFFF',
+      textButton: 'Ir al simulador',
+      borderRadius: '50px 0 0 0',
+      link: APP_STORE_LINK,
+      description: (
+        <p
+          className="font-encode-sans text-lg mb-8 leading-5"
+          style={{ color: '#FFFFFF' }}
+        >
+          Enterate de cómo operaron los fondos en los últimos períodos. Podés
+          compararlos y analizar cómo rindieron para tomar las mejores
+          decisiones
+        </p>
+      ),
+    },
+    {
+      title: 'Conocé más sobre cómo invertir con videos tutoriales',
+      bgColor: '#EBEBEB',
+      textColor: '#3C3C3B',
+      textButton: 'Ver todos los videos',
+      borderRadius: '0 50px 0 0',
+      popup: true,
+      description: (
+        <p className="font-encode-sans text-lg mb-8 leading-5">
+          Recibí nuestra información
+          <br />y enterate de las últimas novedades
+        </p>
+      ),
+    },
+  ];
   // 3) Cargar todas las noticias una vez (o cuando hagan falta)
   useEffect(() => {
     async function load() {
-      setLoadingNews(true);
       setErrorNews(null);
       try {
         const resp = await fetchNoticias(0, 1000);
@@ -35,7 +67,6 @@ export default function NoticiasPage() {
         console.error(err);
         setErrorNews('No se pudieron cargar las noticias');
       } finally {
-        setLoadingNews(false);
       }
     }
     load();
@@ -45,8 +76,8 @@ export default function NoticiasPage() {
   const categories = useMemo(() => {
     const setCat = new Set<string>();
     allNews.forEach((n) => {
-      if (n.category_blog_bursatil?.name) {
-        setCat.add(n.category_blog_bursatil.name);
+      if (n.category_blog_fondos?.name) {
+        setCat.add(n.category_blog_fondos.name);
       }
     });
     return Array.from(setCat).sort();
@@ -64,7 +95,7 @@ export default function NoticiasPage() {
   const themes = useMemo(() => {
     const setTheme = new Set<string>();
     allNews.forEach((n) => {
-      n.topic_blog_bursatils.forEach((t) => {
+      n.topic_blog_fondos.forEach((t) => {
         if (t.topic) {
           setTheme.add(t.topic);
         }
@@ -83,15 +114,11 @@ export default function NoticiasPage() {
     return <div className="text-red-500 text-center py-8">{errorNews}</div>;
   }
 
-  if (loadingNews) {
-    return <div className="text-center py-8">Cargando noticias...</div>;
-  }
-
   // 7) Cuando ya no haya error ni loading, renderizamos el contenido normal:
   const heroData = {
     title: 'Noticias',
     description:
-      'En esta sección vas a poder encontrar distintas noticias, informes de cierre de mercado y demás artículos.',
+      'No dejes de informarte, indagá sobre cotización de activos, informes de cierre de mercado y demás articulos. ',
   };
 
   return (
@@ -115,18 +142,7 @@ export default function NoticiasPage() {
         {/* Ahora sí, NewsGrid recibe allNews + filters */}
         <NewsGrid allNews={allNews} filters={filters} />
 
-        <PromoSection
-          title="¿Querés invertir en dólar MEP?"
-          description="Operá desde Invierta, descubrí nuevas oportunidades y gestioná tu dinero de manera simple, rápida y segura."
-          appStoreUrl="https://apps.apple.com/us/app/invierta/id6448729005"
-          playStoreUrl="https://play.google.com/store/apps/details?id=io.btrader.prbu&hl"
-          wrapperClassName="py-20 px-6 grid gap-8 justify-center text-center text-white relative rounded-t-[40px]"
-          wrapperStyle={{
-            background:
-              'linear-gradient(124deg, #008996 22.18%, #00C3B3 70.32%)',
-          }}
-          buttonWrapperClassName="text-primary"
-        />
+        <PreFooterSection items={items} />
 
         <Footer />
       </div>
