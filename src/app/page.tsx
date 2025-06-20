@@ -1,6 +1,6 @@
 'use client';
 
-import VideosSection from '@/components/guia/VideosSection';
+import VideosSection from '@/components/info/VideosSection';
 import DesktopCarousel from '@/components/inicio/DesktopCarousel';
 import FeaturedCarousel from '@/components/inicio/FeaturedCarousel';
 import AnimationSection from '@/components/invierta/AnimationSection';
@@ -19,7 +19,9 @@ export default function HomePage() {
 
       <DesktopCarousel cards={cards} />
 
-      <AnimationSection />
+      <section className="lg:rounded-t-[50px] py-[30px] lg:pb-[70px] lg:mt-20 flex flex-col items-center mb-5 lg:mb-[-50px] px-4 lg:px-20">
+        <AnimationSection />
+      </section>
 
       <div className="relative bg-[#2098A1] pt-20 overflow-hidden">
         <div
