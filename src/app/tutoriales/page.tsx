@@ -7,8 +7,9 @@ export default function TutorialesPage() {
     <main>
       <Navbar />
 
-      <section className="md:py-16 bg-white dark:bg-dark">
-        <div className="md:px-6 lg:px-8 xl:px-[100px]">
+      <section className="bg-white dark:bg-dark">
+        <div className="">
+          {/* <div className="md:px-6 lg:px-8 xl:px-[100px]"> */}
           <VideosSection />
         </div>
       </section>
