@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import { useAppContext } from '@/context/AppContext';
 import Button from '../shared/Button';
@@ -17,11 +17,26 @@ type Data = {
 };
 
 export default function SimuladorSection() {
+  const myDivRef = useRef<HTMLDivElement>(null);
+
   const [carteras, setCarteras] = useState<Cartera[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [formData, setFormData] = useState<Data>({});
+  const [formData, setFormData] = useState<Data>({
+    monto: '',
+    carteraDocumentId: '',
+    fechaInicio: '',
+    fechaFin: '',
+  });
   const [missing, setMissing] = useState<string[]>([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [result, setResult] = useState({
+    rendimientoTotal: {
+      montoTotalInicialPortafolio: '',
+      porcentajeRendimientoTotal: 0,
+      valorFinalTotalPortafolio: '',
+    },
+  });
 
   const { provinciaApiClient } = useAppContext();
 
@@ -49,16 +64,48 @@ export default function SimuladorSection() {
 
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
+  const requiredFields = [
+    'carteraDocumentId',
+    'fechaInicio',
+    'fechaFin',
+    'monto',
+  ];
+
   const handleChange = (key: string, value: string) => {
+    const missingFields = [...missing].filter((field) => field !== key);
+    setMissing(missingFields);
+
     setFormData((prev) => ({
       ...prev,
       [key]: value,
     }));
   };
 
-  const handleSend = () => {
-    const requiredFields = ['cartera', 'from', 'to', 'moneda', 'monto'];
+  const handleSimular = async () => {
+    try {
+      const response = await provinciaApiClient.bursatil.simulador.simular({
+        data: {
+          carteraDocumentId: formData.carteraDocumentId,
+          monto: Number(formData.monto),
+          fechaInicio: formData.fechaInicio,
+          fechaFin: formData.fechaFin,
+        },
+      });
+      setResult(response.data);
+      if (response.data.rendimientoTotal.montoTotalInicialPortafolio !== '') {
+        setShowPopup(true);
+      }
+      setLoading(true);
+      setError('');
+    } catch (err) {
+      setError('Error al simular inversion');
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  const handleSend = () => {
     const missingFields = requiredFields.filter(
       (field) => !formData[field] || formData[field].trim() === ''
     );
@@ -69,30 +116,66 @@ export default function SimuladorSection() {
       return;
     } else {
       setMissing([]);
+      handleSimular();
+      myDivRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  const handleBackground = (field: string) => {
+    if (!formData[field] || formData[field].trim() === '') {
+      return 'bg-white';
+    } else {
+      return 'bg-[#00C3B3]';
+    }
+  };
+
+  const handleText = (field: string) => {
+    if (!formData[field] || formData[field].trim() === '') {
+      return 'text-[#a3dbc7]';
+    } else {
+      return 'text-white';
+    }
+  };
+
+  const handleClosePopup = () => setShowPopup(false);
+
+  const formatDate = (str: string) => {
+    const blocks = str.split('-');
+    return blocks[2] + '/' + blocks[1] + '/' + blocks[0];
+  };
+
+  // Fecha de ayer en formato YYYY-MM-DD
+  const ayer = new Date();
+  ayer.setDate(ayer.getDate() - 1);
+  const fechaAyer = ayer.toISOString().split('T')[0];
+
   return (
     <>
-      <div className="px-6 md:px-[50px] lg:px-[100px] xl:px-[145px] flex flex-col items-center space-y-6 md:space-y-16 my-12 md:my-24">
+      <div className="px-6 md:px-[50px] lg:px-[100px] xl:px-[145px] flex flex-col items-center space-y-6 md:space-y-16 mb-12 md:mb-8">
         <div className="flex flex-col md:flex-row w-full gap-8 items-stretch">
-          <div className="bg-white rounded-xl py-6 md:py-20 px-8 flex flex-col gap-2 text-primary font-encode-sans border border-gray-300 w-full md:w-1/3">
+          <div
+            className={`rounded-xl py-6 md:py-20 px-8 flex flex-col gap-2 text-secondary font-encode-sans border border-[#2098A1] w-full md:w-1/3 transition duration-200 ${!formData.monto || formData.monto.trim() === '' ? 'bg-white' : 'bg-[#2098A1]'}`}
+          >
             <div className="flex md:flex-col gap-4 mb-6 md:mb-24 items-center md:items-start">
-              <h4 className="text-[75px] text-[#00C3B3] font-black">1</h4>
-              <span className="text-xl font-bold">
+              <h4
+                className={`text-[75px] text-[#a3dbc7] ${handleText('monto')} font-black`}
+              >
+                1
+              </h4>
+              <span className={`text-xl font-bold ${handleText('monto')}`}>
                 Ingresá cuánto dinero
                 <br /> hubieses invertido
               </span>
             </div>
             <div className="space-y-4">
-              <label>Ingresar monto</label>
+              <label className="text-secondary">Ingresar monto</label>
               <div className="relative w-full">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm select-none">
                   $
                 </span>
                 <input
                   type="number"
-                  className={`border rounded w-full py-2 ps-6 pe-3 focus:outline-none max-h-[40px] 
+                  className={`border border-[#929292] rounded w-full py-2 ps-6 pe-3 focus:outline-none max-h-[40px] 
                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${missing.includes('monto') && 'border-[#f27c7c] border-2'}`}
                   onChange={(e) => handleChange('monto', e.target.value)}
                   onKeyDown={(e) => {
@@ -103,83 +186,34 @@ export default function SimuladorSection() {
                   }}
                 />
               </div>
-              <div className="">
-                <div className="flex w-full space-between">
-                  {[
-                    { id: 'pesos', label: 'Pesos' },
-                    { id: 'usd', label: 'Dólares' },
-                  ].map(({ id, label }) => (
-                    <div key={id} className="flex w-[30%] items-baseline gap-1">
-                      <input
-                        type="radio"
-                        name="moneda"
-                        id={id}
-                        value={id}
-                        className="hidden peer"
-                        onChange={(e) => handleChange('moneda', e.target.value)}
-                      />
-                      <label
-                        htmlFor={id}
-                        className={`w-4 h-4 border border-gray-400 rounded flex items-center justify-center peer-checked:bg-blue-600 peer-checked:text-white text-transparent text-xs font-bold cursor-pointer ${missing.includes('moneda') && 'border-[#f27c7c] border-2'}`}
-                      >
-                        ✔
-                      </label>
-                      <label
-                        htmlFor={id}
-                        className="font-encode-sans text-sm cursor-pointer"
-                      >
-                        {label}
-                      </label>
-                    </div>
-                  ))}
-                  <label className="w-[40%] font-encode-sans text-sm">
-                    *Mínimo $100
-                  </label>
-                </div>
-              </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl py-6 md:py-20 px-8 flex flex-col gap-2 text-primary font-encode-sans border border-gray-300 w-full md:w-1/3">
+          <div
+            className={`bg-white rounded-xl py-6 md:py-20 px-8 flex flex-col gap-2 text-secondary font-encode-sans border border-[#2098A1] w-full md:w-1/3 ${!formData.fechaInicio || formData.fechaInicio.trim() === '' || !formData.fechaFin || formData.fechaFin.trim() === '' ? 'bg-white' : 'bg-[#00C3B3]'}`}
+          >
             <div className="flex md:flex-col gap-4 mb-6 md:mb-24 items-center md:items-start">
-              <h4 className="text-[75px] text-[#00C3B3] font-black">2</h4>
-              <span className="text-xl font-bold">
-                Seleccioná
-                <br /> una cartera sugerida
+              <h4 className="text-[75px] text-[#a3dbc7] font-black">2</h4>
+              <span className="text-xl font-bold text-[#a3dbc7]">
+                Seleccioná un período de
+                <br /> flujo de fondos
               </span>
             </div>
             <div className="space-y-4">
-              <label>Elegir cartera</label>
-              <select
-                className={`border rounded w-full p-2 bg-white focus:outline-none text-md ${missing.includes('cartera') && 'border-[#f27c7c] border-2'}`}
-                onChange={(e) => handleChange('cartera', e.target.value)}
-              >
-                <option></option>
-                {carteras.map((cartera) => (
-                  <option key={cartera.id}>{cartera.name}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl py-6 md:py-20 px-8 flex flex-col gap-2 text-primary font-encode-sans border border-gray-300 w-full md:w-1/3">
-            <div className="flex md:flex-col gap-4 mb-6 md:mb-24 items-center md:items-start">
-              <h4 className="text-[75px] text-[#00C3B3] font-black">3</h4>
-              <span className="text-xl font-bold">
-                Elegí una fecha
-                <br /> de inicio y de cierre
-              </span>
-            </div>
-            <div className="space-y-4">
-              <label>Seleccionar fecha</label>
+              <label className="">Seleccionar fecha</label>
               <div className="flex gap-3">
                 <input
                   type="date"
-                  className={`border rounded w-1/2 p-2 focus:outline-none max-h-[40px] ${missing.includes('from') && 'border-[#f27c7c] border-2'}`}
-                  onChange={(e) => handleChange('from', e.target.value)}
+                  value={formData.fechaInicio}
+                  max={formData.fechaFin || fechaAyer}
+                  className={`border border-[#929292] rounded w-1/2 p-2 focus:outline-none max-h-[40px] ${missing.includes('fechaInicio') && 'border-[#f27c7c] border-4'}`}
+                  onChange={(e) => handleChange('fechaInicio', e.target.value)}
                 />
                 <input
                   type="date"
-                  className={`border rounded w-1/2 p-2 focus:outline-none max-h-[40px] ${missing.includes('to') && 'border-[#f27c7c] border-2'}`}
-                  onChange={(e) => handleChange('to', e.target.value)}
+                  value={formData.fechaFin}
+                  max={fechaAyer}
+                  className={`border border-[#929292] rounded w-1/2 p-2 focus:outline-none max-h-[40px] ${missing.includes('fechaFin') && 'border-[#f27c7c] border-4'}`}
+                  onChange={(e) => handleChange('fechaFin', e.target.value)}
                 />
               </div>
               <div className="flex gap-3">
@@ -188,9 +222,34 @@ export default function SimuladorSection() {
               </div>
             </div>
           </div>
+          <div
+            className={`bg-white rounded-xl py-6 md:py-20 px-8 flex flex-col gap-2 text-secondary font-encode-sans border border-[#2098A1] w-full md:w-1/3 ${handleBackground('carteraDocumentId')}`}
+          >
+            <div className="flex md:flex-col gap-4 mb-6 md:mb-24 items-center md:items-start">
+              <h4 className="text-[75px] text-[#a3dbc7] font-black">3</h4>
+              <span className="text-xl font-bold text-[#a3dbc7]">
+                Elegí hasta tres fondos
+                <br /> para simular
+              </span>
+            </div>
+            <div className="space-y-4">
+              <label className="text-secondary">Elegir cartera</label>
+              <select
+                className={`border border-[#929292] rounded w-full p-2 bg-white focus:outline-none text-md ${missing.includes('carteraDocumentId') && 'border-[#f27c7c] border-4'}`}
+                onChange={(e) =>
+                  handleChange('carteraDocumentId', e.target.value)
+                }
+              >
+                <option></option>
+                {carteras.map((cartera) => (
+                  <option key={cartera.id}>{cartera.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
-        <div className="w-full justify-end flex flex-col items-end md:flex-row gap-8">
-          {missing.length === 0 && (
+        <div className="w-full justify-center flex flex-col items-end md:flex-row gap-8">
+          {missing.length !== 0 && (
             <div className="bg-[#f27c7c] text-white px-6 md:px-20 py-2 md:py-3 rounded-[10px] flex items-center gap-4">
               <AlertCircleIcon />
               <span className="font-encode-sans text-sm font-bold">
@@ -203,38 +262,118 @@ export default function SimuladorSection() {
           </Button>
         </div>
       </div>
-      <div className="pt-20 pb-28 relative bg-gradient-to-br from-[#008996] to-[#00C3B3] rounded-t-[50px] text-white mb-[-40px] md:px-[100px] xl:px-[145px] hidden md:block">
-        <div className="bg-white text-primary w-[100%] px-16 lg:px-20 py-12 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] flex flex-col max-w-[922px] mx-auto">
-          <h2 className="font-encode-sans font-bold text-3xl text-center">
-            El rendimiento de tu inversión
-            <br /> hubiese sido
-          </h2>
-          <div className="flex w-full gap-4 pt-16">
-            <div className="w-1/2 flex flex-col gap-8">
-              <div className="flex">
-                <span className="w-1/2 text-[#929292]">Total simulado</span>
-                <span className="w-1/2">$100.000,00</span>
+      {result.rendimientoTotal.montoTotalInicialPortafolio !== '' && (
+        <div className="pt-20 pb-28 relative rounded-t-[50px] mb-[-40px] md:px-[100px] xl:px-[145px] hidden md:block">
+          <div
+            className="bg-[#2098A1] text-white w-[100%] px-16 lg:px-20 py-12 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] flex flex-col max-w-[922px] mx-auto"
+            ref={myDivRef}
+          >
+            <h2 className="font-encode-sans font-bold text-3xl text-center text-navbar">
+              El rendimiento de tu inversión hubiese sido:
+              <br />
+              <b>Firma premium Clase A</b>
+            </h2>
+            <div className="flex w-full pt-16 border-b-2">
+              <div className="w-1/2 flex flex-col">
+                <div className="flex pb-6 border-b-2">
+                  <span className="w-1/2 ">Capital invertido</span>
+                  <span className="w-1/2 font-bold">$100.000,00</span>
+                </div>
+                <div className="flex py-6 border-b-2">
+                  <span className="w-1/2 ">Total simulado</span>
+                  <span className="w-1/2 font-bold">$100.000,00</span>
+                </div>
+                <div className="flex py-6">
+                  <span className="w-1/2">Rendimiento directo</span>
+                  <span className="w-1/2 font-bold">0,60%</span>
+                </div>
               </div>
-              <div className="flex">
-                <span className="w-1/2 text-[#929292]">
-                  Rendimiento directo
-                </span>
-                <span className="w-1/2">0,60%</span>
+              <div className="w-1/2 flex flex-col">
+                <div className="flex px-8 pb-6 justify-between border-b-2">
+                  <span className="">Tipo de inversor</span>
+                  <span className="font-bold"> Arriesgado</span>
+                </div>
+                <div className="flex px-8 py-6 justify-between border-b-2">
+                  <span className="">Desde - Hasta</span>
+                  <span className="font-bold"> 20/07/2025 - 20/09/2025</span>
+                </div>
+                <div className="flex bg-[#EEF8F3] py-2 px-8 rounded-[12px] justify-between my-4">
+                  <span className="text-secondary">Capital + Rendimiento</span>
+                  <span className="font-medium text-secondary font-bold">
+                    $100.5000
+                  </span>
+                </div>
               </div>
             </div>
-            <div className="w-1/2 flex flex-col gap-8">
-              <div className="flex px-8 justify-between rounded-[12px]">
-                <span className="text-[#929292]">Desde - Hasta</span>
-                <span className=""> 20/07/2025 - 20/09/2025</span>
+            <div className="text-center mt-8">
+              <span>
+                Información importante: los resultados de este tipo de fondos
+                puede variar mucho según el período seleccionado
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+      {showPopup && (
+        <div
+          className="fixed bg-[#3c3c3b66] block md:hidden w-[100vw] h-[100vh] top-0 left-0 z-10"
+          onClick={handleClosePopup}
+        >
+          <div
+            className="bg-white text-primary w-[90vw] h-[60vh] top-[5vh] left-[5vw] p-6 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] absolute"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex relative w-[100%]">
+              <h2 className="font-encode-sans font-bold text-xl text-center w-full">
+                El rendimiento
+                <br /> de tu inversión
+                <br /> hubiese sido
+              </h2>
+              <button
+                onClick={handleClosePopup}
+                className="absolute right-0 text-3xl"
+              >
+                ×
+              </button>
+            </div>
+            <div className="flex w-full flex-col gap-4 pt-6 text-sm">
+              <div className="flex justify-between border-b pb-2">
+                <span className="text-[#929292] text-sm">Total simulado</span>
+                <span className="w-1/2 border-l text-right ">
+                  ${result.rendimientoTotal.montoTotalInicialPortafolio}
+                </span>
               </div>
-              <div className="flex bg-[#00E89A] py-2 px-8 rounded-[12px] justify-between">
+              <div className="flex justify-between border-b pb-2">
+                <span className="text-[#929292] text-sm">
+                  Rendimiento directo
+                </span>
+                <span className="w-1/2 border-l text-right">
+                  {result.rendimientoTotal.porcentajeRendimientoTotal.toFixed(
+                    2
+                  )}
+                  %
+                </span>
+              </div>
+              <div className="flex justify-between rounded-[12px]">
+                <span className="text-[#929292] text-sm">Desde - Hasta</span>
+                <div className="flex flex-col border-l pb-2 w-1/2 text-right">
+                  <span className="">{formatDate(formData.fechaInicio)}</span>
+                  <span className="">{formatDate(formData.fechaFin)}</span>
+                </div>
+              </div>
+              <div className="flex bg-[#00E89A] py-2 px-4 rounded-[12px] justify-between text-sm">
                 <span className="text-primary">Capital + Rendimiento</span>
-                <span className="font-medium">$100.5000</span>
+                <span className="font-medium">
+                  $
+                  {Number(
+                    result.rendimientoTotal.valorFinalTotalPortafolio
+                  ).toFixed(2)}
+                </span>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
