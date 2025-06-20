@@ -112,59 +112,61 @@ export default function VideosSection() {
   return (
     <>
       {/* desktop */}
-      <div className="flex-col md:flex-row items-start space-x-4 xl:space-x-8 hidden md:flex justify-between">
-        <div className="flex-col items-center justify-center w-2/5 md:w-1/4 bg-light-aqua-green p-2 lg:p-5 xl:p-6 rounded-xl space-y-5 lg:space-y-10">
+      <div className="flex-col md:flex-row items-start space-x-4 xl:space-x-8 hidden md:flex justify-between items-stretch">
+        <div className="flex-col items-center justify-center w-2/5 md:w-1/4 bg-primary py-2 lg:pt-16 lg:pb-[100%] md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10">
           <div className="space-y-4">
-            <h3 className="text-xl font-black font-encode-sans text-primary">
+            <h3 className="text-xl font-black font-encode-sans text-white">
               Filtros de la búsqueda
             </h3>
             {selectedTags.length > 0 ? (
               selectedTags.map((tag) => (
                 <div
                   key={tag.id}
-                  className="cursor-pointer flex items-center bg-[#DDDDDD] rounded-full py-1 ps-2 pe-1 w-fit"
+                  className="cursor-pointer flex items-center bg-[#a3dbc7] rounded-full py-1 ps-2 pe-1 w-fit"
                   onClick={() => deleteTag(tag)}
                 >
                   <span>{tag.categoryName}</span>
                   <div className="bg-[#454B5433] p-1 rounded-full ms-1">
-                    <FaXmark size={16} className="text-primary" />
+                    <FaXmark size={16} className="text-white" />
                   </div>
                 </div>
               ))
             ) : (
-              <div className="text-sm mt-4">
+              <div className="text-sm mt-4 text-white">
                 Aún no tenes filtros seleccionados
               </div>
             )}
           </div>
           <div className="space-y-4 flex flex-col">
-            <h3 className="text-xl font-black font-encode-sans text-primary">
+            <h3 className="text-xl font-black font-encode-sans text-white">
               Tags
             </h3>
             {categories?.map((tag) => (
               <div
                 key={tag.id}
-                className="cursor-pointer"
+                className="cursor-pointer text-white"
                 onClick={() => addTag(tag)}
               >
                 <span>{tag.categoryName}</span>
               </div>
             ))}
+          </div>
+          <div>
             <button
-              className="px-[16px] py-[9px] rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-primary border border-primary text-white hover:bg-secondary hover:border-secondary focus:ring-primary w-fit"
+              className="py-[9px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white  focus:ring-primary w-fit font-bold"
               onClick={() => deleteAll()}
             >
-              Ver todos los videos
+              Ver todo
             </button>
           </div>
         </div>
-        <div className="align-start text-primary w-3/5 md:w-3/4">
-          <div className="flex flex-col gap-8 py-4">
-            <h1 className="font-encode-sans text-3xl lg:text-5xl text-primary font-black">
+        <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 lg:pr-8 xl:pr-[100px] py-2 lg:py-16">
+          <div className="flex flex-col gap-8 pb-4">
+            <h1 className="font-encode-sans text-3xl lg:text-5xl text-primary-light font-black">
               Videos tutoriales
             </h1>
             <p
-              className="font-encode-sans text-md lg:text-xl text-primary"
+              className="font-encode-sans text-md lg:text-xl text-secondary"
               style={{ fontWeight: 400 }}
             >
               Con nuestros videos tutoriales vas a poder conocer paso a paso
