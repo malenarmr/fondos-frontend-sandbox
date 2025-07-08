@@ -2,16 +2,25 @@
 
 import { useAppContext } from '@/context/AppContext';
 import { ChevronUpIcon, ChevronDownIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { LiaDownloadSolid } from 'react-icons/lia';
 
-interface Faq {
-  question: string;
-  answer: string;
+interface File {
+  title: string;
+  files: {
+    id: string;
+    name: string;
+    file: {
+      id: string;
+      url: string;
+    };
+  }[];
 }
 
 export default function AccordionFiles() {
   const [isOpen, setIsOpen] = useState(-1);
-  const [faqs, setFaqs] = useState<Faq[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -24,8 +33,9 @@ export default function AccordionFiles() {
   useEffect(() => {
     async function fetchFaqs() {
       try {
-        const response = await provinciaApiClient.fondos.faqs.getAll();
-        setFaqs(response.data.data as Faq[]);
+        const response =
+          await provinciaApiClient.fondos.informacionParaInversor.getAll();
+        setFiles(response.data.data as File[]);
       } catch {
         setError('Error al cargar preguntas frecuentes');
       } finally {
@@ -47,7 +57,7 @@ export default function AccordionFiles() {
 
   return (
     <div id="accordion-collapse" data-accordion="collapse" className="px-0">
-      {faqs.map((question, index) => (
+      {files.map((file, index) => (
         <div
           key={index}
           onClick={() => handleOpen(index)}
@@ -67,7 +77,7 @@ export default function AccordionFiles() {
                 <span
                   className={`font-encode-sans font-[18px] font-semibold transition duration-200 text-white text-start`}
                 >
-                  {question.question}
+                  {file.title}
                 </span>
                 <div className="relative w-10 h-10">
                   <ChevronUpIcon
@@ -85,10 +95,20 @@ export default function AccordionFiles() {
             className={`${isOpen === index ? 'open' : 'hidden'} transition-all duration-300 px-4 md:px-16 rounded-bl-xl rounded-br`}
             aria-labelledby="accordion-collapse-heading-1"
           >
-            <div>
-              <p className="font-encode-sans py-6 text-left px-5 font-[18px] text-secondary">
-                {question.answer}
-              </p>
+            <div className="grid grid-cols-2 pb-4">
+              {file.files.map((urlFiles, i) => {
+                console.log(urlFiles);
+                return (
+                  <Link
+                    href={urlFiles.file.url}
+                    key={i}
+                    className="font-encode-sans py-6 text-left px-5 text-secondary flex gap-2 items-center font-medium transition duration-200 lowercase hover:font-bold"
+                  >
+                    <LiaDownloadSolid />
+                    {urlFiles.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
