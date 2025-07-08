@@ -32,7 +32,7 @@ export default function VideosSection() {
       try {
         const response = await provinciaApiClient.fondos.videoTutorial.getAll();
         const resCategories =
-          await provinciaApiClient.bursatil.categoriesVideos.getAll();
+          await provinciaApiClient.fondos.categoriesVideos.getAll();
 
         setVideos(response.data.data as Video[]);
         setFilteredVideos(response.data.data as Video[]);
@@ -53,8 +53,6 @@ export default function VideosSection() {
         <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
-
-  if (error) return <p className="text-center text-red-500">{error}</p>;
 
   const handleFilterVideos = (selectedCategoryIds: string[]) => {
     setIsLoadingFilters(true);
@@ -172,7 +170,7 @@ export default function VideosSection() {
               <br className="hidden lg:block" />
               cómo operar. Usá los instructivos para saldar dudas.
             </p>
-
+            {error && <p className="text-center text-red-500">{error}</p>}
             {isLoadingFilters ? (
               <div className="flex justify-center items-center min-h-[200px]">
                 <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
