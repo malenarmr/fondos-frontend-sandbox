@@ -24,7 +24,7 @@ export default function CategoriesSection() {
     async function fetchVideos() {
       try {
         const response =
-          await provinciaApiClient.bursatil.categoriesVideos.getAll();
+          await provinciaApiClient.fondos.categoriesVideos.getAll();
         setCategories(response.data.data as Category[]);
       } catch {
         setError('Error al cargar categorias de videos');

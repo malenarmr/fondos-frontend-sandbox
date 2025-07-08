@@ -6,8 +6,6 @@ import Navbar from '@/components/shared/NavBar';
 import PreFooterSection from '@/components/shared/PrefooterSection';
 import Link from 'next/link';
 
-const APP_STORE_LINK = 'https://apps.apple.com/us/app/invierta/id6448729005';
-
 const items = [
   {
     title: 'Proyectá con el simulador de rendimientos',
@@ -15,7 +13,7 @@ const items = [
     textColor: '#FFFFFF',
     textButton: 'Ir al simulador',
     borderRadius: '50px 0 0 0',
-    link: APP_STORE_LINK,
+    link: '/simulador',
     description: (
       <p
         className="font-encode-sans text-lg mb-8 leading-5"
@@ -27,16 +25,16 @@ const items = [
     ),
   },
   {
-    title: 'Conocé más sobre cómo invertir con videos tutoriales',
+    title: '¿Querés saber qué tipo de inversor sos?',
     bgColor: '#2098A1',
     textColor: '#FFFFFF',
-    textButton: 'Ver todos los videos',
+    textButton: 'Hacé el test',
     borderRadius: '0 50px 0 0',
-    popup: true,
+    link: '/test-inversor',
     description: (
       <p className="font-encode-sans text-lg mb-8 leading-5">
-        Recibí nuestra información
-        <br />y enterate de las últimas novedades
+        ¿Sos más conservador o te gusta asumir riesgos? Hacé nuestro test en
+        minutos y encontrá la mejor estrategia de inversión para vos.
       </p>
     ),
   },
@@ -54,7 +52,7 @@ export default function NuestrosFondosPage() {
         </div>
       </section>
 
-      <div className="md:px-[100px] xl:px-[145px] py-20 bg-[#EBEBEB]">
+      <div className="md:px-[100px] xl:px-[145px] pt-20 pb-24 bg-[#EBEBEB] mb-[-50px]">
         <div className="flex justify-between items-center">
           <div className="w-3/4">
             <h1 className="font-encode-sans text-2xl lg:text-4xl text-secondary font-bold lg:font-black mb-6">
