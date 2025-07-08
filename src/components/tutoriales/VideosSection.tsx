@@ -30,10 +30,9 @@ export default function VideosSection() {
   useEffect(() => {
     async function fetchVideos() {
       try {
-        const response =
-          await provinciaApiClient.bursatil.videoTutorial.getAll();
+        const response = await provinciaApiClient.fondos.videoTutorial.getAll();
         const resCategories =
-          await provinciaApiClient.bursatil.categoriesVideos.getAll();
+          await provinciaApiClient.fondos.categoriesVideos.getAll();
 
         setVideos(response.data.data as Video[]);
         setFilteredVideos(response.data.data as Video[]);
@@ -54,8 +53,6 @@ export default function VideosSection() {
         <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
-
-  if (error) return <p className="text-center text-red-500">{error}</p>;
 
   const handleFilterVideos = (selectedCategoryIds: string[]) => {
     setIsLoadingFilters(true);
@@ -113,7 +110,7 @@ export default function VideosSection() {
     <>
       {/* desktop */}
       <div className="flex-col md:flex-row items-start space-x-4 xl:space-x-8 hidden md:flex justify-between items-stretch">
-        <div className="flex-col items-center justify-center w-2/5 md:w-1/4 bg-primary py-2 lg:pt-16 lg:pb-[100%] md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10">
+        <div className="flex-col items-center justify-center w-2/5 md:w-1/4 bg-primary py-2 lg:pt-16 lg:pb-[100%] md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10 max-w-[412px]">
           <div className="space-y-4">
             <h3 className="text-xl font-black font-encode-sans text-white">
               Filtros de la búsqueda
@@ -160,8 +157,8 @@ export default function VideosSection() {
             </button>
           </div>
         </div>
-        <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 lg:pr-8 xl:pr-[100px] py-2 lg:py-16">
-          <div className="flex flex-col gap-8 pb-4">
+        <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 lg:pr-8 xl:pr-[100px] py-2 lg:py-16 pl-12">
+          <div className="flex flex-col gap-8 pb-4 max-w-[1132px]">
             <h1 className="font-encode-sans text-3xl lg:text-5xl text-primary-light font-black">
               Videos tutoriales
             </h1>
@@ -173,7 +170,7 @@ export default function VideosSection() {
               <br className="hidden lg:block" />
               cómo operar. Usá los instructivos para saldar dudas.
             </p>
-
+            {error && <p className="text-center text-red-500">{error}</p>}
             {isLoadingFilters ? (
               <div className="flex justify-center items-center min-h-[200px]">
                 <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>

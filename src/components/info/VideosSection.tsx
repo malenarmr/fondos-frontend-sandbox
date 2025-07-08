@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 
 interface Video {
   Name: string;
-  categories_videos: { categoryName: string }[];
+  categories_video_fondo: { categoryName: string }[];
   url: string;
 }
 
@@ -26,8 +26,7 @@ export default function VideosSection() {
   useEffect(() => {
     async function fetchVideos() {
       try {
-        const response =
-          await provinciaApiClient.bursatil.videoTutorial.getAll();
+        const response = await provinciaApiClient.fondos.videoTutorial.getAll();
         setVideos(response.data.data as Video[]);
       } catch {
         setError('Error al cargar preguntas frecuentes');
@@ -94,23 +93,25 @@ export default function VideosSection() {
           {videos.map((video) => {
             const thumb = extractYouTubeId(video.url);
             return (
-              <div
-                key={video.url} // key único
-                className="text-white p-5 h-[314px] w-1/3 min-w-[500px] flex items-start flex-col justify-end gap-2 shadow-xl text-start"
-                style={{
-                  backgroundImage: `url(https://img.youtube.com/vi/${thumb}/hqdefault.jpg)`,
-                  backgroundPosition: 'center center',
-                  backgroundSize: 'cover',
-                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                  backgroundBlendMode: 'color',
-                }}
-              >
-                <div className="flex gap-4">
-                  {video.categories_videos.map((cat) => (
-                    <span key={cat.categoryName}># {cat.categoryName}</span>
-                  ))}
+              <div key={video.url} className="flex flex-col">
+                <div
+                  // key único
+                  className="text-white p-5 h-[314px] w-1/3 min-w-[500px] flex items-start flex-col justify-end gap-2 shadow-xl text-start"
+                  style={{
+                    backgroundImage: `url(https://img.youtube.com/vi/${thumb}/hqdefault.jpg)`,
+                    backgroundPosition: 'center center',
+                    backgroundSize: 'cover',
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    backgroundBlendMode: 'color',
+                  }}
+                >
+                  <div className="flex gap-4">
+                    {video.categories_video_fondo?.map((cat) => (
+                      <span key={cat.categoryName}># {cat.categoryName}</span>
+                    ))}
+                  </div>
                 </div>
-                <h4 className="text-xl font-medium">{video.Name}</h4>
+                <h4 className="text-xl font-medium pt-4">{video.Name}</h4>
               </div>
             );
           })}
@@ -135,7 +136,7 @@ export default function VideosSection() {
             }}
           >
             <div className="flex gap-2 items-start flex-wrap">
-              {videos[current].categories_videos.map((cat) => (
+              {videos[current]?.categories_video_fondo?.map((cat) => (
                 <span key={cat.categoryName} className="text-sm">
                   # {cat.categoryName}
                 </span>
