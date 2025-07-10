@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 
 interface Video {
   Name: string;
-  categories_video_fondo: { categoryName: string }[];
+  categories_video_fondos: { categoryName: string }[];
   url: string;
 }
 
@@ -104,14 +104,18 @@ export default function VideosSection() {
                     backgroundColor: 'rgba(0, 0, 0, 0.1)',
                     backgroundBlendMode: 'color',
                   }}
-                >
-                  <div className="flex gap-4">
-                    {video.categories_video_fondo?.map((cat) => (
-                      <span key={cat.categoryName}># {cat.categoryName}</span>
-                    ))}
-                  </div>
+                ></div>
+                <h4 className="text-xl font-medium pt-4 pb-2">{video.Name}</h4>
+                <div className="flex gap-4 text-primary-light">
+                  {video.categories_video_fondos?.map((cat) => (
+                    <span
+                      className="border w-fit py-1 px-4 rounded-full border-primary-light"
+                      key={cat.categoryName}
+                    >
+                      # {cat.categoryName}
+                    </span>
+                  ))}
                 </div>
-                <h4 className="text-xl font-medium pt-4">{video.Name}</h4>
               </div>
             );
           })}
@@ -135,14 +139,14 @@ export default function VideosSection() {
               backgroundBlendMode: 'color',
             }}
           >
+            <h4 className="text-md font-medium">{videos[current].Name}</h4>
             <div className="flex gap-2 items-start flex-wrap">
-              {videos[current]?.categories_video_fondo?.map((cat) => (
+              {videos[current]?.categories_video_fondos?.map((cat) => (
                 <span key={cat.categoryName} className="text-sm">
                   # {cat.categoryName}
                 </span>
               ))}
             </div>
-            <h4 className="text-md font-medium">{videos[current].Name}</h4>
           </div>
         </div>
         <button onClick={next} aria-label="Next slide">
