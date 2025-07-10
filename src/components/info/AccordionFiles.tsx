@@ -97,7 +97,6 @@ export default function AccordionFiles() {
           >
             <div className="grid grid-cols-2 pb-4">
               {file.files.map((urlFiles, i) => {
-                console.log(urlFiles);
                 return (
                   <Link
                     href={urlFiles.file.url}

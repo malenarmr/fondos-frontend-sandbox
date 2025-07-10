@@ -13,7 +13,7 @@ interface Video {
   Name: string;
   category: string;
   url: string;
-  categories_videos: { categoryName: string; id: string }[];
+  categories_video_fondos: { categoryName: string; id: string }[];
 }
 
 export default function VideosSection() {
@@ -62,7 +62,7 @@ export default function VideosSection() {
         setFilteredVideos(videos);
       } else {
         const newFilteredVideos = videos.filter((video) =>
-          video.categories_videos.some((cat) =>
+          video.categories_video_fondos.some((cat) =>
             selectedCategoryIds.includes(cat.id)
           )
         );
@@ -176,32 +176,36 @@ export default function VideosSection() {
                 <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
               </div>
             ) : (
-              filteredVideos.map((video, index) => (
-                <div key={index} className="relative">
-                  <div className="md:w-[436px] md:h-[325px] lg:w-[696px] lg:h-[475px] xl:w-[846px] xl:h-[475px]">
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={`https://www.youtube.com/embed/${extractYouTubeId(video.url)}?rel=0&modestbranding=1&showinfo=0`}
-                      title={video.Name}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                    ></iframe>
+              <div className="flex flex-col gap-12">
+                {filteredVideos.map((video, index) => (
+                  <div key={index}>
+                    <div className="md:w-[436px] md:h-[325px] lg:w-[696px] lg:h-[475px] xl:w-[846px] xl:h-[475px]">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={`https://www.youtube.com/embed/${extractYouTubeId(video.url)}?rel=0&modestbranding=1&showinfo=0`}
+                        title={video.Name}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                    <div className="">
+                      <h4 className="font-enconde-sans text-2xl pt-4 pb-2 font-bold text-secondary">
+                        {video.Name}
+                      </h4>
+                      <div className="flex gap-4">
+                        {video.categories_video_fondos.map((category, i) => (
+                          <span key={i} className="text-lg text-primary-light">
+                            # {category.categoryName}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div className="absolute bottom-16 left-6 text-white">
-                    {/* <div className="flex gap-4">
-                  {video.categories_videos.map((category, i) => (
-                    <span key={i} className="text-lg">
-                      # {category.categoryName}
-                    </span>
-                  ))}
-                </div>
-                <h4 className="text-2xl font-medium">{video.Name}</h4> */}
-                  </div>
-                </div>
-              ))
+                ))}
+              </div>
             )}
           </div>
         </div>
