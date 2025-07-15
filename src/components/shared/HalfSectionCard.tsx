@@ -20,7 +20,6 @@ const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
   bgColor,
   textColor,
   textButton,
-  borderRadius = '10px 50px 10px 0',
   link,
   animation,
   onClick,
@@ -31,7 +30,7 @@ const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
       style={{
         backgroundColor: bgColor,
         color: textColor,
-        borderRadius: borderRadius,
+        // borderRadius: borderRadius,
         width: '50%',
       }}
     >

@@ -1,0 +1,23 @@
+.img-fondo {
+  background: url('/fondos/Mask.png') repeat;
+  background-size: contain;
+  left: 0;
+  height: 70%;
+  bottom: 0;
+  z-index: -1;
+  position: absolute;
+  width: 100vw;
+  max-width: 100dvw;
+}
+
+@media (width >= 768px) {
+  .img-fondo {
+    left: -100px;
+  }
+}
+
+@media (width >= 1280px) {
+  .img-fondo {
+    left: -160px;
+  }
+}
