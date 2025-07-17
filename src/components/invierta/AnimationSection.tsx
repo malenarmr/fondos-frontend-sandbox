@@ -8,7 +8,7 @@ export default function AnimationSection() {
   return (
     <div className="container flex flex-col lg:flex-row items-center lg:justify-between">
       {/* GIF hardcodeado */}
-      <div className="mb-8 lg:mb-0 lg:mr-10">
+      <div className="mb-2 lg:mb-0 lg:mr-10">
         <Image
           src="/home/01_Binoculares.gif"
           alt="Binoculares simulador"
@@ -19,8 +19,8 @@ export default function AnimationSection() {
       </div>
 
       {/* Texto y botón */}
-      <div className="flex flex-col text-center lg:text-right lg:w-1/2">
-        <h1 className="font-encode-sans text-xl lg:text-4xl text-primary-light leading-tight mb-5 font-bold">
+      <div className="flex flex-col text-end md:text-center lg:text-right lg:w-1/2 px-[50px] md:px-0">
+        <h1 className="font-encode-sans text-xl lg:text-4xl text-primary-light leading-tight mb-5 font-extrabold">
           Proyectá con el
           <br /> simulador de
           <br />
@@ -28,10 +28,12 @@ export default function AnimationSection() {
         </h1>
         <p className="font-encode-sans text-lg text-secondary leading-6 mb-8">
           Enterate de cómo operaron los fondos
-          <br /> en los últimos períodos. Podés compararlos
-          <br /> y analizar cómo rindieron para tomar las mejores decisiones
+          <br className="hidden lg:block" /> en los últimos períodos. Podés
+          compararlos
+          <br className="hidden lg:block" /> y analizar cómo rindieron para
+          tomar las mejores decisiones
         </p>
-        <div className="flex justify-center lg:justify-end">
+        <div className="flex justify-end lg:justify-end mb-6 md:mb-0">
           <Link href="/simulador" passHref>
             <Button variant="light">Ir al simulador</Button>
           </Link>
