@@ -212,13 +212,13 @@ export default function VideosSection() {
       </div>
       {/* mobile */}
       <div className="flex md:hidden flex-col">
-        <div className="bg-light-aqua-green text-center py-16">
+        <div className="text-center py-10">
           <h1 className="font-encode-sans text-3xl text-primary font-black">
             Videos tutoriales
           </h1>
         </div>
-        <div className="space-y-4 bg-[#EBEBEB] py-16 px-[60px]">
-          <h3 className="text-xl font-black font-encode-sans text-primary">
+        <div className="space-y-4 bg-[#a3dbc7] py-10 px-[60px]">
+          <h3 className="text-xl font-black font-encode-sans text-secondary">
             Filtros de la búsqueda
           </h3>
           {selectedTags.length > 0 ? (
@@ -226,12 +226,12 @@ export default function VideosSection() {
               {selectedTags.map((tag) => (
                 <div
                   key={tag.id}
-                  className="cursor-pointer flex items-center bg-[#005A63] rounded-full py-1 ps-2 pe-1 w-fit text-white"
+                  className="cursor-pointer flex items-center bg-primary rounded-full py-1 ps-2 pe-1 w-fit text-white"
                   onClick={() => deleteTag(tag)}
                 >
                   <span>{tag.categoryName}</span>
                   <div className="bg-[#ffffff] p-1 rounded-full ms-1">
-                    <FaXmark size={14} className="text-[#005A63]" />
+                    <FaXmark size={14} className="text-primary" />
                   </div>
                 </div>
               ))}
@@ -242,7 +242,7 @@ export default function VideosSection() {
             </div>
           )}
         </div>
-        <div className="space-y-4 bg-[#005A63] py-16 px-[60px] text-white">
+        <div className="space-y-4 bg-primary py-10 px-[60px] text-white">
           <h3 className="text-xl font-black font-encode-sans">Tags</h3>
           <hr />
           <div className="flex flex-wrap gap-3 mb-4">
@@ -265,7 +265,7 @@ export default function VideosSection() {
             <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : (
-          <div className="flex flex-col gap-6 px-6 py-6 items-center">
+          <div className="flex flex-col gap-10 px-6 py-10 items-center">
             {filteredVideos.map((video, index) => (
               <div key={index} className="w-[100%]">
                 <iframe
@@ -278,6 +278,19 @@ export default function VideosSection() {
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 ></iframe>
+                <div className="flex gap-1 items-start flex-wrap">
+                  <h4 className="text-lg font-medium pt-2 pb-2">
+                    {video.Name}
+                  </h4>
+                  {video.categories_video_fondos?.map((category) => (
+                    <span
+                      className="border w-fit py-1 px-4 rounded-full border-primary-light text-sm text-primary-light"
+                      key={category.categoryName}
+                    >
+                      # {category.categoryName}
+                    </span>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

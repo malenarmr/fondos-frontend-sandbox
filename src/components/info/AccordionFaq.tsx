@@ -59,7 +59,7 @@ export default function AccordionFaq() {
             >
               <button
                 type="button"
-                className="flex items-center justify-between w-full p-5 rtl:text-right gap-3"
+                className="flex items-center justify-between w-full p-2 lg:p-5 rtl:text-right gap-3"
                 data-accordion-target="#accordion-collapse-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-collapse-body-1"
@@ -86,7 +86,7 @@ export default function AccordionFaq() {
             aria-labelledby="accordion-collapse-heading-1"
           >
             <div>
-              <p className="font-encode-sans py-6 text-left px-5 font-[18px] text-secondary">
+              <p className="font-encode-sans py-6 text-left px-2 lg:px-5 font-[18px] text-secondary">
                 {question.answer}
               </p>
             </div>

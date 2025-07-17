@@ -130,7 +130,7 @@ export default function VideosSection() {
         </button>
         <div className="w-full">
           <div
-            key={current} // mantiene el key para slide actual
+            key={current}
             className="text-white p-5 h-48 w-full flex items-start flex-col justify-end text-start"
             style={{
               backgroundImage: `url(https://img.youtube.com/vi/${extractYouTubeId(videos[current].url)}/hqdefault.jpg)`,
@@ -138,15 +138,19 @@ export default function VideosSection() {
               backgroundColor: 'rgba(0, 0, 0, 0.2)',
               backgroundBlendMode: 'color',
             }}
-          >
-            <h4 className="text-md font-medium">{videos[current].Name}</h4>
-            <div className="flex gap-2 items-start flex-wrap">
-              {videos[current]?.categories_video_fondos?.map((cat) => (
-                <span key={cat.categoryName} className="text-sm">
-                  # {cat.categoryName}
-                </span>
-              ))}
-            </div>
+          ></div>
+          <div className="flex gap-1 items-start flex-wrap">
+            <h4 className="text-lg font-medium pt-4 pb-2">
+              {videos[current].Name}
+            </h4>
+            {videos[current].categories_video_fondos?.map((category) => (
+              <span
+                className="border w-fit py-1 px-4 rounded-full border-primary-light text-sm text-primary-light"
+                key={category.categoryName}
+              >
+                # {category.categoryName}
+              </span>
+            ))}
           </div>
         </div>
         <button onClick={next} aria-label="Next slide">
