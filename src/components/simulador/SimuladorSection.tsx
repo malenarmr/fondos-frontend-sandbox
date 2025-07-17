@@ -367,7 +367,7 @@ export default function SimuladorSection() {
             </div>
           </div>
         </div>
-        <div className="w-full justify-center flex flex-col items-end md:flex-row gap-8">
+        <div className="w-full justify-center flex flex-col items-center lg:items-end md:flex-row gap-8">
           {missing.length !== 0 && (
             <div className="bg-[#f27c7c] text-white px-6 md:px-20 py-2 md:py-3 rounded-[10px] flex items-center gap-4">
               <AlertCircleIcon />
@@ -439,7 +439,7 @@ export default function SimuladorSection() {
               onClick={handleClosePopup}
             >
               <div
-                className="bg-white text-primary w-[90vw] h-[60vh] top-[5vh] left-[5vw] p-6 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] absolute"
+                className="bg-white text-secondary w-[90vw] h-[60vh] top-[5vh] left-[5vw] p-6 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] absolute"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex relative w-[100%]">
@@ -486,8 +486,8 @@ export default function SimuladorSection() {
                       <span className="">{formatDate(formData.fechaFin)}</span>
                     </div>
                   </div>
-                  <div className="flex bg-[#00E89A] py-2 px-4 rounded-[12px] justify-between text-sm">
-                    <span className="text-primary">Capital + Rendimiento</span>
+                  <div className="flex bg-[#2098A1] py-2 px-4 rounded-[12px] justify-between text-sm text-white">
+                    <span className="">Capital + Rendimiento</span>
                     <span className="font-medium">
                       $
                       {Number(
