@@ -69,7 +69,7 @@ export default function AccordionFiles() {
             >
               <button
                 type="button"
-                className="flex items-center justify-between w-full p-5 rtl:text-right gap-3"
+                className="flex items-center justify-between w-full p-2 lg:p-5 rtl:text-right gap-3"
                 data-accordion-target="#accordion-collapse-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-collapse-body-1"
@@ -95,15 +95,15 @@ export default function AccordionFiles() {
             className={`${isOpen === index ? 'open' : 'hidden'} transition-all duration-300 px-4 md:px-16 rounded-bl-xl rounded-br`}
             aria-labelledby="accordion-collapse-heading-1"
           >
-            <div className="grid grid-cols-2 pb-4">
+            <div className="grid lg:grid-cols-2 pb-4">
               {file.files.map((urlFiles, i) => {
                 return (
                   <Link
                     href={urlFiles.file.url}
                     key={i}
-                    className="font-encode-sans py-6 text-left px-5 text-secondary flex gap-2 items-center font-medium transition duration-200 lowercase hover:font-bold"
+                    className="font-encode-sans py-3 lg:py-6 text-left px-2 lg:px-5 text-secondary flex gap-2 items-center font-medium transition duration-200 lowercase hover:font-bold"
                   >
-                    <LiaDownloadSolid />
+                    <LiaDownloadSolid className="h-8 w-8 lg:h-5 lg:w-5" />
                     {urlFiles.name}
                   </Link>
                 );
