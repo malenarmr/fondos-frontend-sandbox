@@ -41,22 +41,6 @@ export default function FondoDetails({ id }: FondoProps) {
     fetchFondo();
   }, [provinciaApiClient, id]);
 
-  // useEffect(() => {
-  //   async function fetchCuotaparte() {
-  //     try {
-  //       const res = await provinciaApiClient.fondos.cuotaParte.getAll({
-  //         numero_fondo: fondoData.numero_fondo,
-  //         clase_fondo: 'A',
-  //       });
-  //       console.log(res);
-  //     } catch {
-  //     } finally {
-  //     }
-  //   }
-
-  //   fetchCuotaparte();
-  // }, [fondoData]);
-
   const capitalize = (str: string) => {
     if (str) {
       return str
@@ -95,16 +79,16 @@ export default function FondoDetails({ id }: FondoProps) {
       {error && <p className="text-center text-red-500">{error}</p>}
       {fondoData && !loading ? (
         <>
-          <div className="flex justify-between items-end">
-            <div className="w-1/2">
-              <h1 className="text-center xl:text-left font-encode-sans font-bold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-6 max-w-[590px]">
+          <div className="flex flex-col lg:flex-row justify-between items-end">
+            <div className="w-full lg:w-1/2">
+              <h1 className="text-start lg:text-left font-encode-sans font-extrabold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-6 max-w-[590px] px-[50px] lg:px-0">
                 {capitalize(fondoData.name)}
               </h1>
-              <p className="text-center xl:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] xl:px-0 xl:mr-0">
+              <p className="text-start lg:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] lg:px-0 xl:mr-0">
                 {fondoData.description}
               </p>
             </div>
-            <div className="pb-8">
+            <div className="pb-8 flex justify-start lg:justify-end w-full pt-8 lg:pt-0 px-[50px]">
               <Link href="/nuestros-fondos">
                 <Button variant="light">Volver a fondos</Button>
               </Link>
@@ -114,8 +98,8 @@ export default function FondoDetails({ id }: FondoProps) {
           <div className="relative z-0 relative bg-no-repeat bg-cover bg-bottom pb-20">
             <div className="img-fondo" />
 
-            <div className="flex gap-6 pt-24 pb-12 z-10 relative">
-              <div className="w-1/2 p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans bg-white">
+            <div className="flex gap-10 lg:gap-6 pt-24 pb-12 z-10 relative flex-col lg:flex-row px-[20px] lg:px-0">
+              <div className="w-full lg:w-1/2 p-8 lg:p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans bg-white">
                 <h3 className="font-bold text-lg">Rendimiento</h3>
                 {fondoData.performances.map((performance, i) => (
                   <div
@@ -141,7 +125,7 @@ export default function FondoDetails({ id }: FondoProps) {
                   </>
                 )}
               </div>
-              <div className="w-1/2 p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans bg-white justify-between">
+              <div className="w-full lg:w-1/2 p-8 lg:p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans bg-white justify-between">
                 <div className="flex flex-col gap-6">
                   <h3 className="font-bold text-lg">Información</h3>
                   <div className="pb-4 border-b">
@@ -151,7 +135,7 @@ export default function FondoDetails({ id }: FondoProps) {
                     </span>
                   </div>
 
-                  <div className="pb-12">
+                  <div className="pb-6 lg:pb-12">
                     <span>
                       Patrimonio del Fondo <b>${fondoData.patrimonio}</b>
                     </span>
@@ -159,7 +143,7 @@ export default function FondoDetails({ id }: FondoProps) {
                 </div>
                 <div className="flex justify-between">
                   <a
-                    className="bg-[#2098A1] flex items-center justify-center font-encode-sans font-medium px-[25px] py-[9px] rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] gap-x-[10px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 border border-primary-light text-white hover:shadow-xl focus:ring-primary"
+                    className="bg-[#2098A1] flex items-center justify-center font-encode-sans font-medium px-[12px] py-[7px] lg:px-[25px] lg:py-[9px] rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] gap-x-[10px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white hover:shadow-xl focus:ring-primary"
                     href={
                       process.env.NEXT_PUBLIC_API_URL + fondoData.factSheet.url
                     }
@@ -169,7 +153,7 @@ export default function FondoDetails({ id }: FondoProps) {
                     Fact sheet
                   </a>
                   <Link href={`/nuestros-fondos/cuotaparte/${id}`}>
-                    <button className="bg-[#2098A1] flex items-center justify-center font-encode-sans font-medium px-[25px] py-[9px] rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] gap-x-[10px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 border border-primary-light text-white hover:shadow-xl focus:ring-primary">
+                    <button className="bg-[#2098A1] flex items-center justify-center font-encode-sans font-medium px-[12px] py-[7px] lg:px-[25px] lg:py-[9px] rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] gap-x-[10px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white hover:shadow-xl focus:ring-primary">
                       Valor cuotaparte
                     </button>
                   </Link>
@@ -177,19 +161,19 @@ export default function FondoDetails({ id }: FondoProps) {
               </div>
             </div>
 
-            <div className="flex gap-6 p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans z-10 relative bg-white">
+            <div className="flex gap-6 p-8 lg:p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans z-10 relative bg-white mx-[20px] lg:mx-0">
               <h3 className="font-bold text-lg">Tenencias</h3>
-              <div className="flex flex-col py-6">
+              <div className="flex flex-col pt-6 lg:py-6">
                 {fondoData.holdings.map((holding, i) => (
-                  <div key={holding.id} className="flex">
+                  <div key={holding.id} className="flex mb-8 lg:mb-0">
                     <div
-                      className={`w-full rounded-xl flex items-center font-medium gap-16`}
+                      className={`w-full rounded-xl flex flex-col lg:flex-row items-center font-medium lg:gap-16`}
                     >
-                      <div className="w-1/3 flex justify-between py-2">
+                      <div className="w-full lg:w-1/3 flex justify-between py-2">
                         <span>{holding.name}</span>
                         <span className="font-bold">{holding.value} %</span>
                       </div>
-                      <div className="w-2/3">
+                      <div className="w-full lg:w-2/3">
                         <div
                           className={`w-[${holding.value}%] rounded`}
                           style={{
@@ -205,7 +189,7 @@ export default function FondoDetails({ id }: FondoProps) {
                   </div>
                 ))}
               </div>
-              <div className="flex justify-between font-medium text-lg">
+              <div className="flex flex-col lg:flex-row justify-between font-medium text-lg gap-6 lg:gap-0">
                 {fondoData?.rendimiento_diario?.file?.url && (
                   <a
                     className="flex items-center gap-1"
