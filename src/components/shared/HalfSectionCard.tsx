@@ -12,6 +12,7 @@ interface HalfSectionCardProps {
   link?: string;
   animation?: React.ReactNode;
   onClick?: () => void;
+  align?: string;
 }
 
 const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
@@ -23,10 +24,11 @@ const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
   link,
   animation,
   onClick,
+  align,
 }) => {
   return (
     <div
-      className="p-[40px] md:p-[45px] lg:p-[60px] xl:px-[100px] xl:py-[120px] shadow-md flex flex-col justify-start items-center text-center"
+      className="p-[40px] md:p-[45px] lg:p-[60px] xl:px-[100px] shadow-md flex flex-col justify-start items-center text-center"
       style={{
         backgroundColor: bgColor,
         color: textColor,
@@ -34,14 +36,18 @@ const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
         width: '50%',
       }}
     >
-      <div className="w-full h-full flex flex-col justify-between items-start align-start text-start">
+      <div
+        className={`w-full h-full flex flex-col justify-between items-${align} align-start text-${align}`}
+      >
         {animation && (
           <div className="mb-4 flex justify-center">{animation}</div>
         )}
         <h2 className="text-4xl font-black mb-8">{title}</h2>
         {children}
         <a href={link} target="_blank" rel="noopener noreferrer">
-          <Button onClick={onClick}>{textButton}</Button>
+          <Button variant="sky" onClick={onClick}>
+            {textButton}
+          </Button>
         </a>
       </div>
     </div>

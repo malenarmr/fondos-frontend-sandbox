@@ -11,6 +11,7 @@ interface PreFooterCardProps {
   borderRadius?: string;
   link?: string;
   animation?: React.ReactNode;
+  align?: string;
 }
 
 const PreFooterCard: React.FC<PreFooterCardProps> = ({
@@ -20,29 +21,28 @@ const PreFooterCard: React.FC<PreFooterCardProps> = ({
   textColor,
   textButton,
   animation,
-  borderRadius = '10px 50px 10px 0',
   link,
+  align,
 }) => {
   return (
     <div
-      className="pre-footer-card w-full max-w-full h-full md:w-50 px-[50px] py-[60px] shadow-md flex flex-col justify-start items-center text-center overflow-hidden"
+      className="w-full max-w-full h-full md:w-50 px-[50px] pt-[20px] pb-[40px] shadow-md flex flex-col justify-start items-center text-center overflow-hidden"
       style={{
         backgroundColor: bgColor,
         color: textColor,
-        borderRadius: borderRadius,
       }}
     >
-      <div className="w-full max-w-full md:w-50 h-full flex flex-col justify-start items-start align-start text-start">
+      <div
+        className={`w-full max-w-full md:w-50 h-full flex flex-col justify-start items-start align-start text-${align}`}
+      >
         {animation && (
           <div className="mb-4 flex justify-center">{animation}</div>
         )}
-        <h2 className="text-2xl font-black my-5">{title}</h2>
+        <h2 className="text-2xl font-black mb-5">{title}</h2>
         {children}
-        <div
-          className={'w-full flex justify-center items-center md:justify-start'}
-        >
+        <div className={`w-full flex items-center justify-${align}`}>
           <a href={link}>
-            <Button>{textButton}</Button>
+            <Button variant="sky">{textButton}</Button>
           </a>
         </div>
       </div>
