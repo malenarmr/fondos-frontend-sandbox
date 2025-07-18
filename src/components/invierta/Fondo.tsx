@@ -98,7 +98,7 @@ export default function FondoDetails({ id }: FondoProps) {
           <div className="relative z-0 relative bg-no-repeat bg-cover bg-bottom pb-20">
             <div className="img-fondo" />
 
-            <div className="flex gap-10 lg:gap-6 pt-24 pb-12 z-10 relative flex-col lg:flex-row px-[20px] lg:px-0">
+            <div className="flex gap-10 lg:gap-6 pt-10 lg:pt-24 pb-12 z-10 relative flex-col lg:flex-row px-[20px] lg:px-0">
               <div className="w-full lg:w-1/2 p-8 lg:p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans bg-white">
                 <h3 className="font-bold text-lg">Rendimiento</h3>
                 {fondoData.performances.map((performance, i) => (
