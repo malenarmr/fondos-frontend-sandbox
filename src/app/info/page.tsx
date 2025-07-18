@@ -95,14 +95,16 @@ export default function InfoPage() {
           </h1>
           <p className="text-[16px] lg:text-lg text-white">
             Con nuestros videos tutoriales vas a poder conocer paso a paso cómo
-            operar. Usá los
-            <br /> instructivos para saldar dudas.
+            operar.
+            <br /> Usá los instructivos para saldar dudas.
           </p>
           <AccordionFaq />
           <div className="flex justify-center">
             <span className="text-white mt-4">
-              Si no pudimos saldar tus dudas podes contactarnos por mail
-              a sugerencias@provinfondos.com.ar
+              Si no pudimos saldar tus dudas podes contactarnos por mail a{' '}
+              <a href="mailto:sugerencias@provinfondos.com.ar">
+                <b>sugerencias@provinfondos.com.ar</b>
+              </a>
             </span>
           </div>
         </div>
