@@ -20,18 +20,7 @@ interface Props {
 }
 
 export default function PreFooterSection({ items }: Props) {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
-
-  const nextCard = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-  };
-
-  const prevCard = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + items.length) % items.length
-    );
-  };
 
   const handleOpenPopup = () => setShowPopup(true);
 
@@ -40,46 +29,50 @@ export default function PreFooterSection({ items }: Props) {
   return (
     <div className="investor-container flex flex-col justify-center items-center">
       {/* BEGINS MOBILE */}
-      <div className="block md:hidden mobile-slider w-full">
-        <div className="custom-navigation flex justify-between px-4">
-          <button onClick={prevCard}>
-            <Image
-              src="/invierta/arrow_left.png"
-              alt="Flecha izquierda"
-              width={25}
-              height={25}
-            />
-          </button>
-          <button onClick={nextCard}>
-            <Image
-              src="/invierta/arrow_right.png"
-              alt="Flecha derecha"
-              width={25}
-              height={25}
-            />
-          </button>
-        </div>
-        <div
-          className="card-slider flex transition-transform duration-300 max-w-full w-full"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {items.map((item, index) => (
-            <div
-              key={index}
-              className="card-item min-w-full max-w-full shrink-0"
-            >
-              <PreFooterCard
-                title={item.title}
-                bgColor={item.bgColor}
-                textColor={item.textColor}
-                textButton={item.textButton}
-                borderRadius={item.borderRadius}
-                link={item.link}
+      <div className="block md:hidden w-full">
+        <div className="flex flex-col max-w-full w-full">
+          {items.map((item, index) => {
+            const animation =
+              index === 0 ? (
+                <Image
+                  src="/home/01_Binoculares.gif"
+                  alt="Binoculares simulador"
+                  className="max-w-full h-auto"
+                  width={500}
+                  height={500}
+                />
+              ) : (
+                <Image
+                  src="/guia/03_Checklist.gif"
+                  alt="Check simulador"
+                  className="max-w-full h-auto"
+                  width={500}
+                  height={500}
+                />
+              );
+
+            const textAlign = index === 0 ? 'end' : 'start';
+
+            return (
+              <div
+                key={index}
+                className="card-item min-w-full max-w-full shrink-0"
               >
-                {item.description}
-              </PreFooterCard>
-            </div>
-          ))}
+                <PreFooterCard
+                  title={item.title}
+                  bgColor={item.bgColor}
+                  textColor={item.textColor}
+                  textButton={item.textButton}
+                  borderRadius={item.borderRadius}
+                  link={item.link}
+                  animation={animation}
+                  align={textAlign}
+                >
+                  {item.description}
+                </PreFooterCard>
+              </div>
+            );
+          })}
         </div>
 
         {/* Móvil sky bar */}
@@ -102,13 +95,15 @@ export default function PreFooterSection({ items }: Props) {
               />
             ) : (
               <Image
-                src="/home/05_Check.gif"
+                src="/guia/03_Checklist.gif"
                 alt="Check simulador"
                 className="max-w-full h-auto"
                 width={500}
                 height={500}
               />
             );
+
+          const textAlign = index === 0 ? 'end' : 'start';
 
           return (
             <HalfSectionCard
@@ -121,6 +116,7 @@ export default function PreFooterSection({ items }: Props) {
               borderRadius={item.borderRadius}
               link={item.link}
               onClick={item.popup ? handleOpenPopup : undefined}
+              align={textAlign}
             >
               {item.description}
             </HalfSectionCard>

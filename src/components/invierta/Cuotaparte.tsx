@@ -50,7 +50,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
         );
 
         setFondoData(response.data.data as Fondo);
-        setCurrentClase(response.data.data.clase_fondo[0]);
+        setCurrentClase(response.data.data.clase_fondo[0].clase);
       } catch {
         setError('Error al cargar fondo');
       } finally {
@@ -122,7 +122,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
   const getVisiblePages = (
     currentPage: number,
     totalPages: number,
-    maxVisible = 5
+    maxVisible: number
   ) => {
     const half = Math.floor(maxVisible / 2);
     let start = Math.max(1, currentPage - half);
@@ -181,17 +181,17 @@ export default function CuotaparteDetails({ id }: FondoProps) {
       {error && <p className="text-center text-red-500">{error}</p>}
       {fondoData && !loading ? (
         <>
-          <div className="flex justify-between items-end">
-            <div className="w-1/2">
-              <h1 className="text-center xl:text-left font-encode-sans font-bold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-6 max-w-[590px]">
+          <div className="flex flex-col lg:flex-row justify-between items-end px-[50px] xl:px-0">
+            <div className="w-full lg:w-1/2">
+              <h1 className="text-start lg:text-left font-encode-sans font-extrabold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-6 max-w-[590px]">
                 Valor cuotaparte
                 <br /> {fondoData.name}
               </h1>
-              <p className="text-center xl:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] xl:px-0 xl:mr-0">
+              <p className="text-start lg:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 md:w-[600px] xl:mr-0">
                 Provincia renta fija - Histórico de valores
               </p>
             </div>
-            <div>
+            <div className="w-full lg:w-1/2 flex justify-start lg:justify-end pt-8 lg:pt-0">
               <Link href={`/nuestros-fondos/${id}`}>
                 <Button variant="light">Volver al fondo</Button>
               </Link>
@@ -201,11 +201,11 @@ export default function CuotaparteDetails({ id }: FondoProps) {
           <div className="relative z-0 relative bg-no-repeat bg-cover bg-bottom pb-20">
             <div className="img-fondo" />
 
-            <div className="flex gap-6 pt-24 pb-12 z-10 relative">
-              <div className="w-full p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans bg-white">
+            <div className="flex gap-6 pt-10 lg:pt-24 pb-12 z-10 relative px-[20px] lg:px-0">
+              <div className="w-full p-8 lg:p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans bg-white">
                 <h3 className="font-bold text-lg">Filtros por fecha</h3>
-                <div className="flex justify-between gap-6 text-md">
-                  <div className="w-3/4 flex justify-between">
+                <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-6 text-md">
+                  <div className="w-full lg:w-3/4 flex flex-col lg:flex-row justify-between gap-4 lg:gap-0">
                     <div className="relative flex">
                       <span className="absolute left-3 inset-y-0 flex items-center text-gray-500 select-none">
                         Fecha desde
@@ -235,7 +235,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
                       Filtrar
                     </Button>
                   </div>
-                  <div className="w-1/4 flex justify-end">
+                  <div className="w-full lg:w-1/4 flex flex-col lg:flex-row justify-end">
                     <Button variant="light">Exportar Excel</Button>
                   </div>
                 </div>
@@ -245,8 +245,8 @@ export default function CuotaparteDetails({ id }: FondoProps) {
               </div>
             </div>
 
-            <div className="flex gap-6">
-              <div className="flex gap-6 p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans z-10 relative bg-white w-full">
+            <div className="flex gap-6 px-[20px] lg:px-0">
+              <div className="flex gap-6 p-8 lg:p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans z-10 relative bg-white w-full">
                 <h3 className="font-bold text-lg">
                   Histórico valores por clase
                 </h3>
@@ -259,14 +259,14 @@ export default function CuotaparteDetails({ id }: FondoProps) {
                     return (
                       <button
                         key={'clase-' + i}
-                        className={`w-full p-2 text-center font-regular transition-200 ${clase === currentClase && 'bg-white font-bold'} cursor-pointer`}
+                        className={`w-full p-2 text-center font-regular transition-200 ${clase.clase === currentClase && 'bg-white font-bold'} cursor-pointer`}
                         onClick={() => {
-                          setCurrentClase(clase);
+                          setCurrentClase(clase.clase);
                           setFechaInicio('');
                           setFechaFin('');
                         }}
                       >
-                        {'Clase ' + clase}
+                        {'Clase ' + clase.clase}
                       </button>
                     );
                   })}
@@ -278,8 +278,12 @@ export default function CuotaparteDetails({ id }: FondoProps) {
                     <thead>
                       <tr>
                         <th className="w-[20%] text-start">Fecha</th>
-                        <th className="w-[20%] text-center">Número fondo</th>
-                        <th className="w-[35%] text-center">Nombre fondo</th>
+                        <th className="w-[20%] text-center hidden lg:table-cell">
+                          Número fondo
+                        </th>
+                        <th className="w-[35%] text-center hidden lg:table-cell">
+                          Nombre fondo
+                        </th>
                         <th className="w-[25%] text-end">Valor Cuota Parte</th>
                       </tr>
                     </thead>
@@ -290,10 +294,10 @@ export default function CuotaparteDetails({ id }: FondoProps) {
                             <td className="w-[20%] text-start">
                               {formatDate(cuota.fecha)}
                             </td>
-                            <td className="w-[20%] text-center">
+                            <td className="w-[20%] hidden lg:table-cell text-center">
                               {cuota.numero_fondo}
                             </td>
-                            <td className="w-[35%] text-center">
+                            <td className="w-[35%] hidden lg:table-cell text-center">
                               {cuota.nombre_fondo}
                             </td>
                             <td className="w-[25%] text-end font-bold">
@@ -316,21 +320,41 @@ export default function CuotaparteDetails({ id }: FondoProps) {
                     Anterior
                   </button>
 
-                  {getVisiblePages(currentPage, pagination.pageCount).map(
-                    (page) => (
-                      <Button
-                        key={page}
-                        onClick={() => setCurrentPage(page)}
-                        className={`px-3 py-1 border rounded ${
-                          page === currentPage
-                            ? 'bg-primary text-white'
-                            : 'bg-white'
-                        }`}
-                      >
-                        {page}
-                      </Button>
-                    )
-                  )}
+                  <div className="gap-2 hidden lg:flex">
+                    {getVisiblePages(currentPage, pagination.pageCount, 5).map(
+                      (page) => (
+                        <Button
+                          key={page}
+                          onClick={() => setCurrentPage(page)}
+                          className={`px-3 py-1 border rounded ${
+                            page === currentPage
+                              ? 'bg-primary text-white'
+                              : 'bg-white'
+                          }`}
+                        >
+                          {page}
+                        </Button>
+                      )
+                    )}
+                  </div>
+
+                  <div className="flex gap-2 lg:hidden">
+                    {getVisiblePages(currentPage, pagination.pageCount, 2).map(
+                      (page) => (
+                        <Button
+                          key={page}
+                          onClick={() => setCurrentPage(page)}
+                          className={`px-3 py-1 border rounded ${
+                            page === currentPage
+                              ? 'bg-primary text-white'
+                              : 'bg-white'
+                          }`}
+                        >
+                          {page}
+                        </Button>
+                      )
+                    )}
+                  </div>
 
                   <Button
                     onClick={() =>
