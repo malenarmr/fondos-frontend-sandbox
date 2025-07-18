@@ -60,7 +60,7 @@ export default function FondosSection() {
           inversores: resTipoInveror.data,
         });
       } catch {
-        setError('Error al cargar preguntas videos tutoriales');
+        setError('Error al cargar preguntas fondos');
       } finally {
         setLoading(false);
       }
@@ -374,12 +374,12 @@ export default function FondosSection() {
       </div>
       {/* mobile */}
       <div className="flex md:hidden flex-col">
-        <div className="bg-light-aqua-green text-center py-16">
+        <div className="text-center py-10">
           <h1 className="font-encode-sans text-3xl text-primary font-black">
-            Videos tutoriales
+            Nuestros Fondos
           </h1>
         </div>
-        <div className="space-y-4 bg-[#EBEBEB] py-16 px-[60px]">
+        <div className="space-y-4 bg-[#a3dbc7] py-10 px-[60px]">
           <h3 className="text-xl font-black font-encode-sans text-primary">
             Filtros de la búsqueda
           </h3>
@@ -390,7 +390,7 @@ export default function FondosSection() {
                 tags.map((tag: TagObject) => (
                   <div
                     key={`${type}-${tag.documentId}`}
-                    className="cursor-pointer flex items-center bg-[#005A63] rounded-full py-1 ps-2 pe-1 w-fit text-white"
+                    className="cursor-pointer flex items-center bg-primary rounded-full py-1 ps-2 pe-1 w-fit text-white"
                     onClick={() => deleteTag(tag, type as keyof Tag)}
                   >
                     <span>
@@ -401,7 +401,7 @@ export default function FondosSection() {
                           : ''}
                     </span>
                     <div className="bg-[#ffffff] p-1 rounded-full ms-1">
-                      <FaXmark size={14} className="text-[#005A63]" />
+                      <FaXmark size={14} className="text-primary" />
                     </div>
                   </div>
                 ))
@@ -414,7 +414,7 @@ export default function FondosSection() {
           )}
         </div>
 
-        <div className="space-y-4 bg-[#005A63] py-16 px-[60px] text-white">
+        <div className="space-y-8 bg-primary py-10 px-[60px] text-white">
           <h3 className="text-xl font-black font-encode-sans">Tags</h3>
           <hr />
 
@@ -425,7 +425,7 @@ export default function FondosSection() {
               {categories.caracteristicas.map((tag) => (
                 <div
                   key={`caracteristicas-${tag.documentId}`}
-                  className="cursor-pointer bg-[#EBEBEB] py-1 px-3 rounded-full w-fit text-[#005A63]"
+                  className="cursor-pointer bg-[#EBEBEB] py-1 px-3 rounded-full w-fit text-primary"
                   onClick={() => addTag(tag, 'caracteristicas')}
                 >
                   <span>{tag.value}</span>
@@ -474,10 +474,11 @@ export default function FondosSection() {
               ))}
             </div>
           </div>
-
-          <button className="font-bold" onClick={() => deleteAll()}>
-            Ver todo
-          </button>
+          <div>
+            <button className="font-bold mt-6" onClick={() => deleteAll()}>
+              Ver todos los fondos
+            </button>
+          </div>
         </div>
 
         {isLoadingFilters ? (
@@ -485,10 +486,69 @@ export default function FondosSection() {
             <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : (
-          <div className="flex flex-col gap-6 px-6 py-6 items-center">
-            {filteredFondos.map((video, index) => (
-              <div key={index} className="w-[100%]"></div>
-            ))}
+          <div className="px-[30px] py-[50px] grid gap-10">
+            {filteredFondos.length > 0 ? (
+              filteredFondos.map((fondo, index) => (
+                <div
+                  key={index}
+                  className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-md"
+                >
+                  <div className="py-2 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
+                    <span className="font-encode-sans font-bold">
+                      {fondo.name}
+                    </span>
+                  </div>
+                  <div className="py-2 flex items-center border-b text-secondary">
+                    <div className="w-1/2 px-2 border-r">
+                      <span>
+                        Tipo de ahorro en{' '}
+                        <b>
+                          <span className="lowercase">{fondo.moneda}</span>
+                        </b>
+                      </span>
+                    </div>
+                    <div className="w-1/2 px-2 flex justify-center">
+                      <span
+                        className={`flex px-6 py-2 ${fondo.inversor_profile_fondos[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : 'bg-[#929292]'} text-white font-bold rounded-xl capitalize`}
+                      >
+                        {capitalize(fondo.inversor_profile_fondos[0].title)}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="py-2 flex justify-between items-center border-b text-secondary">
+                    <div className="w-1/2 px-2 border-r">
+                      <span>
+                        Horizonte a <b>{fondo.horizonte}</b>
+                      </span>
+                    </div>
+                    <div className="w-1/2 px-2 flex justify-center">
+                      <span className="flex">
+                        {capitalize(fondo.caracteristicas_fondos[0].value)}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="py-2 flex justify-between items-center text-secondary">
+                    <div className="w-1/2 px-2">
+                      <span className="">
+                        Variación diaria <b>{fondo.variacionDiaria}</b>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="pt-1 pb-4 px-2 flex justify-end items-center">
+                    <Link href={`/nuestros-fondos/${fondo.documentId}`}>
+                      <Button variant="secondary">Ver fondo</Button>
+                    </Link>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p
+                className="font-encode-sans text-md  text-primary-light"
+                style={{ fontWeight: 400 }}
+              >
+                No encontramos resultados que coincidan
+              </p>
+            )}
           </div>
         )}
       </div>

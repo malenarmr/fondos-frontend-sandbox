@@ -29,5 +29,5 @@ export interface Fondo {
   informationAt: string;
   factSheet: { url: string };
   holdings: { id: number; name: string; value: number }[];
-  clase_fondo: string[];
+  clase_fondo: { id: number; inicio: string; clase: string }[];
 }
