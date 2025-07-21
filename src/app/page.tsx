@@ -1,6 +1,6 @@
 'use client';
 
-import VideosSection from '@/components/info/VideosSection';
+import VideosSectionWithFilters from '@/components/info/VideosSection';
 import DesktopCarousel from '@/components/inicio/DesktopCarousel';
 import FeaturedCarousel from '@/components/inicio/FeaturedCarousel';
 import AnimationSection from '@/components/invierta/AnimationSection';
@@ -47,7 +47,7 @@ export default function HomePage() {
               <Button variant="light">Ver todos los videos</Button>
             </Link>
           </div>
-          <VideosSection />
+          <VideosSectionWithFilters />
         </div>
       </div>
 

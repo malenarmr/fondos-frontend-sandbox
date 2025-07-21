@@ -1,14 +1,11 @@
 'use client';
 
 import { useMediaQuery } from '@/hooks/use-media-query';
-import {
-  ApiAnswer,
-  ApiQuestion,
-  getTestInversor,
-} from '@/services/testInversorService';
+import { getTestInversorFondo } from '@/services/testInversorService';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Button from '../shared/Button';
+import Spinner from '../shared/Spinner';
 import ProgressIndicator from './ProgressIndicator';
 import QuestionCard from './QuestionCard';
 import ResultadoContentBase from './ResultadoContentBase';
@@ -38,24 +35,26 @@ export default function TestInversorForm() {
   const [showModal, setShowModal] = useState(false);
   const [totalPoints, setTotalPoints] = useState(0);
   useEffect(() => {
-    getTestInversor()
-      .then((api) => {
-        const qs: Question[] = api.questions.map((q: ApiQuestion) => ({
+    getTestInversorFondo()
+      .then((data) => {
+        const mappedQuestions: Question[] = data.map((q) => ({
           id: q.id,
           text: q.question,
-          options: q.answer.map((a: ApiAnswer) => ({
-            id: a.id.toString(),
-            label: a.answer,
-            point: a.point,
-          })),
+          options: [],
         }));
-        setQuestions(qs);
+        setQuestions(mappedQuestions);
       })
       .catch(() => setError('No se pudieron cargar las preguntas'))
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Cargando preguntas…</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[300px]">
+        <Spinner />
+      </div>
+    );
+  }
   if (error) return <p className="text-red-500">{error}</p>;
 
   const totalSteps = questions.length;
