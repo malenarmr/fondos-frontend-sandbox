@@ -47,6 +47,7 @@ export interface AreaTeamBursatil {
 }
 
 export interface InstitucionalData {
+  area_team_fondos: any;
   id: number;
   documentId: string;
   mision: string;
