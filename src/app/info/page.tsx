@@ -68,8 +68,7 @@ export default function InfoPage() {
         <div className="dark:bg-dark px-[50px] md:px-[100px] xl:px-[145px] pt-12 lg:pt-20 padding-xxl ">
           <div className="flex flex-col lg:flex-row justify-between mb-12 text-center lg:text-start">
             <h1 className="font-encode-sans text-[30px] lg:text-4xl text-secondary font-extrabold lg:font-black leading-snug">
-              Conocé más sobre cómo
-              <br className="hidden lg:block " /> invertir con videos tutoriales
+              Conocé más sobre <br className="hidden lg:block " /> cómo invertir
             </h1>
             <div className="hidden lg:block">
               <Link href="/tutoriales">

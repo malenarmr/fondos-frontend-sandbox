@@ -21,7 +21,7 @@ export default function SimuladorPage() {
             <p className="text-center xl:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] text-secondary leading-5 xl:leading-6 px-[50px] md:w-[600px] xl:px-0 xl:mr-0">
               Usá el simulador de fondos para analizar y comparar diferentes
               <br />
-              fondos según sus rendimientos pasados.
+              fondos según sus rendimientos.
             </p>
           </div>
         </div>

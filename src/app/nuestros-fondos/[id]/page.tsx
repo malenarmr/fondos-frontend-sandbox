@@ -24,7 +24,7 @@ const items = [
         style={{ color: '#FFFFFF' }}
       >
         Enterate de cómo operaron los fondos en los últimos períodos. Podés
-        compararlos y analizar cómo rindieron para tomar las mejores decisiones
+        compararlos y analizar cómo rindieron para tomar las mejores decisiones.
       </p>
     ),
   },
@@ -60,8 +60,8 @@ export default function FondoPage() {
         <div className="flex justify-between items-center">
           <div className="w-3/4">
             <h1 className="font-encode-sans text-2xl lg:text-4xl text-secondary font-bold lg:font-black mb-6">
-              Conocé más sobre cómo
-              <br /> invertir con videos tutoriales
+              Conocé más sobre
+              <br /> cómo invertir
             </h1>
             <CategoriesSection />
           </div>

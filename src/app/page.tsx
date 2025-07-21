@@ -41,7 +41,7 @@ export default function HomePage() {
         <div className="flex flex-col items-center">
           <div className="container mx-auto px-6 xl:px-40 space-y-8 mb-8 flex justify-between gap-10">
             <h1 className="font-encode-sans text-2xl lg:text-4xl text-secondary font-bold lg:font-black">
-              Conocé más sobre cómo invertir con videos tutoriales
+              Conocé más sobre cómo invertir
             </h1>
             <Link href="/tutoriales">
               <Button variant="light">Ver todos los videos</Button>
