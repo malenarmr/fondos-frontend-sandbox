@@ -52,7 +52,7 @@ export default function NuestrosFondosPage() {
         </div>
       </section>
 
-      <div className="hidden lg:block md:px-[100px] xl:px-[145px] pt-20 pb-24 bg-[#EBEBEB] mb-[-50px]">
+      <div className="hidden lg:block md:px-[100px] xl:px-[145px] padding-xxl pt-20 pb-24 bg-[#EBEBEB] mb-[-50px]">
         <div className="flex justify-between items-center">
           <div className="w-3/4">
             <h1 className="font-encode-sans text-2xl lg:text-4xl text-secondary font-bold lg:font-black mb-6">

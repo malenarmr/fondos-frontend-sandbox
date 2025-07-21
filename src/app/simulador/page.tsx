@@ -10,7 +10,7 @@ export default function SimuladorPage() {
     <main>
       <Navbar />
 
-      <section className="rounded-b-[50px] py-10 lg:py-20 dark:bg-dark md:px-[100px] xl:px-[145px]">
+      <section className="rounded-b-[50px] py-10 lg:py-20 dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl">
         <div
           className={`flex flex-col-reverse xl:flex-row items-center justify-between mx-auto`}
         >
@@ -29,7 +29,7 @@ export default function SimuladorPage() {
       <SimuladorSection />
 
       <section className="lg:pt-6">
-        <div className="bg-[#2098A1] py-10 lg:py-16 dark:bg-dark md:px-[100px] xl:px-[145px]">
+        <div className="bg-[#2098A1] py-10 lg:py-16 dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl">
           <div className="flex flex-col-reverse xl:flex-row items-center justify-between mx-auto">
             <div className="flex flex-col text-primary">
               <h1 className="text-start lg:text-center xl:text-left font-encode-sans font-bold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary mb-7 xl:mb-12 max-w-[555px] text-white px-[50px] xl:px-0">

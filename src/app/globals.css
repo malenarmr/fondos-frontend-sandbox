@@ -19,6 +19,21 @@ body {
   background: var(--background);
 }
 
+@media (min-width: 1500px) {
+  .padding-xxl {
+    padding-left: 310px !important;
+    padding-right: 310px !important;
+  }
+
+  .pl-xxl {
+    padding-left: 310px !important;
+  }
+
+  .pr-xxl {
+    padding-right: 310px !important;
+  }
+}
+
 @layer utilities {
   .no-scrollbar {
     -ms-overflow-style: none;

@@ -21,3 +21,9 @@
     left: -160px;
   }
 }
+
+@media (width >= 1500px) {
+  .img-fondo {
+    left: -325px;
+  }
+}

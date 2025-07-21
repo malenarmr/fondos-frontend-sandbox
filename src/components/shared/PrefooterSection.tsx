@@ -105,6 +105,8 @@ export default function PreFooterSection({ items }: Props) {
 
           const textAlign = index === 0 ? 'end' : 'start';
 
+          const paddingXxl = index === 0 ? 'pl-xxl' : 'pr-xxl';
+
           return (
             <HalfSectionCard
               key={index}
@@ -117,6 +119,7 @@ export default function PreFooterSection({ items }: Props) {
               link={item.link}
               onClick={item.popup ? handleOpenPopup : undefined}
               align={textAlign}
+              padding={paddingXxl}
             >
               {item.description}
             </HalfSectionCard>
