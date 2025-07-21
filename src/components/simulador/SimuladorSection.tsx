@@ -198,7 +198,7 @@ export default function SimuladorSection() {
 
   return (
     <>
-      <div className="px-6 md:px-[50px] lg:px-[100px] xl:px-[145px] flex flex-col items-center space-y-6 md:space-y-16 mb-12 md:mb-8 font-encode-sans">
+      <div className="px-6 md:px-[50px] lg:px-[100px] xl:px-[145px] padding-xxl flex flex-col items-center space-y-6 md:space-y-16 mb-12 md:mb-8 font-encode-sans">
         <div className="flex flex-col md:flex-row w-full gap-8 items-stretch">
           <div
             className={`rounded-xl py-6 md:py-20 px-8 flex flex-col gap-2 text-secondary font-encode-sans border border-[#2098A1] w-full md:w-1/3 transition duration-200 ${handleBackground('monto')}`}

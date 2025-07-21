@@ -177,7 +177,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
   };
 
   return (
-    <div className="pt-12 dark:bg-dark md:px-[100px] xl:px-[145px]">
+    <div className="pt-12 dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl">
       {error && <p className="text-center text-red-500">{error}</p>}
       {fondoData && !loading ? (
         <>
