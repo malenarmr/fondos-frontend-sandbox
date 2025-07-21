@@ -113,17 +113,33 @@ export default function DesktopCarousel({ cards }: Props) {
             {current.description}
           </p>
           <div className="flex gap-4">
-            {current.link1 ? (
-              <Button variant="primary" href={current.link1}>
-                {current.button_text || 'Ver más'}
-              </Button>
-            ) : (
-              <Link href={downloadLink || '/invierta'}>
-                <Button variant="sky">
-                  {current.button_text || 'Hacé el test'}
-                </Button>
-              </Link>
-            )}
+            {(() => {
+              const text = current.button_text?.toLowerCase().trim();
+
+              if (current.link1) {
+                return (
+                  <Button variant="primary" href={current.link1}>
+                    {current.button_text || 'Ver más'}
+                  </Button>
+                );
+              }
+
+              if (text === 'ver todos los fondos') {
+                return (
+                  <Link href="/nuestros-fondos">
+                    <Button variant="sky">{current.button_text}</Button>
+                  </Link>
+                );
+              }
+
+              return (
+                <Link href={downloadLink || '/'}>
+                  <Button variant="sky">
+                    {current.button_text || 'Hacé el test'}
+                  </Button>
+                </Link>
+              );
+            })()}
           </div>
         </div>
 

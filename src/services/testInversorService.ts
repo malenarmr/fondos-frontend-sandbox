@@ -6,6 +6,11 @@ export interface ApiAnswer {
   point: number;
 }
 
+export interface FondoQuestion {
+  id: number;
+  question: string;
+}
+
 export interface ApiQuestion {
   id: number;
   question: string;
@@ -35,4 +40,9 @@ export async function getInvestorProfile(
     params: { value },
   });
   return data;
+}
+
+export async function getTestInversorFondo(): Promise<FondoQuestion[]> {
+  const { data } = await apiClient.get('/test-inversor-fondo');
+  return data.questions_fondos; // si `questions_fondos` está dentro del response
 }
