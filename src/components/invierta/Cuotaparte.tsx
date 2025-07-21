@@ -205,8 +205,8 @@ export default function CuotaparteDetails({ id }: FondoProps) {
               <div className="w-full p-8 lg:p-12 shadow-[5px_5px_44px_0px_rgba(0,0,0,0.1)] rounded-xl text-secondary flex flex-col gap-6 font-encode-sans bg-white">
                 <h3 className="font-bold text-lg">Filtros por fecha</h3>
                 <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-6 text-md">
-                  <div className="w-full lg:w-3/4 flex flex-col lg:flex-row justify-between gap-4 lg:gap-0">
-                    <div className="relative flex">
+                  <div className="w-full lg:w-3/4 flex flex-col lg:flex-row justify-between gap-4 lg:gap-2">
+                    <div className="relative flex w-full">
                       <span className="absolute left-3 inset-y-0 flex items-center text-gray-500 select-none">
                         Fecha desde
                       </span>
@@ -218,7 +218,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
                         onChange={(e) => setFechaInicio(e.target.value)}
                       />
                     </div>
-                    <div className="relative">
+                    <div className="relative w-full">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 py-2 text-gray-500 select-none">
                         Fecha hasta
                       </span>
