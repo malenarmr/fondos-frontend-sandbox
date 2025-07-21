@@ -13,6 +13,7 @@ interface HalfSectionCardProps {
   animation?: React.ReactNode;
   onClick?: () => void;
   align?: string;
+  padding?: string;
 }
 
 const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
@@ -25,10 +26,11 @@ const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
   animation,
   onClick,
   align,
+  padding,
 }) => {
   return (
     <div
-      className="p-[40px] md:p-[45px] lg:p-[60px] xl:px-[100px] shadow-md flex flex-col justify-start items-center text-center"
+      className={`p-[40px] md:p-[45px] lg:p-[60px] xl:px-[100px] shadow-md flex flex-col justify-start items-center text-center ${padding}`}
       style={{
         backgroundColor: bgColor,
         color: textColor,

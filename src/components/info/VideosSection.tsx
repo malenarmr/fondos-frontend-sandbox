@@ -83,7 +83,7 @@ export default function VideosSection() {
         {/* desktop */}
         <div
           ref={scrollRef}
-          className="flex-row space-x-8 hidden md:flex w-full mb-8 pl-24 flex-nowrap cursor-grab active:cursor-grabbing overflow-auto scrollbar-hide relative"
+          className="flex-row space-x-8 hidden md:flex w-full mb-8 pl-24 xl:pl-32 flex-nowrap cursor-grab active:cursor-grabbing overflow-auto scrollbar-hide relative"
           style={{ scrollbarWidth: 'none' }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}

@@ -31,7 +31,7 @@ export default function AnimationSection() {
           <br className="hidden lg:block" /> en los últimos períodos. Podés
           compararlos
           <br className="hidden lg:block" /> y analizar cómo rindieron para
-          tomar las mejores decisiones
+          tomar las mejores decisiones.
         </p>
         <div className="flex justify-end lg:justify-end mb-6 md:mb-0">
           <Link href="/simulador" passHref>
