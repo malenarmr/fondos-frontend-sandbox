@@ -17,12 +17,12 @@ export default function HeroSectionInstitucional() {
              md:w-[1000px] space-y-4 px-4 md:px-8 xl:px-0 xl:mr-24"
           >
             <p>
-              Somos una institucion que trabaja desde hacce .... emitiendo
-              fondos para nuestros usuarios. Provinfondos S.A. Sociedad Gerente
-              de Fondos Comunes de Inversión inicia sus actividades el 1° de
-              julio de 1994. Banco Provincia es el principal accionista y la
-              sociedad depositaria de los fondos. Fundado en 1822, hoy cuenta
-              con 420 sucursales y es el segundo banco del sistema financiero
+              Somos una institucion que trabaja desde hace .... emitiendo fondos
+              para nuestros usuarios. Provinfondos S.A. Sociedad Gerente de
+              Fondos Comunes de Inversión inicia sus actividades el 1° de julio
+              de 1994. Banco Provincia es el principal accionista y la sociedad
+              depositaria de los fondos. Fundado en 1822, hoy cuenta con 420
+              sucursales y es el segundo banco del sistema financiero
               argentino..
             </p>
           </div>

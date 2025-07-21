@@ -14,7 +14,7 @@ export default function FeaturedCarousel() {
           ¿Sos más conservador o te gusta asumir riesgos? Hacé nuestro test en
           minutos y encontrá la mejor estrategia de inversión para vos.
         </p>
-        <Link href="/invierta" passHref>
+        <Link href="/test-inversor" passHref>
           <Button variant="light">Hacé el test</Button>
         </Link>
       </div>
