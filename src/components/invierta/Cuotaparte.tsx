@@ -6,6 +6,7 @@ import { Fondo } from '@/types/Fondo';
 import './Fondo.css';
 import { useAppContext } from '@/context/AppContext';
 import Link from 'next/link';
+import * as XLSX from 'xlsx';
 
 interface FondoProps {
   id: string;
@@ -65,6 +66,8 @@ export default function CuotaparteDetails({ id }: FondoProps) {
     if (fondoData && fondoData.numero_fondo && fondoData.clase_fondo) {
       async function fetchCuotaparte() {
         try {
+          setLoading(true);
+
           const res = await provinciaApiClient.fondos.cuotaParte.getAll({
             numero_fondo: fondoData?.numero_fondo,
             clase_fondo: currentClase,
@@ -73,7 +76,9 @@ export default function CuotaparteDetails({ id }: FondoProps) {
           setPagination(res.data.meta.pagination);
           setCurrentPage(1);
         } catch {
+          setError('Error al obtener cuotaparte según clase');
         } finally {
+          setLoading(false);
         }
       }
 
@@ -86,6 +91,8 @@ export default function CuotaparteDetails({ id }: FondoProps) {
     if (fondoData && fondoData.numero_fondo && fondoData.clase_fondo) {
       async function fetchCuotaparte() {
         try {
+          setLoading(true);
+
           if (fechaInicio && fechaFin) {
             const res = await provinciaApiClient.fondos.cuotaParte.getByRange({
               numero_fondo: fondoData?.numero_fondo,
@@ -104,7 +111,9 @@ export default function CuotaparteDetails({ id }: FondoProps) {
             setCuotaparte(res.data.data);
           }
         } catch {
+          setError('Error al obtener cuotaparte según clase');
         } finally {
+          setLoading(false);
         }
       }
 
@@ -176,6 +185,68 @@ export default function CuotaparteDetails({ id }: FondoProps) {
     }
   };
 
+  const handleExport = async () => {
+    try {
+      setLoading(true);
+
+      const allData: Cuotaparte[] = [];
+      let page = 1;
+      let totalPages = 1;
+
+      do {
+        let res;
+        if (fechaInicio && fechaFin) {
+          res = await provinciaApiClient.fondos.cuotaParte.getByRange({
+            numero_fondo: fondoData?.numero_fondo,
+            clase_fondo: currentClase,
+            fecha_inicio: fechaInicio,
+            fecha_fin: fechaFin,
+            page,
+          });
+        } else {
+          res = await provinciaApiClient.fondos.cuotaParte.getAll({
+            numero_fondo: fondoData?.numero_fondo,
+            clase_fondo: currentClase,
+            page,
+          });
+        }
+
+        const dataPage = res.data.data as Cuotaparte[];
+        const pageMeta = res.data.meta.pagination;
+
+        allData.push(...dataPage);
+
+        totalPages = pageMeta.pageCount;
+        page++;
+      } while (page <= totalPages);
+
+      if (!allData.length) {
+        setErrorFiltro('No hay datos para exportar');
+        return;
+      }
+
+      // Preparar datos para exportar
+      const dataToExport = allData.map((cuota) => ({
+        Fecha: formatDate(cuota.fecha),
+        'Número fondo': cuota.numero_fondo,
+        'Nombre fondo': cuota.nombre_fondo,
+        'Valor Cuota Parte': cuota.valor_cuota_parte,
+      }));
+
+      const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Cuotaparte');
+
+      const nombreArchivo = `cuotaparte_${fondoData?.name || 'fondo'}.xlsx`;
+      XLSX.writeFile(workbook, nombreArchivo);
+    } catch (error) {
+      console.error(error);
+      setErrorFiltro('Error al exportar los datos');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="pt-12 dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl">
       {error && <p className="text-center text-red-500">{error}</p>}
@@ -236,7 +307,9 @@ export default function CuotaparteDetails({ id }: FondoProps) {
                     </Button>
                   </div>
                   <div className="w-full lg:w-1/4 flex flex-col lg:flex-row justify-end">
-                    <Button variant="light">Exportar Excel</Button>
+                    <Button variant="light" onClick={() => handleExport()}>
+                      Exportar Excel
+                    </Button>
                   </div>
                 </div>
                 {errorFiltro && (

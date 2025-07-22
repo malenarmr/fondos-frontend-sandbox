@@ -7,7 +7,7 @@ import AnimationSection from '@/components/invierta/AnimationSection';
 import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
-import Image from 'next/image';
+import JsonAnimation from '@/components/shared/LottieAnimation';
 import Link from 'next/link';
 
 export default function InfoPage() {
@@ -52,14 +52,8 @@ export default function InfoPage() {
             </div>
           </div>
           {/* Imagen */}
-          <div className="animation-svg overflow-hidden flex items-center justify-center">
-            <Image
-              src="/guia/03_Checklist.gif"
-              alt="Binoculares simulador"
-              className="max-w-full h-auto"
-              width={500}
-              height={500}
-            />
+          <div className="animation-svg overflow-hidden flex items-center justify-center w-[300px] h-[250px] lg:w-[500px] lg:h-[430px]">
+            <JsonAnimation src="/shared/03_Checklist.json" />
           </div>
         </div>
       </section>

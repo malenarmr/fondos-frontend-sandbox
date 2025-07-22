@@ -1,21 +1,15 @@
 'use client';
 
 import Button from '@/components/shared/Button';
-import Image from 'next/image';
+import JsonAnimation from '@/components/shared/LottieAnimation';
 import Link from 'next/link';
 
 export default function AnimationSection() {
   return (
     <div className="container flex flex-col lg:flex-row items-center lg:justify-between">
       {/* GIF hardcodeado */}
-      <div className="mb-2 lg:mb-0 lg:mr-10">
-        <Image
-          src="/home/01_Binoculares.gif"
-          alt="Binoculares simulador"
-          className="max-w-full h-auto"
-          width={500}
-          height={500}
-        />
+      <div className="mb-2 lg:mb-0 lg:mr-10 w-[300px] h-[250px] lg:w-[500px] lg:h-[430px]">
+        <JsonAnimation src="/shared/01_Binoculares.json" />
       </div>
 
       {/* Texto y botón */}
