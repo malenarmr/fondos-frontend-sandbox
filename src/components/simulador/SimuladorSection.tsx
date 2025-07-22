@@ -32,9 +32,9 @@ export default function SimuladorSection() {
   const [showPopup, setShowPopup] = useState(false);
   const [result, setResult] = useState({
     rendimientoTotal: {
-      montoTotalInicialPortafolio: '',
+      montoTotalInicial: '',
       porcentajeRendimientoTotal: 0,
-      valorFinalTotalPortafolio: '',
+      valorFinalTotal: '',
     },
   });
 
@@ -79,8 +79,13 @@ export default function SimuladorSection() {
 
       const response = await provinciaApiClient.fondos.simulador.simular({
         data: {
-          fondos: formData.fondos.map((data) => {
-            return { numero: data.numero_fondo, clase: data.clase_fondo[0] };
+          fondos: formData.fondos.flatMap((data) => {
+            return data.clase_fondo.map((clase) => {
+              return {
+                numero: data.numero_fondo,
+                clase: clase.clase,
+              };
+            });
           }),
           monto: Number(formData.monto),
           fechaInicio: formData.fechaInicio,
@@ -88,9 +93,7 @@ export default function SimuladorSection() {
         },
       });
       setResult(response.data);
-      if (
-        response?.data?.rendimientoTotal?.montoTotalInicialPortafolio !== ''
-      ) {
+      if (response?.data?.rendimientoTotal?.montoTotalInicial !== '') {
         setShowPopup(true);
       }
       if (!response?.data?.success) {
@@ -178,8 +181,8 @@ export default function SimuladorSection() {
   const validResult = () => {
     if (
       result?.rendimientoTotal?.porcentajeRendimientoTotal &&
-      result?.rendimientoTotal?.montoTotalInicialPortafolio &&
-      result?.rendimientoTotal?.valorFinalTotalPortafolio
+      result?.rendimientoTotal?.montoTotalInicial &&
+      result?.rendimientoTotal?.valorFinalTotal
     ) {
       return true;
     } else {
@@ -195,6 +198,11 @@ export default function SimuladorSection() {
       }));
     }
   };
+
+  const hayFondoUSDSeleccionado = () =>
+    formData.fondos.some((f) => f.moneda === 'USD');
+
+  console.log(formData);
 
   return (
     <>
@@ -227,6 +235,7 @@ export default function SimuladorSection() {
                   className={`border border-[#929292] bg-transparent rounded w-full py-2 ps-6 pe-3 focus:outline-none max-h-[40px] 
                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${missing.includes('monto') && 'border-[#f27c7c] border-2'} text-${handleText('monto')} border-${handleText('monto')}`}
                   onChange={(e) => handleChange('monto', e.target.value)}
+                  value={formData.monto}
                   onKeyDown={(e) => {
                     // Bloquear letras, signos y símbolos
                     if (['e', 'E', '+', '-', '.', ','].includes(e.key)) {
@@ -308,18 +317,35 @@ export default function SimuladorSection() {
 
                     setFormData((prev) => {
                       const newFondos = [...prev.fondos];
+                      const selected = fondos.find(
+                        (f) => f.id === Number(value)
+                      );
 
                       if (value === '') {
+                        // Si el usuario selecciona "Seleccionar fondo"
                         if (newFondos.length > 1) {
-                          newFondos.splice(index, 1); // elimina solo si hay más de uno
+                          newFondos.splice(index, 1);
                         } else {
-                          newFondos[index] = { id: 0, name: '' } as Fondo; // limpia si es el único
+                          newFondos[index] = { id: 0, name: '' } as Fondo;
                         }
-                      } else {
-                        const selected = fondos.find(
-                          (f) => f.id === Number(value)
+                      } else if (selected) {
+                        const fondoEsUSD = selected.moneda === 'USD';
+
+                        // Verificamos si hay un fondo USD en los seleccionados
+                        const usdIndex = newFondos.findIndex(
+                          (f) => f.moneda === 'USD'
                         );
-                        if (selected) {
+
+                        // Si hay USD seleccionado y estamos eligiendo uno NO USD → reemplazamos el fondo USD
+                        if (!fondoEsUSD && usdIndex !== -1) {
+                          newFondos[usdIndex] = selected;
+                        }
+                        // Si estamos eligiendo USD y ya hay otros fondos seleccionados → reemplazamos el primero
+                        else if (fondoEsUSD && newFondos.length > 1) {
+                          newFondos.splice(0, newFondos.length, selected);
+                        }
+                        // Comportamiento normal: simplemente actualizar el fondo en esta posición
+                        else {
                           newFondos[index] = selected;
                         }
                       }
@@ -337,33 +363,35 @@ export default function SimuladorSection() {
                     Seleccionar fondo
                   </option>
                   {fondos
-                    .filter(
-                      (fondo) =>
-                        !formData.fondos.some(
-                          (f, i) => f.id === fondo.id && i !== index
-                        ) // evitar repetidos
-                    )
-                    .map((fondo) => (
-                      <option
-                        className="text-secondary"
-                        key={fondo.id}
-                        value={fondo.id}
-                      >
-                        {fondo.name}
-                      </option>
-                    ))}
+                    .filter((fondo) => {
+                      return !formData.fondos.some((f, i) => {
+                        return f.id === fondo.id && i !== index;
+                      });
+                    })
+                    .map((fondo) => {
+                      return (
+                        <option
+                          key={fondo.id}
+                          value={fondo.id}
+                          className={`text-secondary`}
+                        >
+                          {fondo.name}
+                        </option>
+                      );
+                    })}
                 </select>
               ))}
-
-              <button
-                type="button"
-                className={`flex items-center gap-1 font-bold text-sm text-secondary text-${handleText('fondos')}`}
-                onClick={handleAddFondo}
-                disabled={formData.fondos.length >= 3}
-              >
-                <MdOutlineAddBox />
-                Agregar fondo
-              </button>
+              {!hayFondoUSDSeleccionado() && (
+                <button
+                  type="button"
+                  className={`flex items-center gap-1 font-bold text-sm text-secondary text-${handleText('fondos')}`}
+                  onClick={handleAddFondo}
+                  disabled={formData.fondos.length >= 3}
+                >
+                  <MdOutlineAddBox />
+                  Agregar fondo
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -397,7 +425,7 @@ export default function SimuladorSection() {
                   <div className="flex">
                     <span className="w-1/2 text-[#929292]">Total simulado</span>
                     <span className="w-1/2">
-                      ${result?.rendimientoTotal?.montoTotalInicialPortafolio}
+                      ${result?.rendimientoTotal?.montoTotalInicial}
                     </span>
                   </div>
                   <div className="flex">
@@ -425,7 +453,7 @@ export default function SimuladorSection() {
                     <span className="font-medium">
                       $
                       {Number(
-                        result?.rendimientoTotal?.valorFinalTotalPortafolio
+                        result?.rendimientoTotal?.valorFinalTotal
                       ).toFixed(2)}
                     </span>
                   </div>
@@ -461,7 +489,7 @@ export default function SimuladorSection() {
                       Total simulado
                     </span>
                     <span className="w-1/2 border-l text-right ">
-                      ${result?.rendimientoTotal?.montoTotalInicialPortafolio}
+                      ${result?.rendimientoTotal?.montoTotalInicial}
                     </span>
                   </div>
                   <div className="flex justify-between border-b pb-2">
@@ -490,9 +518,9 @@ export default function SimuladorSection() {
                     <span className="">Capital + Rendimiento</span>
                     <span className="font-medium">
                       $
-                      {Number(
-                        result.rendimientoTotal.valorFinalTotalPortafolio
-                      ).toFixed(2)}
+                      {Number(result.rendimientoTotal.valorFinalTotal).toFixed(
+                        2
+                      )}
                     </span>
                   </div>
                 </div>
