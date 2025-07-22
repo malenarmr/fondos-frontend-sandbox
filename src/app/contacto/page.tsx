@@ -9,7 +9,7 @@ export default function NoticiasPage() {
   const heroData = {
     title: 'Contactanos',
     description:
-      'Podes encontrarnos en nuestras redes sociales, en las sucursales o ponerte en contacto con cualquiera de nuestros operadores.',
+      'Podés encontrarnos en nuestras redes sociales, en las sucursales o ponerte en contacto con cualquiera de nuestros operadores.',
   };
 
   return (
