@@ -47,6 +47,10 @@ const Button: React.FC<Props> = (props) => {
       hover:bg-primary hover:text-white focus:ring-primary
       cursor-pointer
     `,
+    terciary: `
+    bg-primary border border-primary text-white
+    hover:bg-secondary hover:border-secondary focus:ring-primary
+  `,
   } as const;
 
   const className = `${base} ${styles[variant]}`;

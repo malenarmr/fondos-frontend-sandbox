@@ -25,7 +25,19 @@ export default function AsistentesSection() {
           <Link
             key={asistente.id}
             href={`/contacto/asistente/${asistente.id}`}
-            className="w-full max-w-[300px] rounded-[12px] overflow-hidden bg-white shadow transition hover:scale-[1.02]"
+            className={`
+            w-full max-w-[300px]
+            bg-white 
+            border-2 border-[#2F755E]
+            rounded-tl-[8px] rounded-tr-[22px] rounded-bl-[22px] rounded-br-[8px]
+            shadow-sm transition 
+            hover:scale-[1.02]
+            overflow-hidden
+            flex flex-col
+          `}
+            style={{
+              textDecoration: 'none',
+            }}
           >
             <div className="bg-[#A3DBC9] py-6 text-xl font-bold text-black font-encode-sans">
               {asistente.nombre}

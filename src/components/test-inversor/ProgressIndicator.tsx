@@ -10,12 +10,12 @@ export default function ProgressIndicator({
   currentStep,
 }: ProgressIndicatorProps) {
   return (
-    <div className="relative">
+    <div className="relative w-full mb-6">
       {/* Línea de progreso */}
-      <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -translate-y-1/2" />
+      <div className="absolute top-1/2 left-0 right-0 h-1 bg-[#A3DBC9] -translate-y-1/2 z-0" />
 
       {/* Indicadores de pasos */}
-      <div className="relative flex justify-between items-center">
+      <div className="relative flex justify-between items-center z-10">
         {Array.from({ length: totalSteps }).map((_, index) => {
           const stepNumber = index + 1;
           const isCompleted = stepNumber < currentStep;
@@ -24,15 +24,15 @@ export default function ProgressIndicator({
           return (
             <div key={index} className="flex flex-col items-center">
               {isActive ? (
-                // Paso activo: círculo punteado grande + círculo interior
-                <div className="flex items-center justify-center w-[62px] h-[62px] rounded-full border-2 border-dashed border-[#008996]">
-                  <div className="w-[27px] h-[27px] bg-[#00C3B3] rounded-full" />
+                <div className="flex items-center justify-center w-[48px] h-[48px] rounded-full border-2 border-dashed border-[#009B67] bg-white">
+                  <div className="w-[24px] h-[24px] bg-[#009B67] rounded-full" />
                 </div>
               ) : (
-                // Paso completado o no alcanzado
                 <div
-                  className={`w-[27px] h-[27px] rounded-full ${
-                    isCompleted ? 'bg-[#00C3B3]' : 'bg-[#00C3B3]/40'
+                  className={`w-[24px] h-[24px] rounded-full border-2 ${
+                    isCompleted
+                      ? 'bg-[#009B67] border-[#009B67]'
+                      : 'bg-[#A3DBC9] border-[#A3DBC9]'
                   }`}
                 />
               )}

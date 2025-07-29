@@ -205,7 +205,6 @@ const Footer: React.FC = () => {
             </a>
           </div>
         </div>
-        <hr className="border-gray-300 opacity-50 mb-8" />
 
         {/* Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 mb-8 text-white">

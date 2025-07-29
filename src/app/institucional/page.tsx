@@ -1,5 +1,6 @@
 'use client';
 import AutoridadesSection from '@/components/institucional/AutoridadesSection';
+import AvisoLegalSection from '@/components/institucional/AvisoLegalSection';
 import HeroSectionInstitucional from '@/components/institucional/HeroSectionInstitucional';
 import InstitucionalCard from '@/components/institucional/InstitucionalCard';
 import { MobileAutoridadesAccordion } from '@/components/institucional/MobileAccordion';
@@ -89,6 +90,7 @@ export default function InstitucionalPage() {
           {isMobile ? <MobileAutoridadesAccordion /> : <AutoridadesSection />}
         </div>
       </section>
+      <AvisoLegalSection />
 
       {/* Mobile-only Invierta section */}
       <MobileInviertaSection />

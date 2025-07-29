@@ -13,9 +13,7 @@ export default function HeroSectionGenerico({
   showImage = false,
 }: HeroSectionGenericoProps) {
   return (
-    <section
-      className={`rounded-b-[50px] py-8 xl:py-16 dark:bg-dark font-encode-sans`}
-    >
+    <section className={`rounded-b-[50px] dark:bg-dark font-encode-sans`}>
       <div className="flex flex-col-reverse xl:flex-row items-center">
         <div className="flex flex-col text-primary xl:ml-[145px]">
           {/* Título */}

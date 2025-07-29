@@ -40,7 +40,13 @@ export default function TestInversorForm() {
         const mappedQuestions: Question[] = data.map((q) => ({
           id: q.id,
           text: q.question,
-          options: [],
+          options: q.answer.map(
+            (a: { id: { toString: () => any }; answer: any; point: any }) => ({
+              id: a.id.toString(), // asegurate que sea string si estás comparando con string
+              label: a.answer,
+              point: a.point,
+            })
+          ),
         }));
         setQuestions(mappedQuestions);
       })
@@ -94,7 +100,20 @@ export default function TestInversorForm() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-8 my-8">
+    <div
+      className="    mx-auto
+    max-w-[1144px]
+    min-h-[689px]
+    bg-white
+    border
+    border-[#2F755E]
+    rounded-xl
+    shadow-sm
+    p-8
+    flex flex-col
+    justify-center
+    items-center"
+    >
       <ProgressIndicator
         totalSteps={totalSteps}
         currentStep={currentStep + 1}
@@ -108,21 +127,39 @@ export default function TestInversorForm() {
           {currentQuestion.text}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 justify-items-center">
+        <div
+          className="
+            flex 
+            gap-6 
+            mb-8 
+            justify-evenly 
+            w-full 
+            overflow-x-auto 
+            max-w-full
+            p-10
+            "
+          style={{ minHeight: 160 }}
+        >
           {currentQuestion.options.map((opt) => {
             const isSelected = selected === opt.id;
             return (
               <div
                 key={opt.id}
                 onClick={() => handleSelect(opt)}
-                className="relative overflow-hidden transition-all duration-300 ease-in-out font-encode-sans cursor-pointer w-[280px] "
+                className={`
+          flex-shrink-0
+          transition-all duration-300
+          cursor-pointer
+          w-[240px] sm:w-[200px] md:w-[180px] lg:w-[220px]
+          h-auto
+          ${isSelected ? 'ring-2 ring-[#009B67]' : ''}
+        `}
                 style={{
-                  borderRadius: isMobile ? '8px' : '8px 22px',
-                  border: '1px solid #EBEBEB',
+                  borderRadius: '8px',
                   background: '#FFF',
                   boxShadow: isSelected
-                    ? '0px 4px 27px rgba(146,146,146,0.7)'
-                    : '0px 4px 27px rgba(146,146,146,0.37)',
+                    ? '0px 4px 17px rgba(146,146,146,0.7)'
+                    : '0px 4px 17px rgba(146,146,146,0.37)',
                 }}
               >
                 <QuestionCard
