@@ -37,12 +37,12 @@ export default function NoticiasPage() {
         >
           Enterate de cómo operaron los fondos en los últimos períodos. Podés
           compararlos y analizar cómo rindieron para tomar las mejores
-          decisiones
+          decisiones.
         </p>
       ),
     },
     {
-      title: 'Conocé más sobre cómo invertir con videos tutoriales',
+      title: 'Conocé más sobre cómo invertir',
       bgColor: '#EBEBEB',
       textColor: '#3C3C3B',
       textButton: 'Ver todos los videos',

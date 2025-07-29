@@ -2,9 +2,9 @@
 import PreFooterCard from '@/components/invierta/PreFooterCard';
 import '@/components/invierta/PreFooterSection.css';
 import HalfSectionCard from '@/components/shared/HalfSectionCard';
-import Image from 'next/image';
 import { useState } from 'react';
 import Popup from '../ui/inversiones/Popup';
+import JsonAnimation from '@/components/shared/LottieAnimation';
 
 interface Props {
   items: {
@@ -34,21 +34,9 @@ export default function PreFooterSection({ items }: Props) {
           {items.map((item, index) => {
             const animation =
               index === 0 ? (
-                <Image
-                  src="/home/01_Binoculares.gif"
-                  alt="Binoculares simulador"
-                  className="max-w-full h-auto"
-                  width={500}
-                  height={500}
-                />
+                <JsonAnimation src="/shared/01_Binoculares.json" />
               ) : (
-                <Image
-                  src="/guia/03_Checklist.gif"
-                  alt="Check simulador"
-                  className="max-w-full h-auto"
-                  width={500}
-                  height={500}
-                />
+                <JsonAnimation src="/shared/03_Checklist.json" />
               );
 
             const textAlign = index === 0 ? 'end' : 'start';
@@ -86,24 +74,14 @@ export default function PreFooterSection({ items }: Props) {
           // Elige la animación según la posición (0 = izquierda, 1 = derecha)
           const animation =
             index === 0 ? (
-              <Image
-                src="/home/01_Binoculares.gif"
-                alt="Binoculares simulador"
-                className="max-w-full h-auto"
-                width={500}
-                height={500}
-              />
+              <JsonAnimation src="/shared/01_Binoculares.json" />
             ) : (
-              <Image
-                src="/guia/03_Checklist.gif"
-                alt="Check simulador"
-                className="max-w-full h-auto"
-                width={500}
-                height={500}
-              />
+              <JsonAnimation src="/shared/03_Checklist.json" />
             );
 
           const textAlign = index === 0 ? 'end' : 'start';
+
+          const paddingXxl = index === 0 ? 'pl-xxl' : 'pr-xxl';
 
           return (
             <HalfSectionCard
@@ -117,6 +95,7 @@ export default function PreFooterSection({ items }: Props) {
               link={item.link}
               onClick={item.popup ? handleOpenPopup : undefined}
               align={textAlign}
+              padding={paddingXxl}
             >
               {item.description}
             </HalfSectionCard>

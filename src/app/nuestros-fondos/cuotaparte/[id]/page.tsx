@@ -21,7 +21,7 @@ const items = [
         style={{ color: '#FFFFFF' }}
       >
         Enterate de cómo operaron los fondos en los últimos períodos. Podés
-        compararlos y analizar cómo rindieron para tomar las mejores decisiones
+        compararlos y analizar cómo rindieron para tomar las mejores decisiones.
       </p>
     ),
   },
