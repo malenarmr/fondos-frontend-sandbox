@@ -124,7 +124,7 @@ export default function NoticiasPage() {
   return (
     <main>
       <Navbar />
-      <div className="text-center lg:text-left">
+      <div className="container mx-auto px-4 xl:px-36 max-w-6xl">
         <HeroSectionGenerico
           title={heroData.title}
           description={heroData.description}
@@ -141,11 +141,10 @@ export default function NoticiasPage() {
 
         {/* Ahora sí, NewsGrid recibe allNews + filters */}
         <NewsGrid allNews={allNews} filters={filters} />
-
-        <PreFooterSection items={items} />
-
-        <Footer />
       </div>
+      <PreFooterSection items={items} />
+
+      <Footer />
     </main>
   );
 }

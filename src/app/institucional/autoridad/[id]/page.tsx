@@ -1,12 +1,9 @@
 'use client';
 
-import MobileInviertaSection from '@/components/institucional/MobileInviertaSection';
 import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
-import PromoSection from '@/components/shared/PromoSection';
 import { useAppContext } from '@/context/AppContext';
-import { useMediaQuery } from '@/hooks/use-media-query';
 import type { Authority } from '@/services/institutionalService';
 import { ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
@@ -21,7 +18,6 @@ export default function AutoridadDetailPage() {
   const { getAuthorityById, institucionalLoading, institucionalData } =
     useAppContext();
   const [authority, setAuthority] = useState<Authority | null>(null);
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     if (!institucionalLoading && institucionalData) {
@@ -107,47 +103,16 @@ export default function AutoridadDetailPage() {
             </div>
 
             <div className="mt-6 md:mt-8 flex justify-center font-encode-sans">
-              <Button onClick={() => router.push('/institucional')}>
-                Ver todos
+              <Button
+                variant="primary"
+                onClick={() => router.push('/institucional')}
+              >
+                Volver a Nosotros
               </Button>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Mobile-only Invierta section */}
-      {isMobile && (
-        <div
-          style={{
-            background:
-              'linear-gradient(124deg, #008996 22.18%, #00C3B3 70.32%)',
-          }}
-        >
-          <MobileInviertaSection />
-        </div>
-      )}
-
-      {/* Desktop promotion section */}
-      {!isMobile && (
-        <div
-          style={{
-            background:
-              'linear-gradient(124deg, #008996 22.18%, #00C3B3 70.32%)',
-          }}
-        >
-          <PromoSection
-            title="¿Querés invertir en dólar MEP?"
-            description="Operá desde Invierta, descubrí nuevas oportunidades y gestioná tu dinero de manera simple, rápida y segura."
-            appStoreUrl="https://apps.apple.com/app/id6448729005"
-            playStoreUrl="https://play.google.com/store/apps/details?id=io.btrader.prbu&hl"
-            wrapperClassName="bg-[#005A63] py-16 rounded-t-[40px]"
-            innerContainerClassName="container mx-auto px-4 text-center text-white"
-            titleClassName="text-4xl font-bold mb-4"
-            descriptionClassName="max-w-2xl mx-auto mb-8 font-encode-sans"
-            buttonWrapperClassName="flex justify-center gap-8"
-          />
-        </div>
-      )}
 
       <Footer />
     </main>

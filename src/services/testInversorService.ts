@@ -7,6 +7,7 @@ export interface ApiAnswer {
 }
 
 export interface FondoQuestion {
+  answer: any;
   id: number;
   question: string;
 }
@@ -36,7 +37,7 @@ export async function getTestInversor(): Promise<ApiTest> {
 export async function getInvestorProfile(
   value: number
 ): Promise<InvestorProfile> {
-  const { data } = await apiClient.get('/investor-profiles', {
+  const { data } = await apiClient.get('/inversor-profile-fondos', {
     params: { value },
   });
   return data;
@@ -44,5 +45,5 @@ export async function getInvestorProfile(
 
 export async function getTestInversorFondo(): Promise<FondoQuestion[]> {
   const { data } = await apiClient.get('/test-inversor-fondo');
-  return data.questions_fondos; // si `questions_fondos` está dentro del response
+  return data.questions_fondos;
 }

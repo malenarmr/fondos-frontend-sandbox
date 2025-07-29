@@ -24,7 +24,15 @@ export default function NewsCard({
 }: NewsCardProps) {
   return (
     <div
-      className="p-6 rounded-lg relative h-full flex flex-col"
+      className="
+        p-6
+        rounded-tl-[30px] rounded-tr-[4px] rounded-bl-[4px] rounded-br-[30px]
+        relative h-full flex flex-col
+        shadow
+        transition
+        border border-[#E5E7EB]
+        hover:shadow-lg
+      "
       style={{ backgroundColor: bgColor, color: textColor }}
     >
       {/* Fecha en la esquina superior derecha */}

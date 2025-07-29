@@ -42,10 +42,7 @@ export default function NotFoundPage() {
   return (
     <main>
       <Navbar />
-      <div
-        className="relative w-full flex flex-col items-center justify-center overflow-hidden"
-        style={{ background: 'linear-gradient(to bottom, #008996, #00C3B3)' }}
-      >
+      <div className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#009B67]">
         {' '}
         {isMobile ? (
           <div className="relative w-full flex flex-col items-center">
@@ -84,7 +81,7 @@ export default function NotFoundPage() {
             <div className="mt-4 mb-8">
               <Button
                 onClick={() => (window.location.href = '/')}
-                variant="primary"
+                variant="sky"
               >
                 Volver al home
               </Button>

@@ -23,7 +23,8 @@ export default function HomePage() {
         <AnimationSection />
       </section>
 
-      <div className="relative bg-[#2098A1] pt-20 overflow-hidden">
+      <div className="relative bg-[#2098A1] pt-20 overflow-hidden pb-[120px]">
+        {/* Fondo con patrón */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -33,13 +34,18 @@ export default function HomePage() {
             opacity: 0.2,
           }}
         />
-
-        <FeaturedCarousel />
+        {/* La card flotante */}
+        <div className="relative z-10 flex justify-center">
+          <FeaturedCarousel />
+        </div>
       </div>
+
+      {/* Franja blanca que empieza justo debajo */}
+      <div className="relative z-0 bg-white" style={{ minHeight: 80 }}></div>
 
       <div className="py-16 lg:py-[150px]">
         <div className="flex flex-col items-center">
-          <div className="container mx-auto px-6 xl:px-40 space-y-8 mb-8 flex justify-between gap-10">
+          <div className="container mx-auto px-6 xl:px-40 mb-8 flex justify-between items-center gap-10">
             <h1 className="font-encode-sans text-2xl lg:text-4xl text-secondary font-bold lg:font-black">
               Conocé más sobre cómo invertir
             </h1>
@@ -47,6 +53,7 @@ export default function HomePage() {
               <Button variant="light">Ver todos los videos</Button>
             </Link>
           </div>
+
           <VideosSectionWithFilters />
         </div>
       </div>
