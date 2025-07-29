@@ -105,7 +105,7 @@ export default function DesktopCarousel({ cards }: Props) {
       </AnimatePresence>
 
       {/* ===== DESKTOP ===== */}
-      <div className="hidden lg:flex justify-around items-center bg-primary-light mx-auto h-[645px] pl-20 px-8">
+      <div className="hidden lg:flex justify-around items-center bg-primary-light mx-auto pl-20 px-8">
         {/* Left side: Text & Button */}
         <div className="w-1/2 pr-8 text-white">
           <h1 className="text-4xl font-extrabold">{current.title}</h1>
