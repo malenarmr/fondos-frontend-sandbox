@@ -20,7 +20,6 @@ export const MobileAutoridadesAccordion: React.FC = () => {
       ? institucionalData.area_team_bursatils.find((a) => a.name === name)
       : undefined;
 
-
   return (
     <div className="space-y-2 font-encode-sans px-2">
       {FILTERS.map((filter, idx) => {
@@ -107,14 +106,16 @@ export const MobileAutoridadesAccordion: React.FC = () => {
               onClick={() => setOpenIndex(isOpen ? null : idx)}
             >
               <span
-                className={`text-lg ${isOpen ? 'text-[#005A63] font-semibold' : 'text-gray-500'
-                  }`}
+                className={`text-lg ${
+                  isOpen ? 'text-[#005A63] font-semibold' : 'text-gray-500'
+                }`}
               >
                 {filter}
               </span>
               <ChevronRight
-                className={`${isOpen ? 'text-[#005A63] rotate-90' : 'text-gray-400'
-                  } transition-transform`}
+                className={`${
+                  isOpen ? 'text-[#005A63] rotate-90' : 'text-gray-400'
+                } transition-transform`}
                 size={24}
               />
             </button>

@@ -161,10 +161,11 @@ export default function DesktopCarousel({ cards }: Props) {
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`transition-all duration-300 ${idx === currentIndex
-                ? 'w-[63px] h-[27px] bg-gray-800 rounded-full'
-                : 'w-[27px] h-[27px] bg-white border-2 border-gray-300 rounded-full'
-                }`}
+              className={`transition-all duration-300 ${
+                idx === currentIndex
+                  ? 'w-[63px] h-[27px] bg-gray-800 rounded-full'
+                  : 'w-[27px] h-[27px] bg-white border-2 border-gray-300 rounded-full'
+              }`}
             />
           ))}
         </div>

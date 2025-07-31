@@ -33,6 +33,5 @@ export default function TestInversorPage() {
       <DesktopCarousel cards={cards} />
       <Footer />
     </main>
-
   );
 }

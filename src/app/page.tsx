@@ -39,7 +39,6 @@ export default function HomePage() {
           <div className="w-full flex justify-center">
             <div
               className="translate-y-[20%]" // <-- AHORA ES POSITIVO
-
             >
               <FeaturedCarousel />
             </div>
@@ -48,7 +47,6 @@ export default function HomePage() {
       </div>
       {/* Franja blanca suficientemente alta */}
       <div className="relative z-0 bg-white" style={{ minHeight: 180 }}></div>
-
 
       {/* Franja blanca que empieza justo debajo */}
       <div className="relative z-0 bg-white" style={{ minHeight: 80 }}></div>

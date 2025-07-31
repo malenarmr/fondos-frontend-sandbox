@@ -10,13 +10,14 @@ import { useContactoData } from '@/hooks/useContactoData';
 export default function ContactoPage() {
   const { contacto, loading } = useContactoData();
 
-  if (loading || !contacto) return (
-    <main>
-      <Navbar />
-      <div className="py-40 text-center text-gray-500">Cargando...</div>
-      <Footer />
-    </main>
-  );
+  if (loading || !contacto)
+    return (
+      <main>
+        <Navbar />
+        <div className="py-40 text-center text-gray-500">Cargando...</div>
+        <Footer />
+      </main>
+    );
 
   return (
     <main>

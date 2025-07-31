@@ -166,7 +166,6 @@ export default function TestInversorForm() {
           })}
         </div>
 
-
         <div className="flex justify-end gap-4">
           <Button
             onClick={handleBack}

@@ -9,7 +9,10 @@ interface AsistentesSectionProps {
   sectionTitle: string;
 }
 
-export default function AsistentesSection({ asistentes, sectionTitle }: AsistentesSectionProps) {
+export default function AsistentesSection({
+  asistentes,
+  sectionTitle,
+}: AsistentesSectionProps) {
   return (
     <section className="bg-[#239DA8] py-16 px-4 text-white text-center">
       <h2 className="text-3xl font-extrabold font-encode-sans mb-12">

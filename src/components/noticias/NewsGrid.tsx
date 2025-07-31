@@ -117,7 +117,6 @@ export default function NewsGrid({ filters }: NewsGridProps) {
               />
             );
           })}
-
         </div>
 
         {visibleCount < filteredNews.length && (
