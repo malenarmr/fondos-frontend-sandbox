@@ -129,15 +129,8 @@ export default function TestInversorForm() {
 
         <div
           className="
-            flex 
-            gap-6 
-            mb-8 
-            justify-evenly 
-            w-full 
-            overflow-x-auto 
-            max-w-full
-            p-10
-            "
+    flex flex-wrap gap-6 mb-8 justify-center w-full max-w-full p-4
+  "
           style={{ minHeight: 160 }}
         >
           {currentQuestion.options.map((opt) => {
@@ -150,7 +143,8 @@ export default function TestInversorForm() {
           flex-shrink-0
           transition-all duration-300
           cursor-pointer
-          w-[240px] sm:w-[200px] md:w-[180px] lg:w-[220px]
+          w-full max-w-xs
+          sm:w-[220px] md:w-[200px]
           h-auto
           ${isSelected ? 'ring-2 ring-[#009B67]' : ''}
         `}
@@ -171,6 +165,7 @@ export default function TestInversorForm() {
             );
           })}
         </div>
+
 
         <div className="flex justify-end gap-4">
           <Button
