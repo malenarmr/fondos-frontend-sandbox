@@ -1,51 +1,45 @@
-'use client';
-
-import Link from 'next/link';
-
 interface Asistente {
   id: number;
-  nombre: string;
-  rol: string;
+  name: string;
+  rol: string | null;
 }
 
-const asistentes: Asistente[] = [
-  { id: 1, nombre: 'Patricio', rol: 'Información\nRol' },
-  { id: 2, nombre: 'Lucía', rol: 'Información\nRol' },
-];
+interface AsistentesSectionProps {
+  asistentes: Asistente[];
+  sectionTitle: string;
+}
 
-export default function AsistentesSection() {
+export default function AsistentesSection({
+  asistentes,
+  sectionTitle,
+}: AsistentesSectionProps) {
   return (
     <section className="bg-[#239DA8] py-16 px-4 text-white text-center">
       <h2 className="text-3xl font-extrabold font-encode-sans mb-12">
-        Nuestros asistentes
+        {sectionTitle}
       </h2>
-
-      <div className="flex flex-col md:flex-row justify-center gap-6 max-w-4xl mx-auto">
+      <div className="flex flex-col md:flex-row justify-center gap-6 max-w-4xl mx-auto items-center">
         {asistentes.map((asistente) => (
-          <Link
+          <div
             key={asistente.id}
-            href={`/contacto/asistente/${asistente.id}`}
             className={`
-            w-full max-w-[300px]
-            bg-white 
-            border-2 border-[#2F755E]
-            rounded-tl-[8px] rounded-tr-[22px] rounded-bl-[22px] rounded-br-[8px]
-            shadow-sm transition 
-            hover:scale-[1.02]
-            overflow-hidden
-            flex flex-col
-          `}
-            style={{
-              textDecoration: 'none',
-            }}
+              w-full max-w-[300px]
+              bg-white 
+              border-2 border-[#2F755E]
+              rounded-tl-[8px] rounded-tr-[22px] rounded-bl-[22px] rounded-br-[8px]
+              shadow-sm transition 
+              hover:scale-[1.02]
+              overflow-hidden
+              flex flex-col
+            `}
           >
             <div className="bg-[#A3DBC9] py-6 text-xl font-bold text-black font-encode-sans">
-              {asistente.nombre}
+              {asistente.name}
             </div>
             <div className="bg-white py-6 text-gray-600 whitespace-pre-line font-encode-sans">
-              {asistente.rol}
+              {asistente.rol ?? '—'}
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </section>

@@ -14,6 +14,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 export default function NewsDetailPage() {
   const router = useRouter();
@@ -171,11 +173,13 @@ export default function NewsDetailPage() {
             {/* Contenido principal (content) */}
             {noticia.content && (
               <div className="prose max-w-none text-gray-700 font-encode-sans">
-                {noticia.content.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="mb-6 leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
+                {noticia.content && (
+                  <div className="prose max-w-none text-gray-700 font-encode-sans">
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                      {noticia.content.replace(/<br\s*\/?>/gi, '\n')}
+                    </ReactMarkdown>
+                  </div>
+                )}
               </div>
             )}
 
@@ -205,7 +209,6 @@ export default function NewsDetailPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {relatedNews.length > 0 ? (
                 relatedNews.map((n) => {
-                  // Formateamos fecha y descripción para cada NewsCard
                   const fechaN = new Date(n.createdAt).toLocaleDateString(
                     'es-AR',
                     {
@@ -216,14 +219,19 @@ export default function NewsDetailPage() {
                   );
                   const desc =
                     n.shortContent || `${n.content.slice(0, 120)}...`;
-                  const bg = n.category_blog_fondos.colors_fondo.value;
-                  const textColor = '#3C3C3B';
+
+                  // 👇 Cambios acá:
+                  const bg =
+                    n.category_blog_fondos?.colors_fondo?.value || '#009B67';
+                  const category =
+                    n.category_blog_fondos?.name?.toUpperCase() || '';
+                  const textColor = bg === '#E3E3E3' ? '#3C3C3B' : '#FFF';
 
                   return (
                     <NewsCard
                       key={n.id}
                       id={n.id}
-                      category={n.category_blog_fondos.name.toUpperCase()}
+                      category={category}
                       title={n.title}
                       author={n.author ?? 'Provincia Bursátil'}
                       description={desc}

@@ -37,7 +37,7 @@ export default function NewsFilters({
 
   return (
     <div className="bg-white py-12 px-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto sm:items-center">
         <div className="flex flex-col lg:flex-row items-end">
           {/* 1) Input búsqueda */}
           <div className="flex-1 relative">

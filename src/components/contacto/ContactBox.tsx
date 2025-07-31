@@ -1,6 +1,15 @@
 import { Mail, MessageCircle } from 'lucide-react';
 
-export default function ContactBox() {
+interface ContactBoxProps {
+  contacto: {
+    telefono: string;
+    fax: string;
+    consultas_denuncias: string;
+    email: string;
+  };
+}
+
+export default function ContactBox({ contacto }: ContactBoxProps) {
   return (
     <div className="border border-[#009B67] rounded-2xl bg-white p-8 max-w-md w-full flex flex-col gap-6 shadow-sm">
       {/* Teléfonos */}
@@ -13,10 +22,10 @@ export default function ContactBox() {
         />
         <div className="flex flex-col">
           <span className="text-secondary text-lg">
-            Tel.: (11) 4348 - 9415 / FAX. 4348 - 9417
+            Tel.: {contacto.telefono} / FAX. {contacto.fax}
           </span>
           <span className="text-secondary text-lg">
-            Consultas o Denuncias: 0800 - 666 - 2285
+            Consultas o Denuncias: {contacto.consultas_denuncias}
           </span>
         </div>
       </div>
@@ -29,10 +38,10 @@ export default function ContactBox() {
           className="min-w-[32px]"
         />
         <a
-          href="mailto:sugerencias@provinfondos.com.ar"
+          href={`mailto:${contacto.email.trim()}`}
           className="text-secondary text-lg underline"
         >
-          sugerencias@provinfondos.com.ar
+          {contacto.email.trim()}
         </a>
       </div>
     </div>

@@ -16,7 +16,9 @@ export const MobileAutoridadesAccordion: React.FC = () => {
 
   // Busca un área por nombre exacto
   const getArea = (name: string) =>
-    institucionalData.area_team_bursatils.find((a) => a.name === name);
+    Array.isArray(institucionalData.area_team_bursatils)
+      ? institucionalData.area_team_bursatils.find((a) => a.name === name)
+      : undefined;
 
   return (
     <div className="space-y-2 font-encode-sans px-2">

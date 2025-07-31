@@ -1,10 +1,11 @@
-// components/noticias/NewsGrid.tsx
 'use client';
 
 import { NoticiaBackend, fetchNoticias } from '@/services/noticiasService';
 // ──> eliminamos la importación de dayjs
 // import dayjs from 'dayjs';
+import { getNewsCardColors } from '@/helpers/colors';
 import { useCallback, useEffect, useState } from 'react';
+import Spinner from '../shared/Spinner';
 import NewsCard from './NewsCard';
 
 interface NewsGridProps {
@@ -73,7 +74,7 @@ export default function NewsGrid({ filters }: NewsGridProps) {
   if (loading) {
     return (
       <div className="bg-white py-12 px-6 text-center">
-        <p>Cargando noticias...</p>
+        <Spinner />
       </div>
     );
   }
@@ -91,25 +92,28 @@ export default function NewsGrid({ filters }: NewsGridProps) {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredNews.slice(0, visibleCount).map((n) => {
-            // ──> formateamos fecha con toLocaleDateString
             const fechaObj = new Date(n.createdAt);
             const formattedDate = fechaObj.toLocaleDateString('es-AR', {
               day: '2-digit',
               month: 'long',
               year: 'numeric',
-            }); // ej. "03 de junio de 2025"
+            });
+
+            // SAFE ACCESS al color
+            const rawBg = n.category_blog_fondos.colors_fondo?.value;
+            const { bgColor, textColor } = getNewsCardColors(rawBg);
 
             return (
               <NewsCard
                 key={n.id}
                 id={n.id}
-                category={n.category_blog_fondos.name.toUpperCase()}
+                category={n.category_blog_fondos.name?.toUpperCase() ?? ''}
                 title={n.title}
                 author={n.author ?? 'Provincia Bursátil'}
                 description={n.shortContent || n.content.slice(0, 120) + '...'}
                 date={formattedDate}
-                bgColor={n.category_blog_fondos.colors_fondo.value}
-                textColor="#3C3C3B"
+                bgColor={bgColor}
+                textColor={textColor}
               />
             );
           })}
