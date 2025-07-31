@@ -65,31 +65,47 @@ export default function AutoridadDetailPage() {
     <main>
       <Navbar />
 
-      <div className="py-8 md:py-16 font-encode-sans">
-        <div className="container mx-auto px-4">
+      <div className="relative py-8 md:py-16 font-encode-sans min-h-[80vh]">
+        {/* FONDO INSTITUCIONAL */}
+        <div
+          className="absolute inset-0 top-1/4 md:top-1/4 w-full z-0"
+          style={{
+            backgroundImage: "url('/institucional/bg-institucional.svg')",
+            backgroundRepeat: 'repeat',
+            backgroundPosition: 'top center',
+            opacity: 1, // bajalo si es muy fuerte, ej: 0.8
+            minHeight: '60vh',
+          }}
+          aria-hidden="true"
+        />
+
+        {/* CONTENIDO */}
+        <div className="container mx-auto px-4 relative z-10">
           <div
-            className="p-12 sm:p-24 max-w-3xl mx-auto font-encode-sans"
+            className="p-8 sm:p-24 max-w-3xl mx-auto font-encode-sans"
             style={{
               borderRadius: '8px',
               background: 'var(--Blanco, #FFF)',
-              boxShadow: '0px 4px 32px rgba(146,146,146,0.57)',
+              boxShadow: '0px 4px 32px rgba(146,146,146,0.17)',
+              position: 'relative',
             }}
           >
-            <div className="flex flex-col mb-6 md:mb-8">
+            <div className="flex flex-col mb-6 md:mb-8 items-center">
               <div className="w-24 h-32 md:w-64 md:h-80 rounded-lg overflow-hidden mb-4">
                 <Image
                   src={authority.image.url || '/placeholder.svg'}
                   alt={authority.name}
-                  width={128}
-                  height={128}
-                  className="object-cover w-full h-full rounded-[20px]"
+                  width={256}
+                  height={320}
+                  className="object-cover w-full h-full rounded-[20px] grayscale"
+                  // 👆 escala de grises con Tailwind, o usá style={{ filter: 'grayscale(100%)' }}
                 />
               </div>
 
-              <h1 className="text-2xl md:text-3xl font-bold text-primary font-encode-sans">
+              <h1 className="text-2xl md:text-3xl font-bold text-primary font-encode-sans text-center">
                 {authority.name}
               </h1>
-              <p className="text-[#008996] font-medium font-encode-sans">
+              <p className="text-[#008996] font-medium font-encode-sans text-center">
                 {authority.role}
               </p>
             </div>

@@ -4,7 +4,6 @@ import AvisoLegalSection from '@/components/institucional/AvisoLegalSection';
 import HeroSectionInstitucional from '@/components/institucional/HeroSectionInstitucional';
 import InstitucionalCard from '@/components/institucional/InstitucionalCard';
 import { MobileAutoridadesAccordion } from '@/components/institucional/MobileAccordion';
-import MobileInviertaSection from '@/components/institucional/MobileInviertaSection';
 import Footer from '@/components/shared/Footer';
 import MobileCarousel from '@/components/shared/MobileCarousel';
 import Navbar from '@/components/shared/NavBar';
@@ -91,9 +90,6 @@ export default function InstitucionalPage() {
         </div>
       </section>
       <AvisoLegalSection />
-
-      {/* Mobile-only Invierta section */}
-      <MobileInviertaSection />
 
       <Footer />
     </main>

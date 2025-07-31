@@ -2,7 +2,6 @@
 
 import Button from '@/components/shared/Button';
 import Link from 'next/link';
-
 export default function FeaturedCarousel() {
   return (
     <div
