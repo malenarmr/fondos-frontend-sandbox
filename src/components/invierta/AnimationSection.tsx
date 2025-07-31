@@ -15,8 +15,7 @@ export default function AnimationSection() {
       {/* Texto y botón */}
       <div className="flex flex-col text-end md:text-center lg:text-right lg:w-1/2 px-[50px] md:px-0">
         <h1 className="font-encode-sans text-xl lg:text-4xl text-primary-light leading-tight mb-5 font-extrabold">
-          Proyectá con el
-          <br /> simulador de
+          Simulador de
           <br />
           rendimientos
         </h1>

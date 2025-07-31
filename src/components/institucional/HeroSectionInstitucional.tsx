@@ -6,14 +6,14 @@ export default function HeroSectionInstitucional() {
       <div className="flex flex-col-reverse xl:flex-row items-center">
         <div className="flex flex-col text-primary xl:ml-[145px]">
           {/* Título */}
-          <h1 className="text-center xl:text-left font-encode-sans font-bold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary mb-7 xl:mb-12 xl:mt-7">
+          <h1 className="text-center xl:text-left font-encode-sans font-bold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-12 xl:mt-7">
             Institucional
           </h1>
 
           {/* Descripción dividida manualmente */}
           <div
             className="font-encode-sans font-normal text-[16px] xl:text-[20px]
-             leading-5 xl:leading-6 text-primary text-left
+             leading-5 xl:leading-6 text-black text-left
              md:w-[1000px] space-y-4 px-4 md:px-8 xl:px-0 xl:mr-24"
           >
             <p>

@@ -19,7 +19,7 @@ export default function HomePage() {
 
       <DesktopCarousel cards={cards} />
 
-      <section className="lg:rounded-t-[50px] py-[30px] lg:pb-[70px] lg:mt-20 flex flex-col items-center mb-5 lg:mb-[-50px] px-4 lg:px-20">
+      <section className="lg:rounded-t-[50px] py-[30px] lg:pb-[70px] flex flex-col items-center mb-5 lg:mb-[-50px] px-4 lg:px-20">
         <AnimationSection />
       </section>
 
