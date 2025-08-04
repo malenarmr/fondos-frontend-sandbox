@@ -1,3 +1,5 @@
+// src/app/test-inversor/resultado/page.tsx
+
 'use client';
 export const dynamic = 'force-dynamic';
 
@@ -6,7 +8,8 @@ import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import PromoSection from '@/components/shared/PromoSection';
-import ResultadoCartera from '@/components/test-inversor/ResultadoCartera';
+// NUEVO: importá el componente de fondos sugeridos
+import ResultadoFondosSugeridos from '@/components/test-inversor/ResultadoFondosSugeridos';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import {
   InvestorProfile,
@@ -48,14 +51,6 @@ function ResultadoContent() {
     );
   }
 
-  // Mapeo de títulos a tipos de cartera
-  const carteraTypeMap: Record<string, string> = {
-    Conservador: 'Conservadora',
-    Moderado: 'Moderada',
-    Agresivo: 'Arriesgada',
-  };
-  const filterType = carteraTypeMap[profile.title] ?? profile.title;
-
   return (
     <main className="font-encode-sans">
       <Navbar />
@@ -77,7 +72,12 @@ function ResultadoContent() {
           <h2 className="text-3xl font-extrabold text-center mb-4 text-primary">
             {profile.title}
           </h2>
-          <ResultadoCartera filterType={filterType} />
+          <p className="text-center mb-2">{profile.description}</p>
+          <p className="text-center text-secondary mb-4">
+            {profile.shortDescription}
+          </p>
+          {/* Acá usamos el nuevo componente */}
+          <ResultadoFondosSugeridos fondos={profile.our_founds || []} />
 
           <div className="flex justify-center items-center gap-4 mt-6 w-full">
             <Button
@@ -86,7 +86,7 @@ function ResultadoContent() {
             >
               Volver a hacer el test
             </Button>
-            <Button onClick={() => router.push('/inversiones')}>
+            <Button onClick={() => router.push('/simulador')}>
               Simulá tu inversión
             </Button>
           </div>
