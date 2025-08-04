@@ -404,7 +404,11 @@ export default function SimuladorSection() {
               </span>
             </div>
           )}
-          <Button style={{ width: 'fit-content' }} onClick={() => handleSend()}>
+          <Button
+            variant="light"
+            style={{ width: 'fit-content' }}
+            onClick={() => handleSend()}
+          >
             Simular
           </Button>
         </div>
@@ -412,10 +416,10 @@ export default function SimuladorSection() {
       {validResult() && (
         <>
           <div
-            className="pt-20 pb-28 relative bg-gradient-to-br from-[#008996] to-[#00C3B3] rounded-t-[50px] text-white mb-[-40px] md:px-[100px] xl:px-[145px] hidden md:block"
+            className="pt-20 pb-28 relative bg-white rounded-t-[50px] text-white mb-[-40px] md:px-[100px] xl:px-[145px] hidden md:block"
             ref={myDivRef}
           >
-            <div className="bg-white text-primary w-[100%] px-16 lg:px-20 py-12 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] flex flex-col max-w-[922px] mx-auto">
+            <div className="bg-[#2098A1] text-white w-[100%] px-16 lg:px-20 py-12 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] flex flex-col max-w-[922px] mx-auto">
               <h2 className="font-encode-sans font-bold text-3xl text-center">
                 El rendimiento de tu inversión
                 <br /> hubiese sido
@@ -423,15 +427,13 @@ export default function SimuladorSection() {
               <div className="flex w-full gap-4 pt-16">
                 <div className="w-1/2 flex flex-col gap-8">
                   <div className="flex">
-                    <span className="w-1/2 text-[#929292]">Total simulado</span>
+                    <span className="w-1/2 ">Total simulado</span>
                     <span className="w-1/2">
                       ${result?.rendimientoTotal?.montoTotalInicial}
                     </span>
                   </div>
                   <div className="flex">
-                    <span className="w-1/2 text-[#929292]">
-                      Rendimiento directo
-                    </span>
+                    <span className="w-1/2 ">Rendimiento directo</span>
                     <span className="w-1/2">
                       {result?.rendimientoTotal?.porcentajeRendimientoTotal?.toFixed(
                         2
@@ -442,14 +444,14 @@ export default function SimuladorSection() {
                 </div>
                 <div className="w-1/2 flex flex-col gap-8">
                   <div className="flex px-8 justify-between rounded-[12px]">
-                    <span className="text-[#929292]">Desde - Hasta</span>
+                    <span className="">Desde - Hasta</span>
                     <span className="">
                       {formatDate(formData.fechaInicio)} -{' '}
                       {formatDate(formData.fechaFin)}
                     </span>
                   </div>
-                  <div className="flex bg-[#00E89A] py-2 px-8 rounded-[12px] justify-between">
-                    <span className="text-primary">Capital + Rendimiento</span>
+                  <div className="flex bg-[#EEF8F3] py-2 px-8 rounded-[12px] justify-between text-[#3C3C3B]">
+                    <span className="">Capital + Rendimiento</span>
                     <span className="font-medium">
                       $
                       {Number(
@@ -530,8 +532,8 @@ export default function SimuladorSection() {
         </>
       )}
       {error && (
-        <div className="pt-20 pb-28 relative bg-gradient-to-br from-[#008996] to-[#00C3B3] rounded-t-[50px] text-white mb-[-40px] md:px-[100px] xl:px-[145px] hidden md:block">
-          <div className="bg-white text-primary w-[100%] px-16 lg:px-20 py-12 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] flex flex-col max-w-[922px] mx-auto">
+        <div className="pt-20 pb-28 relative bg-white rounded-t-[50px] text-white mb-[-40px] md:px-[100px] xl:px-[145px] hidden md:block">
+          <div className="bg-[#2098A1] text-white w-[100%] px-16 lg:px-20 py-12 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] flex flex-col max-w-[922px] mx-auto">
             <h2 className="font-encode-sans font-bold text-xl text-center">
               {error}. Por favor intentálo nuevamente
             </h2>
