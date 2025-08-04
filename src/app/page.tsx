@@ -7,14 +7,44 @@ import AnimationSection from '@/components/invierta/AnimationSection';
 import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
+import PopupAvisoFondos from '@/components/shared/PopupAvisoFondos';
 import { useHomeCards } from '@/hooks/useHomeCards';
+import { fetchAvisoFondos } from '@/services/popupFondosService';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function HomePage() {
   const cards = useHomeCards();
 
+  // Popup de aviso de operaciones (nuevo)
+  const [showAviso, setShowAviso] = useState(false);
+  const [aviso, setAviso] = useState<null | {
+    title: string;
+    description: string;
+    buttonText?: string | null;
+  }>(null);
+
+  useEffect(() => {
+    fetchAvisoFondos().then((data) => {
+      if (data) {
+        setAviso(data);
+        setShowAviso(true);
+      }
+    });
+  }, []);
+
   return (
     <main>
+      {/* Popup arriba de todo */}
+      {showAviso && aviso && (
+        <PopupAvisoFondos
+          title={aviso.title}
+          description={aviso.description}
+          buttonText={aviso.buttonText || 'Continuar'}
+          onClose={() => setShowAviso(false)}
+        />
+      )}
+
       <Navbar />
 
       <DesktopCarousel cards={cards} />
@@ -37,9 +67,7 @@ export default function HomePage() {
         {/* Card flotante */}
         <div className="relative z-10 flex justify-center">
           <div className="w-full flex justify-center">
-            <div
-              className="translate-y-[20%]" // <-- AHORA ES POSITIVO
-            >
+            <div className="translate-y-[20%]">
               <FeaturedCarousel />
             </div>
           </div>
@@ -47,8 +75,6 @@ export default function HomePage() {
       </div>
       {/* Franja blanca suficientemente alta */}
       <div className="relative z-0 bg-white" style={{ minHeight: 180 }}></div>
-
-      {/* Franja blanca que empieza justo debajo */}
       <div className="relative z-0 bg-white" style={{ minHeight: 80 }}></div>
 
       <div className="py-16 lg:py-[150px]">
@@ -61,7 +87,6 @@ export default function HomePage() {
               <Button variant="light">Ver todos los videos</Button>
             </Link>
           </div>
-
           <VideosSectionWithFilters />
         </div>
       </div>
