@@ -24,6 +24,16 @@ export interface InvestorProfile {
   description: string | null;
   shortDescription: string | null;
   point: string;
+  our_founds: {
+    id: number;
+    name: string;
+    description: string;
+    moneda: string;
+    horizonte: string;
+    variacionDiaria: number;
+    patrimonio: string;
+    carteraDetallada: string;
+  }[];
 }
 export interface ApiTest {
   questions: ApiQuestion[];
