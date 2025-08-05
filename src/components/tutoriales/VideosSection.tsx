@@ -110,7 +110,7 @@ export default function VideosSection() {
     <>
       {/* desktop */}
       <div className="flex-col md:flex-row items-start space-x-4 xl:space-x-8 hidden md:flex justify-between items-stretch">
-        <div className="flex-col items-center justify-center w-2/5 md:w-1/4 bg-primary py-2 lg:pt-16 lg:pb-[100%] md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10 max-w-[412px]">
+        <div className="flex-col items-center justify-center w-2/5 md:w-1/4 bg-primary py-2 lg:pt-16 lg:pb-[100%] md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10 max-w-[412px] pl-xxl xl:w-2/5 width-xxl">
           <div className="space-y-4">
             <h3 className="text-xl font-black font-encode-sans text-white">
               Filtros de la búsqueda
@@ -157,7 +157,7 @@ export default function VideosSection() {
             </button>
           </div>
         </div>
-        <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 lg:pr-8 xl:pr-[100px] py-2 lg:py-16 pl-12">
+        <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 lg:pr-8 xl:pr-[100px] py-2 lg:py-16 pl-12 pr-xxl">
           <div className="flex flex-col gap-8 pb-4 max-w-[1132px]">
             <h1 className="font-encode-sans text-3xl lg:text-5xl text-primary-light font-black">
               Videos tutoriales
