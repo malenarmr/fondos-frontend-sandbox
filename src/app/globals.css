@@ -32,6 +32,10 @@ body {
   .pr-xxl {
     padding-right: 310px !important;
   }
+
+  .width-xxl {
+    max-width: 612px;
+  }
 }
 
 @layer utilities {
