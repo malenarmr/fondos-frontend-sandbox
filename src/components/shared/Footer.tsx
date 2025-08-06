@@ -1,10 +1,7 @@
-// src/components/shared/Footer.tsx
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
-import FooterButton from './FooterButton';
 
 const Footer: React.FC = () => {
   return (
@@ -35,106 +32,59 @@ const Footer: React.FC = () => {
           />
           <Image
             src="/footer/BancoProvinciaFondos.svg"
-            alt="Bursátil"
+            alt="Fondos"
             width={80}
             height={24}
           />
         </div>
         <hr className="border-gray-300 opacity-50 mb-6" />
 
-        {/* Contact Columns */}
-        <div className="flex divide-x divide-gray-300 mb-6">
-          <div className="w-1/2 px-2">
-            <div className="flex items-center gap-3 mb-3">
-              <a
-                href="https://www.facebook.com/ProvinciaSF"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/footer/Facebook.svg"
-                  alt="Facebook"
-                  width={24}
-                  height={24}
-                />
-              </a>
-              <a
-                href="https://x.com/provinciasf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/footer/X.svg"
-                  alt="Twitter"
-                  width={24}
-                  height={24}
-                />
-              </a>
-              <a
-                href="https://www.linkedin.com/company/provincia-servicios-financieros/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/footer/Linkedin.svg"
-                  alt="LinkedIn"
-                  width={24}
-                  height={24}
-                />
-              </a>
-            </div>
-            <h4 className="font-encode-sans font-semibold text-[10px] mb-1 text-white">
-              Responsable Relaciones con el público
-            </h4>
-            <p className="text-[9.5px] text-white">
-              Patricia Alegre – (11) 4347-0132
-            </p>
-          </div>
-          <div className="w-1/2 px-2">
-            <h4 className="font-encode-sans font-semibold text-[10px] mb-1 text-white">
-              Oficinas Centrales Provincia Bursátil
-            </h4>
-            <p className="text-[9.5px] text-white leading-snug">
-              San Martín 108 – Piso 12 (C1004AAD) – Buenos Aires
-              <br />
-              Consultas o Denuncias:
-              <br />
-              0800-999-4008 (10 a 18 h)
-            </p>
-          </div>
+        {/* Asesores Comerciales */}
+        <div className="mb-6">
+          <h4 className="font-encode-sans font-semibold text-[10px] mb-1 text-white">
+            Asesores Comerciales
+          </h4>
+          <p className="text-[9.5px] text-white">
+            Luciana Brossy: 11 6758-5717
+            <br />
+            <span className="break-all">LucianaBrossy@provinfondos.com.ar</span>
+            <br />
+            Patricio Germano: 11 4074-5995
+            <br />
+            <span className="break-all">
+              PatricioGermano@provinfondos.com.ar
+            </span>
+          </p>
         </div>
         <hr className="border-gray-300 opacity-50 mb-6" />
 
-        {/* Branch & Protection Button */}
-        <div className="flex divide-x divide-gray-300 mb-6">
-          <div className="w-1/2 px-2">
-            <h4 className="font-encode-sans font-semibold text-[10px] mb-1 text-white">
-              Sucursal La Plata
-            </h4>
-            <p className="text-[9.5px] text-white leading-snug">
-              Calle 6 (e/46 y 47) Piso 3<br />
-              (B1900AMU) – Buenos Aires
-              <br />
-              Casa Matriz Banco de la Provincia
-              <br />
-              (0221) 4897774/5
-            </p>
-          </div>
-          <div className="w-1/2 px-2 flex flex-col justify-between">
-            <div>
-              <h4 className="font-encode-sans font-semibold text-[10px] mb-1 text-white">
-                Denuncias
-              </h4>
-              <p className="text-[9.5px] text-white">
-                denuncias@provinciabursatil.com.ar
-              </p>
-            </div>
-            <FooterButton className="text-[10px]">
-              <Link href="/proteccion-datos-personales">
-                Protección de datos personales
-              </Link>
-            </FooterButton>
-          </div>
+        {/* Oficinas Centrales */}
+        <div className="mb-6">
+          <h4 className="font-encode-sans font-semibold text-[10px] mb-1 text-white">
+            Oficinas Centrales Provincia Fondos
+          </h4>
+          <p className="text-[9.5px] text-white leading-snug">
+            San Martín 108 – Piso 12 (C1004AAD) – Buenos Aires – Argentina
+            <br />
+            (11) 4348-9415 / FAX. 4348-9417
+          </p>
+        </div>
+        <hr className="border-gray-300 opacity-50 mb-6" />
+
+        {/* Consultas y otros */}
+        <div className="mb-6">
+          <h4 className="font-encode-sans font-semibold text-[10px] mb-1 text-white">
+            Consultas o Denuncias
+          </h4>
+          <p className="text-[9.5px] text-white">
+            0800 - 666 - 2285
+            <br />
+            Sugerencias:{' '}
+            <span className="break-all">sugerencias@provinfondos.com.ar</span>
+            <br />
+            Denuncias:{' '}
+            <span className="break-all">denuncias@provinfondos.com.ar</span>
+          </p>
         </div>
 
         {/* Footer Note */}
@@ -206,47 +156,50 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Info Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 mb-8 text-white">
-          <div className="md:border-r md:border-gray-300 md:pr-4 text-center md:text-left">
-            <h4 className="font-semibold text-md mb-2">
-              Responsable Relaciones con el público
-            </h4>
-            <p className="text-sm">Patricia Alegre – (11) 4347 0132</p>
+        {/* Info Grid - 3 columnas */}
+        <div className="grid grid-cols-1 md:grid-cols-3 mb-8 text-white">
+          {/* Asesores Comerciales */}
+          <div className="md:border-r md:border-gray-300 md:pr-6 text-center md:text-left">
+            <h4 className="font-semibold text-md mb-2">Asesores Comerciales</h4>
+            <p className="text-sm">
+              Luciana Brossy: 11 6758-5717
+              <br />
+              <span className="break-all">
+                LucianaBrossy@provinfondos.com.ar
+              </span>
+              <br />
+              Patricio Germano: 11 4074-5995
+              <br />
+              <span className="break-all">
+                PatricioGermano@provinfondos.com.ar
+              </span>
+            </p>
           </div>
-          <div className="md:border-r md:border-gray-300 md:px-3 text-center md:text-left">
+          {/* Oficinas Centrales */}
+          <div className="md:border-r md:border-gray-300 md:px-6 text-center md:text-left">
             <h4 className="font-semibold text-md mb-2">
-              Oficinas Centrales Provincia Bursátil
+              Oficinas Centrales Provincia Fondos
             </h4>
             <p className="text-sm">
               San Martín 108 – Piso 12 (C1004AAD) – Buenos Aires – Argentina
               <br />
-              Consultas o Denuncias: 0800 – 999 – 4008 (10 a 18 h)
+              (11) 4348-9415 / FAX. 4348-9417
             </p>
           </div>
-          <div className="md:border-r md:border-gray-300 md:px-3 text-center md:text-left">
-            <h4 className="font-semibold text-md mb-2">Sucursal La Plata</h4>
+          {/* Consultas y otros */}
+          <div className="md:px-6 text-center md:text-left">
+            <h4 className="font-semibold text-md mb-2">
+              Consultas o Denuncias
+            </h4>
             <p className="text-sm">
-              Calle 6 (e/46 y 47) Piso 3 (B1900AMU) – <br />
-              Buenos Aires – Argentina
+              0800 - 666 - 2285
               <br />
-              Casa Matriz Banco de la Provincia
+              Sugerencias:{' '}
+              <span className="break-all">sugerencias@provinfondos.com.ar</span>
               <br />
-              (0221) 4897774/5
+              Denuncias:{' '}
+              <span className="break-all">denuncias@provinfondos.com.ar</span>
             </p>
-          </div>
-          <div className="md:px-4 flex flex-col justify-between text-center md:text-left">
-            <div>
-              <h4 className="font-semibold text-md mb-2">
-                Consultas y reclamos
-              </h4>
-              <p className="text-sm">denuncias@provinciabursatil.com.ar</p>
-            </div>
-            <FooterButton>
-              <Link href="/proteccion-datos-personales">
-                Protección de datos personales
-              </Link>
-            </FooterButton>
           </div>
         </div>
       </footer>

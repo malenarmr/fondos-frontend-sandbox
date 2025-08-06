@@ -22,17 +22,24 @@ export default function ContactoPage() {
   return (
     <main>
       <Navbar />
-      <div className="w-full bg-white pt-8 pb-20 pl-60">
-        <div className="container mx-auto pl-44 pr-36 md:p-0 flex flex-col lg:flex-row">
-          {/* Columna izquierda: título y descripción, centrado vertical */}
-          <div className="flex-1 flex flex-col justify-center">
+      <div className="w-full bg-white pt-8 pb-20">
+        <div
+          className="
+            container mx-auto
+            flex flex-col lg:flex-row
+            items-center justify-center
+            px-4 md:px-12
+          "
+        >
+          {/* Columna izquierda: título y descripción */}
+          <div className="flex-1 w-full flex flex-col justify-center items-center mb-8 lg:mb-0">
             <HeroSectionGenerico
               title={contacto.title}
               description={contacto.description}
             />
           </div>
-          {/* Columna derecha: ContactBox, mismo margen superior que la izquierda */}
-          <div className="flex-1 flex items-center justify-start lg:mt-8">
+          {/* Columna derecha: ContactBox */}
+          <div className="flex-1 w-full flex justify-center items-center mt-7">
             <ContactBox contacto={contacto} />
           </div>
         </div>
