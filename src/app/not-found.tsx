@@ -3,31 +3,9 @@
 import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
-import PreFooterSection from '@/components/shared/PrefooterSection';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-
-const items = [
-  {
-    title: 'Llegó Invierta!',
-    bgColor: '#005A63',
-    textColor: '#FFFFFF',
-    textButton: 'Descargar Invierta!',
-    borderRadius: '50px 0 0 0',
-    description: (
-      <p
-        className="font-encode-sans text-lg mb-8 leading-5"
-        style={{ color: '#FFFFFF' }}
-      >
-        Con INVIERTA podés dar tus primeros pasos
-        <br /> en el mundo de las inversiones sin
-        <br /> complicaciones. Gestioná tu dinero de manera
-        <br /> simple, rápida y segura.
-      </p>
-    ),
-  },
-];
 
 export default function NotFoundPage() {
   const [mounted, setMounted] = useState(false);
@@ -64,7 +42,6 @@ export default function NotFoundPage() {
                 Volver al home
               </Button>
             </div>
-            <PreFooterSection items={items} />
           </div>
         ) : (
           <div className="relative w-full max-w-6xl mx-auto px-4 py-8 flex flex-col items-center">

@@ -2,6 +2,8 @@ interface Asistente {
   id: number;
   name: string;
   rol: string | null;
+  phone?: string | null;
+  email?: string | null;
 }
 
 interface AsistentesSectionProps {
@@ -23,7 +25,7 @@ export default function AsistentesSection({
           <div
             key={asistente.id}
             className={`
-              w-full max-w-[300px]
+              w-full max-w-[400px]
               bg-white 
               border-2 border-[#2F755E]
               rounded-tl-[8px] rounded-tr-[22px] rounded-bl-[22px] rounded-br-[8px]
@@ -36,8 +38,18 @@ export default function AsistentesSection({
             <div className="bg-[#A3DBC9] py-6 text-xl font-bold text-black font-encode-sans">
               {asistente.name}
             </div>
-            <div className="bg-white py-6 text-gray-600 whitespace-pre-line font-encode-sans">
-              {asistente.rol ?? '—'}
+            <div className="bg-white py-6 text-gray-600 whitespace-pre-line font-encode-sans flex flex-col gap-1 items-center">
+              {/* Mostrar email y teléfono, si existen */}
+              {asistente.email && (
+                <span className="block text-sm break-all">
+                  <span className="font-bold">Email:</span> {asistente.email}
+                </span>
+              )}
+              {asistente.phone && (
+                <span className="block text-sm">
+                  <span className="font-bold">Teléfono:</span> {asistente.phone}
+                </span>
+              )}
             </div>
           </div>
         ))}

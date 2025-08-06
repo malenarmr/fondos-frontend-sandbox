@@ -31,16 +31,24 @@ export default function NewsFilters({
     onFilter({ search, category, year, theme });
   };
 
-  // Función auxiliar para capitalizar la primera letra
   const capitalize = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1);
 
   return (
     <div className="bg-white py-12 px-6">
-      <div className="max-w-6xl mx-auto sm:items-center">
-        <div className="flex flex-col lg:flex-row items-end">
+      <div className="max-w-6xl mx-auto">
+        {/* Si querés un título arriba, descomentá la línea siguiente */}
+        {/* <h2 className="pt-4 text-center text-2xl font-bold font-encode-sans mb-6">Filtrar noticias</h2> */}
+        <div
+          className="
+            flex flex-col gap-4
+            lg:flex-row lg:gap-0
+            items-center justify-center
+            w-full
+          "
+        >
           {/* 1) Input búsqueda */}
-          <div className="flex-1 relative">
+          <div className="w-full lg:flex-1 relative">
             <input
               type="text"
               placeholder="Busca por palabra"
@@ -87,11 +95,11 @@ export default function NewsFilters({
           </div>
 
           {/* 4) Select Tema */}
-          <div className="w-full lg:w-48 mr-5">
+          <div className="w-full lg:w-48">
             <select
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
-              className="w-full px-4 py-[9px] border  rounded-r-xl border-gray-300 rounded-lg font-encode-sans focus:outline-none focus:ring-2 focus:ring-[#008996] focus:border-transparent appearance-none bg-white"
+              className="w-full px-4 py-[9px] border border-gray-300 rounded-lg font-encode-sans focus:outline-none focus:ring-2 focus:ring-[#008996] focus:border-transparent appearance-none bg-white"
             >
               <option value="">Tema</option>
               {themes.map((t) => (

@@ -3,14 +3,14 @@
 'use client';
 export const dynamic = 'force-dynamic';
 
-import MobileInviertaSection from '@/components/institucional/MobileInviertaSection';
+import DesktopCarousel from '@/components/inicio/DesktopCarousel';
 import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
-import PromoSection from '@/components/shared/PromoSection';
 // NUEVO: importá el componente de fondos sugeridos
 import ResultadoFondosSugeridos from '@/components/test-inversor/ResultadoFondosSugeridos';
 import { useMediaQuery } from '@/hooks/use-media-query';
+import { useHomeCards } from '@/hooks/useHomeCards';
 import {
   InvestorProfile,
   getInvestorProfile,
@@ -23,6 +23,7 @@ function ResultadoContent() {
   const router = useRouter();
   const isMobile = useMediaQuery('(max-width: 768px)');
   const value = Number(params.get('value') || 0);
+  const cards = useHomeCards();
 
   const [profile, setProfile] = useState<InvestorProfile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -56,75 +57,57 @@ function ResultadoContent() {
       <Navbar />
 
       {/* Fondo con gradient */}
-      <div
-        className="min-h-screen flex items-center py-16"
-        style={{
-          background: 'linear-gradient(124deg, #008996 22.18%, #00C3B3 70.32%)',
-        }}
-      >
+      <div className="relative py-8 md:py-16 font-encode-sans min-h-[80vh]">
+        {/* FONDO INSTITUCIONAL */}
         <div
-          className="max-w-sm sm:max-w-3xl mx-auto p-4 sm:p-12 bg-white rounded-[8px] shadow-[0_4px_32px_rgba(146,146,146,0.57)]"
-          style={{ borderRadius: '8px' }}
-        >
-          <h1 className="text-center text-md font-semibold text-primary mb-2">
-            Perfil del inversor
-          </h1>
-          <h2 className="text-3xl font-extrabold text-center mb-4 text-primary">
-            {profile.title}
-          </h2>
-          <p className="text-center mb-2">{profile.description}</p>
-          <p className="text-center text-secondary mb-4">
-            {profile.shortDescription}
-          </p>
-          {/* Acá usamos el nuevo componente */}
-          <ResultadoFondosSugeridos fondos={profile.our_founds || []} />
+          className="absolute inset-0 top-1/4 md:top-1/4 w-full z-0"
+          style={{
+            backgroundImage: "url('/institucional/bg-institucional.svg')",
+            backgroundRepeat: 'repeat',
+            backgroundPosition: 'top center',
+            opacity: 1,
+            minHeight: '60vh',
+          }}
+          aria-hidden="true"
+        />
+        {/* CONTENIDO */}
+        <div className="container mx-auto px-4 relative z-10">
+          <div
+            className="max-w-sm sm:max-w-3xl mx-auto p-4 sm:p-12 bg-white rounded-[8px] shadow-[0_4px_32px_rgba(146,146,146,0.57)]"
+            style={{ borderRadius: '8px' }}
+          >
+            <div className="px-20">
+              <h1 className="text-center text-md font-semibold text-primary mb-2">
+                Perfil del inversor
+              </h1>
+              <h2 className="text-3xl font-extrabold text-center mb-4 text-primary">
+                {profile.title}
+              </h2>
+              <p className="text-center mb-2">{profile.description}</p>
+              <p className="text-center text-secondary mb-4">
+                {profile.shortDescription}
+              </p>
+              <div className="px-20 py-4">
+                <ResultadoFondosSugeridos fondos={profile.our_founds || []} />
+              </div>
 
-          <div className="flex justify-center items-center gap-4 mt-6 w-full">
-            <Button
-              onClick={() => router.push('/test-inversor')}
-              variant="secondary"
-            >
-              Volver a hacer el test
-            </Button>
-            <Button onClick={() => router.push('/simulador')}>
-              Simulá tu inversión
-            </Button>
+              <div className="flex justify-center items-center gap-4 mt-6 w-full">
+                <Button
+                  onClick={() => router.push('/test-inversor')}
+                  variant="secondary"
+                >
+                  Volver a hacer el test
+                </Button>
+                <Button onClick={() => router.push('/simulador')}>
+                  Simulá tu inversión
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* — Componente con activos sugerencia de cartera — */}
-      {isMobile && (
-        <div
-          style={{
-            background:
-              'linear-gradient(124deg, #008996 22.18%, #00C3B3 70.32%)',
-          }}
-        >
-          <MobileInviertaSection />
-        </div>
-      )}
-
-      {!isMobile && (
-        <div
-          style={{
-            background:
-              'linear-gradient(124deg, #008996 22.18%, #00C3B3 70.32%)',
-          }}
-        >
-          <PromoSection
-            title="¿Querés invertir en dólar MEP?"
-            description="Comprá y vendé activos, descubrí nuevas oportunidades y gestioná tu dinero de manera simple, rápida y segura."
-            appStoreUrl="https://apps.apple.com/app/id6448729005"
-            playStoreUrl="https://play.google.com/store/apps/details?id=io.btrader.prbu&hl"
-            wrapperClassName="bg-[#005A63] py-16 rounded-t-[40px]"
-            innerContainerClassName="container mx-auto px-4 text-center text-white"
-            titleClassName="text-4xl font-bold mb-4"
-            descriptionClassName="max-w-2xl mx-auto mb-8 font-encode-sans"
-            buttonWrapperClassName="flex justify-center gap-8"
-          />
-        </div>
-      )}
+      <DesktopCarousel cards={cards} />
 
       <Footer />
     </main>

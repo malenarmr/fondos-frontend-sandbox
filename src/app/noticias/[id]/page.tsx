@@ -11,7 +11,6 @@ import {
   fetchNoticias,
 } from '@/services/noticiasService';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -121,76 +120,94 @@ export default function NewsDetailPage() {
       <Navbar />
 
       {/* Banner de fondo de color */}
-      <div className="bg-[#00C3B3] py-8 md:py-16 font-encode-sans rounded-b-[40px]">
-        <div className="container mx-auto px-4">
-          <div
-            className="p-8 md:p-12 max-w-4xl mx-auto font-encode-sans bg-white rounded-lg shadow-lg"
-            style={{
-              borderRadius: '8px',
-              background: 'var(--Blanco, #FFF)',
-              boxShadow: '0px 4px 32px rgba(146,146,146,0.57)',
-            }}
-          >
-            {/* Badge de categoría */}
-            <div className="flex justify-end mb-6">
-              <span className="bg-[#00C3B3] text-white px-4 py-2 rounded-lg text-sm font-encode-sans">
-                {noticia.category_blog_fondos.name}
-              </span>
-            </div>
+      <div className="relative py-8 md:py-16 font-encode-sans rounded-b-[40px]">
+        {/* FONDO INSTITUCIONAL */}
+        <div
+          className="absolute inset-0 w-full h-full z-0 rounded-b-[40px]"
+          style={{
+            backgroundImage: "url('/institucional/bg-institucional.svg')",
+            backgroundRepeat: 'repeat',
+            backgroundPosition: 'top center',
+            opacity: 1, // Bajalo si lo querés más suave (ej: 0.8)
+            borderBottomLeftRadius: '40px',
+            borderBottomRightRadius: '40px',
+            minHeight: '100%',
+          }}
+          aria-hidden="true"
+        />
+        {/* CONTENIDO */}
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4">
+            <div
+              className="p-8 md:p-12 max-w-4xl mx-auto font-encode-sans bg-white rounded-lg shadow-lg"
+              style={{
+                borderRadius: '8px',
+                background: 'var(--Blanco, #FFF)',
+                boxShadow: '0px 4px 32px rgba(146,146,146,0.57)',
+              }}
+            >
+              {/* Badge de categoría */}
+              <div className="flex justify-end mb-6">
+                <span className="bg-[#00C3B3] text-white px-4 py-2 rounded-lg text-sm font-encode-sans">
+                  {noticia.category_blog_fondos.name}
+                </span>
+              </div>
 
-            {/* Imagen (si la hay) */}
-            {imageUrl && (
+              {/* Imagen (si la hay) */}
+              {imageUrl && (
+                <div className="mb-6">
+                  <Image
+                    src={imageUrl}
+                    alt={noticia.title}
+                    className="w-full h-auto object-cover rounded-md"
+                    width={800}
+                    height={450}
+                  />
+                </div>
+              )}
+
+              {/* Información del autor y fecha */}
               <div className="mb-6">
-                <Image
-                  src={imageUrl}
-                  alt={noticia.title}
-                  className="w-full h-auto object-cover rounded-md"
-                  width={800}
-                  height={450}
-                />
+                <p className="text-gray-600 font-encode-sans text-sm">
+                  Por: {noticia.author ?? 'Provincia Bursátil'} /{' '}
+                  {formattedDate}
+                </p>
               </div>
-            )}
 
-            {/* Información del autor y fecha */}
-            <div className="mb-6">
-              <p className="text-gray-600 font-encode-sans text-sm">
-                Por: {noticia.author ?? 'Provincia Bursátil'} / {formattedDate}
-              </p>
-            </div>
+              {/* Título */}
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-800 font-encode-sans mb-6">
+                {noticia.title}
+              </h1>
 
-            {/* Título */}
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 font-encode-sans mb-6">
-              {noticia.title}
-            </h1>
+              {/* Síntesis (shortContent) */}
+              {noticia.shortContent && (
+                <p className="text-gray-700 font-encode-sans mb-8 text-lg leading-relaxed">
+                  {noticia.shortContent}
+                </p>
+              )}
 
-            {/* Síntesis (shortContent) */}
-            {noticia.shortContent && (
-              <p className="text-gray-700 font-encode-sans mb-8 text-lg leading-relaxed">
-                {noticia.shortContent}
-              </p>
-            )}
+              {/* Contenido principal (content) */}
+              {noticia.content && (
+                <div className="prose max-w-none text-gray-700 font-encode-sans">
+                  {noticia.content && (
+                    <div className="prose max-w-none text-gray-700 font-encode-sans">
+                      <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                        {noticia.content.replace(/<br\s*\/?>/gi, '\n')}
+                      </ReactMarkdown>
+                    </div>
+                  )}
+                </div>
+              )}
 
-            {/* Contenido principal (content) */}
-            {noticia.content && (
-              <div className="prose max-w-none text-gray-700 font-encode-sans">
-                {noticia.content && (
-                  <div className="prose max-w-none text-gray-700 font-encode-sans">
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                      {noticia.content.replace(/<br\s*\/?>/gi, '\n')}
-                    </ReactMarkdown>
-                  </div>
-                )}
+              {/* Botón “Ver todas” para volver al listado */}
+              <div className="mt-8 flex justify-center">
+                <Button
+                  variant="secondary"
+                  onClick={() => router.push('/noticias')}
+                >
+                  Ver todas
+                </Button>
               </div>
-            )}
-
-            {/* Botón “Ver todas” para volver al listado */}
-            <div className="mt-8 flex justify-center">
-              <Button
-                variant="secondary"
-                onClick={() => router.push('/noticias')}
-              >
-                Ver todas
-              </Button>
             </div>
           </div>
         </div>
@@ -249,29 +266,6 @@ export default function NewsDetailPage() {
             </div>
           )}
         </div>
-      </div>
-
-      {/* ── PromoSection de test de inversor ── */}
-      <div
-        className="py-20 px-6 grid gap-8 justify-center text-center text-white relative rounded-t-[40px]"
-        style={{
-          background: 'linear-gradient(124deg, #008996 22.18%, #00C3B3 70.32%)',
-        }}
-      >
-        <h2 className="font-encode-sans font-black text-[25px] md:text-[45px]">
-          ¿Querés saber <br />
-          qué tipo de inversor sos?
-        </h2>
-        <p className="font-encode-sans text-[16px] md:text-xl mb-6">
-          ¿Sos más conservador o te gusta asumir riesgos?
-          <br /> Hacé nuestro test en minutos y encontrá la mejor estrategia de
-          inversión para vos.
-        </p>
-        <Link href="/test-inversor">
-          <Button style={{ width: 'fit-content', margin: '0 auto' }}>
-            Hacé el test!
-          </Button>
-        </Link>
       </div>
 
       <Footer />
