@@ -9,7 +9,6 @@ import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 // NUEVO: importá el componente de fondos sugeridos
 import ResultadoFondosSugeridos from '@/components/test-inversor/ResultadoFondosSugeridos';
-import { useMediaQuery } from '@/hooks/use-media-query';
 import { useHomeCards } from '@/hooks/useHomeCards';
 import {
   InvestorProfile,
@@ -21,7 +20,6 @@ import { Suspense, useEffect, useState } from 'react';
 function ResultadoContent() {
   const params = useSearchParams();
   const router = useRouter();
-  const isMobile = useMediaQuery('(max-width: 768px)');
   const value = Number(params.get('value') || 0);
   const cards = useHomeCards();
 
