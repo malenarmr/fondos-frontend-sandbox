@@ -194,7 +194,7 @@ export default function FondosSection() {
       <div className="flex-col md:flex-row items-start space-x-4 xl:space-x-8 hidden md:flex justify-between items-stretch">
         <div className="flex-col items-center justify-center w-2/5 md:w-1/4 bg-primary py-2 lg:pt-16  md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10 max-w-[412px] pl-xxl xl:w-2/5 width-xxl">
           <div className="space-y-4">
-            <h3 className="text-xl font-black font-encode-sans text-white">
+            <h3 className="text-xl font-bold font-encode-sans text-white">
               Filtros de la búsqueda
             </h3>
             {Object.entries(selectedTags).every(
@@ -226,7 +226,7 @@ export default function FondosSection() {
           </div>
 
           <div className="space-y-4 flex flex-col">
-            <h3 className="text-xl font-black font-encode-sans text-white">
+            <h3 className="text-xl font-bold font-encode-sans text-white">
               Característica del fondo
             </h3>
             {categories?.caracteristicas?.map((tag) => (
@@ -241,7 +241,7 @@ export default function FondosSection() {
           </div>
 
           <div className="space-y-4 flex flex-col">
-            <h3 className="text-xl font-black font-encode-sans text-white">
+            <h3 className="text-xl font-bold font-encode-sans text-white">
               Tipo de inversor
             </h3>
             {categories?.inversores?.map((tag) => (
@@ -256,7 +256,7 @@ export default function FondosSection() {
           </div>
 
           <div className="space-y-4 flex flex-col">
-            <h3 className="text-xl font-black font-encode-sans text-white">
+            <h3 className="text-xl font-bold font-encode-sans text-white">
               Tipo de activos
             </h3>
             {categories?.activos?.map((tag) => (
@@ -272,7 +272,7 @@ export default function FondosSection() {
 
           <div>
             <button
-              className="py-[9px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white  focus:ring-primary w-fit font-bold"
+              className="py-[9px] transition-colors duration-200 focus:outline-none focus:ring-0 text-white  focus:ring-primary w-fit font-bold"
               onClick={() => deleteAll()}
             >
               Ver todos los fondos
@@ -302,9 +302,9 @@ export default function FondosSection() {
                     filteredFondos.map((fondo, index) => (
                       <div
                         key={index}
-                        className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-md"
+                        className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg"
                       >
-                        <div className="py-2 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
+                        <div className="py-4 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
                           <span className="font-encode-sans font-bold">
                             {fondo.name}
                           </span>
@@ -491,7 +491,7 @@ export default function FondosSection() {
               filteredFondos.map((fondo, index) => (
                 <div
                   key={index}
-                  className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-md"
+                  className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg"
                 >
                   <div className="py-2 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
                     <span className="font-encode-sans font-bold">

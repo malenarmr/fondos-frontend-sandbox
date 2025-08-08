@@ -1,6 +1,6 @@
 'use client';
 
-import VideosSectionWithFilters from '@/components/info/VideosSection';
+import VideosSection from '@/components/info/VideosSection';
 import DesktopCarousel from '@/components/inicio/DesktopCarousel';
 import FeaturedCarousel from '@/components/inicio/FeaturedCarousel';
 import AnimationSection from '@/components/invierta/AnimationSection';
@@ -51,7 +51,7 @@ export default function HomePage() {
         <DesktopCarousel cards={cards} />
       </div>
 
-      <section className="page-container page-max py-[30px] lg:pb-[70px]">
+      <section className="py-[30px] lg:pb-[70px] px-4 md:px-[100px] xl:px-[145px] padding-xxl">
         <AnimationSection />
       </section>
 
@@ -79,19 +79,28 @@ export default function HomePage() {
       <div className="relative z-0 bg-white" style={{ minHeight: 180 }}></div>
       <div className="relative z-0 bg-white" style={{ minHeight: 80 }}></div>
 
-      <div className="py-16 lg:py-[150px]">
-        <div className="flex flex-col items-center">
-          <div className="container mx-auto px-6 xl:px-40 mb-8 flex justify-between items-center gap-10">
-            <h1 className="font-encode-sans text-2xl lg:text-4xl text-secondary font-bold lg:font-black">
-              Conocé más sobre cómo invertir
+      <section>
+        <div className="dark:bg-dark px-[50px] md:px-[100px] xl:px-[145px] padding-xxl ">
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-12 text-center lg:text-start">
+            <h1 className="font-encode-sans text-[30px] lg:text-4xl text-secondary font-extrabold lg:font-black leading-snug">
+              Conocé más sobre <br className="hidden lg:block " /> cómo invertir
             </h1>
-            <Link href="/tutoriales">
-              <Button variant="light">Ver todos los videos</Button>
-            </Link>
+            <div className="hidden lg:block">
+              <Link href="/tutoriales">
+                <Button variant="light">Ver todos los videos</Button>
+              </Link>
+            </div>
           </div>
-          <VideosSectionWithFilters />
         </div>
-      </div>
+        <div className="flex lg:pl-12 flex-col">
+          <VideosSection />
+        </div>
+        <div className="flex lg:hidden justify-center">
+          <Link href="/tutoriales">
+            <Button variant="light">Ver todos los videos</Button>
+          </Link>
+        </div>
+      </section>
 
       <Footer />
     </main>

@@ -143,7 +143,7 @@ export default function FondoDetails({ id }: FondoProps) {
                 </div>
                 <div className="flex justify-between">
                   <a
-                    className="bg-[#2098A1] flex items-center justify-center font-encode-sans font-medium px-[12px] py-[7px] lg:px-[25px] lg:py-[9px] rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] gap-x-[10px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white hover:shadow-xl focus:ring-primary"
+                    className="bg-[#2098A1] focus:outline-none flex items-center justify-center font-encode-sans font-medium px-[12px] py-[7px] lg:px-[25px] lg:py-[9px] rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] gap-x-[10px] transition-colors duration-200 focus:outline-none focus:ring-0 text-white hover:shadow-xl focus:ring-primary"
                     href={
                       process.env.NEXT_PUBLIC_API_URL + fondoData.factSheet.url
                     }
@@ -153,7 +153,7 @@ export default function FondoDetails({ id }: FondoProps) {
                     Fact sheet
                   </a>
                   <Link href={`/nuestros-fondos/cuotaparte/${id}`}>
-                    <button className="bg-[#2098A1] flex items-center justify-center font-encode-sans font-medium px-[12px] py-[7px] lg:px-[25px] lg:py-[9px] rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] gap-x-[10px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white hover:shadow-xl focus:ring-primary">
+                    <button className="bg-[#2098A1] flex items-center justify-center font-encode-sans font-medium px-[12px] py-[7px] lg:px-[25px] lg:py-[9px] rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] gap-x-[10px] transition-colors duration-200 focus:outline-none focus:ring-0 text-white hover:shadow-xl focus:ring-primary">
                       Valor cuotaparte
                     </button>
                   </Link>
