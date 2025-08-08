@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="bg-navbar">
-      <div className="w-full px-4 lg:px-[50px] flex justify-evenly items-center py-5 relative">
+      <div className="page-container page-max flex justify-between items-center py-5 relative">
         {/* Logo */}
         <div className="w-60 max-w-full">
           <Link href="/" legacyBehavior>

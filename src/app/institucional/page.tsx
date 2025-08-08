@@ -1,4 +1,5 @@
 'use client';
+
 import AutoridadesSection from '@/components/institucional/AutoridadesSection';
 import AvisoLegalSection from '@/components/institucional/AvisoLegalSection';
 import HeroSectionInstitucional from '@/components/institucional/HeroSectionInstitucional';
@@ -43,52 +44,56 @@ export default function InstitucionalPage() {
     <main>
       <Navbar />
 
-      {/* Header section - responsive for mobile */}
-      <div className="px-4 md:px-0">
+      {/* Hero con paddings controlados */}
+      <div className="page-container page-max">
         <HeroSectionInstitucional />
       </div>
 
-      {/* Sección de Misión, Visión y Valores - Carousel on mobile */}
-      <section className="mt-16 bg-primary-light py-12 px-4 md:px-36">
-        {isMobile ? (
-          <MobileCarousel>
-            <InstitucionalCard
-              title="Misión"
-              description={institucionalData?.mision || ''}
-            />
-            <InstitucionalCard
-              title="Visión"
-              description={institucionalData?.vision || ''}
-            />
-            <InstitucionalCard
-              title="Valores"
-              description={institucionalData?.values || ''}
-            />
-          </MobileCarousel>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
-            <InstitucionalCard
-              title="Misión"
-              description={institucionalData?.mision || ''}
-            />
-            <InstitucionalCard
-              title="Visión"
-              description={institucionalData?.vision || ''}
-            />
-            <InstitucionalCard
-              title="Valores"
-              description={institucionalData?.values || ''}
-            />
-          </div>
-        )}
+      {/* Misión/Visión/Valores */}
+      <section className="mt-16 bg-primary-light py-12">
+        <div className="page-container page-max">
+          {isMobile ? (
+            <MobileCarousel>
+              <InstitucionalCard
+                title="Misión"
+                description={institucionalData?.mision || ''}
+              />
+              <InstitucionalCard
+                title="Visión"
+                description={institucionalData?.vision || ''}
+              />
+              <InstitucionalCard
+                title="Valores"
+                description={institucionalData?.values || ''}
+              />
+            </MobileCarousel>
+          ) : (
+            <div className="flex justify-between gap-12">
+              <InstitucionalCard
+                title="Misión"
+                description={institucionalData?.mision || ''}
+              />
+              <InstitucionalCard
+                title="Visión"
+                description={institucionalData?.vision || ''}
+              />
+              <InstitucionalCard
+                title="Valores"
+                description={institucionalData?.values || ''}
+              />
+            </div>
+          )}
+        </div>
       </section>
 
-      {/* Sección de Autoridades - Accordion on mobile */}
+      {/* Autoridades */}
       <section className="mt-16">
-        <div className="px-4 md:px-36">
+        <div className="page-container page-max">
           {isMobile ? <MobileAutoridadesAccordion /> : <AutoridadesSection />}
         </div>
       </section>
+
+      {/* Aviso legal */}
       <AvisoLegalSection />
 
       <Footer />

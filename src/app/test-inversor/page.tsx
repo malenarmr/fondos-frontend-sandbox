@@ -18,19 +18,21 @@ export default function TestInversorPage() {
     <main className="font-encode-sans">
       <Navbar />
       {/* TODO alineado, mismo container */}
-      <div className="container mx-auto px-4 py-8 flex flex-col gap-10 items-center">
-        <div className="w-full max-w-6xl">
+      <div className="page-container mx-auto py-8 flex flex-col gap-10 items-center">
+        <div className="w-full">
           <HeroSectionGenerico
             title={heroData.title}
             description={heroData.description}
             bgColor="bg-light-aqua-green"
           />
         </div>
-        <div className="w-full max-w-6xl">
+        <div className="w-full">
           <TestInversorForm />
         </div>
       </div>
-      <DesktopCarousel cards={cards} />
+      <div className="bg-primary-light ">
+        <DesktopCarousel cards={cards} />
+      </div>
       <Footer />
     </main>
   );

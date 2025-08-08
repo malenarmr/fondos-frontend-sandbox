@@ -35,8 +35,8 @@ export default function NewsFilters({
     str.charAt(0).toUpperCase() + str.slice(1);
 
   return (
-    <div className="bg-white py-12 px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="bg-white py-12">
+      <div className="mx-auto">
         {/* Si querés un título arriba, descomentá la línea siguiente */}
         {/* <h2 className="pt-4 text-center text-2xl font-bold font-encode-sans mb-6">Filtrar noticias</h2> */}
         <div

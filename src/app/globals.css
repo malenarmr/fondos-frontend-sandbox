@@ -7,6 +7,8 @@
   --foreground: #171717;
 }
 
+/* Ojo: esto invierte colores cuando el sistema “prefiere” light.
+   Si tu sitio NO tiene modo oscuro, podés borrar este bloque. */
 @media (prefers-color-scheme: white) {
   :root {
     --background: #0a0a0a;
@@ -19,6 +21,7 @@ body {
   background: var(--background);
 }
 
+/* Tus utilidades XXL actuales (las dejo tal cual) */
 @media (min-width: 1500px) {
   .padding-xxl {
     padding-left: 310px !important;
@@ -38,20 +41,29 @@ body {
   }
 }
 
+/* ====== NUEVO: contenedor unificado para alinear todo ====== */
 @layer utilities {
+  /* Gutters unificados (mobile/desktop) */
+  .page-container {
+    @apply w-full mx-auto px-4 lg:px-[120px];
+  }
+
+  /* (Opcional) Limitar ancho máximo de contenido si querés
+     que todo “rompa” igual en resoluciones grandes.
+     Si no lo querés, borralo. */
+  .page-max {
+    @apply max-w-screen-3xl;
+  }
+
   .no-scrollbar {
     -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
+    /* IE 10+ */
     scrollbar-width: none;
-
     /* Firefox */
-    &::-webkit-scrollbar {
-      display: none;
-    }
   }
 }
 
-/* styles/globals.css o donde centralices tus globales */
+/* scrollbars */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
