@@ -6,6 +6,7 @@ import { FaXmark } from 'react-icons/fa6';
 import Button from '../shared/Button';
 import { Fondo } from '@/types/Fondo';
 import Link from 'next/link';
+import Accordion from './Accordion';
 
 interface TagObject {
   documentId: string;
@@ -415,12 +416,8 @@ export default function FondosSection() {
         </div>
 
         <div className="space-y-8 bg-primary py-10 px-[60px] text-white">
-          <h3 className="text-xl font-black font-encode-sans">Tags</h3>
-          <hr />
-
           {/* Características */}
-          <div className="mb-6">
-            <h4 className="font-bold mb-2">Características</h4>
+          <Accordion title="Característica del fondo">
             <div className="flex flex-wrap gap-3">
               {categories.caracteristicas.map((tag) => (
                 <div
@@ -428,15 +425,14 @@ export default function FondosSection() {
                   className="cursor-pointer bg-[#EBEBEB] py-1 px-3 rounded-full w-fit text-primary"
                   onClick={() => addTag(tag, 'caracteristicas')}
                 >
-                  <span>{tag.value}</span>
+                  <span>{capitalize(tag.value)}</span>
                 </div>
               ))}
             </div>
-          </div>
-
+          </Accordion>
+          <hr />
           {/* Tipo de Inversor */}
-          <div className="mb-6">
-            <h4 className="font-bold mb-2">Tipo de Inversor</h4>
+          <Accordion title="Tipo de Inversor">
             <div className="flex flex-wrap gap-3">
               {categories.inversores.map((tag) => (
                 <div
@@ -453,15 +449,14 @@ export default function FondosSection() {
                     )
                   }
                 >
-                  <span>{tag.title}</span>
+                  <span>{capitalize(tag.title ?? '')}</span>
                 </div>
               ))}
             </div>
-          </div>
-
+          </Accordion>
+          <hr />
           {/* Tipo de Activos */}
-          <div className="mb-6">
-            <h4 className="font-bold mb-2">Tipo de Activos</h4>
+          <Accordion title="Tipo de Activos">
             <div className="flex flex-wrap gap-3">
               {categories.activos.map((tag) => (
                 <div
@@ -473,7 +468,7 @@ export default function FondosSection() {
                 </div>
               ))}
             </div>
-          </div>
+          </Accordion>
           <div>
             <button className="font-bold mt-6" onClick={() => deleteAll()}>
               Ver todos los fondos
