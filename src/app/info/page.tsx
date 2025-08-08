@@ -20,7 +20,8 @@ export default function InfoPage() {
         >
           <div className="flex flex-col text-secondary">
             <h1 className="text-center xl:text-left font-encode-sans font-extrabold xl:font-black text-[30px] xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-12 max-w-[590px]">
-              Info para el inversor
+              Información para
+              <br /> el inversor
             </h1>
             <p className="text-center xl:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] xl:px-0 xl:mr-0">
               En la guia para el inversor vas a poder encontrar distintas
@@ -31,7 +32,7 @@ export default function InfoPage() {
           </div>
         </div>
       </section>
-      <section className="lg:rounded-t-[50px] py:[0px] md:py-[30px] lg:pb-[70px] flex flex-col items-center mb-5 lg:mb-[-50px] md:px-[100px] xl:px-[145px] padding-xxl">
+      <section className="lg:rounded-t-[50px] py:[0px] md:py-[30px] lg:pb-[70px] flex flex-col items-center mb-5 lg:mb-[-50px] px-[30px] md:px-[100px] xl:px-[145px] padding-xxl">
         <AnimationSection />
       </section>
 
@@ -60,7 +61,7 @@ export default function InfoPage() {
 
       <section>
         <div className="dark:bg-dark px-[50px] md:px-[100px] xl:px-[145px] pt-12 lg:pt-20 padding-xxl ">
-          <div className="flex flex-col lg:flex-row justify-between mb-12 text-center lg:text-start">
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-12 text-center lg:text-start">
             <h1 className="font-encode-sans text-[30px] lg:text-4xl text-secondary font-extrabold lg:font-black leading-snug">
               Conocé más sobre <br className="hidden lg:block " /> cómo invertir
             </h1>

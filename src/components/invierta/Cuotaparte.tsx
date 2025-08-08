@@ -401,7 +401,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
                           onClick={() => setCurrentPage(page)}
                           className={`px-3 py-1 border rounded ${
                             page === currentPage
-                              ? 'bg-primary text-white'
+                              ? 'bg-[#a2dbc8] text-white'
                               : 'bg-white'
                           }`}
                         >
@@ -419,7 +419,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
                           onClick={() => setCurrentPage(page)}
                           className={`px-3 py-1 border rounded ${
                             page === currentPage
-                              ? 'bg-primary text-white'
+                              ? 'bg-[#a2dbc8] text-white'
                               : 'bg-white'
                           }`}
                         >

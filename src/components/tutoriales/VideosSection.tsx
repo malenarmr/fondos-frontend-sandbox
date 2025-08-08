@@ -150,7 +150,7 @@ export default function VideosSection() {
           </div>
           <div>
             <button
-              className="py-[9px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white  focus:ring-primary w-fit font-bold"
+              className="py-[9px] transition-colors duration-200 focus:outline-none focus:ring-0 text-white  focus:ring-primary w-fit font-bold"
               onClick={() => deleteAll()}
             >
               Ver todo

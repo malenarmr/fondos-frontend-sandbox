@@ -18,7 +18,7 @@ export default function TestInversorPage() {
     <main className="font-encode-sans">
       <Navbar />
       {/* TODO alineado, mismo container */}
-      <div className="page-container mx-auto py-8 flex flex-col gap-10 items-center">
+      <div className="px-4 md:px-[100px] xl:px-[145px] padding-xxl mx-auto py-8 flex flex-col gap-10 items-center">
         <div className="w-full">
           <HeroSectionGenerico
             title={heroData.title}

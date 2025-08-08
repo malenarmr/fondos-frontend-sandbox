@@ -45,13 +45,13 @@ export default function InstitucionalPage() {
       <Navbar />
 
       {/* Hero con paddings controlados */}
-      <div className="page-container page-max">
+      <div className="px-4 md:px-[100px] xl:px-[145px] padding-xxl">
         <HeroSectionInstitucional />
       </div>
 
       {/* Misión/Visión/Valores */}
       <section className="mt-16 bg-primary-light py-12">
-        <div className="page-container page-max">
+        <div className="px-4 md:px-[100px] xl:px-[145px] padding-xxl">
           {isMobile ? (
             <MobileCarousel>
               <InstitucionalCard
@@ -88,7 +88,7 @@ export default function InstitucionalPage() {
 
       {/* Autoridades */}
       <section className="mt-16">
-        <div className="page-container page-max">
+        <div className="px-4 md:px-[100px] xl:px-[145px] padding-xxl">
           {isMobile ? <MobileAutoridadesAccordion /> : <AutoridadesSection />}
         </div>
       </section>

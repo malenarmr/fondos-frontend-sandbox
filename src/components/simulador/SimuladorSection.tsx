@@ -98,6 +98,7 @@ export default function SimuladorSection() {
       }
       if (!response?.data?.success) {
         setError(response?.data?.message);
+        setShowPopup(true);
       } else {
         setError('');
       }
@@ -201,8 +202,6 @@ export default function SimuladorSection() {
 
   const hayFondoUSDSeleccionado = () =>
     formData.fondos.some((f) => f.moneda === 'USD');
-
-  console.log(formData);
 
   return (
     <>
@@ -532,13 +531,43 @@ export default function SimuladorSection() {
         </>
       )}
       {error && (
-        <div className="pt-20 pb-28 relative bg-white rounded-t-[50px] text-white mb-[-40px] md:px-[100px] xl:px-[145px] hidden md:block">
-          <div className="bg-[#2098A1] text-white w-[100%] px-16 lg:px-20 py-12 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] flex flex-col max-w-[922px] mx-auto">
-            <h2 className="font-encode-sans font-bold text-xl text-center">
-              {error}. Por favor intentálo nuevamente
-            </h2>
+        <>
+          <div className="pt-20 pb-28 relative bg-white rounded-t-[50px] text-white mb-[-40px] md:px-[100px] xl:px-[145px] hidden md:block">
+            <div className="bg-[#2098A1] text-white w-[100%] px-16 lg:px-20 py-12 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] flex flex-col max-w-[922px] mx-auto">
+              <h2 className="font-encode-sans font-bold text-xl text-center">
+                {error}. Por favor intentálo nuevamente
+              </h2>
+            </div>
           </div>
-        </div>
+          {showPopup && (
+            <div
+              className="fixed bg-[#3c3c3b66] block md:hidden w-[100vw] h-[100vh] top-0 left-0 z-10"
+              onClick={handleClosePopup}
+            >
+              <div
+                className="bg-white text-secondary w-[90vw] h-[60vh] top-[5vh] left-[5vw] p-6 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] absolute"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex relative w-[100%] mb-6">
+                  <h2 className="font-encode-sans font-bold text-xl text-center w-full">
+                    Por favor intentálo nuevamente
+                  </h2>
+                  <button
+                    onClick={handleClosePopup}
+                    className="absolute right-0 text-3xl"
+                  >
+                    ×
+                  </button>
+                </div>
+                <div className="flex relative w-[100%]">
+                  <p className="font-encode-sans  text-xl text-center">
+                    {error}.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </>
   );
