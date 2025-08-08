@@ -11,39 +11,41 @@ export default function AvisoLegalSection() {
 
   return (
     <section className="w-full flex justify-center items-center py-12 bg-[#2098A1]">
-      <div
-        className="
-          bg-white
-          max-w-4xl
-          w-full
-          px-4 sm:px-8 md:px-20 py-10 md:py-20
-          shadow-lg
-          rounded-tl-[48px] rounded-br-[48px] rounded-tr-[12px] rounded-bl-[12px]
-          mx-4
-        "
-      >
-        <h3 className="text-center text-xl font-bold mb-6 text-gray-800">
-          Aviso legal
-        </h3>
-        {/* Mobile (corta y muestra leer más) */}
-        <div className="block md:hidden text-gray-700 leading-relaxed text-base text-center">
-          {!showFull ? (
-            <>
-              {SHORT_TEXT}{' '}
-              <button
-                className="text-secondary font-bold"
-                onClick={() => setShowFull(true)}
-              >
-                Leer más
-              </button>
-            </>
-          ) : (
-            FULL_TEXT
-          )}
-        </div>
-        {/* Desktop (siempre completo) */}
-        <div className="hidden md:block text-gray-700 leading-relaxed text-base text-center md:text-left">
-          {FULL_TEXT}
+      <div className="page-container page-max">
+        <div
+          className="
+        bg-white
+        w-full
+        px-4 sm:px-8 md:px-20 py-10 md:py-20
+        shadow-lg
+        rounded-tl-[48px] rounded-br-[48px] rounded-tr-[12px] rounded-bl-[12px]
+      "
+        >
+          <h3 className="text-center text-xl font-bold mb-6 text-gray-800">
+            Aviso legal
+          </h3>
+
+          {/* Mobile (corta y muestra leer más) */}
+          <div className="block md:hidden text-gray-700 leading-relaxed text-base text-center">
+            {!showFull ? (
+              <>
+                {SHORT_TEXT}{' '}
+                <button
+                  className="text-secondary font-bold"
+                  onClick={() => setShowFull(true)}
+                >
+                  Leer más
+                </button>
+              </>
+            ) : (
+              FULL_TEXT
+            )}
+          </div>
+
+          {/* Desktop (siempre completo) */}
+          <div className="hidden md:block text-gray-700 leading-relaxed text-base text-center md:text-left">
+            {FULL_TEXT}
+          </div>
         </div>
       </div>
     </section>

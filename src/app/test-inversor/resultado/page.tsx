@@ -7,6 +7,7 @@ import DesktopCarousel from '@/components/inicio/DesktopCarousel';
 import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
+import Spinner from '@/components/shared/Spinner';
 // NUEVO: importá el componente de fondos sugeridos
 import ResultadoFondosSugeridos from '@/components/test-inversor/ResultadoFondosSugeridos';
 import { useHomeCards } from '@/hooks/useHomeCards';
@@ -35,7 +36,11 @@ function ResultadoContent() {
   }, [value]);
 
   if (loading) {
-    return <p className="text-center py-16">Cargando resultado…</p>;
+    return (
+      <div className="flex justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (error || !profile) {
@@ -104,8 +109,9 @@ function ResultadoContent() {
           </div>
         </div>
       </div>
-
-      <DesktopCarousel cards={cards} />
+      <div className="bg-primary-light ">
+        <DesktopCarousel cards={cards} />
+      </div>
 
       <Footer />
     </main>
@@ -115,7 +121,11 @@ function ResultadoContent() {
 export default function ResultadoPage() {
   return (
     <Suspense
-      fallback={<p className="text-center py-16">Cargando resultado…</p>}
+      fallback={
+        <div className="text-center py-16">
+          <Spinner />
+        </div>
+      }
     >
       <ResultadoContent />
     </Suspense>

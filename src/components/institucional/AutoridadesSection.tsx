@@ -7,13 +7,11 @@ import PersonCard from './PersonCard';
 
 export default function AutoridadesSection() {
   const [selectedFilter, setSelectedFilter] = useState('Directorio');
-
   const { institucionalData } = useAppContext();
   if (!institucionalData) return null;
 
   const conductFile = institucionalData.code_of_conduct[0];
 
-  // 👇 Filtramos solo las áreas REALES, sin los titulares
   const filters = [
     'Directorio',
     ...institucionalData.area_team_fondos
@@ -27,9 +25,8 @@ export default function AutoridadesSection() {
   const renderTeamMemberCard = (member: any) => (
     <div
       key={member.id}
-      className="bg-primary-light text-white font-encode-sans font-semibold text-center
-             px-6 py-6 rounded-[12px] w-full max-w-xs min-h-[120px]
-             flex flex-col justify-center mx-auto"
+      className="bg-primary-light text-white font-encode-sans font-semibold text-center w-full
+        px-6 py-6 rounded-[12px] min-h-[120px] flex flex-col justify-center mx-auto"
     >
       <div className="text-[18px] mb-2">{member.name}</div>
       {member.rol && (
@@ -45,23 +42,19 @@ export default function AutoridadesSection() {
     if (!area) return null;
 
     return (
-      <div className="col-span-2 space-y-12">
-        <div>
-          <h3 className="text-2xl font-bold mb-8 text-secondary">
-            {area.name}
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {area.member_team_fondos.map((member: any) =>
-              renderTeamMemberCard(member)
-            )}
-          </div>
+      <div className="w-full">
+        <h3 className="text-2xl font-bold mb-8 text-secondary">{area.name}</h3>
+        <div className="flex justify-between gap-6">
+          {area.member_team_fondos.map((member: any) =>
+            renderTeamMemberCard(member)
+          )}
         </div>
       </div>
     );
   };
 
   return (
-    <section className="mt-32 mb-32 font-encode-sans">
+    <section className="mt-32 mb-32 font-encode-sans px-4 sm:px-6 lg:px-0 mx-auto">
       <h2 className="text-3xl font-bold mb-6 text-center text-primary-light">
         Directorio
       </h2>
@@ -70,16 +63,16 @@ export default function AutoridadesSection() {
       </p>
       <p className="text-center mb-6">llevan adelante a nuestra institución</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+      <div className="flex flex-col lg:flex-row gap-12">
         {/* Filtros */}
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full lg:w-1/3">
           {filters.map((f) => (
             <button
               key={f}
               onClick={() => setSelectedFilter(f)}
               className={`relative w-full text-left py-4 px-6 rounded-[12px] border-[1.5px] mb-4 flex justify-between items-start
-              transition-all font-bold
-              ${selectedFilter === f ? 'border-[#008264] text-[#008264]' : 'border-[#929292] text-[#929292]'}`}
+                transition-all font-bold
+                ${selectedFilter === f ? 'border-[#008264] text-[#008264]' : 'border-[#929292] text-[#929292]'}`}
             >
               <span className="text-[18px]">{f}</span>
               <ArrowUpRight
@@ -91,22 +84,19 @@ export default function AutoridadesSection() {
           ))}
         </div>
 
-        {selectedFilter === 'Directorio' ? (
-          <>
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Contenido de cada filtro */}
+        <div className="flex-1">
+          {selectedFilter === 'Directorio' ? (
+            <div className="flex flex-col md:flex-row gap-6">
               {/* Presidente */}
-              <div className="flex flex-col items-center space-y-6">
-                <div className="w-full max-w-xs">
-                  <PersonCard
-                    id={institucionalData.presidente.id}
-                    name={institucionalData.presidente.name}
-                    role={institucionalData.presidente.role}
-                    imageUrl={institucionalData.presidente.image.url}
-                  />
-                </div>
-
-                {/* Directores Titulares - HARDCODEADA */}
-                <div className="bg-primary-light text-white px-6 py-6 rounded-[12px] w-full max-w-xs min-h-[220px] flex flex-col justify-start">
+              <div className="flex flex-col items-center space-y-6 w-full">
+                <PersonCard
+                  id={institucionalData.presidente.id}
+                  name={institucionalData.presidente.name}
+                  role={institucionalData.presidente.role}
+                  imageUrl={institucionalData.presidente.image.url}
+                />
+                <div className="bg-primary-light text-white px-6 py-6 rounded-[12px] min-h-[220px] flex flex-col justify-start w-full">
                   <h4 className="text-lg font-bold text-center mb-2 border-b border-white pb-1">
                     Directores titulares
                   </h4>
@@ -121,18 +111,14 @@ export default function AutoridadesSection() {
               </div>
 
               {/* Vicepresidente */}
-              <div className="flex flex-col items-center space-y-6">
-                <div className="w-full max-w-xs">
-                  <PersonCard
-                    id={institucionalData.vicepresidente.id}
-                    name={institucionalData.vicepresidente.name}
-                    role={institucionalData.vicepresidente.role}
-                    imageUrl={institucionalData.vicepresidente.image.url}
-                  />
-                </div>
-
-                {/* Síndicos Titulares - HARDCODEADA */}
-                <div className="bg-primary-light text-white px-6 py-6 rounded-[12px] w-full max-w-xs min-h-[220px] flex flex-col justify-start">
+              <div className="flex flex-col items-center space-y-6 w-full">
+                <PersonCard
+                  id={institucionalData.vicepresidente.id}
+                  name={institucionalData.vicepresidente.name}
+                  role={institucionalData.vicepresidente.role}
+                  imageUrl={institucionalData.vicepresidente.image.url}
+                />
+                <div className="bg-primary-light text-white px-6 py-6 rounded-[12px] min-h-[220px] flex flex-col justify-start w-full">
                   <h4 className="text-lg font-bold text-center mb-2 border-b border-white pb-1">
                     Síndicos titulares
                   </h4>
@@ -144,28 +130,28 @@ export default function AutoridadesSection() {
                 </div>
               </div>
             </div>
-
-            {/* PDF abajo de todo */}
-            {conductFile && (
-              <div className="col-span-3 mt-12 flex justify-center">
-                <a
-                  href={conductFile.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[#00C3B3]"
-                >
-                  <Download size={24} />
-                  <span className="font-bold text-[#3C3C3B]">
-                    Código de comportamiento empresarial
-                  </span>
-                </a>
-              </div>
-            )}
-          </>
-        ) : (
-          renderTeamByArea()
-        )}
+          ) : (
+            renderTeamByArea()
+          )}
+        </div>
       </div>
+
+      {/* PDF */}
+      {conductFile && (
+        <div className="mt-12 flex justify-center">
+          <a
+            href={conductFile.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-[#00C3B3]"
+          >
+            <Download size={24} />
+            <span className="font-bold text-[#3C3C3B]">
+              Código de comportamiento empresarial
+            </span>
+          </a>
+        </div>
+      )}
     </section>
   );
 }

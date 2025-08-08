@@ -47,9 +47,11 @@ export default function HomePage() {
 
       <Navbar />
 
-      <DesktopCarousel cards={cards} />
+      <div className="bg-primary-light ">
+        <DesktopCarousel cards={cards} />
+      </div>
 
-      <section className="lg:rounded-t-[50px] py-[30px] lg:pb-[70px] flex flex-col items-center mb-5 lg:mb-[-50px] px-4 lg:px-20">
+      <section className="page-container page-max py-[30px] lg:pb-[70px]">
         <AnimationSection />
       </section>
 
@@ -67,7 +69,7 @@ export default function HomePage() {
         {/* Card flotante */}
         <div className="relative z-10 flex justify-center">
           <div className="w-full flex justify-center">
-            <div className="translate-y-[20%]">
+            <div className="translate-y-[20%] ">
               <FeaturedCarousel />
             </div>
           </div>

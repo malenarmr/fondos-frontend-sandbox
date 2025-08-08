@@ -124,7 +124,7 @@ export default function NoticiasPage() {
   return (
     <main>
       <Navbar />
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="page-container">
         <HeroSectionGenerico
           title={heroData.title}
           description={heroData.description}

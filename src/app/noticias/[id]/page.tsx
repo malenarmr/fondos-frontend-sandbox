@@ -5,6 +5,7 @@ import NewsCard from '@/components/noticias/NewsCard';
 import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
+import Spinner from '@/components/shared/Spinner';
 import {
   NoticiaBackend,
   fetchNoticiaById,
@@ -89,7 +90,9 @@ export default function NewsDetailPage() {
   // ── 3) Manejamos los casos de loading / error antes de renderizar todo ──
   if (loading) {
     return (
-      <div className="text-center py-8">Cargando detalle de noticia...</div>
+      <div className="text-center py-8 flex justify-center">
+        <Spinner />
+      </div>
     );
   }
 
@@ -127,8 +130,8 @@ export default function NewsDetailPage() {
           style={{
             backgroundImage: "url('/institucional/bg-institucional.svg')",
             backgroundRepeat: 'repeat',
-            backgroundPosition: 'top center',
-            opacity: 1, // Bajalo si lo querés más suave (ej: 0.8)
+            backgroundPosition: 'botto center',
+            opacity: 1,
             borderBottomLeftRadius: '40px',
             borderBottomRightRadius: '40px',
             minHeight: '100%',

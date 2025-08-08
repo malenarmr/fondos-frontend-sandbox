@@ -11,9 +11,9 @@ interface ContactBoxProps {
 
 export default function ContactBox({ contacto }: ContactBoxProps) {
   return (
-    <div className="border border-[#009B67] rounded-2xl bg-white p-8 max-w-md w-full flex flex-col gap-6 shadow-sm">
+    <div className="border border-[#009B67] rounded-tl-[8px] rounded-br-[8px] rounded-tr-[22px] rounded-bl-[22px] bg-white py-8 w-full flex flex-col gap-6 shadow-sm items-center">
       {/* Teléfonos */}
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-4 p-4">
         <MessageCircle
           size={32}
           strokeWidth={2}
@@ -21,10 +21,10 @@ export default function ContactBox({ contacto }: ContactBoxProps) {
           className="min-w-[32px]"
         />
         <div className="flex flex-col">
-          <span className="text-secondary text-lg">
+          <span className="text-secondary text-md md:text-lg">
             Tel.: {contacto.telefono} / FAX. {contacto.fax}
           </span>
-          <span className="text-secondary text-lg">
+          <span className="text-secondary text-md md:text-lg">
             Consultas o Denuncias: {contacto.consultas_denuncias}
           </span>
         </div>
@@ -39,7 +39,7 @@ export default function ContactBox({ contacto }: ContactBoxProps) {
         />
         <a
           href={`mailto:${contacto.email.trim()}`}
-          className="text-secondary text-lg underline"
+          className="text-secondary text-md md:text-lg underline"
         >
           {contacto.email.trim()}
         </a>

@@ -102,7 +102,6 @@ export default function TestInversorForm() {
   return (
     <div
       className="    mx-auto
-    max-w-[1144px]
     min-h-[689px]
     bg-white
     border

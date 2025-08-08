@@ -19,7 +19,7 @@ const PersonCard: React.FC<PersonCardProps> = ({
   return (
     <Link
       href={`/institucional/autoridad/${id}`}
-      className="block mx-auto w-full max-w-[360px]"
+      className="block mx-auto w-full"
     >
       <div className="relative overflow-hidden rounded-[23px] h-[377px] w-full">
         {/* Background image con gradiente */}
@@ -28,7 +28,7 @@ const PersonCard: React.FC<PersonCardProps> = ({
             src={imageUrl || '/placeholder.svg'}
             alt={name}
             fill
-            className="object-cover"
+            className="object-cover object-top"
             sizes="(max-width: 768px) 100vw, 360px"
           />
           <div
