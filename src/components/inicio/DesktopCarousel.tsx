@@ -100,7 +100,7 @@ export default function DesktopCarousel({ cards }: Props) {
       </AnimatePresence>
 
       {/* ===== DESKTOP ===== */}
-      <div className="page-container page-max hidden lg:flex justify-between items-center gap-60">
+      <div className="px-4 md:px-[100px] xl:px-[145px] padding-xxl hidden lg:flex justify-between items-center gap-60">
         {/* Left side: Text & Button */}
         <div className="w-1/2 pr-8 text-white">
           <h1 className="text-4xl font-extrabold">{current.title}</h1>

@@ -11,7 +11,7 @@ export default function AvisoLegalSection() {
 
   return (
     <section className="w-full flex justify-center items-center py-12 bg-[#2098A1]">
-      <div className="page-container page-max">
+      <div className="px-4 md:px-[100px] xl:px-[145px] padding-xxl">
         <div
           className="
         bg-white
