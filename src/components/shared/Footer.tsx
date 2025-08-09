@@ -16,21 +16,21 @@ const Footer: React.FC = () => {
               alt="Banco Provincia"
               width={120}
               height={32}
-              className="w-[120px] h-auto"
+              className="w-[90px] h-auto"
             />
             <Image
               src="/footer/BancoProvinciaServiciosFinancieros.svg"
               alt="Provincia Servicios Financieros"
               width={170}
               height={40}
-              className="w-[180px] h-auto"
+              className="w-[120px] h-auto"
             />
             <Image
               src="/footer/BancoProvinciaFondos.svg"
               alt="Provincia Fondos"
               width={120}
               height={32}
-              className="w-[140px] h-auto"
+              className="w-[90px] h-auto"
             />
           </div>
 
