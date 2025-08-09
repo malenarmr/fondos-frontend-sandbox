@@ -38,7 +38,7 @@ export default function InfoPage() {
 
       <section className="bg-[#2098A1] py-12 lg:py-8 dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl">
         <div className="flex flex-col-reverse xl:flex-row items-center justify-between mx-auto">
-          <div className="flex flex-col text-primary px-[50px] xl:px-0">
+          <div className="flex flex-col  text-primary px-[50px] xl:px-0">
             <h1 className="text-start lg:text-center xl:text-left font-encode-sans font-bold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary mb-7 xl:mb-12 max-w-[555px] text-white">
               ¿Querés saber qué tipo de inversor sos?
             </h1>

@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <header className="bg-navbar">
+    <header className="bg-navbar sticky top-0 z-50">
       <div className="w-full px-4 lg:px-[50px] flex justify-evenly items-center py-5 relative">
         {/* Logo */}
         <div className="w-60 max-w-full">
