@@ -6,7 +6,7 @@ export default function FeaturedCarousel() {
   return (
     <div
       className="
-        w-full max-w-[827px]
+        w-full max-w-[400px] md:max-w-[827px]
         rounded-tr-xl rounded-bl-xl rounded-tl-[80px] rounded-br-[80px]
         bg-white
         flex flex-col justify-center items-center text-center

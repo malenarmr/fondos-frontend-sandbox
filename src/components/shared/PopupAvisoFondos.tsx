@@ -27,10 +27,10 @@ const PopupAvisoFondos: React.FC<PopupAvisoFondosProps> = ({
       >
         <button
           onClick={onClose}
-          className="absolute right-6 top-6 text-secondary text-3xl md:text-4xl"
+          className="absolute right-3 top-3 md:right-6 md:top-6 text-secondary text-2xl md:text-4xl"
           aria-label="Cerrar"
         >
-          <X size={36} />
+          <X size={28} className="md:size-9" />
         </button>
         <h2 className="text-2xl md:text-3xl font-black text-[#3C3C3B] mb-3 text-center font-encode-sans">
           {title}

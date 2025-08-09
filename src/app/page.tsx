@@ -95,7 +95,7 @@ export default function HomePage() {
         <div className="flex lg:pl-12 flex-col">
           <VideosSection />
         </div>
-        <div className="flex lg:hidden justify-center">
+        <div className="flex lg:hidden justify-center pb-10 lg:pb-0">
           <Link href="/tutoriales">
             <Button variant="light">Ver todos los videos</Button>
           </Link>
