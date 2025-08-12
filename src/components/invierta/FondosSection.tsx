@@ -27,7 +27,7 @@ interface Tag {
 }
 
 export default function FondosSection() {
-  const [videos, setVideos] = useState<Fondo[]>([]);
+  const [fondos, setFondos] = useState<Fondo[]>([]);
   const [filteredFondos, setFilteredFondos] = useState<Fondo[]>([]);
   const [categories, setCategories] = useState<Tag>({
     caracteristicas: [],
@@ -75,8 +75,19 @@ export default function FondosSection() {
       try {
         const response = await provinciaApiClient.fondos.founds.getAll();
 
-        setVideos(response.data.data as Fondo[]);
-        setFilteredFondos(response.data.data as Fondo[]);
+        const orderMap: Record<string, number> = {
+          CONSERVADOR: 0,
+          MODERADO: 1,
+          AGRESIVO: 2,
+        };
+        const sortedFondos = [...response.data.data].sort((a, b) => {
+          const profileA = a.inversor_profile_fondos?.[0]?.title || '';
+          const profileB = b.inversor_profile_fondos?.[0]?.title || '';
+          return (orderMap[profileA] ?? 99) - (orderMap[profileB] ?? 99);
+        });
+
+        setFondos(sortedFondos as Fondo[]);
+        setFilteredFondos(sortedFondos as Fondo[]);
       } catch {
         setError('Error al cargar preguntas fondos');
       } finally {
@@ -96,7 +107,7 @@ export default function FondosSection() {
 
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
-  const handleFilterVideos = (tags: Tag) => {
+  const handleFilterFondos = (tags: Tag) => {
     setIsLoadingFilters(true);
 
     setTimeout(() => {
@@ -105,7 +116,7 @@ export default function FondosSection() {
         tags.activos.length === 0 &&
         tags.inversores.length === 0
       ) {
-        setFilteredFondos(videos);
+        setFilteredFondos(fondos);
       } else {
         // Obtenemos los IDs de fondos desde our_founds de cada filtro
         const fondosFromCaracteristicas = tags.caracteristicas.flatMap(
@@ -135,7 +146,7 @@ export default function FondosSection() {
         const matchByInversores = new Set(fondosFromInversores);
 
         // Mantenemos los fondos que estén en todas las categorías seleccionadas
-        const filtered = videos.filter((fondo) => {
+        const filtered = fondos.filter((fondo) => {
           const id = fondo.documentId;
           return (
             (tags.caracteristicas.length === 0 ||
@@ -161,7 +172,7 @@ export default function FondosSection() {
         [type]: [...prevTags, tag],
       };
       setSelectedTags(updatedTags);
-      handleFilterVideos(updatedTags);
+      handleFilterFondos(updatedTags);
     }
   };
 
@@ -172,7 +183,7 @@ export default function FondosSection() {
     };
 
     setSelectedTags(updatedTags);
-    handleFilterVideos(updatedTags);
+    handleFilterFondos(updatedTags);
   };
 
   const deleteAll = () => {
@@ -182,7 +193,7 @@ export default function FondosSection() {
       inversores: [],
     };
     setSelectedTags(emptyTags);
-    handleFilterVideos(emptyTags);
+    handleFilterFondos(emptyTags);
   };
 
   const capitalize = (str: string) => {
