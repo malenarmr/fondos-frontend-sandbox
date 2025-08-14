@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Button from './Button';
+import Link from 'next/link';
 
 interface HalfSectionCardProps {
   title: string;
@@ -46,11 +47,11 @@ const HalfSectionCard: React.FC<HalfSectionCardProps> = ({
         )}
         <h2 className="text-4xl font-black mb-8">{title}</h2>
         {children}
-        <a href={link} target="_blank" rel="noopener noreferrer">
+        <Link href={link || '#'}>
           <Button variant="sky" onClick={onClick}>
             {textButton}
           </Button>
-        </a>
+        </Link>
       </div>
     </div>
   );

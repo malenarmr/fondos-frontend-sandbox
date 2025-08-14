@@ -13,7 +13,6 @@ export default function NoticiasPage() {
   // 1) Estado para todas las noticias
   const [allNews, setAllNews] = useState<NoticiaBackend[]>([]);
   const [errorNews, setErrorNews] = useState<string | null>(null);
-  const APP_STORE_LINK = 'https://apps.apple.com/us/app/invierta/id6448729005';
 
   // 2) Estado para los filtros actuales seleccionados
   const [filters, setFilters] = useState({
@@ -29,7 +28,7 @@ export default function NoticiasPage() {
       textColor: '#FFFFFF',
       textButton: 'Ir al simulador',
       borderRadius: '50px 0 0 0',
-      link: APP_STORE_LINK,
+      link: '/simulador',
       description: (
         <p
           className="font-encode-sans text-lg mb-8 leading-5"
@@ -42,20 +41,21 @@ export default function NoticiasPage() {
       ),
     },
     {
-      title: 'Conocé más sobre cómo invertir',
-      bgColor: '#EBEBEB',
-      textColor: '#3C3C3B',
-      textButton: 'Ver todos los videos',
+      title: '¿Querés saber qué tipo de inversor sos?',
+      bgColor: '#2098A1',
+      textColor: '#FFFFFF',
+      textButton: 'Hacé el test',
       borderRadius: '0 50px 0 0',
-      popup: true,
+      link: '/test-inversor',
       description: (
         <p className="font-encode-sans text-lg mb-8 leading-5">
-          Recibí nuestra información
-          <br />y enterate de las últimas novedades
+          ¿Sos más conservador o te gusta asumir riesgos? Hacé nuestro test en
+          minutos y encontrá la mejor estrategia de inversión para vos.
         </p>
       ),
     },
   ];
+
   // 3) Cargar todas las noticias una vez (o cuando hagan falta)
   useEffect(() => {
     async function load() {

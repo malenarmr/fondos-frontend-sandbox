@@ -5,8 +5,9 @@ import {
   InvestorProfile,
   getInvestorProfile,
 } from '@/services/testInversorService';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import ResultadoCartera from './ResultadoCartera';
+import ResultadoFondosSugeridos from './ResultadoFondosSugeridos';
 
 interface Props {
   value: number;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function ResultadoContentBase({ value, onClose }: Props) {
+  const router = useRouter();
   const [profile, setProfile] = useState<InvestorProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -29,24 +31,35 @@ export default function ResultadoContentBase({ value, onClose }: Props) {
   if (error || !profile)
     return <p className="text-red-500">No se encontró el perfil</p>;
 
-  const carteraTypeMap: Record<string, string> = {
-    Conservador: 'Conservadora',
-    Moderado: 'Moderada',
-    Agresivo: 'Arriesgada',
-  };
-  const filterType = carteraTypeMap[profile.title] ?? profile.title;
-
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-center text-2xl font-bold mb-4">{profile.title}</h2>
-      <ResultadoCartera filterType={filterType} />
+      <p className="text-center mb-2">{profile.description}</p>
+      <p className="text-center text-secondary mb-4">
+        {profile.shortDescription}
+      </p>
 
-      <div className="flex justify-center items-center gap-4 mt-6 w-full">
-        {onClose && (
-          <Button variant="secondary" onClick={onClose}>
-            Cerrar
-          </Button>
-        )}
+      <ResultadoFondosSugeridos fondos={profile.our_founds || []} />
+
+      <div className="flex flex-col gap-4 mt-6 w-full">
+        <Button
+          variant="light"
+          onClick={() => {
+            if (onClose) onClose();
+            router.push('/simulador');
+          }}
+        >
+          Simulá tu inversión
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            if (onClose) onClose();
+            router.push('/test-inversor');
+          }}
+        >
+          Volver a hacer el test
+        </Button>
       </div>
     </div>
   );

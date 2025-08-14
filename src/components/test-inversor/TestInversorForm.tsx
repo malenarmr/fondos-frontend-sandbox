@@ -180,8 +180,8 @@ export default function TestInversorForm() {
       </div>
       {/* Modal móvil */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="relative">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4 rounded-xl">
+          <div className="relative w-full max-w-lg mx-auto overflow-hidden bg-white  rounded-xl">
             <button
               className="absolute top-2 right-2 text-white text-xl"
               onClick={() => setShowModal(false)}
