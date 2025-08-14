@@ -2,9 +2,9 @@
 import PreFooterCard from '@/components/invierta/PreFooterCard';
 import '@/components/invierta/PreFooterSection.css';
 import HalfSectionCard from '@/components/shared/HalfSectionCard';
+import JsonAnimation from '@/components/shared/LottieAnimation';
 import { useState } from 'react';
 import Popup from '../ui/inversiones/Popup';
-import JsonAnimation from '@/components/shared/LottieAnimation';
 
 interface Props {
   items: {
@@ -21,8 +21,6 @@ interface Props {
 
 export default function PreFooterSection({ items }: Props) {
   const [showPopup, setShowPopup] = useState(false);
-
-  const handleOpenPopup = () => setShowPopup(true);
 
   const handleClosePopup = () => setShowPopup(false);
 
@@ -52,7 +50,7 @@ export default function PreFooterSection({ items }: Props) {
                   textColor={item.textColor}
                   textButton={item.textButton}
                   borderRadius={item.borderRadius}
-                  link={item.link}
+                  link={item.link} // siempre link
                   animation={animation}
                   align={textAlign}
                 >
@@ -92,8 +90,7 @@ export default function PreFooterSection({ items }: Props) {
               textColor={item.textColor}
               textButton={item.textButton}
               borderRadius={item.borderRadius}
-              link={item.link}
-              onClick={item.popup ? handleOpenPopup : undefined}
+              link={item.link} // siempre usa link
               align={textAlign}
               padding={paddingXxl}
             >

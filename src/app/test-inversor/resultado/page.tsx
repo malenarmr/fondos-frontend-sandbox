@@ -101,7 +101,10 @@ function ResultadoContent() {
                 >
                   Volver a hacer el test
                 </Button>
-                <Button onClick={() => router.push('/simulador')}>
+                <Button
+                  variant="light"
+                  onClick={() => router.push('/simulador')}
+                >
                   Simulá tu inversión
                 </Button>
               </div>

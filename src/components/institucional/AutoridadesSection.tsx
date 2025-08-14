@@ -41,12 +41,26 @@ export default function AutoridadesSection() {
     );
     if (!area) return null;
 
+    // Aseguramos par de elementos para mantener “grupos de a 2”
+    const members = [...area.member_team_fondos];
+    if (members.length % 2 !== 0) members.push(null);
+
     return (
       <div className="w-full">
         <h3 className="text-2xl font-bold mb-8 text-secondary">{area.name}</h3>
-        <div className="flex justify-between gap-6">
-          {area.member_team_fondos.map((member: any) =>
-            renderTeamMemberCard(member)
+
+        {/* Grid fijo: 1 col en mobile, 2 cols en md+ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {members.map((member: any, idx: number) =>
+            member ? (
+              renderTeamMemberCard(member)
+            ) : (
+              // placeholder invisible para completar la grilla y evitar estirado
+              <div
+                key={`placeholder-${idx}`}
+                className="invisible w-full px-6 py-6 rounded-[12px] min-h-[120px]"
+              />
+            )
           )}
         </div>
       </div>

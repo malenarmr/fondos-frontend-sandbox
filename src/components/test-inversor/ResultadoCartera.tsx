@@ -43,8 +43,19 @@ export default function ResultadoCartera({ filterType }: Props) {
           await provinciaApiClient.bursatil.carterasEficientes.getAll();
         const todas: Cartera[] = resp.data.data;
         // Buscamos la cartera cuya “name” coincida con filterType
-        const found = todas.find((c) => c.name === filterType);
+        function normalize(s: string) {
+          return s
+            ?.normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '') // quita acentos
+            .replace(/^cartera\s+/i, '') // quita "Cartera " al inicio
+            .trim()
+            .toLowerCase();
+        }
 
+        const target = normalize(filterType);
+        const found = todas.find(
+          (c: any) => normalize(c.inversor_profile?.title || '') === target
+        );
         if (!found) {
           setError('No se encontró la cartera para este perfil');
           return;

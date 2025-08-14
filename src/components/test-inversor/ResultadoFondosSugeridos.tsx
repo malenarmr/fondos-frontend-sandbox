@@ -3,10 +3,6 @@
 import Link from 'next/link';
 import Button from '../shared/Button';
 
-// Si necesitás la función, la traés de donde la tengas, o la pegás acá:
-const capitalize = (str: string) =>
-  str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-
 interface Fondo {
   id: number;
   documentId?: string;
@@ -35,8 +31,8 @@ export default function ResultadoFondosSugeridos({ fondos }: Props) {
 
   return (
     <section className="px-0 md:px-0 pt-0 pb-0 space-y-8">
-      <h3 className="text-xl font-bold mb-6 text-primary text-center">
-        Fondos sugeridos para tu perfil
+      <h3 className="md:text-xl font-bold mb-6 text-secondary text-center">
+        Fondos que se ajustan a tu perfil
       </h3>
       <div className="grid md:grid-cols-1 gap-6 max-w-[1132px] mx-auto">
         {fondos.map((fondo, index) => (
@@ -59,19 +55,10 @@ export default function ResultadoFondosSugeridos({ fondos }: Props) {
                 </span>
               </div>
               <div className="w-1/2 flex justify-start pl-6">
-                <div className="w-1/2 border-r">
+                <div className="w-full border-r">
                   <span>
                     Horizonte a <b>{fondo.horizonte}</b>
                   </span>
-                </div>
-                <div className="w-1/2 flex justify-start pl-6">
-                  {/* Mostramos característica si viene */}
-                  {fondo.caracteristicas_fondos &&
-                    fondo.caracteristicas_fondos[0]?.value && (
-                      <span className="flex p-2">
-                        {capitalize(fondo.caracteristicas_fondos[0].value)}
-                      </span>
-                    )}
                 </div>
               </div>
             </div>
