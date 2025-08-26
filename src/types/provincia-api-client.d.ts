@@ -1,7 +1,7 @@
 import type { AxiosInstance } from 'axios';
 declare module 'provincia-api-client' {
   export interface ClientOptions {
-    env: 'development' | 'sandbox' | 'production';
+    env: 'development' | 'sandbox' | 'prod';
   }
 
   export interface BursatilProductEndpoint {
