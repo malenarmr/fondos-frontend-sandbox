@@ -32,10 +32,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   // tu env queda igual
   const env =
-    (process.env.NEXT_PUBLIC_API_ENV as
-      | 'sandbox'
-      | 'development'
-      | 'production') || 'sandbox';
+    (process.env.NEXT_PUBLIC_API_ENV as 'sandbox' | 'development' | 'prod') ||
+    'sandbox';
   const provinciaApiClientInstance = provinciaClient({ env });
 
   const [institucionalData, setInstitucionalData] =

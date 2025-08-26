@@ -10,27 +10,45 @@ const Footer: React.FC = () => {
       <footer className="w-full bg-primary py-8 sm:py-10 px-4 sm:px-10 lg:px-28 font-encode-sans text-white">
         {/* Logos & Socials */}
         <div className="flex flex-col md:flex-row justify-between gap-8 sm:gap-8 mb-2 md:mb-8">
-          <div className="flex items-center gap-4 sm:gap-6 align-center justify-center">
+          <div className="flex items-center gap-4 sm:gap-6 justify-center hidden md:flex">
             <Image
               src="/footer/BancoProvincia.svg"
               alt="Banco Provincia"
-              width={120}
-              height={32}
-              className="w-[90px] h-auto"
+              width={100}
+              height={36}
             />
             <Image
-              src="/footer/BancoProvinciaServiciosFinancieros.svg"
+              src="/footer/BancoProvinciaServiciosFinancieros.png"
               alt="Provincia Servicios Financieros"
-              width={170}
-              height={40}
-              className="w-[120px] h-auto"
+              width={138}
+              height={36}
             />
             <Image
-              src="/footer/BancoProvinciaFondos.svg"
+              src="/footer/BancoProvinciaFondos.png"
               alt="Provincia Fondos"
+              width={105}
+              height={35}
+            />
+          </div>
+
+          <div className="flex items-center gap-4 sm:gap-6 justify-center flex md:hidden">
+            <Image
+              src="/footer/BancoProvincia.svg"
+              alt="Banco Provincia"
+              width={90}
+              height={35}
+            />
+            <Image
+              src="/footer/BancoProvinciaServiciosFinancieros.png"
+              alt="Provincia Servicios Financieros"
               width={120}
-              height={32}
-              className="w-[90px] h-auto"
+              height={35}
+            />
+            <Image
+              src="/footer/BancoProvinciaFondos.png"
+              alt="Provincia Fondos"
+              width={100}
+              height={35}
             />
           </div>
 
