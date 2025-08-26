@@ -30,13 +30,16 @@ export default function SimuladorSection() {
   });
   const [missing, setMissing] = useState<string[]>([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [result, setResult] = useState({
-    rendimientoTotal: {
-      montoTotalInicial: '',
-      porcentajeRendimientoTotal: 0,
-      valorFinalTotal: '',
+  const [result, setResult] = useState([
+    {
+      rendimientoTotal: {
+        montoTotalInicial: '',
+        porcentajeRendimientoTotal: 0,
+        valorFinalTotal: '',
+      },
+      resultados: [],
     },
-  });
+  ]);
 
   const { provinciaApiClient } = useAppContext();
 
@@ -180,15 +183,7 @@ export default function SimuladorSection() {
   const fechaAyer = ayer.toISOString().split('T')[0];
 
   const validResult = () => {
-    if (
-      result?.rendimientoTotal?.porcentajeRendimientoTotal &&
-      result?.rendimientoTotal?.montoTotalInicial &&
-      result?.rendimientoTotal?.valorFinalTotal
-    ) {
-      return true;
-    } else {
-      return false;
-    }
+    return result.every((item: any) => item.success === true);
   };
 
   const handleAddFondo = () => {
@@ -423,52 +418,67 @@ export default function SimuladorSection() {
                 El rendimiento de tu inversión
                 <br /> hubiese sido
               </h2>
-              <div className="flex w-full gap-4 pt-16">
-                <div className="w-1/2 flex flex-col gap-8">
-                  <div className="flex">
-                    <span className="w-1/2 ">Total simulado</span>
-                    <span className="w-1/2">
-                      ${result?.rendimientoTotal?.montoTotalInicial}
-                    </span>
+              {result.map((resultadoFondo: any, i: number) => (
+                <div key={i}>
+                  <div className="flex w-full gap-4 pt-16">
+                    <div className="w-1/2 flex flex-col gap-8">
+                      <div className="flex">
+                        <span className="w-1/2 ">Fondo</span>
+                        <span className="w-1/2 font-bold">
+                          {resultadoFondo?.resultados[0]?.instrumento?.name}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex">
-                    <span className="w-1/2 ">Rendimiento directo</span>
-                    <span className="w-1/2">
-                      {result?.rendimientoTotal?.porcentajeRendimientoTotal?.toFixed(
-                        2
-                      )}
-                      %
-                    </span>
+                  <div className="flex w-full gap-4 pt-8">
+                    <div className="w-1/2 flex flex-col gap-8">
+                      <div className="flex">
+                        <span className="w-1/2 ">Total simulado</span>
+                        <span className="w-1/2 font-bold">
+                          ${resultadoFondo?.rendimientoTotal?.montoTotalInicial}
+                        </span>
+                      </div>
+                      <div className="flex">
+                        <span className="w-1/2 ">Rendimiento directo</span>
+                        <span className="w-1/2 font-bold">
+                          {resultadoFondo?.rendimientoTotal?.porcentajeRendimientoTotal?.toFixed(
+                            2
+                          )}
+                          %
+                        </span>
+                      </div>
+                    </div>
+                    <div className="w-1/2 flex flex-col gap-8">
+                      <div className="flex px-8 justify-between rounded-[12px]">
+                        <span className="">Desde - Hasta</span>
+                        <span className=" font-bold">
+                          {formatDate(formData.fechaInicio)} -{' '}
+                          {formatDate(formData.fechaFin)}
+                        </span>
+                      </div>
+                      <div className="flex bg-[#EEF8F3] py-2 px-8 rounded-[12px] justify-between text-[#3C3C3B]">
+                        <span className="">Capital + Rendimiento</span>
+                        <span className="font-bold">
+                          $
+                          {Number(
+                            resultadoFondo?.rendimientoTotal?.valorFinalTotal
+                          ).toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="w-1/2 flex flex-col gap-8">
-                  <div className="flex px-8 justify-between rounded-[12px]">
-                    <span className="">Desde - Hasta</span>
-                    <span className="">
-                      {formatDate(formData.fechaInicio)} -{' '}
-                      {formatDate(formData.fechaFin)}
-                    </span>
-                  </div>
-                  <div className="flex bg-[#EEF8F3] py-2 px-8 rounded-[12px] justify-between text-[#3C3C3B]">
-                    <span className="">Capital + Rendimiento</span>
-                    <span className="font-medium">
-                      $
-                      {Number(
-                        result?.rendimientoTotal?.valorFinalTotal
-                      ).toFixed(2)}
-                    </span>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           {showPopup && (
             <div
               className="fixed bg-[#3c3c3b66] block md:hidden w-[100vw] h-[100vh] top-0 left-0 z-10"
+              style={{ zIndex: 100 }}
               onClick={handleClosePopup}
             >
               <div
-                className="bg-white text-secondary w-[90vw] h-[60vh] top-[5vh] left-[5vw] p-6 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] absolute"
+                className="bg-white text-secondary w-[90vw] h-[70vh] top-[5vh] left-[5vw] p-6 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px] absolute overflow-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex relative w-[100%]">
@@ -484,47 +494,60 @@ export default function SimuladorSection() {
                     ×
                   </button>
                 </div>
-                <div className="flex w-full flex-col gap-4 pt-6 text-sm">
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="text-[#929292] text-sm">
-                      Total simulado
-                    </span>
-                    <span className="w-1/2 border-l text-right ">
-                      ${result?.rendimientoTotal?.montoTotalInicial}
-                    </span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="text-[#929292] text-sm">
-                      Rendimiento directo
-                    </span>
-                    <span className="w-1/2 border-l text-right">
-                      {result.rendimientoTotal.porcentajeRendimientoTotal.toFixed(
-                        2
-                      )}
-                      %
-                    </span>
-                  </div>
-                  <div className="flex justify-between rounded-[12px]">
-                    <span className="text-[#929292] text-sm">
-                      Desde - Hasta
-                    </span>
-                    <div className="flex flex-col border-l pb-2 w-1/2 text-right">
-                      <span className="">
-                        {formatDate(formData.fechaInicio)}
+                {result.map((resultadoFondo: any, i: number) => (
+                  <div
+                    className="flex w-full flex-col gap-4 pt-6 text-sm pb-6"
+                    key={i}
+                  >
+                    <div className="flex justify-between border-b pb-2">
+                      <span className="text-[#929292] text-sm">Fondo</span>
+                      <span className="w-1/2 border-l text-right ">
+                        {resultadoFondo?.resultados[0]?.instrumento?.name}
                       </span>
-                      <span className="">{formatDate(formData.fechaFin)}</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span className="text-[#929292] text-sm">
+                        Total simulado
+                      </span>
+                      <span className="w-1/2 border-l text-right ">
+                        ${resultadoFondo?.rendimientoTotal?.montoTotalInicial}
+                      </span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span className="text-[#929292] text-sm">
+                        Rendimiento directo
+                      </span>
+                      <span className="w-1/2 border-l text-right">
+                        {resultadoFondo.rendimientoTotal?.porcentajeRendimientoTotal.toFixed(
+                          2
+                        )}
+                        %
+                      </span>
+                    </div>
+                    <div className="flex justify-between rounded-[12px]">
+                      <span className="text-[#929292] text-sm">
+                        Desde - Hasta
+                      </span>
+                      <div className="flex flex-col border-l pb-2 w-1/2 text-right">
+                        <span className="">
+                          {formatDate(formData.fechaInicio)}
+                        </span>
+                        <span className="">
+                          {formatDate(formData.fechaFin)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex bg-[#2098A1] py-2 px-4 rounded-[12px] justify-between text-sm text-white">
+                      <span className="">Capital + Rendimiento</span>
+                      <span className="font-medium">
+                        $
+                        {Number(
+                          resultadoFondo?.rendimientoTotal?.valorFinalTotal
+                        ).toFixed(2)}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex bg-[#2098A1] py-2 px-4 rounded-[12px] justify-between text-sm text-white">
-                    <span className="">Capital + Rendimiento</span>
-                    <span className="font-medium">
-                      $
-                      {Number(result.rendimientoTotal.valorFinalTotal).toFixed(
-                        2
-                      )}
-                    </span>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           )}
