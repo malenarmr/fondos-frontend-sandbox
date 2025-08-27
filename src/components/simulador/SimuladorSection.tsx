@@ -485,7 +485,7 @@ export default function SimuladorSection() {
                   <h2 className="font-encode-sans font-bold text-xl text-center w-full">
                     El rendimiento
                     <br /> de tu inversión
-                    <br /> hubiese sido
+                    <br className="" /> hubiese sido
                   </h2>
                   <button
                     onClick={handleClosePopup}
