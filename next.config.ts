@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'provincia-sandbox-api.teocoop.site',
+        hostname: 'provincia-prod-api.teocoop.site',
         port: '',
         pathname: '/uploads/**',
       },
