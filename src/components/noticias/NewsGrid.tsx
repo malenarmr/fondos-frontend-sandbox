@@ -50,11 +50,10 @@ export default function NewsGrid({ filters }: NewsGridProps) {
 
     const matchesCategory =
       !filters.category ||
-      n.category_blog_fondos.name
+      (n.category_blog_fondos?.name ?? '')
         .toLowerCase()
         .includes(filters.category.toLowerCase());
 
-    // ──> obtenemos el año nativo
     const yearFromDate = new Date(n.createdAt).getFullYear().toString();
     const matchesYear = !filters.year || yearFromDate === filters.year;
 
@@ -100,16 +99,20 @@ export default function NewsGrid({ filters }: NewsGridProps) {
             });
 
             // SAFE ACCESS al color
-            const rawBg = n.category_blog_fondos.colors_fondo?.value;
+            const rawBg = n.category_blog_fondos?.colors_fondo?.value ?? '#ccc';
             const { bgColor, textColor } = getNewsCardColors(rawBg);
+
+            const category = (
+              n.category_blog_fondos?.name ?? 'Sin categoría'
+            ).toUpperCase();
 
             return (
               <NewsCard
                 key={n.id}
                 id={n.id}
-                category={n.category_blog_fondos.name?.toUpperCase() ?? ''}
+                category={category}
                 title={n.title}
-                author={n.author ?? 'Provincia Bursátil'}
+                author={n.author ?? 'Provincia Fondos'}
                 description={n.shortContent || n.content.slice(0, 120) + '...'}
                 date={formattedDate}
                 bgColor={bgColor}
