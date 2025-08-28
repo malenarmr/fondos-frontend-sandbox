@@ -151,9 +151,11 @@ export default function NewsDetailPage() {
             >
               {/* Badge de categoría */}
               <div className="flex justify-end mb-6">
-                <span className="bg-[#00C3B3] text-white px-4 py-2 rounded-lg text-sm font-encode-sans">
-                  {noticia.category_blog_fondos.name}
-                </span>
+                {noticia.category_blog_fondos?.name && (
+                  <span className="bg-[#00C3B3] text-white px-4 py-2 rounded-lg text-sm font-encode-sans">
+                    {noticia.category_blog_fondos.name}
+                  </span>
+                )}
               </div>
 
               {/* Imagen (si la hay) */}
@@ -240,12 +242,11 @@ export default function NewsDetailPage() {
                   const desc =
                     n.shortContent || `${n.content.slice(0, 120)}...`;
 
-                  // 👇 Cambios acá:
                   const bg =
-                    n.category_blog_fondos?.colors_fondo?.value || '#009B67';
-                  const category =
-                    n.category_blog_fondos?.name?.toUpperCase() || '';
-                  const textColor = bg === '#E3E3E3' ? '#3C3C3B' : '#FFF';
+                    n.category_blog_fondos?.colors_fondo?.value ?? '#009B67';
+                  const category = (
+                    n.category_blog_fondos?.name ?? 'Sin categoría'
+                  ).toUpperCase();
 
                   return (
                     <NewsCard
@@ -253,11 +254,11 @@ export default function NewsDetailPage() {
                       id={n.id}
                       category={category}
                       title={n.title}
-                      author={n.author ?? 'Provincia Bursátil'}
+                      author={n.author ?? 'Provincia Fondos'}
                       description={desc}
                       date={fechaN}
                       bgColor={bg}
-                      textColor={textColor}
+                      textColor="#3C3C3B"
                     />
                   );
                 })

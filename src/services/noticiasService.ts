@@ -4,7 +4,7 @@ import apiClient from './apiClient';
 export interface Categoria {
   id: number;
   name: string;
-  colors_fondo: { value: string };
+  colors_fondo: { value: string } | null;
 }
 
 export interface Topic {
@@ -21,7 +21,7 @@ export interface NoticiaBackend {
   createdAt: string;
   publishedAt: string;
   image: { url: string } | null;
-  category_blog_fondos: Categoria;
+  category_blog_fondos: Categoria | null;
   topic_blog_fondos: Topic[];
 }
 
