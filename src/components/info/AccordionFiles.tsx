@@ -1,7 +1,7 @@
 'use client';
 
 import { useAppContext } from '@/context/AppContext';
-import { ChevronUpIcon, ChevronDownIcon } from 'lucide-react';
+import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { LiaDownloadSolid } from 'react-icons/lia';
@@ -99,7 +99,7 @@ export default function AccordionFiles() {
               {file.files.map((urlFiles, i) => {
                 return (
                   <Link
-                    href={urlFiles.file.url}
+                    href={process.env.NEXT_PUBLIC_API_URL + urlFiles.file.url}
                     key={i}
                     className="font-encode-sans py-3 lg:py-6 text-left px-2 lg:px-5 text-secondary flex gap-2 items-center font-medium transition duration-200 lowercase hover:font-bold"
                   >
