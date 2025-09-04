@@ -10,6 +10,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 export default function AutoridadDetailPage() {
   const params = useParams();
@@ -98,7 +100,7 @@ export default function AutoridadDetailPage() {
                   width={256}
                   height={320}
                   className="object-cover w-full h-full rounded-[20px] grayscale"
-                  // 👆 escala de grises con Tailwind, o usá style={{ filter: 'grayscale(100%)' }}
+                // 👆 escala de grises con Tailwind, o usá style={{ filter: 'grayscale(100%)' }}
                 />
               </div>
 
@@ -110,12 +112,14 @@ export default function AutoridadDetailPage() {
               </p>
             </div>
 
-            <div className="prose max-w-none text-sm md:text-base font-encode-sans">
-              {authority.description.split('\n').map((para, i) => (
-                <p key={i} className="mb-4 text-gray-700">
-                  {para}
-                </p>
-              ))}
+            {/* Renderizar markdown como en Noticias */}
+            <div className="prose max-w-none text-sm md:text-base font-encode-sans prose-ul:list-disc prose-ol:list-decimal prose-li:my-1">
+              <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                {
+                  // Igual que en Noticias: reemplazamos <br> por saltos para listas/negritas
+                  (authority.description ?? '').replace(/<br\s*\/?>/gi, '\n')
+                }
+              </ReactMarkdown>
             </div>
 
             <div className="mt-6 md:mt-8 flex justify-center font-encode-sans">
