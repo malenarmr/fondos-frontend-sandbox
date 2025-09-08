@@ -25,7 +25,7 @@ export default function FeaturedCarousel() {
         minutos y encontrá la mejor estrategia de inversión para vos.
       </p>
       <Link href="/test-inversor" passHref>
-        <Button variant="light">Hacé el test</Button>
+        <Button variant="light">Hacer el test</Button>
       </Link>
     </div>
   );
