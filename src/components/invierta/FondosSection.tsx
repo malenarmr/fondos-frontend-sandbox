@@ -293,16 +293,9 @@ export default function FondosSection() {
         </div>
         <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 xl:w-3/5 lg:pr-8 xl:pr-[100px] py-2 lg:py-16 pr-xxl">
           <div className="flex flex-col gap-8 pb-4">
-            <h1 className="font-encode-sans text-3xl lg:text-5xl text-primary-light font-black">
+            <h1 className="font-encode-sans text-3xl lg:text-5xl text-primary-light font-black mb-4">
               Nuestros Fondos
             </h1>
-            <p
-              className="font-encode-sans text-md lg:text-xl text-secondary"
-              style={{ fontWeight: 400 }}
-            >
-              Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
-              phasellus mollis sit aliquam sit nullam.
-            </p>
             <div className="grid md:grid-cols-2 gap-6 max-w-[1132px]">
               {isLoadingFilters ? (
                 <div className="flex justify-center items-center min-h-[200px]">
