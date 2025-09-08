@@ -42,7 +42,7 @@ export default function SimuladorPage() {
               </p>
               <div className="px-[50px] xl:px-0">
                 <Link href="/test-inversor" passHref>
-                  <Button variant="sky">Hacé el test</Button>
+                  <Button variant="sky">Hacer el test</Button>
                 </Link>
               </div>
             </div>
