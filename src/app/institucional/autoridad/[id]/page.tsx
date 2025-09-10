@@ -98,7 +98,7 @@ export default function AutoridadDetailPage() {
                   width={256}
                   height={320}
                   className="object-cover w-full h-full rounded-[20px] grayscale"
-                // 👆 escala de grises con Tailwind, o usá style={{ filter: 'grayscale(100%)' }}
+                  // 👆 escala de grises con Tailwind, o usá style={{ filter: 'grayscale(100%)' }}
                 />
               </div>
 
