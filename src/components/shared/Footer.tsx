@@ -54,19 +54,6 @@ const Footer: React.FC = () => {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://www.facebook.com/ProvinciaSF"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook Provincia Servicios Financieros"
-            >
-              <Image
-                src="/footer/Facebook.svg"
-                alt="Facebook"
-                width={35}
-                height={35}
-              />
-            </a>
-            <a
               href="https://x.com/provinciasf"
               target="_blank"
               rel="noopener noreferrer"

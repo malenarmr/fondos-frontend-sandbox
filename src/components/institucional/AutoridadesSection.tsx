@@ -10,7 +10,7 @@ export default function AutoridadesSection() {
   const { institucionalData } = useAppContext();
   if (!institucionalData) return null;
 
-  const conductFile = institucionalData.code_of_conduct[0];
+  const conductFile = institucionalData.code_of_conduct?.[0];
 
   const filters = [
     'Directorio',
@@ -47,8 +47,6 @@ export default function AutoridadesSection() {
 
     return (
       <div className="w-full">
-        <h3 className="text-2xl font-bold mb-8 text-secondary">{area.name}</h3>
-
         {/* Grid fijo: 1 col en mobile, 2 cols en md+ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {members.map((member: any, idx: number) =>
@@ -69,13 +67,10 @@ export default function AutoridadesSection() {
 
   return (
     <section className="mt-32 mb-32 font-encode-sans px-4 sm:px-6 lg:px-0 mx-auto">
+      {/* Título dinámico según filtro */}
       <h2 className="text-3xl font-bold mb-6 text-center text-primary-light">
-        Directorio
+        {selectedFilter}
       </h2>
-      <p className="text-center">
-        Te presentamos a las figuras más relevantes que
-      </p>
-      <p className="text-center mb-6">llevan adelante a nuestra institución</p>
 
       <div className="flex flex-col lg:flex-row gap-12">
         {/* Filtros */}
