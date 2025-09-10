@@ -130,7 +130,7 @@ export default function DesktopCarousel({ cards }: Props) {
               return (
                 <Link href={downloadLink || '/'}>
                   <Button variant="sky">
-                    {current.button_text || 'Hacé el test'}
+                    {current.button_text || 'Hacer el test'}
                   </Button>
                 </Link>
               );

@@ -146,7 +146,7 @@ export default function InvestorTestSection() {
         <div className="text-center">
           <Link href="/test-inversor">
             <Button style={{ width: 'fit-content', margin: '0 auto' }}>
-              Hacé el test!
+              Hacer el test
             </Button>
           </Link>
         </div>
