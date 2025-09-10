@@ -4,7 +4,7 @@ export default function HeroSectionInstitucional() {
   return (
     <section className="rounded-b-[50px] py-8 xl:py-16 font-encode-sans">
       <div className="flex flex-col-reverse xl:flex-row items-center">
-        <div className="flex flex-col text-primary xl:w-1/2">
+        <div className="flex flex-col text-primary xl:w-3/4">
           <h1 className="text-center xl:text-left font-bold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-12">
             Institucional
           </h1>
