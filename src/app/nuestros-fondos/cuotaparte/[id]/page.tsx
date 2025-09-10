@@ -29,7 +29,7 @@ const items = [
     title: '¿Querés saber qué tipo de inversor sos?',
     bgColor: '#2098A1',
     textColor: '#FFFFFF',
-    textButton: 'Hacé el test',
+    textButton: 'Hacer el test',
     borderRadius: '0 50px 0 0',
     link: '/test-inversor',
     description: (

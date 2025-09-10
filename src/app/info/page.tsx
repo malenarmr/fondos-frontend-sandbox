@@ -48,7 +48,7 @@ export default function InfoPage() {
             </p>
             <div className="">
               <Link href="/test-inversor" passHref>
-                <Button variant="sky">Hacé el test</Button>
+                <Button variant="sky">Hacer el test</Button>
               </Link>
             </div>
           </div>
