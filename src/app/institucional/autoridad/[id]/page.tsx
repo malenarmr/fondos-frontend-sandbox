@@ -72,7 +72,7 @@ export default function AutoridadDetailPage() {
         <div
           className="absolute inset-0 top-1/4 md:top-1/4 w-full z-0"
           style={{
-            backgroundImage: "url('/institucional/bg-institucional.svg')",
+            backgroundImage: "url('/institucional/bg-institucional.png')",
             backgroundRepeat: 'repeat',
             backgroundPosition: 'top center',
             opacity: 1, // bajalo si es muy fuerte, ej: 0.8
