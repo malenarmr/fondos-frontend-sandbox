@@ -1,6 +1,5 @@
 'use client';
 
-import AsistentesSection from '@/components/contacto/AsistentesSection';
 import ContactBox from '@/components/contacto/ContactBox';
 import Footer from '@/components/shared/Footer';
 import HeroSectionGenerico from '@/components/shared/HeroSectionGenerico';

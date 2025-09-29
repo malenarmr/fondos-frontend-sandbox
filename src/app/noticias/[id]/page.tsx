@@ -213,6 +213,7 @@ export default function NewsDetailPage() {
                         rehypePlugins={[rehypeRaw, [rehypeSanitize, mdSchema]]}
                         components={{
                           img: (props) => (
+                            // eslint-disable-next-line @next/next/no-img-element
                             <img
                               {...props}
                               alt={props.alt || ''}
