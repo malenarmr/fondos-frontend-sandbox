@@ -24,7 +24,7 @@ export default function InfoPage() {
               <br /> el inversor
             </h1>
             <p className="text-center xl:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] xl:px-0 xl:mr-0">
-              En la guia para el inversor vas a poder encontrar distintas
+              En la guía para el inversor vas a poder encontrar distintas
               herramientas para conocer más sobre el mundo de la inversión:
               videos tutoriales, test del inversor, simulador de inversiones,
               etc.
@@ -95,7 +95,7 @@ export default function InfoPage() {
           <AccordionFaq />
           <div className="flex justify-center">
             <span className="text-white mt-4">
-              Si no pudimos saldar tus dudas podes contactarnos por mail a{' '}
+              Si no pudimos responder a tus dudas, podes contactarnos por mail a{' '}
               <a href="mailto:sugerencias@provinfondos.com.ar">
                 <b>sugerencias@provinfondos.com.ar</b>
               </a>

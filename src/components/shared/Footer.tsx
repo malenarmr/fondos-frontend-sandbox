@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
           {/* Asesores Comerciales */}
           <div className="text md:text-left md:border-r md:border-white/40 md:pr-6">
             <h4 className="font-semibold text-sm sm:text-base mb-2">
-              Asesores Comerciales
+              Contacto
             </h4>
             <p className="text-[12px] sm:text-sm leading-snug">
               Luciana Brossy: 11 6758-5717

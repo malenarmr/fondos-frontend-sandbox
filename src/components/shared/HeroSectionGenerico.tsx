@@ -25,7 +25,7 @@ export default function HeroSectionGenerico({
           <div
             className="font-encode-sans font-normal text-[16px] xl:text-[20px]
              leading-5 xl:leading-6 text-secondary text-left
-             md:w-[630px] space-y-4 px-4 md:px-8 xl:px-0 xl:mr-24"
+             lg:max-w-[630px] space-y-4 px-4 md:px-8 xl:px-0 xl:mr-24"
           >
             <p>{description}</p>
           </div>

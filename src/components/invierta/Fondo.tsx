@@ -204,17 +204,6 @@ export default function FondoDetails({ id }: FondoProps) {
                     <span className=" ">Rendimiento Diario</span>
                   </a>
                 )}
-                {fondoData?.carteraDetallada && (
-                  <a
-                    className="flex items-center gap-1"
-                    href={fondoData.carteraDetallada}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <LiaDownloadSolid />
-                    <span className="">Cartera Detallada</span>
-                  </a>
-                )}
                 {fondoData?.reglamento_de_gestion?.file?.url && (
                   <a
                     className="flex items-center gap-1"

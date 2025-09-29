@@ -327,7 +327,7 @@ export default function FondosSection() {
                           </div>
                           <div className="w-1/2 flex justify-start pl-6">
                             <span
-                              className={`flex px-6 py-2 ${fondo.inversor_profile_fondos[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : 'bg-[#929292]'} text-white font-bold rounded-xl capitalize`}
+                              className={`flex px-6 py-2 ${fondo.inversor_profile_fondos[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : fondo.inversor_profile_fondos[0].title == 'MODERADO' ? 'bg-[#929292]' : 'bg-[#B4B4B4]'} text-white font-bold rounded-xl capitalize`}
                             >
                               {capitalize(
                                 fondo.inversor_profile_fondos[0].title
@@ -508,7 +508,7 @@ export default function FondosSection() {
                     </div>
                     <div className="w-1/2 px-2 flex justify-center">
                       <span
-                        className={`flex px-6 py-2 ${fondo.inversor_profile_fondos[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : 'bg-[#929292]'} text-white font-bold rounded-xl capitalize`}
+                        className={`flex px-6 py-2 ${fondo.inversor_profile_fondos[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : fondo.inversor_profile_fondos[0].title == 'MODERADO' ? 'bg-[#929292]' : 'bg-[#B4B4B4]'} text-white font-bold rounded-xl capitalize`}
                       >
                         {capitalize(fondo.inversor_profile_fondos[0].title)}
                       </span>
