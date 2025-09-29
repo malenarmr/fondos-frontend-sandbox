@@ -28,22 +28,22 @@ export default function ContactoPage() {
       <div className="w-full bg-white pt-8 pb-20">
         <div className="px-4 md:px-[100px] xl:px-[145px] padding-xxl flex flex-col xl:flex-row justify-between">
           {/* Columna izquierda: título y descripción */}
-          <div className="w-full flex flex-col justify-center items-center mb-8 lg:mb-0">
+          <div className="w-full lg:w-[50%] flex flex-col justify-center items-center mb-8 lg:mb-0">
             <HeroSectionGenerico
               title={contacto.title}
               description={contacto.description}
             />
           </div>
           {/* Columna derecha: ContactBox */}
-          <div className="w-full flex mt-7">
+          <div className="w-full lg:w-[50%] flex mt-7">
             <ContactBox contacto={contacto} />
           </div>
         </div>
       </div>
-      <AsistentesSection
+      {/* <AsistentesSection
         asistentes={contacto.contactos_seccion.contacto}
         sectionTitle={contacto.contactos_seccion.title}
-      />
+      /> */}
       <Footer />
     </main>
   );
