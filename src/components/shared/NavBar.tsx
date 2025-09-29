@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
           className={`${open ? 'block' : 'hidden'} absolute top-full left-0 right-0 bg-white shadow-md rounded-lg p-6 lg:static lg:block lg:bg-transparent lg:shadow-none lg:p-0 lg:right-auto lg:left-auto`}
           style={{ zIndex: 3 }}
         >
-          <ul className="flex flex-col space-y-4 gap-10 text-secondary lg:flex-row lg:space-y-0 lg:space-x-5 lg:items-center lg:whitespace-nowrap">
+          <ul className="flex flex-col space-y-4 gap-8 text-secondary lg:flex-row lg:space-y-0 lg:space-x-5 lg:items-center lg:whitespace-nowrap">
             <ListItem href="/institucional" currentPath={pathname}>
               Institucional
             </ListItem>
@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
               Contacto
             </ListItem>
             <ListItem href="/noticias" currentPath={pathname}>
-              Noticias
+              Informes
             </ListItem>
           </ul>
         </nav>

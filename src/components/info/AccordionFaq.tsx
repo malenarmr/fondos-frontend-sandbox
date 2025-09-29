@@ -3,6 +3,11 @@
 import { useAppContext } from '@/context/AppContext';
 import { ChevronUpIcon, ChevronDownIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
 
 interface Faq {
   question: string;
@@ -19,6 +24,15 @@ export default function AccordionFaq() {
 
   const handleOpen = (index: number) => {
     setIsOpen((prevIsOpen) => (prevIsOpen === index ? -1 : index));
+  };
+
+  const mdSchema = {
+    ...defaultSchema,
+    attributes: {
+      ...(defaultSchema.attributes || {}),
+      a: ['href', 'title', 'rel', 'target'],
+      img: ['src', 'alt', 'title', 'width', 'height', 'loading'],
+    },
   };
 
   useEffect(() => {
@@ -86,9 +100,33 @@ export default function AccordionFaq() {
             aria-labelledby="accordion-collapse-heading-1"
           >
             <div>
-              <p className="font-encode-sans py-6 text-left px-2 lg:px-5 font-[18px] text-secondary">
-                {question.answer}
-              </p>
+              <div className="font-encode-sans py-6 text-left px-2 lg:px-5 font-[18px] text-secondary">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeRaw, [rehypeSanitize, mdSchema]]}
+                  components={{
+                    a: (props) => (
+                      <a
+                        {...props}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline text-primary"
+                      />
+                    ),
+                    img: (props) => (
+                      <Image
+                        src={String(props.src || '')}
+                        alt={props.alt || ''}
+                        width={600}
+                        height={400}
+                        className="max-w-full h-auto"
+                      />
+                    ),
+                  }}
+                >
+                  {question.answer}
+                </ReactMarkdown>
+              </div>
             </div>
           </div>
         </div>
