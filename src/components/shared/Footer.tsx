@@ -12,43 +12,43 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between gap-8 sm:gap-8 mb-2 md:mb-8">
           <div className="flex items-center gap-4 sm:gap-6 justify-center hidden md:flex">
             <Image
-              src="/footer/BancoProvincia.svg"
+              src="/footer/BancoProvincia_1.png"
               alt="Banco Provincia"
-              width={100}
+              width={107}
               height={36}
             />
             <Image
-              src="/footer/BancoProvinciaServiciosFinancieros.png"
+              src="/footer/ServiciosFinancieros_1.png"
               alt="Provincia Servicios Financieros"
-              width={138}
-              height={36}
+              width={142}
+              height={35}
             />
             <Image
-              src="/footer/BancoProvinciaFondos.png"
+              src="/footer/BancoProvinciaFondos2.png"
               alt="Provincia Fondos"
               width={105}
-              height={35}
+              height={34}
             />
           </div>
 
           <div className="flex items-center gap-4 sm:gap-6 justify-center flex md:hidden">
             <Image
-              src="/footer/BancoProvincia.svg"
+              src="/footer/BancoProvincia_1.png"
               alt="Banco Provincia"
-              width={90}
-              height={35}
+              width={86}
+              height={29}
             />
             <Image
-              src="/footer/BancoProvinciaServiciosFinancieros.png"
+              src="/footer/ServiciosFinancieros_1.png"
               alt="Provincia Servicios Financieros"
-              width={120}
-              height={35}
+              width={114}
+              height={28}
             />
             <Image
-              src="/footer/BancoProvinciaFondos.png"
+              src="/footer/BancoProvinciaFondos2.png"
               alt="Provincia Fondos"
-              width={100}
-              height={35}
+              width={84}
+              height={27}
             />
           </div>
 
