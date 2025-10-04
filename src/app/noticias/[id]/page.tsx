@@ -140,7 +140,7 @@ export default function NewsDetailPage() {
         <div
           className="absolute inset-0 w-full h-full z-0 rounded-b-[40px]"
           style={{
-            backgroundImage: "url('/institucional/bg-institucional.png')",
+            backgroundImage: "url('/institucional/bg-institucional.jpg')",
             backgroundRepeat: 'repeat',
             backgroundPosition: 'botto center',
             opacity: 1,
