@@ -10,12 +10,28 @@ export default function HeroSectionInstitucional() {
           </h1>
           <div className="font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 text-black space-y-4">
             <p>
-              Somos una institución que trabaja desde hace años emitiendo fondos
-              para nuestros usuarios. Provinfondos S.A. Sociedad Gerente de
-              Fondos Comunes de Inversión inicia sus actividades el 1° de julio
-              de 1994. Banco Provincia es el principal accionista y la sociedad
-              depositaria de los fondos. Fundado en 1822, hoy cuenta con 420
-              sucursales y es el segundo banco del sistema financiero argentino.
+              Somos una Sociedad Gerente de Fondos Comunes de Inversión (FCI)
+              dedicada a la administración de productos para la gestión de las
+              finanzas de personas, empresas y entidades del sector público y
+              privado.
+            </p>
+            <p>
+              Administramos los Fondos Comunes de Inversión del Banco de la
+              Provincia de Buenos Aires fundado en 1822, que hoy cuenta con más
+              de 400 sucursales estratégicamente distribuidas en el territorio
+              bonaerense.
+            </p>
+            <p>
+              Como parte de las empresas controladas por Provincia Servicios
+              Financieros, holding de Banco Provincia, ofrecemos un abanico de
+              fondos de mercado de dinero, renta fija, renta variable y de
+              retorno total, los cuales permiten satisfacer las necesidades y
+              expectativas de nuestros clientes.
+            </p>
+            <p>
+              Provinfondos SA inició sus actividades el 1 de julio de 1994 y es
+              Agente de Administración de Productos de Inversión Colectiva de
+              Fondos Comunes de Inversión Nro. 39/CNV.
             </p>
           </div>
         </div>

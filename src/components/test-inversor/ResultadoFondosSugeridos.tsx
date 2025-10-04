@@ -76,16 +76,6 @@ export default function ResultadoFondosSugeridos({ fondos }: Props) {
                   <Button variant="secondary">Ver fondo</Button>
                 </Link>
               )}
-              {fondo.carteraDetallada && (
-                <a
-                  href={fondo.carteraDetallada}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-2 text-xs text-primary underline"
-                >
-                  Cartera detallada
-                </a>
-              )}
             </div>
           </div>
         ))}

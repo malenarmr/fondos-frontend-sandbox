@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "jest.config.cjs",
     "src",
-    "src/types"
+    "src/types",
+    "next.config.ts"
   ],
   "exclude": ["node_modules"]
 }

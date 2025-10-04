@@ -55,7 +55,7 @@ export default function HomePage() {
         <AnimationSection />
       </section>
 
-      <div className="relative bg-[#2098A1] pt-20 pb-0 overflow-visible">
+      <div className="relative bg-[#3998a1] pt-20 pb-0 overflow-visible">
         {/* Fondo patrón */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -63,7 +63,7 @@ export default function HomePage() {
             backgroundImage: "url('/home/BGHome.png')",
             backgroundRepeat: 'repeat',
             backgroundPosition: 'top center',
-            opacity: 0.2,
+            opacity: 1,
           }}
         />
         {/* Card flotante */}

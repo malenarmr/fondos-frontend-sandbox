@@ -116,9 +116,9 @@ export default function NoticiasPage() {
 
   // 7) Cuando ya no haya error ni loading, renderizamos el contenido normal:
   const heroData = {
-    title: 'Noticias',
+    title: 'Informes',
     description:
-      'No dejes de informarte, indagá sobre cotización de activos, informes de cierre de mercado y demás articulos. ',
+      'Indagá sobre cotización de activos, cierres y análisis de mercados. ',
   };
 
   return (

@@ -16,6 +16,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
 
 export default function NewsDetailPage() {
   const router = useRouter();
@@ -28,6 +30,16 @@ export default function NewsDetailPage() {
   // ── Estados para las noticias relacionadas ──
   const [relatedNews, setRelatedNews] = useState<NoticiaBackend[]>([]);
   const [loadingRelated, setLoadingRelated] = useState(true);
+
+  const mdSchema = {
+    ...defaultSchema,
+    attributes: {
+      ...(defaultSchema.attributes || {}),
+      a: ['href', 'title', 'rel', 'target'],
+      img: ['src', 'alt', 'title', 'width', 'height', 'loading'],
+      iframe: ['src', 'width', 'height', 'allow', 'allowfullscreen', 'loading'],
+    },
+  };
 
   // ── 1) useEffect para cargar el detalle de la noticia ──
   useEffect(() => {
@@ -128,7 +140,7 @@ export default function NewsDetailPage() {
         <div
           className="absolute inset-0 w-full h-full z-0 rounded-b-[40px]"
           style={{
-            backgroundImage: "url('/institucional/bg-institucional.png')",
+            backgroundImage: "url('/institucional/bg-institucional.jpg')",
             backgroundRepeat: 'repeat',
             backgroundPosition: 'botto center',
             opacity: 1,
@@ -196,8 +208,45 @@ export default function NewsDetailPage() {
                 <div className="prose max-w-none text-gray-700 font-encode-sans">
                   {noticia.content && (
                     <div className="prose max-w-none text-gray-700 font-encode-sans">
-                      <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                        {noticia.content.replace(/<br\s*\/?>/gi, '\n')}
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw, [rehypeSanitize, mdSchema]]}
+                        components={{
+                          img: (props) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              {...props}
+                              alt={props.alt || ''}
+                              className="rounded-lg mx-auto my-6 max-w-full h-auto"
+                              loading="lazy"
+                            />
+                          ),
+                          a: (props) => (
+                            <a
+                              {...props}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="underline text-primary"
+                            />
+                          ),
+                          table: (props) => (
+                            <table
+                              className="min-w-full divide-y divide-gray-200 mb-6"
+                              {...props}
+                            />
+                          ),
+                          th: (props) => (
+                            <th
+                              className="bg-gray-100 px-3 py-2 font-semibold text-left"
+                              {...props}
+                            />
+                          ),
+                          td: (props) => (
+                            <td className="border px-3 py-2" {...props} />
+                          ),
+                        }}
+                      >
+                        {noticia.content}
                       </ReactMarkdown>
                     </div>
                   )}
