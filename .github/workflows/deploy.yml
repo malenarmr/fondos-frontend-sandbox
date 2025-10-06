@@ -1,10 +1,10 @@
-name: Deploy to Vercel
+name: Deploy Fondos to Vercel
 
 on:
   push:
     branches:
       - main # solo main dispara el deploy
-  workflow_dispatch:
+  workflow_dispatch: # ejecución manual
     inputs:
       environment:
         description: 'Seleccioná el entorno'
@@ -17,22 +17,37 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Link Vercel Project
-        run: vercel link --token=${{ secrets.VERCEL_TOKEN }} --project=${{ secrets.VERCEL_PROJECT_NAME }} --yes
+      # opcional: linkeo explícito usando secrets ORG y PROJECT
+      - name: Link Vercel project
+        run: |
+          vercel link --yes \
+            --token=${{ secrets.VERCEL_TOKEN }} \
+            --project=${{ secrets.VERCEL_PROJECT_ID }} \
+            --org=${{ secrets.VERCEL_ORG_ID }}
+        if: secrets.VERCEL_PROJECT_ID != null && secrets.VERCEL_ORG_ID != null
 
       - name: Deploy to Vercel
         run: |
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "Deploy a Producción (branch main)"
-            vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
-          else
-            echo "Deploy a Preview (branch dev u otro)"
-            vercel --yes --token=${{ secrets.VERCEL_TOKEN }}
-          fi
+          ENV=${{ github.event.inputs.environment || 'production' }}
+          echo "Deploying to $ENV environment"
+          vercel deploy \
+            --yes \
+            --prod \
+            --token=${{ secrets.VERCEL_TOKEN }}
