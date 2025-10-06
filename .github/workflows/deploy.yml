@@ -41,8 +41,6 @@ jobs:
             --token=${{ secrets.VERCEL_TOKEN }} \
             --project=${{ secrets.VERCEL_PROJECT_ID }} \
             --org=${{ secrets.VERCEL_ORG_ID }}
-        if: secrets.VERCEL_PROJECT_ID != null && secrets.VERCEL_ORG_ID != null
-
       - name: Deploy to Vercel
         run: |
           ENV=${{ github.event.inputs.environment || 'production' }}
