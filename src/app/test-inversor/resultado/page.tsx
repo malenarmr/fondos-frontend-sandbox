@@ -65,7 +65,7 @@ function ResultadoContent() {
         <div
           className="absolute inset-0 top-1/4 md:top-1/4 w-full z-0"
           style={{
-            backgroundImage: "url('/institucional/bg-institucional.jpg')",
+            backgroundImage: "url('/institucional/bg-institucional.png')",
             backgroundRepeat: 'repeat',
             backgroundPosition: 'top center',
             opacity: 1,

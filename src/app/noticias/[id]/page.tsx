@@ -140,13 +140,13 @@ export default function NewsDetailPage() {
         <div
           className="absolute inset-0 w-full h-full z-0 rounded-b-[40px]"
           style={{
-            backgroundImage: "url('/institucional/bg-institucional.jpg')",
+            backgroundImage: "url('/institucional/bg-institucional.png')",
             backgroundRepeat: 'repeat',
             backgroundPosition: 'botto center',
             opacity: 1,
             borderBottomLeftRadius: '40px',
             borderBottomRightRadius: '40px',
-            minHeight: '100%',
+            minHeight: '0%',
           }}
           aria-hidden="true"
         />

@@ -60,7 +60,7 @@ export default function HomePage() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: "url('/home/BGHome.png')",
+            backgroundImage: "url('/home/BGHome-2.png')",
             backgroundRepeat: 'repeat',
             backgroundPosition: 'top center',
             opacity: 1,
