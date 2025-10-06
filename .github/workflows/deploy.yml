@@ -37,10 +37,16 @@ jobs:
       # opcional: linkeo explícito usando secrets ORG y PROJECT
       - name: Link Vercel project
         run: |
-          vercel link --yes \
-            --token=${{ secrets.VERCEL_TOKEN }} \
-            --project=${{ secrets.VERCEL_PROJECT_ID }} \
-            --org=${{ secrets.VERCEL_ORG_ID }}
+          if [ -n "${{ secrets.VERCEL_PROJECT_ID }}" ] && [ -n "${{ secrets.VERCEL_ORG_ID }}" ]; then
+            echo "🔗 Linking Vercel project..."
+            vercel link --yes \
+              --token=${{ secrets.VERCEL_TOKEN }} \
+              --project=${{ secrets.VERCEL_PROJECT_ID }} \
+              --scope=${{ secrets.VERCEL_ORG_ID }}
+          else
+            echo "⚠️  Skipping Vercel link: missing project or org ID."
+          fi
+
       - name: Deploy to Vercel
         run: |
           ENV=${{ github.event.inputs.environment || 'production' }}
