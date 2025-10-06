@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
               height={28}
             />
             <Image
-              src="/footer/BancoProvinciaFondos2.png"
+              src="/footer/BancoProvinciaFondos.png"
               alt="Provincia Fondos"
               width={84}
               height={27}
