@@ -137,7 +137,7 @@ export default function FondoDetails({ id }: FondoProps) {
 
                   <div className="pb-6 lg:pb-12">
                     <span>
-                      Patrimonio del Fondo <b>${fondoData.patrimonio}</b>
+                      Patrimonio del Fondo <b>USD {fondoData.patrimonio}</b>
                     </span>
                   </div>
                 </div>
