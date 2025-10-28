@@ -139,7 +139,8 @@ export default function FondoDetails({ id }: FondoProps) {
                     <span>
                       Patrimonio del Fondo{' '}
                       <b>
-                        {fondoData.moneda === 'usd'
+                        {fondoData.moneda === 'usd' ||
+                        fondoData.moneda === 'USD'
                           ? `U$D${fondoData.patrimonio} `
                           : `$${fondoData.patrimonio} `}
                       </b>
