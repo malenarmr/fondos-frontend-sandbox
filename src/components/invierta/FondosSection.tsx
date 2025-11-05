@@ -352,7 +352,7 @@ export default function FondosSection() {
                         <div className="py-2 flex justify-between items-center mx-4 text-secondary">
                           <div className="w-1/2 pt-2">
                             <span className="">
-                              Variación diaria <b>{fondo.variacionDiaria}</b>
+                              Variación diaria <b>{fondo.variacionDiaria}%</b>
                             </span>
                           </div>
                         </div>
