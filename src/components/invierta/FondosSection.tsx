@@ -7,6 +7,7 @@ import Button from '../shared/Button';
 import { Fondo } from '@/types/Fondo';
 import Link from 'next/link';
 import Accordion from './Accordion';
+import { LiaDownloadSolid } from 'react-icons/lia';
 
 interface TagObject {
   documentId: string;
@@ -206,6 +207,16 @@ export default function FondosSection() {
       <div className="flex-col md:flex-row items-start space-x-4 xl:space-x-8 hidden md:flex justify-between items-stretch">
         <div className="flex-col items-center justify-center w-2/5 md:w-1/4 bg-primary py-2 lg:pt-16  md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10 max-w-[412px] pl-xxl xl:w-2/5 width-xxl">
           <div className="space-y-4">
+            <Link
+              className="flex items-center gap-1 mb-8 text-white border border-white w-fit p-2 rounded-tl-[6px] rounded-tr-[12px]
+    rounded-br-[6px] rounded-bl-[12px]"
+              href="/rendimiento"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LiaDownloadSolid />
+              <span className=" ">Rendimiento Diario</span>
+            </Link>
             <h3 className="text-xl font-bold font-encode-sans text-white">
               Filtros de la búsqueda
             </h3>
@@ -385,6 +396,16 @@ export default function FondosSection() {
           </h1>
         </div>
         <div className="space-y-4 bg-[#a3dbc7] py-10 px-[60px]">
+          <Link
+            className="flex items-center gap-1 mb-8 text-primary border border-primary w-fit p-2 rounded-tl-[6px] rounded-tr-[12px]
+    rounded-br-[6px] rounded-bl-[12px]"
+            href="/rendimiento"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LiaDownloadSolid />
+            <span className=" ">Rendimiento Diario</span>
+          </Link>
           <h3 className="text-xl font-black font-encode-sans text-primary">
             Filtros de la búsqueda
           </h3>

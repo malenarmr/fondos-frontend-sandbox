@@ -191,18 +191,15 @@ export default function FondoDetails({ id }: FondoProps) {
               </div>
               <div className="flex flex-col lg:flex-row justify-between font-medium text-lg gap-6 lg:gap-0">
                 {fondoData?.rendimiento_diario?.file?.url && (
-                  <a
+                  <Link
                     className="flex items-center gap-1"
-                    href={
-                      process.env.NEXT_PUBLIC_API_URL +
-                      fondoData.rendimiento_diario.file.url
-                    }
+                    href="/rendimiento"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <LiaDownloadSolid />
                     <span className=" ">Rendimiento Diario</span>
-                  </a>
+                  </Link>
                 )}
                 {fondoData?.reglamento_de_gestion?.file?.url && (
                   <a
