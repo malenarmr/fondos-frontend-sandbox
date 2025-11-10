@@ -1,12 +1,12 @@
 'use-client';
 
-import { useEffect, useState } from 'react';
-import Button from '../shared/Button';
-import { LiaDownloadSolid } from 'react-icons/lia';
-import { Fondo } from '@/types/Fondo';
-import './Fondo.css';
 import { useAppContext } from '@/context/AppContext';
+import { Fondo } from '@/types/Fondo';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { LiaDownloadSolid } from 'react-icons/lia';
+import Button from '../shared/Button';
+import './Fondo.css';
 
 interface FondoProps {
   id: string;
@@ -137,7 +137,13 @@ export default function FondoDetails({ id }: FondoProps) {
 
                   <div className="pb-6 lg:pb-12">
                     <span>
-                      Patrimonio del Fondo <b>${fondoData.patrimonio}</b>
+                      Patrimonio del Fondo{' '}
+                      <b>
+                        {fondoData.moneda === 'usd' ||
+                        fondoData.moneda === 'USD'
+                          ? `U$D ${fondoData.patrimonio} `
+                          : `$ ${fondoData.patrimonio} `}
+                      </b>
                     </span>
                   </div>
                 </div>
