@@ -33,10 +33,61 @@ export default function NewsDetailPage() {
 
   const mdSchema = {
     ...defaultSchema,
+    tagNames: [
+      ...(defaultSchema.tagNames || []),
+      'p',
+      'br',
+      'hr',
+      'blockquote',
+
+      // texto
+      'strong',
+      'em',
+      'del',
+
+      // listas
+      'ul',
+      'ol',
+      'li',
+
+      // headings
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+
+      // tablas
+      'table',
+      'thead',
+      'tbody',
+      'tr',
+      'th',
+      'td',
+
+      // media
+      'img',
+
+      // enlaces
+      'a',
+    ],
     attributes: {
       ...(defaultSchema.attributes || {}),
-      a: ['href', 'title', 'rel', 'target'],
-      img: ['src', 'alt', 'title', 'width', 'height', 'loading'],
+      a: [
+        ...(defaultSchema.attributes?.a || []),
+        'href',
+        'title',
+        'target',
+        'rel',
+      ],
+
+      img: [
+        ...(defaultSchema.attributes?.img || []),
+        'src',
+        'alt',
+        'title',
+        'width',
+        'height',
+      ],
       iframe: ['src', 'width', 'height', 'allow', 'allowfullscreen', 'loading'],
     },
   };
@@ -208,46 +259,77 @@ export default function NewsDetailPage() {
                 <div className="prose max-w-none text-gray-700 font-encode-sans">
                   {noticia.content && (
                     <div className="prose max-w-none text-gray-700 font-encode-sans">
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeRaw, [rehypeSanitize, mdSchema]]}
-                        components={{
-                          img: (props) => (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                              {...props}
-                              alt={props.alt || ''}
-                              className="rounded-lg mx-auto my-6 max-w-full h-auto"
-                              loading="lazy"
-                            />
-                          ),
-                          a: (props) => (
-                            <a
-                              {...props}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="underline text-primary"
-                            />
-                          ),
-                          table: (props) => (
-                            <table
-                              className="min-w-full divide-y divide-gray-200 mb-6"
-                              {...props}
-                            />
-                          ),
-                          th: (props) => (
-                            <th
-                              className="bg-gray-100 px-3 py-2 font-semibold text-left"
-                              {...props}
-                            />
-                          ),
-                          td: (props) => (
-                            <td className="border px-3 py-2" {...props} />
-                          ),
-                        }}
-                      >
-                        {noticia.content}
-                      </ReactMarkdown>
+                      <article className="prose prose-neutral max-w-none">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          rehypePlugins={[
+                            rehypeRaw,
+                            [rehypeSanitize, mdSchema],
+                          ]}
+                          components={{
+                            h1: ({ children }) => (
+                              <h1 className="text-2xl font-bold mt-4 mb-0">
+                                {children}
+                              </h1>
+                            ),
+                            h2: ({ children }) => (
+                              <h2 className="text-xl font-semibold mt-4 mb-0">
+                                {children}
+                              </h2>
+                            ),
+                            h3: ({ children }) => (
+                              <h3 className="text-lg font-semibold mt-4 mb-0">
+                                {children}
+                              </h3>
+                            ),
+                            blockquote: ({ children, ...props }) => (
+                              <blockquote
+                                {...props}
+                                className="border-l-4 border-primary/40 pl-4 py-2 my-6 bg-primary/5 rounded"
+                              >
+                                {children}
+                              </blockquote>
+                            ),
+                            p: ({ children }) => (
+                              <p className="my-4 leading-relaxed">{children}</p>
+                            ),
+                            hr: () => <hr className="my-10 border-gray-200" />,
+                            img: (props) => (
+                              <img
+                                {...props}
+                                alt={props.alt || ''}
+                                className="rounded-lg mx-auto my-6 max-w-full h-auto"
+                                loading="lazy"
+                              />
+                            ),
+                            a: (props) => (
+                              <a
+                                {...props}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline text-primary"
+                              />
+                            ),
+                            table: (props) => (
+                              <table
+                                className="min-w-full divide-y divide-gray-200 mb-6"
+                                {...props}
+                              />
+                            ),
+                            th: (props) => (
+                              <th
+                                className="bg-gray-100 px-3 py-2 font-semibold text-left"
+                                {...props}
+                              />
+                            ),
+                            td: (props) => (
+                              <td className="border px-3 py-2" {...props} />
+                            ),
+                          }}
+                        >
+                          {noticia.content}
+                        </ReactMarkdown>
+                      </article>
                     </div>
                   )}
                 </div>
