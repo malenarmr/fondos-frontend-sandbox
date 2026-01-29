@@ -53,11 +53,13 @@ export interface HomeCard {
   link1: string | null;
   color: string | null;
   button_text: string | null;
+  color_text?: string | null;
   downloadLinks: RawDownloadLink[];
   image?: RawImage[];
   imageMobile?: RawImage[];
   jsonUrlDesktop: string;
   jsonUrlMobile: string;
+  backgroundImage?: any;
 }
 
 export interface DestacadoBackend {

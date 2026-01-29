@@ -1,21 +1,18 @@
 'use client';
 
 import VideosSection from '@/components/info/VideosSection';
-import DesktopCarousel from '@/components/inicio/DesktopCarousel';
+import HeroCarousel from '@/components/inicio/HeroCarousel';
 import FeaturedCarousel from '@/components/inicio/FeaturedCarousel';
 import AnimationSection from '@/components/invierta/AnimationSection';
 import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import PopupAvisoFondos from '@/components/shared/PopupAvisoFondos';
-import { useHomeCards } from '@/hooks/useHomeCards';
 import { fetchAvisoFondos } from '@/services/popupFondosService';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function HomePage() {
-  const cards = useHomeCards();
-
   // Popup de aviso de operaciones (nuevo)
   const [showAviso, setShowAviso] = useState(false);
   const [aviso, setAviso] = useState<null | {
@@ -47,9 +44,7 @@ export default function HomePage() {
 
       <Navbar />
 
-      <div className="bg-primary-light ">
-        <DesktopCarousel cards={cards} />
-      </div>
+      <HeroCarousel />
 
       <section className="py-[30px] lg:pb-[70px] px-4 md:px-[100px] xl:px-[145px] padding-xxl">
         <AnimationSection />

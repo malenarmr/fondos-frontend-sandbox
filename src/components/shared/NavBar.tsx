@@ -14,16 +14,14 @@ const Navbar: React.FC = () => {
       <div className="w-full px-4 lg:px-[50px] flex justify-evenly items-center py-5 relative">
         {/* Logo */}
         <div className="w-60 max-w-full">
-          <Link href="/" legacyBehavior>
-            <a className="block w-full">
-              <Image
-                src="/Capa_1.svg"
-                alt="logo"
-                width={100}
-                height={50}
-                className="w-full"
-              />
-            </a>
+          <Link href="/" className="block w-full">
+            <Image
+              src="/Capa_1.svg"
+              alt="logo"
+              width={100}
+              height={50}
+              className="w-full"
+            />
           </Link>
         </div>
 
@@ -78,14 +76,13 @@ const ListItem: React.FC<ListItemProps> = ({ href, children, currentPath }) => {
   const isActive = currentPath === href;
   return (
     <li>
-      <Link href={href} legacyBehavior>
-        <a
-          className={`flex py-2 text-md  whitespace-nowrap hover:text-dark ${
-            isActive ? 'font-bold' : 'font-medium'
-          }`}
-        >
-          {children}
-        </a>
+      <Link
+        href={href}
+        className={`flex py-2 text-md  whitespace-nowrap hover:text-dark ${
+          isActive ? 'font-bold' : 'font-medium'
+        }`}
+      >
+        {children}
       </Link>
     </li>
   );

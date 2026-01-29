@@ -295,6 +295,7 @@ export default function NewsDetailPage() {
                             ),
                             hr: () => <hr className="my-10 border-gray-200" />,
                             img: (props) => (
+                              // eslint-disable-next-line @next/next/no-img-element
                               <img
                                 {...props}
                                 alt={props.alt || ''}
