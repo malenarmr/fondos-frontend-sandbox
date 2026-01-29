@@ -31,28 +31,35 @@ export default function ProteccionDatosPersonalesPage() {
 
             <div className="prose max-w-none text-sm md:text-base text-gray-700 mb-8">
               <p>
-                Por la presente informamos que Provincia Bursátil SA se
+                Por la presente informamos que Provincia Bursátil S.A. se
                 encuentra inscripta en el Registro Nacional de Bases de Datos
-                alcanzadas por la Ley N° 25.326 con el número de registro: 890.
+                alcanzadas por la Ley N.º 25.326 con el número de registro: 890.
                 Provincia Bursátil S. A. respeta el derecho de los usuarios a la
                 protección de sus datos personales, los cuales están amparados
-                por la Ley de Protección de Datos Personales Nº 25.326. El
+                por la Ley de Protección de Datos Personales n.º 25.326. El
                 usuario que desee suprimir (total o parcialmente) o conocer los
                 datos de su persona que constan en la misma, actualizarlos o
-                rectificar errores deberá comunicarse por correo al domicilio
-                indicado más arriba. El titular de los datos personales tiene la
-                facultad de ejercer el derecho de acceso a los mismos de forma
-                gratuita a intervalos no inferiores a 6 meses, salvo que se
-                acredite un interés legítimo según art. 14, inciso 3 de la ley
-                25.326. Sus datos solo serán utilizados a los efectos de
-                perfeccionar el contrato, concretar las transacciones en el
-                sitio web, validar los pedidos, recibir pagos y realizar la
-                oferta y comercialización de los productos y/o servicios de las
-                empresas de Grupo Provincia. La inexactitud o falsedad de los
-                datos suministrados por el usuario, o la ausencia de alguno de
-                ellos, invalidaran su derecho a reclamar por cualquier error o
-                perjuicio relacionado a la entrega. La DIRECCION NACIONAL DE
-                PROTECCION DE DATOS PERSONALES, Órgano de control de la Ley Nº
+                rectificar errores, deberá comunicarse al correo{' '}
+                <a
+                  href="mailto:provinciabursatil@provinciabursatil.com.ar"
+                  className="text-blue-500 underline"
+                >
+                  provinciabursatil@provinciabursatil.com.ar
+                </a>
+                . El titular de los datos personales tiene la facultad de
+                ejercer el derecho de acceso a los mismos de forma gratuita a
+                intervalos no inferiores a 6 meses, salvo que se acredite un
+                interés legítimo según art. 14, inciso 3 de la ley 25.326. Sus
+                datos solo serán utilizados a los efectos de perfeccionar el
+                contrato, concretar las transacciones en el sitio web, validar
+                los pedidos, recibir pagos y realizar la oferta y
+                comercialización de los productos y/o servicios del Banco de la
+                Provincia de Buenos Aires y/o cualquier empresa integrante del
+                grupo económico. La inexactitud o falsedad de los datos
+                suministrados por el usuario, o la ausencia de alguno de ellos,
+                invalidarán su derecho a reclamar por cualquier error o
+                perjuicio relacionado con la entrega. La DIRECCIÓN NACIONAL DE
+                PROTECCIÓN DE DATOS PERSONALES, órgano de control de la Ley n.º
                 25.326, tiene la atribución de atender las denuncias y reclamos
                 que se interpongan con relación al cumplimiento de las normas
                 sobre protección de datos personales.
