@@ -128,12 +128,14 @@ export default function HeroCarousel() {
                       {card.description}
                     </p>
                     <div className="flex gap-4 pb-4">
-                      <Button
-                        variant="sky"
-                        onClick={() => console.log('Descarga no disponible')}
-                      >
-                        {card.button_text}
-                      </Button>
+                      <Link href={card.link1 !== null ? card.link1 : '/'}>
+                        <Button
+                          variant="sky"
+                          onClick={() => console.log('Descarga no disponible')}
+                        >
+                          {card.button_text}
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -155,7 +157,7 @@ export default function HeroCarousel() {
                       {card.description}
                     </p>
                     <div className="flex gap-4">
-                      <Link href="/">
+                      <Link href={card.link1 !== null ? card.link1 : '/'}>
                         <Button variant="sky">
                           {card.button_text || 'Hacer el test'}
                         </Button>
