@@ -2,7 +2,6 @@
 
 import type { HomeCard } from '@/services/homeService';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Button from '../shared/Button';
 import { useAppContext } from '@/context/AppContext';
@@ -55,7 +54,19 @@ export default function HeroCarousel() {
         const response =
           await provinciaApiClient.fondos.heroAndDestacados.getFromFront();
 
-        setCards([response.data.hero, ...response.data.destacados]);
+        const hero = {
+          ...response.data.hero,
+          link1: response.data.hero.link1 ?? null,
+        };
+
+        const destacados = response.data.destacados.map(
+          ({ urlRedirect, ...rest }: any) => ({
+            ...rest,
+            link1: urlRedirect ?? null,
+          })
+        );
+
+        setCards([hero, ...destacados]);
       } catch {
         console.log('Error al cargar fondo');
       }
@@ -127,16 +138,20 @@ export default function HeroCarousel() {
                     <p className="text-base whitespace-pre-line font-encode-sans mb-6">
                       {card.description}
                     </p>
-                    <div className="flex gap-4 pb-4">
-                      <Link href={card.link1 !== null ? card.link1 : '/'}>
-                        <Button
-                          variant="sky"
-                          onClick={() => console.log('Descarga no disponible')}
-                        >
-                          {card.button_text}
-                        </Button>
-                      </Link>
-                    </div>
+                    {card.link1 && (
+                      <div className="flex gap-4 pb-4">
+                        <a href={card.link1}>
+                          <Button
+                            variant="sky"
+                            onClick={() =>
+                              console.log('Descarga no disponible')
+                            }
+                          >
+                            {card.button_text}
+                          </Button>
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -156,13 +171,15 @@ export default function HeroCarousel() {
                     <p className="text-lg mb-6 whitespace-pre-line">
                       {card.description}
                     </p>
-                    <div className="flex gap-4">
-                      <Link href={card.link1 !== null ? card.link1 : '/'}>
-                        <Button variant="sky">
-                          {card.button_text || 'Hacer el test'}
-                        </Button>
-                      </Link>
-                    </div>
+                    {card.link1 && (
+                      <div className="flex gap-4">
+                        <a href={card.link1}>
+                          <Button variant="sky">
+                            {card.button_text || 'Hacer el test'}
+                          </Button>
+                        </a>
+                      </div>
+                    )}
                   </div>
 
                   <div className="w-1/2 flex justify-center">
