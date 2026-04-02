@@ -69,7 +69,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
           setLoading(true);
 
           const res = await provinciaApiClient.fondos.cuotaParte.getAll({
-            numero_fondo: fondoData?.numero_fondo,
+            our_found: fondoData?.documentId,
             clase_fondo: currentClase,
           });
           setCuotaparte(res.data.data);
@@ -95,7 +95,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
 
           if (fechaInicio && fechaFin) {
             const res = await provinciaApiClient.fondos.cuotaParte.getByRange({
-              numero_fondo: fondoData?.numero_fondo,
+              our_found: fondoData?.documentId,
               clase_fondo: currentClase,
               fecha_inicio: fechaInicio,
               fecha_fin: fechaFin,
@@ -104,7 +104,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
             setCuotaparte(res.data.data);
           } else {
             const res = await provinciaApiClient.fondos.cuotaParte.getAll({
-              numero_fondo: fondoData?.numero_fondo,
+              our_found: fondoData?.documentId,
               clase_fondo: currentClase,
               page: currentPage,
             });
@@ -171,7 +171,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
 
     try {
       const res = await provinciaApiClient.fondos.cuotaParte.getByRange({
-        numero_fondo: fondoData?.numero_fondo,
+        our_found: fondoData?.documentId,
         clase_fondo: currentClase,
         fecha_inicio: fechaInicio,
         fecha_fin: fechaFin,
@@ -197,7 +197,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
         let res;
         if (fechaInicio && fechaFin) {
           res = await provinciaApiClient.fondos.cuotaParte.getByRange({
-            numero_fondo: fondoData?.numero_fondo,
+            our_found: fondoData?.documentId,
             clase_fondo: currentClase,
             fecha_inicio: fechaInicio,
             fecha_fin: fechaFin,
@@ -205,7 +205,7 @@ export default function CuotaparteDetails({ id }: FondoProps) {
           });
         } else {
           res = await provinciaApiClient.fondos.cuotaParte.getAll({
-            numero_fondo: fondoData?.numero_fondo,
+            our_found: fondoData?.documentId,
             clase_fondo: currentClase,
             page,
           });
