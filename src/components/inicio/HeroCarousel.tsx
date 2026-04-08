@@ -59,10 +59,12 @@ export default function HeroCarousel() {
           link1: response.data.hero.link1 ?? null,
         };
 
+        console.log(response.data.destacados);
+
         const destacados = response.data.destacados.map(
-          ({ urlRedirect, ...rest }: any) => ({
+          ({ link1, ...rest }: any) => ({
             ...rest,
-            link1: urlRedirect ?? null,
+            link1: link1 ?? null,
           })
         );
 
@@ -84,6 +86,8 @@ export default function HeroCarousel() {
   }, [emblaApi, onSelect]);
 
   if (!cards || cards.length === 0) return null;
+
+  console.log(cards, 'a');
 
   return (
     <div>
@@ -140,7 +144,7 @@ export default function HeroCarousel() {
                     </p>
                     {card.link1 && (
                       <div className="flex gap-4 pb-4">
-                        <a href={card.link1}>
+                        <a href={card.link1} target="_blank">
                           <Button
                             variant="sky"
                             onClick={() =>
@@ -173,7 +177,7 @@ export default function HeroCarousel() {
                     </p>
                     {card.link1 && (
                       <div className="flex gap-4">
-                        <a href={card.link1}>
+                        <a href={card.link1} target="_blank">
                           <Button variant="sky">
                             {card.button_text || 'Hacer el test'}
                           </Button>
