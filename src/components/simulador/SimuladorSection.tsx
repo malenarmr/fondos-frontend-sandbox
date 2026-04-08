@@ -83,7 +83,7 @@ export default function SimuladorSection() {
       const response = await provinciaApiClient.fondos.simulador.simular({
         data: {
           fondos: formData.fondos.flatMap((data) => {
-            return data.clase_fondo.map((clase) => {
+            return data?.clase_fondo?.map((clase) => {
               return {
                 numero: data.numero_fondo,
                 clase: clase.clase,
