@@ -364,7 +364,7 @@ export default function FondosSection() {
                     filteredFondos.map((fondo, index) => (
                       <div
                         key={index}
-                        className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg bg-primary w-full"
+                        className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg w-full"
                       >
                         <div className="py-4 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
                           <span className="font-encode-sans font-bold">
