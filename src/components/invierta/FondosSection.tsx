@@ -25,6 +25,7 @@ interface Tag {
   caracteristicas: TagObject[];
   activos: TagObject[];
   inversores: TagObject[];
+  moneda: TagObject[];
 }
 
 export default function FondosSection() {
@@ -34,6 +35,7 @@ export default function FondosSection() {
     caracteristicas: [],
     activos: [],
     inversores: [],
+    moneda: [],
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -41,6 +43,7 @@ export default function FondosSection() {
     caracteristicas: [],
     activos: [],
     inversores: [],
+    moneda: [],
   });
   const [isLoadingFilters, setIsLoadingFilters] = useState(false);
 
@@ -56,11 +59,12 @@ export default function FondosSection() {
         const resTipoActivos =
           await provinciaApiClient.fondos.tiposActivos.getAll();
 
-        setCategories({
+        setCategories((prev) => ({
+          ...prev,
           caracteristicas: resCaracteristicas.data.data,
           activos: resTipoActivos.data.data,
           inversores: resTipoInveror.data,
-        });
+        }));
       } catch {
         setError('Error al cargar preguntas fondos');
       } finally {
@@ -87,6 +91,23 @@ export default function FondosSection() {
           return (orderMap[profileA] ?? 99) - (orderMap[profileB] ?? 99);
         });
 
+        // Extraer monedas únicas de los fondos y convertirlas al formato TagObject
+        const monedasUnicas = Array.from(
+          new Set(sortedFondos.map((f) => f.moneda).filter(Boolean))
+        ).map((moneda) => ({
+          documentId: moneda,
+          value: moneda,
+          our_founds: sortedFondos
+            .filter((f) => f.moneda === moneda)
+            .map((f) => ({
+              id: 0,
+              documentId: f.documentId,
+              description: '',
+              name: f.name,
+            })),
+        }));
+
+        setCategories((prev) => ({ ...prev, moneda: monedasUnicas }));
         setFondos(sortedFondos as Fondo[]);
         setFilteredFondos(sortedFondos as Fondo[]);
       } catch {
@@ -97,7 +118,7 @@ export default function FondosSection() {
     }
 
     fetchFondos();
-  }, [categories, provinciaApiClient]);
+  }, [provinciaApiClient]);
 
   if (loading)
     return (
@@ -112,14 +133,15 @@ export default function FondosSection() {
     setIsLoadingFilters(true);
 
     setTimeout(() => {
-      if (
+      const hasNoFilters =
         tags.caracteristicas.length === 0 &&
         tags.activos.length === 0 &&
-        tags.inversores.length === 0
-      ) {
+        tags.inversores.length === 0 &&
+        tags.moneda.length === 0;
+
+      if (hasNoFilters) {
         setFilteredFondos(fondos);
       } else {
-        // Obtenemos los IDs de fondos desde our_founds de cada filtro
         const fondosFromCaracteristicas = tags.caracteristicas.flatMap(
           (tag) =>
             categories.caracteristicas
@@ -141,19 +163,26 @@ export default function FondosSection() {
               ?.our_founds.map((f) => f.documentId) ?? []
         );
 
-        // Armamos sets con todos los IDs de fondos encontrados en cada filtro
+        const fondosFromMoneda = tags.moneda.flatMap(
+          (tag) =>
+            categories.moneda
+              .find((m) => m.documentId === tag.documentId)
+              ?.our_founds.map((f) => f.documentId) ?? []
+        );
+
         const matchByCaracteristicas = new Set(fondosFromCaracteristicas);
         const matchByActivos = new Set(fondosFromActivos);
         const matchByInversores = new Set(fondosFromInversores);
+        const matchByMoneda = new Set(fondosFromMoneda);
 
-        // Mantenemos los fondos que estén en todas las categorías seleccionadas
         const filtered = fondos.filter((fondo) => {
           const id = fondo.documentId;
           return (
             (tags.caracteristicas.length === 0 ||
               matchByCaracteristicas.has(id)) &&
             (tags.activos.length === 0 || matchByActivos.has(id)) &&
-            (tags.inversores.length === 0 || matchByInversores.has(id))
+            (tags.inversores.length === 0 || matchByInversores.has(id)) &&
+            (tags.moneda.length === 0 || matchByMoneda.has(id))
           );
         });
 
@@ -188,10 +217,11 @@ export default function FondosSection() {
   };
 
   const deleteAll = () => {
-    const emptyTags = {
+    const emptyTags: Tag = {
       caracteristicas: [],
       activos: [],
       inversores: [],
+      moneda: [],
     };
     setSelectedTags(emptyTags);
     handleFilterFondos(emptyTags);
@@ -204,8 +234,8 @@ export default function FondosSection() {
   return (
     <>
       {/* desktop */}
-      <div className="flex-col md:flex-row items-start space-x-4 xl:space-x-8 hidden lg:flex justify-between items-stretch">
-        <div className="flex-col items-center justify-center w-2/5 lg:w-1/4 bg-primary py-2 lg:pt-16  md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10 max-w-[412px] pl-xxl xl:w-2/5 width-xxl">
+      <div className="flex-col md:flex-row items-start space-x-4 xl:space-x-8 hidden md:flex justify-between items-stretch">
+        <div className="flex-col items-center justify-center w-2/5 md:w-1/4 bg-primary py-2 lg:pt-16  md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10 max-w-[412px] pl-xxl xl:w-2/5 width-xxl">
           <div className="space-y-4">
             <Link
               className="flex items-center gap-1 mb-8 text-white border border-white w-fit p-2 rounded-tl-[6px] rounded-tr-[12px]
@@ -247,7 +277,20 @@ export default function FondosSection() {
               )
             )}
           </div>
-
+          <div className="space-y-4 flex flex-col">
+            <h3 className="text-xl font-bold font-encode-sans text-white">
+              Tipo de moneda
+            </h3>
+            {categories?.moneda?.map((tag) => (
+              <div
+                key={tag.documentId}
+                className="cursor-pointer text-white"
+                onClick={() => addTag(tag, 'moneda')}
+              >
+                <span>{capitalize(tag.value)}</span>
+              </div>
+            ))}
+          </div>
           <div className="space-y-4 flex flex-col">
             <h3 className="text-xl font-bold font-encode-sans text-white">
               Característica del fondo
@@ -293,6 +336,8 @@ export default function FondosSection() {
             ))}
           </div>
 
+          {/* Filtro por moneda — desktop */}
+
           <div>
             <button
               className="py-[9px] transition-colors duration-200 focus:outline-none focus:ring-0 text-white  focus:ring-primary w-fit font-bold"
@@ -302,12 +347,13 @@ export default function FondosSection() {
             </button>
           </div>
         </div>
-        <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 xl:w-4/5 lg:pr-8 xl:pr-[100px] py-2 lg:py-16 pr-xxl">
+        <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 xl:w-3/5 lg:pr-8 xl:pr-[100px] py-2 lg:py-16 pr-xxl">
           <div className="flex flex-col gap-8 pb-4">
             <h1 className="font-encode-sans text-3xl lg:text-5xl text-primary-light font-black mb-4">
               Nuestros Fondos
             </h1>
-            <div className="grid md:grid-cols-2 gap-6 max-w-[1132px] w-full">
+            <div className="grid md:grid-cols-2 gap-6 max-w-[1132px] w-full [grid-template-columns:repeat(2,minmax(0,1fr))]">
+              {' '}
               {isLoadingFilters ? (
                 <div className="flex justify-center items-center min-h-[200px]">
                   <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
@@ -318,7 +364,7 @@ export default function FondosSection() {
                     filteredFondos.map((fondo, index) => (
                       <div
                         key={index}
-                        className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg"
+                        className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg bg-primary w-full"
                       >
                         <div className="py-4 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
                           <span className="font-encode-sans font-bold">
@@ -326,7 +372,7 @@ export default function FondosSection() {
                           </span>
                         </div>
                         <div className="py-2 flex items-center border-b mx-4 text-secondary">
-                          <div className="w-1/2 border-r">
+                          <div className="w-1/2 min-w-0 border-r pr-3">
                             <span>
                               Tipo de ahorro en{' '}
                               <b>
@@ -336,9 +382,18 @@ export default function FondosSection() {
                               </b>
                             </span>
                           </div>
-                          <div className="w-1/2 flex justify-start pl-6">
+
+                          <div className="w-1/2 min-w-0 flex justify-start pl-3 lg:pl-6">
                             <span
-                              className={`flex px-6 py-2 ${fondo?.inversor_profile_fondos?.[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : fondo.inversor_profile_fondos?.[0].title == 'MODERADO' ? 'bg-[#929292]' : 'bg-[#B4B4B4]'} text-white font-bold rounded-xl capitalize`}
+                              className={`inline-flex w-fit max-w-full px-3 lg:px-6 py-2 text-sm lg:text-base ${
+                                fondo?.inversor_profile_fondos?.[0].title ===
+                                'AGRESIVO'
+                                  ? 'bg-[#3C3C3B]'
+                                  : fondo?.inversor_profile_fondos?.[0]
+                                        .title === 'MODERADO'
+                                    ? 'bg-[#929292]'
+                                    : 'bg-[#B4B4B4]'
+                              } text-white font-bold rounded-xl capitalize whitespace-nowrap`}
                             >
                               {capitalize(
                                 fondo?.inversor_profile_fondos?.[0]?.title ?? ''
@@ -389,7 +444,7 @@ export default function FondosSection() {
         </div>
       </div>
       {/* mobile */}
-      <div className="flex lg:hidden flex-col">
+      <div className="flex md:hidden flex-col">
         <div className="text-center py-10">
           <h1 className="font-encode-sans text-3xl text-primary font-black">
             Nuestros Fondos
@@ -490,6 +545,21 @@ export default function FondosSection() {
                   onClick={() => addTag(tag, 'activos')}
                 >
                   <span>{tag.value}</span>
+                </div>
+              ))}
+            </div>
+          </Accordion>
+          <hr />
+          {/* Tipo de Moneda — mobile */}
+          <Accordion title="Tipo de Moneda">
+            <div className="flex flex-wrap gap-3">
+              {categories.moneda.map((tag) => (
+                <div
+                  key={`moneda-${tag.documentId}`}
+                  className="cursor-pointer bg-[#EBEBEB] py-1 px-3 rounded-full w-fit text-[#005A63]"
+                  onClick={() => addTag(tag, 'moneda')}
+                >
+                  <span>{capitalize(tag.value)}</span>
                 </div>
               ))}
             </div>
