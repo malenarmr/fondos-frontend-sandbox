@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { Encode_Sans, Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Script from 'next/script';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const encodeSans = Encode_Sans({
   variable: '--font-encode-sans',
@@ -62,6 +64,19 @@ export default function RootLayout({
         </noscript>
         {/* End Google Tag Manager (noscript) */}
         <AppProvider>{children}</AppProvider>
+        <Link
+          target="_blank"
+          href="https://wa.me/5491148895265?text=%C2%A1Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20inversiones%20en%20Fondos%20Comunes%20de%20Inversi%C3%B3n%20del%20Banco%20Provincia"
+          className="fixed bottom-5 right-4 z-[9999]"
+        >
+          <Image
+            width={60}
+            height={60}
+            src="/wpp-logo.png"
+            alt="WhatsApp Banco Provincia"
+            className="cursor-pointer transition-transform duration-300 hover:scale-110"
+          />
+        </Link>
       </body>
     </html>
   );

@@ -232,8 +232,10 @@ export default function FondosSection() {
   return (
     <>
       {/* desktop */}
-      <div className="flex-col md:flex-row items-start space-x-4 xl:space-x-8 hidden lg:flex justify-between items-stretch">
-        <div className="flex-col items-center justify-center w-2/5 lg:w-1/4 bg-primary py-2 lg:pt-16  md:w-3/4 pr-4 md:pl-6 lg:pl-8 xl:pl-[100px] space-y-5 lg:space-y-10 max-w-[412px] pl-xxl xl:w-2/5 width-xxl">
+      <div className="hidden md:flex flex-row items-start gap-4 lg:gap-8 justify-between">
+        {' '}
+        <div className="w-[280px] md:w-[230px] lg:w-[300px] xl:w-[380px] shrink-0 bg-primary py-8 px-6 lg:px-8">
+          {' '}
           <div className="space-y-4">
             <Link
               className="flex items-center gap-1 mb-8 text-white border border-white w-fit p-2 rounded-tl-[6px] rounded-tr-[12px]
@@ -303,7 +305,6 @@ export default function FondosSection() {
               </div>
             ))}
           </div>
-
           <div className="space-y-4 flex flex-col">
             <h3 className="text-xl font-bold font-encode-sans text-white">
               Tipo de inversor
@@ -318,7 +319,6 @@ export default function FondosSection() {
               </div>
             ))}
           </div>
-
           <div className="space-y-4 flex flex-col">
             <h3 className="text-xl font-bold font-encode-sans text-white">
               Tipo de activos
@@ -333,7 +333,6 @@ export default function FondosSection() {
               </div>
             ))}
           </div>
-
           <div>
             <button
               className="py-[9px] transition-colors duration-200 focus:outline-none focus:ring-0 text-white  focus:ring-primary w-fit font-bold"
@@ -346,9 +345,10 @@ export default function FondosSection() {
         <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 xl:w-4/5 lg:pr-8 xl:pr-[100px] py-2 lg:py-16 pr-xxl">
           <div className="flex flex-col gap-8 pb-4">
             <h1 className="font-encode-sans text-3xl lg:text-5xl text-primary-light font-black mb-4">
-              Nuestros Fondos
+              Nuestros Fondoss
             </h1>
-            <div className="grid md:grid-cols-2 gap-6 max-w-[1132px] w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {' '}
               {isLoadingFilters ? (
                 <div className="flex justify-center items-center min-h-[200px]">
                   <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
@@ -377,7 +377,7 @@ export default function FondosSection() {
                               </b>
                             </span>
                           </div>
-                          <div className="w-1/2 flex justify-start pl-6">
+                          <div className="w-1/2 flex justify-start pl-6 lg:pl-0 xl:pl-6 ">
                             <span
                               className={`flex px-6 py-2 ${fondo?.inversor_profile_fondos?.[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : fondo.inversor_profile_fondos?.[0].title == 'MODERADO' ? 'bg-[#929292]' : 'bg-[#B4B4B4]'} text-white font-bold rounded-xl capitalize`}
                             >
