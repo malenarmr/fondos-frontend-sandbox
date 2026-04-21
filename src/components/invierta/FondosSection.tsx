@@ -232,9 +232,9 @@ export default function FondosSection() {
   return (
     <>
       {/* desktop */}
-      <div className="hidden md:flex flex-row items-start gap-4 lg:gap-8 justify-between">
+      <div className="hidden md:flex flex-row items-stretch gap-4 lg:gap-8 justify-between">
         {' '}
-        <div className="w-[280px] md:w-[230px] lg:w-[300px] xl:w-[380px] shrink-0 bg-primary py-8 px-6 lg:px-8">
+        <div className="w-[280px] md:w-[230px] lg:w-[300px] xl:w-[380px] shrink-0 bg-primary py-8 px-6 lg:px-8 min-h-screen self-stretch">
           {' '}
           <div className="space-y-4">
             <Link
