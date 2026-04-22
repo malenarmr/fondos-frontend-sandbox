@@ -103,11 +103,7 @@ export default function AutoridadesSection() {
                   id={institucionalData.presidente.id}
                   name={institucionalData.presidente.name}
                   role={institucionalData.presidente.role}
-                  imageUrl={
-                    institucionalData.presidente.image.url.startsWith('http')
-                      ? institucionalData.presidente.image.url
-                      : `https://provincia-prod-api.teocoop.site${institucionalData.presidente.image.url}`
-                  }
+                  imageUrl={institucionalData.presidente.image.url}
                 />
                 <div className="bg-primary-light text-white px-6 py-6 rounded-[12px] min-h-[220px] flex flex-col justify-start w-full">
                   <h4 className="text-lg font-bold text-center mb-2 border-b border-white pb-1">
@@ -129,13 +125,7 @@ export default function AutoridadesSection() {
                   id={institucionalData.vicepresidente.id}
                   name={institucionalData.vicepresidente.name}
                   role={institucionalData.vicepresidente.role}
-                  imageUrl={
-                    institucionalData.vicepresidente.image.url.startsWith(
-                      'http'
-                    )
-                      ? institucionalData.vicepresidente.image.url
-                      : `https://provincia-prod-api.teocoop.site${institucionalData.vicepresidente.image.url}`
-                  }
+                  imageUrl={institucionalData.vicepresidente.image.url}
                 />
                 <div className="bg-primary-light text-white px-6 py-6 rounded-[12px] min-h-[220px] flex flex-col justify-start w-full">
                   <h4 className="text-lg font-bold text-center mb-2 border-b border-white pb-1">

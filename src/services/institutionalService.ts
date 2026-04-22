@@ -73,12 +73,35 @@ export interface InstitucionalData {
 export const getInstitucionalData = async (
   apiClient: AxiosInstance
 ): Promise<InstitucionalData> => {
-  try {
-    const resp = await apiClient.get('/institutional-fondo');
-    return resp.data.data as InstitucionalData;
-  } catch (error: any) {
-    throw error; // importante: re-lanzar
+  const resp = await apiClient.get('/institutional-fondo');
+  const data = resp.data.data as InstitucionalData;
+
+  const STATIC_BASE =
+    process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, '') ||
+    'https://provincia-prod-api.teocoop.site';
+
+  function fixAuth(auth: Authority) {
+    if (!auth.image.url.startsWith('http')) {
+      auth.image.url = `${STATIC_BASE}${auth.image.url}`;
+    }
+
+    Object.values(auth.image.formats).forEach((fmt) => {
+      if (!fmt.url.startsWith('http')) {
+        fmt.url = `${STATIC_BASE}${fmt.url}`;
+      }
+    });
   }
+
+  fixAuth(data.presidente);
+  fixAuth(data.vicepresidente);
+
+  data.code_of_conduct.forEach((file) => {
+    if (!file.url.startsWith('http')) {
+      file.url = `${STATIC_BASE}${file.url}`;
+    }
+  });
+
+  return data;
 };
 
 /**
