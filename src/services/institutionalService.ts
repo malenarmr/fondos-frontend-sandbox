@@ -73,31 +73,12 @@ export interface InstitucionalData {
 export const getInstitucionalData = async (
   apiClient: AxiosInstance
 ): Promise<InstitucionalData> => {
-  const resp = await apiClient.get('/institutional-fondo');
-  const data = resp.data.data as InstitucionalData;
-
-  // 1) Base completa de la API (p.ej. "https://.../api")
-  const apiBase = apiClient.defaults.baseURL?.replace(/\/$/, '') || '';
-  // 2) Base para assets (quitamos el "/api" final)
-  const staticBase = apiBase.replace(/\/api$/, '');
-
-  function fixAuth(auth: Authority) {
-    auth.image.url = `${staticBase}${auth.image.url}`;
-    Object.values(auth.image.formats).forEach((fmt) => {
-      fmt.url = `${staticBase}${fmt.url}`;
-    });
+  try {
+    const resp = await apiClient.get('/institutional-fondo');
+    return resp.data.data as InstitucionalData;
+  } catch (error: any) {
+    throw error; // importante: re-lanzar
   }
-
-  // Arreglamos URLs de las dos autoridades
-  fixAuth(data.presidente);
-  fixAuth(data.vicepresidente);
-
-  // Arreglamos también el PDF de código de conducta
-  data.code_of_conduct.forEach((file) => {
-    file.url = `${staticBase}${file.url}`;
-  });
-
-  return data;
 };
 
 /**

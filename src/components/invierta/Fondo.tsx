@@ -37,7 +37,6 @@ export default function FondoDetails({ id }: FondoProps) {
         );
 
         const data = response.data.data;
-        console.log('Datos recibidos:', data);
         setFondoData(data);
         setError('');
       } catch (err) {
