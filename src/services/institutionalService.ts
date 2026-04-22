@@ -76,29 +76,23 @@ export const getInstitucionalData = async (
   const resp = await apiClient.get('/institutional-fondo');
   const data = resp.data.data as InstitucionalData;
 
-  const STATIC_BASE =
-    process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, '') ||
-    'https://provincia-prod-api.teocoop.site';
+  // 1) Base completa de la API (p.ej. "https://.../api")
+  const apiBase = apiClient.defaults.baseURL?.replace(/\/$/, '') || '';
+  // 2) Base para assets (quitamos el "/api" final)
+  const staticBase = apiBase.replace(/\/api$/, '');
 
   function fixAuth(auth: Authority) {
-    if (!auth.image.url.startsWith('http')) {
-      auth.image.url = `${STATIC_BASE}${auth.image.url}`;
-    }
-
+    auth.image.url = `${staticBase}${auth.image.url}`;
     Object.values(auth.image.formats).forEach((fmt) => {
-      if (!fmt.url.startsWith('http')) {
-        fmt.url = `${STATIC_BASE}${fmt.url}`;
-      }
+      fmt.url = `${staticBase}${fmt.url}`;
     });
   }
-
   fixAuth(data.presidente);
   fixAuth(data.vicepresidente);
 
+  // Arreglamos también el PDF de código de conducta
   data.code_of_conduct.forEach((file) => {
-    if (!file.url.startsWith('http')) {
-      file.url = `${STATIC_BASE}${file.url}`;
-    }
+    file.url = `${staticBase}${file.url}`;
   });
 
   return data;
