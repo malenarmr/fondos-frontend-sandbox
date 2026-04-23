@@ -9,7 +9,7 @@ export default function AutoridadesSection() {
   const [selectedFilter, setSelectedFilter] = useState('Directorio');
   const { institucionalData } = useAppContext();
   if (!institucionalData) return null;
-
+  console.log(institucionalData, '');
   const conductFile = institucionalData.code_of_conduct?.[0];
 
   const filters = [
@@ -43,7 +43,7 @@ export default function AutoridadesSection() {
 
     // Aseguramos par de elementos para mantener “grupos de a 2”
     const members = [...area.member_team_fondos];
-    if (members.length % 2 !== 0) members.push(null);
+    if (members.length % 2 !== 0) members.push();
 
     return (
       <div className="w-full">
@@ -61,6 +61,25 @@ export default function AutoridadesSection() {
             )
           )}
         </div>
+      </div>
+    );
+  };
+  const renderMemberList = (areaName: string) => {
+    const area = institucionalData.area_team_fondos.find(
+      (a: { name: string }) => a.name.toLowerCase() === areaName.toLowerCase()
+    );
+    if (!area) return null;
+
+    return (
+      <div className="bg-primary-light text-white px-6 py-6 rounded-[12px] min-h-[220px] flex flex-col justify-start w-full">
+        <h4 className="text-lg font-bold text-center mb-2 border-b border-white pb-1">
+          {area.name}
+        </h4>
+        <ul className="mt-2 space-y-1 text-center text-sm flex-1 flex flex-col justify-center">
+          {area.member_team_fondos.map((m) => (
+            <li key={m.id}>{m.name}</li>
+          ))}
+        </ul>
       </div>
     );
   };
@@ -105,18 +124,7 @@ export default function AutoridadesSection() {
                   role={institucionalData.presidente.role}
                   imageUrl={institucionalData.presidente.image.url}
                 />
-                <div className="bg-primary-light text-white px-6 py-6 rounded-[12px] min-h-[220px] flex flex-col justify-start w-full">
-                  <h4 className="text-lg font-bold text-center mb-2 border-b border-white pb-1">
-                    Directores titulares
-                  </h4>
-                  <ul className="mt-2 space-y-1 text-center text-sm flex-1 flex flex-col justify-center">
-                    <li>Carlos Antonio Gorosito</li>
-                    <li>Raquel Corrales</li>
-                    <li>Guillermo Diego Galli</li>
-                    <li>Facundo Ballesteros</li>
-                    <li>Claudia Ormachea</li>
-                  </ul>
-                </div>
+                {renderMemberList('directores titulares')}
               </div>
 
               {/* Vicepresidente */}
@@ -127,16 +135,7 @@ export default function AutoridadesSection() {
                   role={institucionalData.vicepresidente.role}
                   imageUrl={institucionalData.vicepresidente.image.url}
                 />
-                <div className="bg-primary-light text-white px-6 py-6 rounded-[12px] min-h-[220px] flex flex-col justify-start w-full">
-                  <h4 className="text-lg font-bold text-center mb-2 border-b border-white pb-1">
-                    Síndicos titulares
-                  </h4>
-                  <ul className="mt-2 space-y-1 text-center text-sm flex-1 flex flex-col justify-center">
-                    <li>Martín Alejandro Latorre</li>
-                    <li>María del Carmen Capdevila</li>
-                    <li>Héctor Mauricio Paulone</li>
-                  </ul>
-                </div>
+                {renderMemberList('síndicos titulares')}
               </div>
             </div>
           ) : (
