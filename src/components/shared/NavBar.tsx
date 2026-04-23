@@ -13,15 +13,16 @@ const Navbar: React.FC = () => {
     <header className="bg-navbar sticky top-0 z-50">
       <div className="w-full px-4 lg:px-[50px] flex justify-evenly items-center py-5 relative">
         {/* Logo */}
-        <div className="w-60 max-w-full">
-          <Link href="/" className="block w-full">
-            <Image
-              src="/Capa_1.svg"
-              alt="logo"
-              width={100}
-              height={50}
-              className="w-full"
-            />
+        <div className="w-60 max-w-full h-[65px] min-h-[65px]">
+          <Link href="/" className="w-full h-full">
+            <div className="relative h-[65px] max-h-[65px] w-full">
+              <Image
+                src="/Logo.png"
+                alt="logo"
+                fill
+                className="object-contain object-left"
+              />
+            </div>
           </Link>
         </div>
 
