@@ -345,7 +345,7 @@ export default function FondosSection() {
         <div className="align-start text-primary w-3/5 md:w-3/4 md:pr-6 xl:w-4/5 lg:pr-8 xl:pr-[100px] py-2 lg:py-16 pr-xxl">
           <div className="flex flex-col gap-8 pb-4">
             <h1 className="font-encode-sans text-3xl lg:text-5xl text-primary-light font-black mb-4">
-              Nuestros Fondoss
+              Nuestros Fondos
             </h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {' '}
