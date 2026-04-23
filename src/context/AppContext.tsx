@@ -49,7 +49,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         setInstitucionalData(data);
         setInstitucionalError(null);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('Error real:', err);
+
+        if (err.response) {
+          console.error('Status:', err.response.status);
+          console.error('Data:', err.response.data);
+        }
+
         setInstitucionalError('Error al cargar datos institucionales');
       })
       .finally(() => {

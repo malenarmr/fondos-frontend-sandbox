@@ -3,10 +3,11 @@
 import { useAppContext } from '@/context/AppContext';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
+import ReactMarkdown from 'react-markdown';
 import Button from '../shared/Button';
 import './Fondo.css';
 import { LiaDownloadSolid } from 'react-icons/lia';
+import remarkGfm from 'remark-gfm';
 
 interface FondoProps {
   id: string;
@@ -36,7 +37,6 @@ export default function FondoDetails({ id }: FondoProps) {
         );
 
         const data = response.data.data;
-        console.log('Datos recibidos:', data);
         setFondoData(data);
         setError('');
       } catch (err) {
@@ -153,12 +153,27 @@ export default function FondoDetails({ id }: FondoProps) {
     <div className="pt-12 dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl">
       <div className="flex flex-col lg:flex-row justify-between items-end">
         <div className="w-full lg:w-1/2">
-          <h1 className="text-start lg:text-left font-encode-sans font-extrabold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-6 max-w-[590px] px-[50px] lg:px-0">
+          <h1 className="text-start lg:text-left font-encode-sans font-extrabold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-6 max-w-[590px] px-[50px] lg:px-0 whitespace-nowrap">
             {capitalize(fondoData.name || '')}
           </h1>
-          <p className="text-start lg:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] lg:px-0 xl:mr-0">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              p: ({ children }) => (
+                <p className="text-start lg:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] lg:px-0 xl:mr-0">
+                  {children}
+                </p>
+              ),
+              strong: ({ children }) => (
+                <strong className="font-bold">{children}</strong>
+              ),
+            }}
+          >
+            {fondoData.description ?? ''}
+          </ReactMarkdown>
+          {/* <p className="text-start lg:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] lg:px-0 xl:mr-0">
             {fondoData.description || 'Sin descripción disponible'}
-          </p>
+          </p> */}
         </div>
         <div className="pb-8 flex justify-start lg:justify-end w-full pt-8 lg:pt-0 px-[50px]">
           <Link href="/nuestros-fondos">

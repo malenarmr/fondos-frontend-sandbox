@@ -59,8 +59,6 @@ export default function HeroCarousel() {
           link1: response.data.hero.link1 ?? null,
         };
 
-        console.log(response.data.destacados);
-
         const destacados = response.data.destacados.map(
           ({ link1, ...rest }: any) => ({
             ...rest,
@@ -69,9 +67,7 @@ export default function HeroCarousel() {
         );
 
         setCards([hero, ...destacados]);
-      } catch {
-        console.log('Error al cargar fondo');
-      }
+      } catch {}
     }
 
     fetchFondo();

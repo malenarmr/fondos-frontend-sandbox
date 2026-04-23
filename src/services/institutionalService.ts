@@ -45,9 +45,16 @@ export interface AreaTeamBursatil {
   isDelete: boolean | null;
   member_team_bursatil: MemberTeamBursatil[];
 }
+export interface AreaTeamFondos {
+  id: number;
+  documentId: string;
+  name: string;
+  isDelete: boolean | null;
+  member_team_fondos: MemberTeamBursatil[];
+}
 
 export interface InstitucionalData {
-  area_team_fondos: any;
+  area_team_fondos: AreaTeamFondos[];
   id: number;
   documentId: string;
   mision: string;
@@ -76,25 +83,29 @@ export const getInstitucionalData = async (
   const resp = await apiClient.get('/institutional-fondo');
   const data = resp.data.data as InstitucionalData;
 
-  // 1) Base completa de la API (p.ej. "https://.../api")
-  const apiBase = apiClient.defaults.baseURL?.replace(/\/$/, '') || '';
-  // 2) Base para assets (quitamos el "/api" final)
-  const staticBase = apiBase.replace(/\/api$/, '');
+  const STATIC_BASE =
+    process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, '') ||
+    'https://provincia-prod-api.teocoop.site';
 
   function fixAuth(auth: Authority) {
-    auth.image.url = `${staticBase}${auth.image.url}`;
+    if (!auth.image.url.startsWith('http')) {
+      auth.image.url = `${STATIC_BASE}${auth.image.url}`;
+    }
+
     Object.values(auth.image.formats).forEach((fmt) => {
-      fmt.url = `${staticBase}${fmt.url}`;
+      if (!fmt.url.startsWith('http')) {
+        fmt.url = `${STATIC_BASE}${fmt.url}`;
+      }
     });
   }
 
-  // Arreglamos URLs de las dos autoridades
   fixAuth(data.presidente);
   fixAuth(data.vicepresidente);
 
-  // Arreglamos también el PDF de código de conducta
   data.code_of_conduct.forEach((file) => {
-    file.url = `${staticBase}${file.url}`;
+    if (!file.url.startsWith('http')) {
+      file.url = `${STATIC_BASE}${file.url}`;
+    }
   });
 
   return data;
