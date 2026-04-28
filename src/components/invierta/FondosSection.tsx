@@ -158,7 +158,6 @@ export default function FondosSection() {
   };
 
   const filteredFondos = getFilteredFondos();
-  console.log(filteredFondos, 'AAAAAAAA');
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-[200px]">

@@ -9,7 +9,6 @@ export default function AutoridadesSection() {
   const [selectedFilter, setSelectedFilter] = useState('Directorio');
   const { institucionalData } = useAppContext();
   if (!institucionalData) return null;
-  console.log(institucionalData, '');
   const conductFile = institucionalData.code_of_conduct?.[0];
 
   const filters = [
