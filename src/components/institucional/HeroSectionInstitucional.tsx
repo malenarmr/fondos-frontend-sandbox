@@ -6,7 +6,7 @@ export default function HeroSectionInstitucional() {
       <div className="flex flex-col-reverse xl:flex-row items-center">
         <div className="flex flex-col text-primary xl:w-3/4">
           <h1 className="text-center xl:text-left font-bold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-12">
-            Institucional
+            Provincia Fondos
           </h1>
           <div className="font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 text-black space-y-4">
             <p>
