@@ -30,7 +30,6 @@ interface Tag {
 
 export default function FondosSection() {
   const [fondos, setFondos] = useState<Fondo[]>([]);
-  const [filteredFondos, setFilteredFondos] = useState<Fondo[]>([]);
   const [categories, setCategories] = useState<Tag>({
     caracteristicas: [],
     activos: [],
@@ -45,7 +44,6 @@ export default function FondosSection() {
     inversores: [],
     moneda: [],
   });
-  const [isLoadingFilters, setIsLoadingFilters] = useState(false);
 
   const { provinciaApiClient } = useAppContext();
 
@@ -58,12 +56,18 @@ export default function FondosSection() {
           await provinciaApiClient.fondos.inversorProfile.getAll();
         const resTipoActivos =
           await provinciaApiClient.fondos.tiposActivos.getAll();
+        const resMonedas = await provinciaApiClient.fondos.founds.getMoneda();
 
         setCategories((prev) => ({
           ...prev,
           caracteristicas: resCaracteristicas.data.data,
           activos: resTipoActivos.data.data,
           inversores: resTipoInveror.data,
+          moneda: resMonedas.data.map((m: any, index: number) => ({
+            documentId: `${m.value}-${index}`, // o solo m.value si es único
+            value: m.value,
+            our_founds: m.our_founds,
+          })),
         }));
       } catch {
         setError('Error al cargar preguntas fondos');
@@ -90,24 +94,8 @@ export default function FondosSection() {
           const profileB = b.inversor_profile_fondos?.[0]?.title || '';
           return (orderMap[profileA] ?? 99) - (orderMap[profileB] ?? 99);
         });
-        const monedasUnicas = Array.from(
-          new Set(sortedFondos.map((f) => f.moneda).filter(Boolean))
-        ).map((moneda) => ({
-          documentId: moneda,
-          value: moneda,
-          our_founds: sortedFondos
-            .filter((f) => f.moneda === moneda)
-            .map((f) => ({
-              id: 0,
-              documentId: f.documentId,
-              description: '',
-              name: f.name,
-            })),
-        }));
 
-        setCategories((prev) => ({ ...prev, moneda: monedasUnicas }));
         setFondos(sortedFondos as Fondo[]);
-        setFilteredFondos(sortedFondos as Fondo[]);
       } catch {
         setError('Error al cargar preguntas fondos');
       } finally {
@@ -116,8 +104,60 @@ export default function FondosSection() {
     }
 
     fetchFondos();
-  }, [categories, provinciaApiClient]);
+  }, [provinciaApiClient]);
 
+  const getFilteredFondos = (): Fondo[] => {
+    const hasNoFilters =
+      selectedTags.caracteristicas.length === 0 &&
+      selectedTags.activos.length === 0 &&
+      selectedTags.inversores.length === 0 &&
+      selectedTags.moneda.length === 0;
+
+    if (hasNoFilters) return fondos;
+
+    const matchByCaracteristicas = new Set(
+      selectedTags.caracteristicas.flatMap(
+        (tag) =>
+          categories.caracteristicas
+            .find((c) => c.documentId === tag.documentId)
+            ?.our_founds.map((f) => f.documentId) ?? []
+      )
+    );
+    const matchByActivos = new Set(
+      selectedTags.activos.flatMap(
+        (tag) =>
+          categories.activos
+            .find((a) => a.documentId === tag.documentId)
+            ?.our_founds.map((f) => f.documentId) ?? []
+      )
+    );
+    const matchByInversores = new Set(
+      selectedTags.inversores.flatMap(
+        (tag) =>
+          categories.inversores
+            .find((i) => i.documentId === tag.documentId)
+            ?.our_founds.map((f) => f.documentId) ?? []
+      )
+    );
+    const matchByMonedaDirect = (fondo: Fondo) =>
+      selectedTags.moneda.length === 0 ||
+      selectedTags.moneda.some(
+        (tag) => fondo.moneda.toLowerCase() === tag.value.toLowerCase()
+      );
+
+    return fondos.filter((fondo) => {
+      const id = fondo.documentId;
+      return (
+        (selectedTags.caracteristicas.length === 0 ||
+          matchByCaracteristicas.has(id)) &&
+        (selectedTags.activos.length === 0 || matchByActivos.has(id)) &&
+        (selectedTags.inversores.length === 0 || matchByInversores.has(id)) &&
+        matchByMonedaDirect(fondo) // 👈 más confiable
+      );
+    });
+  };
+
+  const filteredFondos = getFilteredFondos();
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-[200px]">
@@ -127,102 +167,26 @@ export default function FondosSection() {
 
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
-  const handleFilterFondos = (tags: Tag) => {
-    setIsLoadingFilters(true);
-
-    setTimeout(() => {
-      const hasNoFilters =
-        tags.caracteristicas.length === 0 &&
-        tags.activos.length === 0 &&
-        tags.inversores.length === 0 &&
-        tags.moneda.length === 0;
-
-      if (hasNoFilters) {
-        setFilteredFondos(fondos);
-      } else {
-        const fondosFromCaracteristicas = tags.caracteristicas.flatMap(
-          (tag) =>
-            categories.caracteristicas
-              .find((c) => c.documentId === tag.documentId)
-              ?.our_founds.map((f) => f.documentId) ?? []
-        );
-
-        const fondosFromActivos = tags.activos.flatMap(
-          (tag) =>
-            categories.activos
-              .find((a) => a.documentId === tag.documentId)
-              ?.our_founds.map((f) => f.documentId) ?? []
-        );
-
-        const fondosFromInversores = tags.inversores.flatMap(
-          (tag) =>
-            categories.inversores
-              .find((i) => i.documentId === tag.documentId)
-              ?.our_founds.map((f) => f.documentId) ?? []
-        );
-
-        const fondosFromMoneda = tags.moneda.flatMap(
-          (tag) =>
-            categories.moneda
-              .find((m) => m.documentId === tag.documentId)
-              ?.our_founds.map((f) => f.documentId) ?? []
-        );
-
-        const matchByCaracteristicas = new Set(fondosFromCaracteristicas);
-        const matchByActivos = new Set(fondosFromActivos);
-        const matchByInversores = new Set(fondosFromInversores);
-        const matchByMoneda = new Set(fondosFromMoneda);
-
-        const filtered = fondos.filter((fondo) => {
-          const id = fondo.documentId;
-          return (
-            (tags.caracteristicas.length === 0 ||
-              matchByCaracteristicas.has(id)) &&
-            (tags.activos.length === 0 || matchByActivos.has(id)) &&
-            (tags.inversores.length === 0 || matchByInversores.has(id)) &&
-            (tags.moneda.length === 0 || matchByMoneda.has(id))
-          );
-        });
-
-        setFilteredFondos(filtered);
-      }
-
-      setIsLoadingFilters(false);
-    }, 300);
-  };
-
   const addTag = (tag: TagObject, type: keyof Tag) => {
-    const prevTags = [...selectedTags[type]];
-
-    if (!prevTags.some((t) => t.documentId === tag.documentId)) {
-      const updatedTags = {
-        ...selectedTags,
-        [type]: [...prevTags, tag],
-      };
-      setSelectedTags(updatedTags);
-      handleFilterFondos(updatedTags);
+    if (!selectedTags[type].some((t) => t.documentId === tag.documentId)) {
+      setSelectedTags((prev) => ({ ...prev, [type]: [...prev[type], tag] }));
     }
   };
 
   const deleteTag = (tag: TagObject, type: keyof Tag) => {
-    const updatedTags = {
-      ...selectedTags,
-      [type]: selectedTags[type].filter((t) => t.documentId !== tag.documentId),
-    };
-
-    setSelectedTags(updatedTags);
-    handleFilterFondos(updatedTags);
+    setSelectedTags((prev) => ({
+      ...prev,
+      [type]: prev[type].filter((t) => t.documentId !== tag.documentId),
+    }));
   };
 
   const deleteAll = () => {
-    const emptyTags = {
+    setSelectedTags({
       caracteristicas: [],
       activos: [],
       inversores: [],
       moneda: [],
-    };
-    setSelectedTags(emptyTags);
-    handleFilterFondos(emptyTags);
+    });
   };
 
   const capitalize = (str: string) => {
@@ -233,23 +197,21 @@ export default function FondosSection() {
     <>
       {/* desktop */}
       <div className="hidden md:flex flex-row items-stretch gap-4 lg:gap-8 justify-between">
-        {' '}
         <div className="w-[280px] md:w-[230px] lg:w-[300px] xl:w-[380px] shrink-0 bg-primary py-8 px-6 lg:px-8 min-h-screen self-stretch">
-          {' '}
           <div className="space-y-4">
             <Link
-              className="flex items-center gap-1 mb-8 text-white border border-white w-fit p-2 rounded-tl-[6px] rounded-tr-[12px]
-    rounded-br-[6px] rounded-bl-[12px]"
+              className="flex items-center gap-1 mb-8 text-white border border-white w-fit p-2 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px]"
               href="/rendimiento"
               target="_blank"
               rel="noopener noreferrer"
             >
               <LiaDownloadSolid />
-              <span className=" ">Rendimiento Diario</span>
+              <span>Rendimiento Diario</span>
             </Link>
             <h3 className="text-xl font-bold font-encode-sans text-white">
               Filtros de la búsqueda
             </h3>
+
             {Object.entries(selectedTags).every(
               ([, tags]) => tags.length === 0
             ) ? (
@@ -276,6 +238,7 @@ export default function FondosSection() {
                 ))
               )
             )}
+            <br />
           </div>
           <div className="space-y-4 flex flex-col">
             <h3 className="text-xl font-bold font-encode-sans text-white">
@@ -335,7 +298,7 @@ export default function FondosSection() {
           </div>
           <div>
             <button
-              className="py-[9px] transition-colors duration-200 focus:outline-none focus:ring-0 text-white  focus:ring-primary w-fit font-bold"
+              className="py-[9px] transition-colors duration-200 focus:outline-none focus:ring-0 text-white focus:ring-primary w-fit font-bold"
               onClick={() => deleteAll()}
             >
               Ver todos los fondos
@@ -348,87 +311,77 @@ export default function FondosSection() {
               Nuestros Fondos
             </h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {' '}
-              {isLoadingFilters ? (
-                <div className="flex justify-center items-center min-h-[200px]">
-                  <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              ) : (
-                <>
-                  {filteredFondos.length > 0 ? (
-                    filteredFondos.map((fondo, index) => (
-                      <div
-                        key={index}
-                        className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg"
-                      >
-                        <div className="py-4 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
-                          <span className="font-encode-sans font-bold">
-                            {fondo.name}
-                          </span>
-                        </div>
-                        <div className="py-2 flex items-center border-b mx-4 text-secondary">
-                          <div className="w-1/2 border-r">
-                            <span>
-                              Tipo de ahorro en{' '}
-                              <b>
-                                <span className="lowercase">
-                                  {fondo.moneda}
-                                </span>
-                              </b>
-                            </span>
-                          </div>
-                          <div className="w-1/2 flex justify-start pl-6 lg:pl-0 xl:pl-6 ">
-                            <span
-                              className={`flex px-6 py-2 ${fondo?.inversor_profile_fondos?.[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : fondo.inversor_profile_fondos?.[0].title == 'MODERADO' ? 'bg-[#929292]' : 'bg-[#B4B4B4]'} text-white font-bold rounded-xl capitalize`}
-                            >
-                              {capitalize(
-                                fondo?.inversor_profile_fondos?.[0]?.title ?? ''
-                              )}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="py-2 flex justify-between items-center border-b mx-4 text-secondary">
-                          <div className="w-1/2 border-r">
-                            <span>
-                              Horizonte a <b>{fondo.horizonte}</b>
-                            </span>
-                          </div>
-                          <div className="w-1/2 flex justify-start pl-6">
-                            <span className="flex p-2">
-                              {capitalize(
-                                fondo?.caracteristicas_fondos?.[0]?.value ?? ''
-                              )}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="py-2 flex justify-between items-center mx-4 text-secondary">
-                          <div className="w-1/2 pt-2">
-                            <span className="">
-                              Variación diaria <b>{fondo.variacionDiaria}%</b>
-                            </span>
-                          </div>
-                        </div>
-                        <div className="py-4 flex justify-end items-center mx-4">
-                          <Link href={`/nuestros-fondos/${fondo.documentId}`}>
-                            <Button variant="secondary">Ver fondo</Button>
-                          </Link>
-                        </div>
+              {filteredFondos.length > 0 ? (
+                filteredFondos.map((fondo, index) => (
+                  <div
+                    key={index}
+                    className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg"
+                  >
+                    <div className="py-4 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
+                      <span className="font-encode-sans font-bold">
+                        {fondo.name}
+                      </span>
+                    </div>
+                    <div className="py-2 flex items-center border-b mx-4 text-secondary">
+                      <div className="w-1/2 border-r">
+                        <span>
+                          Tipo de ahorro en{' '}
+                          <b>
+                            <span className="lowercase">{fondo.moneda}</span>
+                          </b>
+                        </span>
                       </div>
-                    ))
-                  ) : (
-                    <p
-                      className="font-encode-sans text-md  text-primary-light"
-                      style={{ fontWeight: 400 }}
-                    >
-                      No encontramos resultados que coincidan
-                    </p>
-                  )}
-                </>
+                      <div className="w-1/2 flex justify-start pl-6 lg:pl-0 xl:pl-6">
+                        <span
+                          className={`flex px-6 py-2 ${fondo?.inversor_profile_fondos?.[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : fondo.inversor_profile_fondos?.[0].title == 'MODERADO' ? 'bg-[#929292]' : 'bg-[#B4B4B4]'} text-white font-bold rounded-xl capitalize`}
+                        >
+                          {capitalize(
+                            fondo?.inversor_profile_fondos?.[0]?.title ?? ''
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="py-2 flex justify-between items-center border-b mx-4 text-secondary">
+                      <div className="w-1/2 border-r">
+                        <span>
+                          Horizonte a <b>{fondo.horizonte}</b>
+                        </span>
+                      </div>
+                      <div className="w-1/2 flex justify-start pl-6">
+                        <span className="flex p-2">
+                          {capitalize(
+                            fondo?.caracteristicas_fondos?.[0]?.value ?? ''
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="py-2 flex justify-between items-center mx-4 text-secondary">
+                      <div className="w-1/2 pt-2">
+                        <span>
+                          Variación diaria <b>{fondo.variacionDiaria}%</b>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="py-4 flex justify-end items-center mx-4">
+                      <Link href={`/nuestros-fondos/${fondo.documentId}`}>
+                        <Button variant="secondary">Ver fondo</Button>
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p
+                  className="font-encode-sans text-md text-primary-light"
+                  style={{ fontWeight: 400 }}
+                >
+                  No encontramos resultados que coincidan
+                </p>
               )}
             </div>
           </div>
         </div>
       </div>
+
       {/* mobile */}
       <div className="flex lg:hidden flex-col">
         <div className="text-center py-10">
@@ -438,14 +391,13 @@ export default function FondosSection() {
         </div>
         <div className="space-y-4 bg-[#a3dbc7] py-10 px-[60px]">
           <Link
-            className="flex items-center gap-1 mb-8 text-primary border border-primary w-fit p-2 rounded-tl-[6px] rounded-tr-[12px]
-    rounded-br-[6px] rounded-bl-[12px]"
+            className="flex items-center gap-1 mb-8 text-primary border border-primary w-fit p-2 rounded-tl-[6px] rounded-tr-[12px] rounded-br-[6px] rounded-bl-[12px]"
             href="/rendimiento"
             target="_blank"
             rel="noopener noreferrer"
           >
             <LiaDownloadSolid />
-            <span className=" ">Rendimiento Diario</span>
+            <span>Rendimiento Diario</span>
           </Link>
           <h3 className="text-xl font-black font-encode-sans text-primary">
             Filtros de la búsqueda
@@ -482,7 +434,6 @@ export default function FondosSection() {
         </div>
 
         <div className="space-y-8 bg-primary py-10 px-[60px] text-white">
-          {/* Tipo de Moneda — mobile */}
           <Accordion title="Tipo de Moneda">
             <div className="flex flex-wrap gap-3">
               {categories.moneda.map((tag) => (
@@ -496,7 +447,6 @@ export default function FondosSection() {
               ))}
             </div>
           </Accordion>
-          {/* Características */}
           <Accordion title="Característica del fondo">
             <div className="flex flex-wrap gap-3">
               {categories.caracteristicas.map((tag) => (
@@ -511,7 +461,6 @@ export default function FondosSection() {
             </div>
           </Accordion>
           <hr />
-          {/* Tipo de Inversor */}
           <Accordion title="Tipo de Inversor">
             <div className="flex flex-wrap gap-3">
               {categories.inversores.map((tag) => (
@@ -535,7 +484,6 @@ export default function FondosSection() {
             </div>
           </Accordion>
           <hr />
-          {/* Tipo de Activos */}
           <Accordion title="Tipo de Activos">
             <div className="flex flex-wrap gap-3">
               {categories.activos.map((tag) => (
@@ -556,80 +504,74 @@ export default function FondosSection() {
           </div>
         </div>
 
-        {isLoadingFilters ? (
-          <div className="flex justify-center items-center min-h-[200px]">
-            <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        ) : (
-          <div className="px-[30px] py-[50px] grid gap-10">
-            {filteredFondos.length > 0 ? (
-              filteredFondos.map((fondo, index) => (
-                <div
-                  key={index}
-                  className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg"
-                >
-                  <div className="py-2 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
-                    <span className="font-encode-sans font-bold">
-                      {fondo.name}
+        <div className="px-[30px] py-[50px] grid gap-10">
+          {filteredFondos.length > 0 ? (
+            filteredFondos.map((fondo, index) => (
+              <div
+                key={index}
+                className="rounded-tr-xl rounded-bl-xl rounded-tl rounded-br shadow-lg"
+              >
+                <div className="py-2 px-4 bg-primary-light text-white rounded-tr-xl rounded-tl">
+                  <span className="font-encode-sans font-bold">
+                    {fondo.name}
+                  </span>
+                </div>
+                <div className="py-2 flex items-center border-b text-secondary">
+                  <div className="w-1/2 px-2 border-r">
+                    <span>
+                      Tipo de ahorro en{' '}
+                      <b>
+                        <span className="lowercase">{fondo.moneda}</span>
+                      </b>
                     </span>
                   </div>
-                  <div className="py-2 flex items-center border-b text-secondary">
-                    <div className="w-1/2 px-2 border-r">
-                      <span>
-                        Tipo de ahorro en{' '}
-                        <b>
-                          <span className="lowercase">{fondo.moneda}</span>
-                        </b>
-                      </span>
-                    </div>
-                    <div className="w-1/2 px-2 flex justify-center">
-                      <span
-                        className={`flex px-6 py-2 ${fondo?.inversor_profile_fondos?.[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : fondo?.inversor_profile_fondos?.[0].title == 'MODERADO' ? 'bg-[#929292]' : 'bg-[#B4B4B4]'} text-white font-bold rounded-xl capitalize`}
-                      >
-                        {capitalize(
-                          fondo?.inversor_profile_fondos?.[0]?.title ?? ''
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="py-2 flex justify-between items-center border-b text-secondary">
-                    <div className="w-1/2 px-2 border-r">
-                      <span>
-                        Horizonte a <b>{fondo.horizonte}</b>
-                      </span>
-                    </div>
-                    <div className="w-1/2 px-2 flex justify-center">
-                      <span className="flex">
-                        {capitalize(
-                          fondo?.caracteristicas_fondos?.[0]?.value ?? ''
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="py-2 flex justify-between items-center text-secondary">
-                    <div className="w-1/2 px-2">
-                      <span className="">
-                        Variación diaria <b>{fondo.variacionDiaria} %</b>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="pt-1 pb-4 px-2 flex justify-end items-center">
-                    <Link href={`/nuestros-fondos/${fondo.documentId}`}>
-                      <Button variant="secondary">Ver fondo</Button>
-                    </Link>
+                  <div className="w-1/2 px-2 flex justify-center">
+                    <span
+                      className={`flex px-6 py-2 ${fondo?.inversor_profile_fondos?.[0].title == 'AGRESIVO' ? 'bg-[#3C3C3B]' : fondo?.inversor_profile_fondos?.[0].title == 'MODERADO' ? 'bg-[#929292]' : 'bg-[#B4B4B4]'} text-white font-bold rounded-xl capitalize`}
+                    >
+                      {capitalize(
+                        fondo?.inversor_profile_fondos?.[0]?.title ?? ''
+                      )}
+                    </span>
                   </div>
                 </div>
-              ))
-            ) : (
-              <p
-                className="font-encode-sans text-md  text-primary-light"
-                style={{ fontWeight: 400 }}
-              >
-                No encontramos resultados que coincidan
-              </p>
-            )}
-          </div>
-        )}
+                <div className="py-2 flex justify-between items-center border-b text-secondary">
+                  <div className="w-1/2 px-2 border-r">
+                    <span>
+                      Horizonte a <b>{fondo.horizonte}</b>
+                    </span>
+                  </div>
+                  <div className="w-1/2 px-2 flex justify-center">
+                    <span className="flex">
+                      {capitalize(
+                        fondo?.caracteristicas_fondos?.[0]?.value ?? ''
+                      )}
+                    </span>
+                  </div>
+                </div>
+                <div className="py-2 flex justify-between items-center text-secondary">
+                  <div className="w-1/2 px-2">
+                    <span>
+                      Variación diaria <b>{fondo.variacionDiaria} %</b>
+                    </span>
+                  </div>
+                </div>
+                <div className="pt-1 pb-4 px-2 flex justify-end items-center">
+                  <Link href={`/nuestros-fondos/${fondo.documentId}`}>
+                    <Button variant="secondary">Ver fondo</Button>
+                  </Link>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p
+              className="font-encode-sans text-md text-primary-light"
+              style={{ fontWeight: 400 }}
+            >
+              No encontramos resultados que coincidan
+            </p>
+          )}
+        </div>
       </div>
     </>
   );

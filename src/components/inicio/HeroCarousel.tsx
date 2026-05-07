@@ -83,8 +83,6 @@ export default function HeroCarousel() {
 
   if (!cards || cards.length === 0) return null;
 
-  console.log(cards, 'a');
-
   return (
     <div>
       {/* VIEWPORT */}
