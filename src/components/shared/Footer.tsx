@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
               height={35}
             />
             <Image
-              src="/footer/BancoProvinciaFondos.png"
+              src="/footer/BancoProvinciaFondos2.png"
               alt="Provincia Fondos"
               width={105}
               height={34}
@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
               height={28}
             />
             <Image
-              src="/footer/BancoProvinciaFondos.png"
+              src="/footer/BancoProvinciaFondos2.png"
               alt="Provincia Fondos"
               width={84}
               height={27}
