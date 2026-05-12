@@ -99,7 +99,7 @@ export default function AutoridadDetailPage() {
                   alt={authority.name}
                   width={256}
                   height={320}
-                  className="object-cover w-full h-full rounded-[20px] grayscale"
+                  className="object-cover w-full h-full rounded-[20px]"
                 />
               </div>
 
