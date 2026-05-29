@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
           <Link href="/" className="w-full h-full">
             <div className="relative h-[65px] max-h-[65px] w-full">
               <Image
-                src="/Logo.png"
+                src="/Logo-original.png"
                 alt="logo"
                 fill
                 className="object-contain object-left"
