@@ -156,21 +156,11 @@ export default function FondoDetails({ id }: FondoProps) {
           <h1 className="text-start lg:text-left font-encode-sans font-extrabold xl:font-black text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-7 xl:mb-6 max-w-[590px] px-[50px] lg:px-0 whitespace-nowrap">
             {capitalize(fondoData.name || '')}
           </h1>
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              p: ({ children }) => (
-                <p className="text-start lg:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] lg:px-0 xl:mr-0">
-                  {children}
-                </p>
-              ),
-              strong: ({ children }) => (
-                <strong className="font-bold">{children}</strong>
-              ),
-            }}
-          >
-            {fondoData.description ?? ''}
-          </ReactMarkdown>
+          <div className="prose max-w-none">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {fondoData.description}
+            </ReactMarkdown>
+          </div>
           {/* <p className="text-start lg:text-left font-encode-sans font-normal text-[16px] xl:text-[20px] leading-5 xl:leading-6 px-[50px] md:w-[600px] lg:px-0 xl:mr-0">
             {fondoData.description || 'Sin descripción disponible'}
           </p> */}
