@@ -143,7 +143,7 @@ const Footer: React.FC = () => {
       {/* SKY BAR */}
       <div className="w-full py-4 bg-sky sm:bg-white">
         <div className="mx-auto px-4 text-center font-encode-sans font-semibold text-[12px] leading-[100%] tracking-normal text-primary">
-          2025 Banco de la Provincia de Buenos Aires – Casa Matriz: Calle 7 N°
+          2026 Banco de la Provincia de Buenos Aires – Casa Matriz: Calle 7 N°
           726 (B1900TFS) La Plata, Buenos Aires, Argentina
         </div>
       </div>
