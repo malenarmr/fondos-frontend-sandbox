@@ -8,6 +8,7 @@ import { Fondo } from '@/types/Fondo';
 import Link from 'next/link';
 import Accordion from './Accordion';
 import { LiaDownloadSolid } from 'react-icons/lia';
+import { useSearchParams } from 'next/navigation';
 
 interface TagObject {
   documentId: string;
@@ -27,6 +28,11 @@ interface Tag {
   inversores: TagObject[];
   moneda: TagObject[];
 }
+const normalize = (str: string) =>
+  str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
 
 export default function FondosSection() {
   const [fondos, setFondos] = useState<Fondo[]>([]);
@@ -44,8 +50,22 @@ export default function FondosSection() {
     inversores: [],
     moneda: [],
   });
+  const searchParams = useSearchParams();
 
   const { provinciaApiClient } = useAppContext();
+  useEffect(() => {
+    const monedaParam = searchParams.get('moneda');
+    if (!monedaParam || categories.moneda.length === 0) return;
+
+    const target = normalize(monedaParam);
+    const match = categories.moneda.find(
+      (tag) => normalize(tag.value) === target
+    );
+
+    if (match) {
+      addTag(match, 'moneda');
+    }
+  }, [searchParams, categories.moneda]);
 
   useEffect(() => {
     async function fetchFiltros() {

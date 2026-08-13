@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
+import FundsSelect from './SelectNavbar';
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -46,9 +47,7 @@ const Navbar: React.FC = () => {
             <ListItem href="/institucional" currentPath={pathname}>
               Institucional
             </ListItem>
-            <ListItem href="/nuestros-fondos" currentPath={pathname}>
-              Nuestros Fondos
-            </ListItem>
+            <FundsSelect currentPath={pathname} />
             <ListItem href="/info" currentPath={pathname}>
               Info para el inversor
             </ListItem>

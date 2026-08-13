@@ -27,6 +27,7 @@ export default function VideosSection() {
     async function fetchVideos() {
       try {
         const response = await provinciaApiClient.fondos.videoTutorial.getAll();
+        console.log(response, 'aaaaaaaaaaaaaaaaaa');
         setVideos(response.data.data as Video[]);
       } catch {
         setError('Error al cargar preguntas frecuentes');
