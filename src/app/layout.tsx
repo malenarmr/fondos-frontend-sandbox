@@ -22,8 +22,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Provincia Fondos',
-  description: 'Provincia Fondos',
+  title: {
+    default: 'Provincia Fondos',
+    template: '%s | Provincia Fondos',
+  },
+  openGraph: {
+    siteName: 'Provincia Fondos',
+    title: 'Provincia Fondos',
+    url: 'https://www.provinfondos.com.ar', // tu dominio real
+  },
 };
 
 export default function RootLayout({
@@ -34,6 +41,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <Script
+          id="website-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Provincia Fondos',
+              url: 'https://www.provinfondos.com.ar',
+            }),
+          }}
+        />
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
