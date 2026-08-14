@@ -8,7 +8,7 @@ import { Fondo } from '@/types/Fondo';
 import Link from 'next/link';
 import Accordion from './Accordion';
 import { LiaDownloadSolid } from 'react-icons/lia';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 interface TagObject {
   documentId: string;
@@ -51,8 +51,10 @@ export default function FondosSection() {
     moneda: [],
   });
   const searchParams = useSearchParams();
-
+  const router = useRouter();
+  const pathname = usePathname();
   const { provinciaApiClient } = useAppContext();
+
   useEffect(() => {
     const monedaParam = searchParams.get('moneda');
     if (!monedaParam || categories.moneda.length === 0) return;
@@ -63,10 +65,9 @@ export default function FondosSection() {
     );
 
     if (match) {
-      addTag(match, 'moneda');
+      setSelectedTags((prev) => ({ ...prev, moneda: [match] })); // reemplaza, no agrega
     }
   }, [searchParams, categories.moneda]);
-
   useEffect(() => {
     async function fetchFiltros() {
       try {
@@ -192,12 +193,20 @@ export default function FondosSection() {
       setSelectedTags((prev) => ({ ...prev, [type]: [...prev[type], tag] }));
     }
   };
-
+  const removeMonedaFromUrl = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('moneda');
+    router.replace(params.toString() ? `${pathname}?${params}` : pathname, {
+      scroll: false,
+    });
+  };
   const deleteTag = (tag: TagObject, type: keyof Tag) => {
     setSelectedTags((prev) => ({
       ...prev,
       [type]: prev[type].filter((t) => t.documentId !== tag.documentId),
     }));
+
+    if (type === 'moneda') removeMonedaFromUrl();
   };
 
   const deleteAll = () => {
@@ -207,6 +216,7 @@ export default function FondosSection() {
       inversores: [],
       moneda: [],
     });
+    removeMonedaFromUrl();
   };
 
   const capitalize = (str: string) => {

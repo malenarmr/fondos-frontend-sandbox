@@ -4,23 +4,6 @@ import { useAppContext } from '@/context/AppContext';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
-interface FundsOption {
-  label: string;
-  value: string;
-  href: string;
-}
-
-// Ajustá los hrefs a las rutas reales cuando estén definidas
-const FUNDS_OPTIONS: FundsOption[] = [
-  {
-    label: 'En Dólares',
-    value: 'dolares',
-    href: '/nuestros-fondos?moneda=dolares',
-  },
-  { label: 'En Pesos', value: 'pesos', href: '/nuestros-fondos?moneda=pesos' },
-  { label: 'FAL', value: 'fal', href: '/nuestros-fondos/fal' },
-];
-
 interface FundsSelectProps {
   currentPath: string;
 }
@@ -41,7 +24,6 @@ const FundsSelect: React.FC<FundsSelectProps> = ({ currentPath }) => {
 
     fetchFiltros();
   }, [provinciaApiClient]);
-  console.log(filter, 'asas');
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -54,7 +36,6 @@ const FundsSelect: React.FC<FundsSelectProps> = ({ currentPath }) => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
   return (
     <li ref={containerRef} className="relative">
       <button
@@ -88,15 +69,15 @@ const FundsSelect: React.FC<FundsSelectProps> = ({ currentPath }) => {
       {open && (
         <ul
           role="listbox"
-          className="absolute top-full left-0 w-full mt-2 bg-[#CDCACA] rounded-[6px] overflow-hidden"
+          className="lg:absolute top-full left-0 w-full min-w-fit mt-2 bg-transparent lg:bg-[#CDCACA] rounded-[6px] overflow-hidden"
           style={{ zIndex: 3 }}
         >
           {filter.map((option) => (
-            <li key={option} role="option">
+            <li key={option}>
               <Link
-                href={option}
+                href={`/nuestros-fondos?moneda=${encodeURIComponent(option)}`}
                 onClick={() => setOpen(false)}
-                className="block px-4 py-3 text-secondary font-medium hover:bg-white/30 rounded-[6px] transition-colors capitalize"
+                className="block px-2 py-2 lg:px-8 lg:py-4 text-secondary font-medium hover:bg-white/30 rounded-[6px] transition-colors capitalize"
               >
                 En {option}
               </Link>
