@@ -5,6 +5,7 @@ import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import PreFooterSection from '@/components/shared/PrefooterSection';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 const items = [
   {
@@ -39,7 +40,13 @@ const items = [
     ),
   },
 ];
-
+function FondosSectionFallback() {
+  return (
+    <div className="flex justify-center items-center min-h-[200px]">
+      <div className="w-12 h-12 border-4 border-green-900 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
+}
 export default function NuestrosFondosPage() {
   return (
     <main>
@@ -48,7 +55,9 @@ export default function NuestrosFondosPage() {
       <section className="bg-white dark:bg-dark">
         <div className="">
           {/* <div className="md:px-6 lg:px-8 xl:px-[100px]"> */}
-          <FondosSection />
+          <Suspense fallback={<FondosSectionFallback />}>
+            <FondosSection />
+          </Suspense>
         </div>
       </section>
 
