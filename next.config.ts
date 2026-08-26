@@ -16,7 +16,7 @@ const csp = [
   "form-action 'self'",
 
   // Imágenes (incluye tu API y CDNs típicos + thumbs de YouTube)
-  "img-src 'self' data: blob: https://provincia-prod-api.teocoop.site https://*.amazonaws.com https://*.cloudfront.net https://*.r2.cloudflarestorage.com https://*.teocoop.site https://img.youtube.com",
+  "img-src 'self' data: blob: http://localhost:1337 https://provincia-prod-api.teocoop.site https://*.amazonaws.com https://*.cloudfront.net https://*.r2.cloudflarestorage.com https://*.teocoop.site https://img.youtube.com",
 
   "font-src 'self' data: https:",
   "style-src 'self' 'unsafe-inline' https:",
@@ -62,32 +62,42 @@ const nextConfig: NextConfig = {
 
   images: {
     remotePatterns: [
+      ...(isProd
+        ? []
+        : [
+            {
+              protocol: 'http' as const,
+              hostname: 'localhost',
+              port: '1337',
+              pathname: '/uploads/**',
+            },
+          ]),
       {
-        protocol: 'https',
+        protocol: 'https' as const,
         hostname: 'provincia-prod-api.teocoop.site',
         port: '',
         pathname: '/uploads/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https' as const,
         hostname: '**.amazonaws.com',
         port: '',
         pathname: '/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https' as const,
         hostname: '**.cloudfront.net',
         port: '',
         pathname: '/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https' as const,
         hostname: '**.r2.cloudflarestorage.com',
         port: '',
         pathname: '/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https' as const,
         hostname: '**.teocoop.site',
         port: '',
         pathname: '/**',

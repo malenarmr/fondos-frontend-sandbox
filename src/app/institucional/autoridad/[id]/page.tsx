@@ -1,7 +1,6 @@
 'use client';
 
 import Button from '@/components/shared/Button';
-import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import { useAppContext } from '@/context/AppContext';
 import type { Authority } from '@/services/institutionalService';
@@ -35,7 +34,6 @@ export default function AutoridadDetailPage() {
         <div className="flex justify-center items-center min-h-[400px]">
           <div className="w-12 h-12 border-4 border-dark-teal border-t-transparent rounded-full animate-spin" />
         </div>
-        <Footer />
       </main>
     );
   }
@@ -58,7 +56,6 @@ export default function AutoridadDetailPage() {
             </Link>
           </div>
         </div>
-        <Footer />
       </main>
     );
   }
@@ -132,8 +129,6 @@ export default function AutoridadDetailPage() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </main>
   );
 }

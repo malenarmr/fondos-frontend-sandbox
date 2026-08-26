@@ -1,4 +1,7 @@
+'use client';
+
 import { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 export default function Accordion({
   title,
@@ -12,12 +15,17 @@ export default function Accordion({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="mb-6">
+    <div className="rounded-[4px] border-l-[5px] border-[#80DAEB] p-5 shadow-[0px_1px_3px_rgba(128,218,235,.5)]">
       <h3
-        className="font-bold mb-2 text-lg cursor-pointer"
+        className="font-bold mb-2 text-lg cursor-pointer flex items-center justify-between"
         onClick={() => setIsOpen(!isOpen)}
       >
         {title}
+        <ChevronDown
+          className={`w-5 h-5 transition-transform duration-300 ${
+            isOpen ? 'rotate-180' : 'rotate-0'
+          }`}
+        />
       </h3>
 
       <div

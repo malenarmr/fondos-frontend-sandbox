@@ -1,6 +1,5 @@
 'use client';
 import DesktopCarousel from '@/components/inicio/DesktopCarousel';
-import Footer from '@/components/shared/Footer';
 import HeroSectionGenerico from '@/components/shared/HeroSectionGenerico';
 import Navbar from '@/components/shared/NavBar';
 import TestInversorForm from '@/components/test-inversor/TestInversorForm';
@@ -33,7 +32,6 @@ export default function TestInversorPage() {
       <div className="bg-primary-light ">
         <DesktopCarousel cards={cards} />
       </div>
-      <Footer />
     </main>
   );
 }

@@ -5,7 +5,6 @@ export const dynamic = 'force-dynamic';
 
 import DesktopCarousel from '@/components/inicio/DesktopCarousel';
 import Button from '@/components/shared/Button';
-import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import Spinner from '@/components/shared/Spinner';
 // NUEVO: importá el componente de fondos sugeridos
@@ -50,7 +49,6 @@ function ResultadoContent() {
         <div className="text-center text-red-500 py-16">
           No se encontró el perfil
         </div>
-        <Footer />
       </main>
     );
   }
@@ -115,8 +113,6 @@ function ResultadoContent() {
       <div className="bg-primary-light ">
         <DesktopCarousel cards={cards} />
       </div>
-
-      <Footer />
     </main>
   );
 }

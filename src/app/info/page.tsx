@@ -1,16 +1,36 @@
 'use client';
 
-import AccordionFaq from '@/components/info/AccordionFaq';
+import AccordionFaq, { Faq } from '@/components/info/AccordionFaq';
 import AccordionFiles from '@/components/info/AccordionFiles';
 import VideosSection from '@/components/info/VideosSection';
 import AnimationSection from '@/components/invierta/AnimationSection';
 import Button from '@/components/shared/Button';
-import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import JsonAnimation from '@/components/shared/LottieAnimation';
 import Link from 'next/link';
+import { useAppContext } from '@/context/AppContext';
+import { useEffect, useState } from 'react';
 
 export default function InfoPage() {
+  const { provinciaApiClient } = useAppContext();
+  const [faqs, setFaqs] = useState<Faq[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    async function fetchFaqs() {
+      try {
+        const response = await provinciaApiClient.fondos.faqs.getAll();
+        setFaqs(response.data.data as Faq[]);
+      } catch {
+        setError('Error al cargar preguntas frecuentes');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchFaqs();
+  }, [provinciaApiClient]);
   return (
     <main>
       <Navbar />
@@ -92,7 +112,7 @@ export default function InfoPage() {
             operar.
             <br /> Usá los instructivos para saldar dudas.
           </p>
-          <AccordionFaq />
+          <AccordionFaq faqs={faqs} error={error} loading={loading} />
           <div className="flex justify-center">
             <span className="text-white mt-4">
               Si no pudimos responder a tus dudas, podes contactarnos por mail a{' '}
@@ -115,8 +135,6 @@ export default function InfoPage() {
           <AccordionFiles />
         </div>
       </div>
-
-      <Footer />
     </main>
   );
 }

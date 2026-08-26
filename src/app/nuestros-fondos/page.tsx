@@ -1,7 +1,6 @@
 import CategoriesSection from '@/components/invierta/CategoriesSection';
 import FondosSection from '@/components/invierta/FondosSection';
 import Button from '@/components/shared/Button';
-import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import PreFooterSection from '@/components/shared/PrefooterSection';
 import Link from 'next/link';
@@ -77,8 +76,6 @@ export default function NuestrosFondosPage() {
       </div>
 
       <PreFooterSection items={items} />
-
-      <Footer />
     </main>
   );
 }

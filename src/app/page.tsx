@@ -5,7 +5,6 @@ import HeroCarousel from '@/components/inicio/HeroCarousel';
 import FeaturedCarousel from '@/components/inicio/FeaturedCarousel';
 import AnimationSection from '@/components/invierta/AnimationSection';
 import Button from '@/components/shared/Button';
-import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import PopupAvisoFondos from '@/components/shared/PopupAvisoFondos';
 import { fetchAvisoFondos } from '@/services/popupFondosService';
@@ -96,8 +95,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

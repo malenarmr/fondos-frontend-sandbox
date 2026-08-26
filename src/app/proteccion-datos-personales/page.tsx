@@ -3,7 +3,6 @@
 
 import MobileInviertaSection from '@/components/institucional/MobileInviertaSection';
 import Button from '@/components/shared/Button';
-import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import Image from 'next/image';
@@ -127,8 +126,6 @@ export default function ProteccionDatosPersonalesPage() {
           </div>
         </div>
       )}
-
-      <Footer />
     </main>
   );
 }

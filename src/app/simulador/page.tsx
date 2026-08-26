@@ -1,5 +1,4 @@
 import Button from '@/components/shared/Button';
-import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import SimuladorSection from '@/components/simulador/SimuladorSection';
 import JsonAnimation from '@/components/shared/LottieAnimation';
@@ -53,8 +52,6 @@ export default function SimuladorPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

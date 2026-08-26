@@ -1,26 +1,26 @@
 'use client';
 
-import { useAppContext } from '@/context/AppContext';
 import { ChevronUpIcon, ChevronDownIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
 
-interface Faq {
+export interface Faq {
   question: string;
   answer: string;
 }
+interface Props {
+  faqs: Faq[];
+  loading: boolean;
+  error?: string;
+}
 
-export default function AccordionFaq() {
+export default function AccordionFaq({ faqs, loading, error }: Props) {
   const [isOpen, setIsOpen] = useState(-1);
-  const [faqs, setFaqs] = useState<Faq[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  const { provinciaApiClient } = useAppContext();
+  // const [faqs, setFaqs] = useState<Faq[]>([]);
 
   const handleOpen = (index: number) => {
     setIsOpen((prevIsOpen) => (prevIsOpen === index ? -1 : index));
@@ -34,21 +34,6 @@ export default function AccordionFaq() {
       img: ['src', 'alt', 'title', 'width', 'height', 'loading'],
     },
   };
-
-  useEffect(() => {
-    async function fetchFaqs() {
-      try {
-        const response = await provinciaApiClient.fondos.faqs.getAll();
-        setFaqs(response.data.data as Faq[]);
-      } catch {
-        setError('Error al cargar preguntas frecuentes');
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchFaqs();
-  }, [provinciaApiClient]);
 
   if (loading)
     return (

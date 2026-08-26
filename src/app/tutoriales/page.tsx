@@ -1,4 +1,3 @@
-import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import VideosSection from '@/components/tutoriales/VideosSection';
 
@@ -13,8 +12,6 @@ export default function TutorialesPage() {
           <VideosSection />
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

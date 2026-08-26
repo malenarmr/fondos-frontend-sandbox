@@ -1,7 +1,6 @@
 'use client';
 
 import ContactBox from '@/components/contacto/ContactBox';
-import Footer from '@/components/shared/Footer';
 import HeroSectionGenerico from '@/components/shared/HeroSectionGenerico';
 import Navbar from '@/components/shared/NavBar';
 import Spinner from '@/components/shared/Spinner';
@@ -17,7 +16,6 @@ export default function ContactoPage() {
         <div className="py-40 text-center flex justify-center text-gray-500">
           <Spinner />
         </div>
-        <Footer />
       </main>
     );
 
@@ -43,7 +41,6 @@ export default function ContactoPage() {
         asistentes={contacto.contactos_seccion.contacto}
         sectionTitle={contacto.contactos_seccion.title}
       /> */}
-      <Footer />
     </main>
   );
 }

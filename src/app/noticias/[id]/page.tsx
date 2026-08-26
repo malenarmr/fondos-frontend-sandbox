@@ -3,7 +3,6 @@
 
 import NewsCard from '@/components/noticias/NewsCard';
 import Button from '@/components/shared/Button';
-import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/NavBar';
 import Spinner from '@/components/shared/Spinner';
 import {
@@ -403,8 +402,6 @@ export default function NewsDetailPage() {
           )}
         </div>
       </div>
-
-      <Footer />
     </main>
   );
 }

@@ -3,7 +3,6 @@
 import { useParams } from 'next/navigation';
 import FondoDetails from '@/components/invierta/Fondo';
 import Navbar from '@/components/shared/NavBar';
-import Footer from '@/components/shared/Footer';
 import NotFoundPage from '@/app/not-found';
 import CategoriesSection from '@/components/invierta/CategoriesSection';
 import Link from 'next/link';
@@ -73,8 +72,6 @@ export default function FondoPage() {
       </div>
 
       <PreFooterSection items={items} />
-
-      <Footer />
     </main>
   );
 }

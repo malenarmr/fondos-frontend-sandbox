@@ -5,6 +5,7 @@ import Script from 'next/script';
 import Link from 'next/link';
 import Image from 'next/image';
 import Providers from './providers';
+import Footer from '@/components/shared/Footer';
 
 const encodeSans = Encode_Sans({
   variable: '--font-encode-sans',
@@ -70,7 +71,7 @@ export default function RootLayout({
         {/* End Google Tag Manager */}
       </head>
       <body
-        className={`${encodeSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${encodeSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         {/* Google Tag Manager (noscript) */}
         <noscript>
@@ -81,8 +82,12 @@ export default function RootLayout({
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
+
         {/* End Google Tag Manager (noscript) */}
-        <Providers>{children}</Providers>
+        <Providers>
+          <main className="flex-1 z-10">{children}</main>
+        </Providers>
+        <Footer />
         <Link
           target="_blank"
           href="https://wa.me/5491148895265?text=%C2%A1Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20inversiones%20en%20Fondos%20Comunes%20de%20Inversi%C3%B3n%20del%20Banco%20Provincia"

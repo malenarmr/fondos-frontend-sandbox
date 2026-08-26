@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   return (
     <>
       {/* FOOTER */}
-      <footer className="w-full bg-primary py-8 sm:py-10 px-4 sm:px-10 lg:px-28 font-encode-sans text-white">
+      <footer className="z-9 w-full bg-primary py-8 sm:py-10 px-4 sm:px-10 lg:px-28 font-encode-sans text-white">
         {/* Logos & Socials */}
         <div className="flex flex-col md:flex-row justify-between gap-8 sm:gap-8 mb-2 md:mb-8">
           <div className="flex items-center gap-4 sm:gap-6 justify-center hidden md:flex">

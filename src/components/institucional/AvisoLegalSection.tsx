@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import remarkGfm from 'remark-gfm';
+import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
+interface Props {
+  FULL_TEXT: string;
+  SHORT_TEXT: string;
+}
 
-const FULL_TEXT = `La información presentada en este informe corresponde a Provinfondos S.A. Sociedad Gerente de Fondos Comunes de Inversión. La misma solo tiene carácter informativo y corresponde al período especificado. Los rendimientos corresponden a datos históricos y no son indicadores de tendencias futuras. Las inversiones en cuotapartes del fondo no constituyen depósitos en la Sociedad Depositaria a los fines de la Ley de Entidades Financieras ni cuentan con ninguna de las garantías que tales depósitos a la vista o plazo puedan gozar, de acuerdo con la legislación y reglamentación aplicables en materia de depósitos en entidades financieras. Asimismo, la sociedad Depositaria, se encuentra impedida por normas del BCRA, de asumir, tácita o expresamente, compromiso alguno en cuanto al mantenimiento, en cualquier momento, del valor del capital convertido, al rendimiento, al valor del rescate de las cuotapartes o al otorgamiento de liquidez a tal fin.`;
-
-const SHORT_TEXT = `La información presentada en este informe corresponde a Provinfondos S.A. Sociedad Gerente de Fondos Comunes de Inversión. La misma solo tiene carácter informativo y corresponde al período especificado. Los rendimientos...`;
-
-export default function AvisoLegalSection() {
+export default function AvisoLegalSection({ SHORT_TEXT, FULL_TEXT }: Props) {
   const [showFull, setShowFull] = useState(false);
 
   return (
@@ -41,11 +44,13 @@ export default function AvisoLegalSection() {
               FULL_TEXT
             )}
           </div>
-
-          {/* Desktop (siempre completo) */}
-          <div className="hidden md:block text-gray-700 leading-relaxed text-base text-center md:text-left">
+          <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
             {FULL_TEXT}
-          </div>
+          </ReactMarkdown>
+          {/* Desktop (siempre completo) */}
+          {/* <div className="hidden md:block text-gray-700 leading-relaxed text-base text-center md:text-left">
+            {FULL_TEXT}
+          </div> */}
         </div>
       </div>
     </section>

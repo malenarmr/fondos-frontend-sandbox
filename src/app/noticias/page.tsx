@@ -2,7 +2,6 @@
 
 import NewsFilters from '@/components/noticias/NewsFilters';
 import NewsGrid from '@/components/noticias/NewsGrid';
-import Footer from '@/components/shared/Footer';
 import HeroSectionGenerico from '@/components/shared/HeroSectionGenerico';
 import Navbar from '@/components/shared/NavBar';
 import PreFooterSection from '@/components/shared/PrefooterSection';
@@ -143,8 +142,6 @@ export default function NoticiasPage() {
         <NewsGrid allNews={allNews} filters={filters} />
       </div>
       <PreFooterSection items={items} />
-
-      <Footer />
     </main>
   );
 }

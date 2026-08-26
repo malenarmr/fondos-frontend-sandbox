@@ -2,7 +2,6 @@
 
 import { useParams } from 'next/navigation';
 import Navbar from '@/components/shared/NavBar';
-import Footer from '@/components/shared/Footer';
 import NotFoundPage from '@/app/not-found';
 import CuotaparteDetails from '@/components/invierta/Cuotaparte';
 import PreFooterSection from '@/components/shared/PrefooterSection';
@@ -54,8 +53,6 @@ export default function CuotapartePage() {
       <CuotaparteDetails id={id} />
 
       <PreFooterSection items={items} />
-
-      <Footer />
     </main>
   );
 }
