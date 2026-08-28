@@ -22,7 +22,7 @@ export default function HeaderDinamicPage({ header, description }: Props) {
           <div
             className="font-encode-sans font-normal text-[16px] xl:text-[20px]
            leading-5 xl:leading-6 text-secondary text-left
-           lg:max-w-[630px] space-y-4 px-4 md:px-8 xl:px-0 xl:mr-24"
+           lg:max-w-[630px] space-y-4 xl:px-0 xl:mr-24"
           >
             <p>{header.description}</p>
           </div>
@@ -35,12 +35,14 @@ export default function HeaderDinamicPage({ header, description }: Props) {
       </div>
 
       <div
-        className="bg-[#2098A1] h-fit min-h-fit shadow-xl p-[4rem] rounded-tl-[6px] rounded-tr-[20px]
+        className="bg-[#2098A1] h-fit min-h-fit shadow-xl p-[4rem] lg:p-[3rem] rounded-tl-[6px] rounded-tr-[20px]
     rounded-br-[6px] rounded-bl-[20px] "
       >
         <div className="w-[80%] h-full flex flex-col gap-5 justify-around">
-          <p className="font-bold text-2xl text-white ">{description.title}</p>
-          <div className="prose prose-invert max-w-none text-xl prose-p:text-white">
+          <p className="font-bold text-2xl lg:text-xl text-white ">
+            {description.title}
+          </p>
+          <div className="prose prose-invert max-w-none text-[16px] xl:text-[20px] prose-p:text-white">
             {' '}
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
               {description.description}

@@ -1,41 +1,22 @@
 'use client';
 
-import { useAppContext } from '@/context/AppContext';
+import { Videos } from '@/types/DinamicLanding';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-interface Video {
-  Name: string;
-  categories_video_fondos: { categoryName: string }[];
-  url: string;
+interface Props {
+  videos: Videos[];
+  loading: boolean;
+  error: string | null;
 }
 
-export default function VideosSection() {
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+export default function VideosSection({ videos, loading, error }: Props) {
   const [current, setCurrent] = useState(0);
-
-  const { provinciaApiClient } = useAppContext();
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const isDown = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
-
-  useEffect(() => {
-    async function fetchVideos() {
-      try {
-        const response = await provinciaApiClient.fondos.videoTutorial.getAll();
-        setVideos(response.data.data as Video[]);
-      } catch {
-        setError('Error al cargar preguntas frecuentes');
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchVideos();
-  }, [provinciaApiClient]);
 
   if (loading)
     return (

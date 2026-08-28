@@ -10,13 +10,29 @@ import JsonAnimation from '@/components/shared/LottieAnimation';
 import Link from 'next/link';
 import { useAppContext } from '@/context/AppContext';
 import { useEffect, useState } from 'react';
+import { Videos } from '@/types/DinamicLanding';
 
 export default function InfoPage() {
   const { provinciaApiClient } = useAppContext();
   const [faqs, setFaqs] = useState<Faq[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+  const [videos, setVideos] = useState<Videos[]>([]);
+  const [loadingVideos, setLoadingVideos] = useState(true);
+  const [errorVideos, setErrorVideos] = useState('');
+  useEffect(() => {
+    async function fetchVideos() {
+      try {
+        const response = await provinciaApiClient.fondos.videoTutorial.getAll();
+        setVideos(response.data.data as Videos[]);
+      } catch {
+        setErrorVideos('Error al cargar preguntas frecuentes');
+      } finally {
+        setLoadingVideos(false);
+      }
+    }
+    fetchVideos();
+  }, [provinciaApiClient]);
   useEffect(() => {
     async function fetchFaqs() {
       try {
@@ -93,7 +109,11 @@ export default function InfoPage() {
           </div>
         </div>
         <div className="flex lg:pl-12 flex-col">
-          <VideosSection />
+          <VideosSection
+            videos={videos}
+            error={errorVideos}
+            loading={loadingVideos}
+          />
         </div>
         <div className="flex lg:hidden justify-center">
           <Link href="/tutoriales">

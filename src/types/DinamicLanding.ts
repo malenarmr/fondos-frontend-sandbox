@@ -5,7 +5,7 @@ export type SimpleCard = {
 };
 export type Image = {
   url: string;
-  alternativeText?: string;
+  alternativeText: string | null;
   width: number;
   height: number;
 };
@@ -18,7 +18,7 @@ export type ImageCard = {
 };
 export type SimpleSection = {
   title: string;
-  description: string;
+  description?: string;
   cards: SimpleCard[];
 };
 export type SectionWithImage = {
@@ -28,7 +28,7 @@ export type SectionWithImage = {
 };
 export type SectionWithButtons = {
   title: string;
-  description: string;
+  description?: string;
   cards: ImageCard[];
   button_link: string;
   button_text: string;
@@ -39,6 +39,12 @@ export type Header = {
   description: string;
   button_link: string;
   button_text: string;
+};
+export type Videos = {
+  id: number;
+  url: string;
+  Name: string;
+  categories_video_fondos?: { categoryName: string }[];
 };
 
 export type DynamicLanding = {
@@ -52,7 +58,7 @@ export type DynamicLanding = {
   moreInfo: SimpleSection;
   faqs: SimpleSection;
   legal: SimpleCard;
-  // agregá acá los demás campos que devuelve Strapi
+  video_seccion_fondos: Videos[];
 };
 
 export type StrapiResponse = {

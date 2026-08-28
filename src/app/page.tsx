@@ -10,8 +10,12 @@ import PopupAvisoFondos from '@/components/shared/PopupAvisoFondos';
 import { fetchAvisoFondos } from '@/services/popupFondosService';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { Videos } from '@/types/DinamicLanding';
+import { useAppContext } from '@/context/AppContext';
 
 export default function HomePage() {
+  const { provinciaApiClient } = useAppContext();
+
   // Popup de aviso de operaciones (nuevo)
   const [showAviso, setShowAviso] = useState(false);
   const [aviso, setAviso] = useState<null | {
@@ -19,7 +23,9 @@ export default function HomePage() {
     description: string;
     buttonText?: string | null;
   }>(null);
-
+  const [videos, setVideos] = useState<Videos[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   useEffect(() => {
     fetchAvisoFondos().then((data) => {
       if (data) {
@@ -28,7 +34,19 @@ export default function HomePage() {
       }
     });
   }, []);
-
+  useEffect(() => {
+    async function fetchVideos() {
+      try {
+        const response = await provinciaApiClient.fondos.videoTutorial.getAll();
+        setVideos(response.data.data as Videos[]);
+      } catch {
+        setError('Error al cargar preguntas frecuentes');
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchVideos();
+  }, [provinciaApiClient]);
   return (
     <main>
       {/* Popup arriba de todo */}
@@ -87,7 +105,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="flex lg:pl-12 flex-col">
-          <VideosSection />
+          <VideosSection videos={videos} error={error} loading={loading} />
         </div>
         <div className="flex lg:hidden justify-center pb-10 lg:pb-0">
           <Link href="/tutoriales">

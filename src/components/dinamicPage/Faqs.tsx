@@ -14,7 +14,7 @@ export default function Faqs({ section }: Props) {
   }));
   console.log(faqs);
   return (
-    <div className="mt-12 py-12 lg:py-16 px-[30px] md:px-[100px] xl:px-[145px] padding-xxl">
+    <div className="mt-12 py-12 bg-primary-light lg:py-16 px-[30px] md:px-[100px] xl:px-[145px] padding-xxl">
       <div className="space-y-12 text-center lg:pt-0">
         <h1 className="font-encode-sans text-2xl lg:text-4xl text-white font-bold lg:font-black">
           {section.title}

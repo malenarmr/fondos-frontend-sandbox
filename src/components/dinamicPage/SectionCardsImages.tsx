@@ -12,40 +12,69 @@ interface Props {
 
 export default function SectionButtons({ section }: Props) {
   return (
-    <div className="h-fit flex !px-0 flex-col items-center gap-[7vh] my-5">
-      <h1 className="w-full text-center font-encode-sans font-bold text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-[#3C3C3B]-light ">
+    <div className="h-fit flex !px-0 flex-col items-center gap-[7vh] ">
+      <h1 className="w-full text-center font-encode-sans font-bold text-2xl xl:text-[40px] leading-[30px] xl:leading-[60px] text-[#3C3C3B]/99">
         {section.title}
       </h1>
-      <div className="grid grid-cols-2 gap-y-5 gap-x-8 w-full">
-        {section.cards.map((c) => (
-          <div
-            className="h-[295px] w-full grid grid-cols-3 text-[#3C3C3B] px-3 bg-white shadow-[5px_5px_44px_rgba(0,0,0,0.1)] rounded-tl-[6px] rounded-tr-[20px]
-    rounded-br-[6px] rounded-bl-[20px] place-items-center"
-            key={c.id}
-          >
-            <div className="h-full flex items-center">
-              <Image
-                src={`http://localhost:1337${c.image.url}`}
-                height={200}
-                width={200}
-                alt={c.image.alternativeText || ''}
-                className="object-cover w-full"
-              />
-            </div>
-            <div className="gap-2 col-span-2">
-              <p className="font-bold w-[80%] text-lg mb-2">{c.title}</p>
-              <div className="text-md ">
-                <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
-                  {c.description}
-                </ReactMarkdown>
+      <div
+        className="gap-y-8 w-full dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl pb-20 flex flex-col items-center"
+        style={{
+          backgroundImage: "url('/background-gris.png')",
+          backgroundRepeat: 'repeat',
+        }}
+      >
+        <div className="grid grid-cols-2 gap-y-5 gap-x-8 ">
+          {section.cards.map((c) => (
+            <div
+              key={c.id}
+              className="
+                    min-h-[220px]
+                    w-full
+                    grid grid-cols-3
+                    items-center
+                    px-5 py-10
+                    text-[#3C3C3B]
+                    bg-white
+                    shadow-[5px_5px_44px_rgba(0,0,0,0.1)]
+                    rounded-tl-[6px]
+                    rounded-tr-[20px]
+                    rounded-br-[6px]
+                    rounded-bl-[20px]
+                  "
+            >
+              {/* Imagen */}
+              <div className="flex h-full items-center justify-center mr-5">
+                <Image
+                  src={c.image.url}
+                  height={100}
+                  width={100}
+                  alt={c.image.alternativeText || ''}
+                />
+              </div>
+
+              {/* Contenido */}
+              <div className="col-span-2 flex h-full flex-col">
+                {/* Título */}
+                <div className="flex min-h-[60px] items-start">
+                  <p className="w-[90%] xl:w-[80%] text-lg lg:text-md font-bold">
+                    {c.title}
+                  </p>
+                </div>
+
+                {/* Descripción */}
+                <div className="text-md lg:text-sm">
+                  <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+                    {c.description}
+                  </ReactMarkdown>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <Link href={section.button_link}>
+          <Button>{section.button_text}</Button>
+        </Link>
       </div>
-      <Link href={section.button_link}>
-        <Button>{section.button_text}</Button>
-      </Link>
     </div>
   );
 }

@@ -1,0 +1,363 @@
+{
+  "data": [
+    {
+      "id": 53,
+      "documentId": "mox6gvkjhysl6w7qi4lmf1tu",
+      "public": true,
+      "createdAt": "2026-08-25T18:09:31.715Z",
+      "updatedAt": "2026-08-26T20:27:56.341Z",
+      "publishedAt": "2026-08-26T20:27:56.500Z",
+      "relation": "/nuestros-fondos",
+      "path": "/fondos-fal",
+      "header": {
+        "id": 48,
+        "title": "Nuevo Fondo de Asistencia Laboral",
+        "description": "Anticipate a los costos laborales de tu empresa. Te acompañamos en cada etapa del camino.",
+        "button_text": "Quiero que me contacten",
+        "button_link": "/contacto",
+        "public": true
+      },
+      "description": {
+        "id": 485,
+        "title": "¿Qué son los Fondos de Asistencia Laboral (FAL)?",
+        "description": "El FAL es un reserva financiera para que los empleadores acumulen un respaldo financiero destinado a cubrir futuros costos indemnizatorios y otras contingencias derivadas del cese de las relaciones laborales. \nEste instrumento actúa como una fondo de capitalización obligatorio, el cual se integra mediante contribuciones mensuales derivadas del pago de los aportes patronales. ",
+        "public": true
+      },
+      "sectionCardsImages": {
+        "id": 47,
+        "title": "Conocé los beneficios para tu empresa",
+        "button_link": "/contacto",
+        "button_text": "Quiero que me contacten",
+        "public": true,
+        "cards": [
+          {
+            "id": 206,
+            "title": "Respaldo institucional y solidez Financiera",
+            "description": "Al canalizar las reservas obligatorias a través de una compañía con sólida trayectoria en administración de activos, se asegura una gestión **transparente y eficiente. Esto dota a las empresas de una robusta contención institucional frente a cualquier contingencia laboral.**",
+            "image": {
+              "id": 475,
+              "documentId": "r166248swv2w2nm44d1rx3fa",
+              "name": "Animaciones_Fondos-21 1.png",
+              "alternativeText": null,
+              "caption": null,
+              "width": 209,
+              "height": 180,
+              "formats": {
+                "thumbnail": {
+                  "ext": ".png",
+                  "url": "/mockData/escudo.png",
+                  "hash": "thumbnail_Animaciones_Fondos_21_1_f758cddc64",
+                  "mime": "image/png",
+                  "name": "thumbnail_Animaciones_Fondos-21 1.png",
+                  "path": null,
+                  "size": 7.98,
+                  "width": 181,
+                  "height": 156,
+                  "sizeInBytes": 7978
+                }
+              },
+              "hash": "Animaciones_Fondos_21_1_f758cddc64",
+              "ext": ".png",
+              "mime": "image/png",
+              "size": 1.66,
+              "url": "/mockData/escudo.png",
+              "previewUrl": null,
+              "provider": "local",
+              "provider_metadata": null,
+              "createdAt": "2026-08-26T04:08:49.681Z",
+              "updatedAt": "2026-08-26T04:08:49.681Z",
+              "publishedAt": "2026-08-26T04:08:49.682Z"
+            }
+          },
+          {
+            "id": 207,
+            "title": "Esquema de comisiones decrecientes",
+            "description": "A mayor volumen de fondos acumulados o mayor permanencia, la estructura de comisiones por administración se reduce sustancialmente. Esto optimiza de forma directa el retorno neto de la cartera invertida en beneficio de la empresa.",
+            "image": {
+              "id": 475,
+              "documentId": "r166248swv2w2nm44d1rx3fa",
+              "name": "Animaciones_Fondos-21 1.png",
+              "alternativeText": null,
+              "caption": null,
+              "width": 209,
+              "height": 180,
+              "formats": {
+                "thumbnail": {
+                  "ext": ".png",
+                  "url": "/mockData/grafico.png",
+                  "hash": "thumbnail_Animaciones_Fondos_21_1_f758cddc64",
+                  "mime": "image/png",
+                  "name": "thumbnail_Animaciones_Fondos-21 1.png",
+                  "path": null,
+                  "size": 7.98,
+                  "width": 181,
+                  "height": 156,
+                  "sizeInBytes": 7978
+                }
+              },
+              "hash": "Animaciones_Fondos_21_1_f758cddc64",
+              "ext": ".png",
+              "mime": "image/png",
+              "size": 1.66,
+              "url": "/mockData/grafico.png",
+              "previewUrl": null,
+              "provider": "local",
+              "provider_metadata": null,
+              "createdAt": "2026-08-26T04:08:49.681Z",
+              "updatedAt": "2026-08-26T04:08:49.681Z",
+              "publishedAt": "2026-08-26T04:08:49.682Z"
+            }
+          },
+          {
+            "id": 208,
+            "title": "Optimización y rendimiento de excedentes",
+            "description": "Los aportes no quedan inmovilizados; ingresan de inmediato a carteras de inversión diseñadas con criterios profesionales de preservación del capital y búsqueda de retornos financieros reales, maximizando cada peso depositado.",
+            "image": {
+              "id": 475,
+              "documentId": "r166248swv2w2nm44d1rx3fa",
+              "name": "Animaciones_Fondos-21 1.png",
+              "alternativeText": null,
+              "caption": null,
+              "width": 209,
+              "height": 180,
+              "formats": {
+                "thumbnail": {
+                  "ext": ".png",
+                  "url": "/mockData/flecha.png",
+                  "hash": "thumbnail_Animaciones_Fondos_21_1_f758cddc64",
+                  "mime": "image/png",
+                  "name": "thumbnail_Animaciones_Fondos-21 1.png",
+                  "path": null,
+                  "size": 7.98,
+                  "width": 181,
+                  "height": 156,
+                  "sizeInBytes": 7978
+                }
+              },
+              "hash": "Animaciones_Fondos_21_1_f758cddc64",
+              "ext": ".png",
+              "mime": "image/png",
+              "size": 1.66,
+              "url": "/mockData/flecha.png",
+              "previewUrl": null,
+              "provider": "local",
+              "provider_metadata": null,
+              "createdAt": "2026-08-26T04:08:49.681Z",
+              "updatedAt": "2026-08-26T04:08:49.681Z",
+              "publishedAt": "2026-08-26T04:08:49.682Z"
+            }
+          },
+          {
+            "id": 209,
+            "title": "Integración y carga operativa cero",
+            "description": "El proceso de aportes se acopla directamente a las liquidaciones y declaraciones habituales de cargas sociales de la empresa, lo que evita burocracias adicionales y simplifica el día a día del área de recursos humanos y administración.",
+            "image": {
+              "id": 475,
+              "documentId": "r166248swv2w2nm44d1rx3fa",
+              "name": "Animaciones_Fondos-21 1.png",
+              "alternativeText": null,
+              "caption": null,
+              "width": 209,
+              "height": 180,
+              "formats": {
+                "thumbnail": {
+                  "ext": ".png",
+                  "url": "/mockData/toogle.png",
+                  "hash": "thumbnail_Animaciones_Fondos_21_1_f758cddc64",
+                  "mime": "image/png",
+                  "name": "thumbnail_Animaciones_Fondos-21 1.png",
+                  "path": null,
+                  "size": 7.98,
+                  "width": 181,
+                  "height": 156,
+                  "sizeInBytes": 7978
+                }
+              },
+              "hash": "Animaciones_Fondos_21_1_f758cddc64",
+              "ext": ".png",
+              "mime": "image/png",
+              "size": 1.66,
+              "url": "/mockData/toogle.png",
+              "previewUrl": null,
+              "provider": "local",
+              "provider_metadata": null,
+              "createdAt": "2026-08-26T04:08:49.681Z",
+              "updatedAt": "2026-08-26T04:08:49.681Z",
+              "publishedAt": "2026-08-26T04:08:49.682Z"
+            }
+          }
+        ]
+      },
+      "sectionQuestions": {
+        "id": 16,
+        "public": true,
+        "title": "¿Por qué elegirnos? ",
+        "cards": [
+          {
+            "id": 493,
+            "title": "Motivo 1 - redactar",
+            "description": "El régimen es obligatorio para los empleadores del sector privado, incluidas las entidades sin fines de lucro. Lo que cada empresa elige libremente es la entidad que va a administrar su fondo.",
+            "public": true
+          },
+          {
+            "id": 494,
+            "title": "Motivo 2",
+            "description": "El régimen es obligatorio para los empleadores del sector privado, incluidas las entidades sin fines de lucro. Lo que cada empresa elige libremente es la entidad **que va a administrar su fondo**.",
+            "public": true
+          },
+          {
+            "id": 495,
+            "title": "Motivo 3",
+            "description": "El régimen es obligatorio para los empleadores del sector privado, incluidas las entidades sin fines de lucro. Lo que cada empresa elige libremente es la entidad que va a administrar su fondo.",
+            "public": true
+          },
+          {
+            "id": 496,
+            "title": "Motivo 4",
+            "description": "El régimen es obligatorio para los empleadores del sector privado, incluidas las entidades sin fines de lucro. Lo que cada empresa elige libremente es la entidad que va a administrar su fondo.",
+            "public": true
+          },
+          {
+            "id": 497,
+            "title": "Motivo 4",
+            "description": "El régimen es obligatorio para los empleadores del sector privado, incluidas las entidades sin fines de lucro. Lo que cada empresa elige libremente es la entidad que va a administrar su fondo.",
+            "public": true
+          }
+        ],
+        "image": {
+          "id": 476,
+          "documentId": "e2dblqifr612z6fon8jmody5",
+          "name": "Animaciones_Fondos-25 1.png",
+          "alternativeText": null,
+          "caption": null,
+          "width": 230,
+          "height": 272,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "/mockData/premio.png",
+              "hash": "thumbnail_Animaciones_Fondos_25_1_8c152cd35f",
+              "mime": "image/png",
+              "name": "thumbnail_Animaciones_Fondos-25 1.png",
+              "path": null,
+              "size": 15.08,
+              "width": 132,
+              "height": 156,
+              "sizeInBytes": 15075
+            }
+          },
+          "hash": "Animaciones_Fondos_25_1_8c152cd35f",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 6.01,
+          "url": "/mockData/premio.png",
+          "previewUrl": null,
+          "provider": "local",
+          "provider_metadata": null,
+          "createdAt": "2026-08-26T04:40:04.563Z",
+          "updatedAt": "2026-08-26T04:40:04.563Z",
+          "publishedAt": "2026-08-26T04:40:04.564Z"
+        }
+      },
+      "moreInfo": {
+        "id": 126,
+        "title": "Todo lo que necesitás saber sobre el FAL",
+        "public": true,
+        "cards": [
+          {
+            "id": 486,
+            "title": "Inicio y alcance",
+            "description": "La fecha de inicio está prevista para el 1° de noviembre de 2026 y alcanza a todos los empleadores del sector privado. ",
+            "public": true
+          },
+          {
+            "id": 487,
+            "title": "Elección del administrador",
+            "description": "Las empresas deben realizar la elección de un FAL administrado por alguna entidad habilitada por la CNV, generando su identificador único (ID FAL) previo al 1/11/26. De no hacerlo, se asignará un administrador de oficio.",
+            "public": true
+          },
+          {
+            "id": 488,
+            "title": "Patrimonio separado",
+            "description": "El fondo posee un carácter inalienable e inembargable, lo que asegura que esos ahorros se destinen exclusivamente al pago de indemnizaciones por despido, acuerdos por retiro voluntario u otras obligaciones especificadas en la norma (Ley 27.802)   ",
+            "public": true
+          },
+          {
+            "id": 489,
+            "title": "Rendimiento del Fondo ",
+            "description": "El capital acumulado en cada cuenta corporativa es gestionado e invertido en el mercado financiero; mientras el dinero no se retire para afrontar pagos, genera rendimientos que se acumulan en el fondo. ",
+            "public": true
+          },
+          {
+            "id": 490,
+            "title": "Aportes según empresa",
+            "description": "Las Micro, Pequeñas y Medianas Empresas (MiPyMEs) realizan un aporte mensual del 2,5% sobre su masa salarial bruta, mientras que para las grandes empresas el porcentaje es del 1% de la nómina. En ambos casos los pagos se integran al momento de abonar los aportes y contribuciones patronales y no implican un costo incremental para el empleador.",
+            "public": true
+          }
+        ]
+      },
+      "faqs": {
+        "id": 127,
+        "title": "Preguntas frecuentes",
+        "public": true,
+        "cards": [
+          {
+            "id": 491,
+            "title": "¿Qué es el FAL? ",
+            "description": "Es un esquema mediante el cual las empresas constituyen, con aportes mensuales, un fondo destinado a cubrir eventuales indemnizaciones por la finalización del vínculo laboral de sus trabajadores.",
+            "public": true
+          },
+          {
+            "id": 497777,
+            "title": "¿Qué es el FAL? ",
+            "description": "Es un esquema mediante el cual las empresas constituyen, con aportes mensuales, un fondo destinado a cubrir eventuales indemnizaciones por la finalización del vínculo laboral de sus trabajadores.",
+            "public": true
+          },
+          {
+            "id": 5654645654,
+            "title": "¿Qué es el FAL? ",
+            "description": "Es un esquema mediante el cual las empresas constituyen, con aportes mensuales, un fondo destinado a cubrir eventuales indemnizaciones por la finalización del vínculo laboral de sus trabajadores.",
+            "public": true
+          }
+        ]
+      },
+      "legal": {
+        "id": 492,
+        "title": "Aviso legal",
+        "description": "El presente material tiene fines exclusivamente informativos y comerciales, y no constituye un asesoramiento legal, impositivo ni una oferta o invitación para invertir. La implementación, adhesión y funcionamiento de los Fondos de Asistencia Laboral (FAL) se encuentran sujetos a la reglamentación que emita el Poder Ejecutivo Nacional, la Comisión Nacional de Valores (CNV), y a la efectiva inclusión y aprobación de este mecanismo en los Convenios Colectivos de Trabajo correspondientes a cada sector, conforme la legislación laboral vigente.\n\nLas inversiones en los vehículos financieros propuestos, como Fondos Comunes de Inversión y Fideicomisos Financieros, están sujetas a riesgos de mercado y fluctuaciones de precios. Los rendimientos pasados no son indicativos ni garantizan rendimientos futuros. Nada garantiza que el capital invertido o el rendimiento esperado cubran la totalidad de las obligaciones laborales de la empresa.\n\nBanco BBVA Argentina S.A. y BBVA Asset Management Argentina S.A.U. son entidades jurídicas separadas e independientes. Las inversiones en cuotapartes de fondos comunes de inversión no constituyen depósitos en Banco BBVA Argentina S.A., a los fines de la Ley de Entidades Financieras ni están amparadas por el sistema de seguro de garantía de los depósitos (Ley 24.485). BBVA Asset Management Argentina S.A.U. actúa como Sociedad Gerente y Banco BBVA Argentina S.A. actúa como Sociedad Depositaria de los Fondos Comunes de Inversión.",
+        "public": true
+      },
+      "video_seccion_fondos": [
+        {
+          "id": 13,
+          "documentId": "c9x0k7evphcoqkzja48giln3",
+          "Name": "pruebaxsj",
+          "url": "https://youtu.be/rnb0e8-fef8",
+          "isDelete": false,
+          "createdAt": "2025-06-09T16:53:14.254Z",
+          "updatedAt": "2025-08-27T23:28:08.952Z",
+          "publishedAt": "2025-08-27T23:28:08.984Z",
+          "categories_video_fondos": [
+            {
+              "id": 20,
+              "documentId": "z6lyiinwgc0qd4nollhthjne",
+              "categoryName": "fondos fal",
+              "isDelete": false,
+              "createdAt": "2026-08-26T19:09:36.406Z",
+              "updatedAt": "2026-08-26T19:09:40.762Z",
+              "publishedAt": "2026-08-26T19:09:40.806Z"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "page": 1,
+      "pageSize": 25,
+      "pageCount": 1,
+      "total": 1
+    }
+  }
+}
