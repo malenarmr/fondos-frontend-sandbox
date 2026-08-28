@@ -22,7 +22,7 @@
     "framer-motion": "^12.16.0",
     "lottie-web": "^5.12.2",
     "lucide-react": "^0.501.0",
-    "next": "^15.5.7",
+    "next": "15.5.3",
     "provincia-api-client": "^1.108.0",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
