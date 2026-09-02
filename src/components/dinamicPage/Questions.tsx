@@ -21,7 +21,7 @@ export default function Questions({ section }: Props) {
         <div className="absolute inset-y-0 left-0 w-1/3 p-5">
           <div className="relative w-full h-full flex items-center justify-center">
             <Image
-              src={`${section.image.url}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}${section.image.url}`}
               alt={section.image.alternativeText || ''}
               width={250}
               height={250}

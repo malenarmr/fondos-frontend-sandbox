@@ -18,7 +18,7 @@ import AvisoLegalSection from '@/components/institucional/AvisoLegalSection';
 
 import VideosComponent from '@/components/dinamicPage/Videos';
 
-import mockData from '@/utils/mockData.json';
+//import mockData from '@/utils/mockData.json';
 
 type PageProps = {
   params: Promise<{
@@ -26,19 +26,48 @@ type PageProps = {
   }>;
 };
 
-async function getLandings(): Promise<DynamicLanding[]> {
-  return mockData.data;
+async function getLandings() {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/dinamic-landings`
+  );
+
+  if (!response.ok) {
+    throw new Error('Error al obtener las landings');
+  }
+
+  return response.json();
 }
+// async function getLandings(): Promise<DynamicLanding[]> {
+//   try {
+//     const respuesta = await fetch(
+//       `${process.env.NEXT_PUBLIC_API_URL}/api/dinamic-landings`
+//     );
+//     console.log(respuesta, 'aaaaaaaaaaa');
+//     if (!respuesta.ok) {
+//       throw new Error('Ocurrió un error en la red: ' + respuesta.statusText);
+//     }
+
+//     const datos = await respuesta.json();
+
+//     console.log(datos.data, 'dataaaaaaaaaaaaaaaaaa');
+
+//     return datos.data;
+//   } catch (error) {
+//     console.error('Error al realizar la consulta:', error);
+
+//     return [];
+//   }
+//   // return mockData.data;
+// }
 
 export default async function DynamicLandingPage({ params }: PageProps) {
   const { slug } = await params;
 
   const path = `/${slug.join('/')}`;
-
-  const landings = await getLandings();
-
-  const landing = landings.find((item) => item.path === path);
-
+  const response = await getLandings();
+  const landing = response.data.find(
+    (item: DynamicLanding) => item.path === path
+  );
   if (!landing) {
     notFound();
   }
@@ -56,7 +85,7 @@ export default async function DynamicLandingPage({ params }: PageProps) {
   return (
     <main>
       <Navbar />
-      <div className="pt-12 mb-[8rem] dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl ">
+      <div className="pt-12 dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl ">
         {landing.description && landing.header && (
           <HeaderDinamicPage
             header={landing.header}

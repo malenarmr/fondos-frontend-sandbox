@@ -45,7 +45,7 @@ export default function SectionButtons({ section }: Props) {
               {/* Imagen */}
               <div className="flex h-full items-center justify-center mr-5">
                 <Image
-                  src={c.image.url}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}${c.image.url}`}
                   height={100}
                   width={100}
                   alt={c.image.alternativeText || ''}
