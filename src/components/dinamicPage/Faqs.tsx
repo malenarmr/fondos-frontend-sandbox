@@ -12,7 +12,6 @@ export default function Faqs({ section }: Props) {
     answer: card.description,
     id: card.id,
   }));
-  console.log(faqs);
   return (
     <div className="mt-12 py-12 bg-primary-light lg:py-16 px-[30px] md:px-[100px] xl:px-[145px] padding-xxl">
       <div className="space-y-12 text-center lg:pt-0">

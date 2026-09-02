@@ -25,7 +25,7 @@ const csp = [
   `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://go.botmaker.com${isProd ? '' : " 'unsafe-eval' http://localhost:3000"}`,
 
   // Conexiones (tu API + GA; en dev añadimos ws/http localhost)
-  `connect-src 'self' https://provincia-prod-api.teocoop.site/ https://www.google-analytics.com${isProd ? '' : ' http://localhost:3000 ws://localhost:3000'}`,
+  `connect-src 'self' https://provincia-prod-api.teocoop.site/ https://www.google-analytics.com${isProd ? '' : ' http://localhost:3000 ws://localhost:3000 http://localhost:1337'}`,
 
   // iframes (YouTube)
   "frame-src 'self' https://www.youtube.com",
