@@ -44,9 +44,11 @@ export default function AvisoLegalSection({ SHORT_TEXT, FULL_TEXT }: Props) {
               FULL_TEXT
             )}
           </div>
-          <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
-            {FULL_TEXT}
-          </ReactMarkdown>
+          <div className="hidden md:flex">
+            <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+              {FULL_TEXT}
+            </ReactMarkdown>
+          </div>
           {/* Desktop (siempre completo) */}
           {/* <div className="hidden md:block text-gray-700 leading-relaxed text-base text-center md:text-left">
             {FULL_TEXT}

@@ -99,7 +99,7 @@ export default async function DynamicLandingPage({ params }: PageProps) {
       {landing.sectionQuestions && (
         <Questions section={landing.sectionQuestions} />
       )}
-      <div className="pt-[25vh] dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl mb-10">
+      <div className="md:pt-[15vh] pt-[10vh] dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl mb-10 flex items-center justify-center">
         {landing.moreInfo && <MoreInfo section={landing.moreInfo} />}
       </div>
       <br />

@@ -14,11 +14,11 @@ export default function Questions({ section }: Props) {
     <div className="relative pb-0 md:px-[100px] lg:px-[100px] xl:px-[145px] 2xl:px-[300px] bg-primary-light dark:bg-dark">
       {/* Tarjeta blanca: se desplaza hacia abajo con translate-y para "caer" fuera del fondo verde */}
       <div
-        className="relative rounded-[20px] p-10 !bg-white shadow-[5px_5px_44px_rgba(0,0,0,0.1)] overflow-hidden
+        className="relative mx-[5%] rounded-[5px] md:rounded-[20px] p-10 !bg-white shadow-[5px_5px_44px_rgba(0,0,0,0.4)] overflow-hidden
                    translate-y-10 md:translate-y-20 xl:translate-y-25"
       >
         {/* Imagen: absoluta, ocupa el 100% de la altura del padre */}
-        <div className="absolute inset-y-0 left-0 w-1/3 p-5">
+        <div className="absolute hidden md:flex inset-y-0 left-0 w-1/3 p-5">
           <div className="relative w-full h-full flex items-center justify-center">
             <Image
               src={`${process.env.NEXT_PUBLIC_API_URL}${section.image.url}`}
@@ -31,10 +31,10 @@ export default function Questions({ section }: Props) {
 
         {/* Contenido: en flujo normal, título centrado respecto al padre completo */}
         <div className="flex flex-col gap-[3vh]">
-          <h1 className="w-full text-center font-encode-sans font-semibold text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-[#3C3C3B]-light">
+          <h1 className="w-full md:text-center font-encode-sans font-semibold text-2xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-[#3C3C3B]-light">
             {section.title}
           </h1>
-          <div className="pl-[33%] flex gap-2 flex-col pr-10">
+          <div className="md:pl-[33%] flex gap-2 flex-col md:pr-10">
             {section.cards.map((c) => (
               <Accordion title={c.title} key={c.id} defaultOpen={false}>
                 <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>

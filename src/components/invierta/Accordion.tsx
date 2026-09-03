@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Accordion({
   title,
@@ -15,16 +16,23 @@ export default function Accordion({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="rounded-[4px] border-l-[5px] border-[#80DAEB] p-5 shadow-[0px_1px_3px_rgba(128,218,235,.5)]">
+    <div className="md:rounded-[4px] md:border-l-[5px] md:border-[#80DAEB] border-b-[3px] border-black/60 p-5 md:shadow-[0px_1px_3px_rgba(128,218,235,.5)]">
       <h3
-        className="font-bold mb-2 text-lg cursor-pointer flex items-center justify-between"
+        className="font-bold text-lg cursor-pointer flex items-center justify-between"
         onClick={() => setIsOpen(!isOpen)}
       >
         {title}
         <ChevronDown
-          className={`w-5 h-5 transition-transform duration-300 ${
+          className={`hidden md:flex w-5 h-5 transition-transform duration-300 ${
             isOpen ? 'rotate-180' : 'rotate-0'
           }`}
+        />
+        <Image
+          src="/dinamic/arrow.svg"
+          alt="expandir"
+          width={15}
+          height={15}
+          className="md:hidden"
         />
       </h3>
 
