@@ -80,35 +80,36 @@ function Card({ card }: { card: ImageCard }) {
       {/* Desktop / tablet (>=768px): markup original, sin cambios respecto al diseño que ya funcionaba */}
       <div
         className="
-              hidden md:grid
-              min-h-full
-              w-full
-              lg:grid-cols-3
-              mg:grid-cols-1
-              items-center
-              px-5 py-10
-              text-[#3C3C3B]
-              bg-white
-              shadow-[5px_5px_44px_rgba(0,0,0,0.1)]
-              rounded-tl-[6px]
-              rounded-tr-[20px]
-              rounded-br-[6px]
-              rounded-bl-[20px]
-            "
+    hidden md:grid
+    min-h-full
+    w-full
+    lg:grid-cols-3
+    mg:grid-cols-1
+    items-center
+    px-5 py-10
+    text-[#3C3C3B]
+    bg-white
+    shadow-[5px_5px_44px_rgba(0,0,0,0.1)]
+    rounded-tl-[6px]
+    rounded-tr-[20px]
+    rounded-br-[6px]
+    rounded-bl-[20px]
+    justify-between
+  "
       >
-        <div className="h-[100px] shrink-0 w-full flex justify-center">
+        <div className="h-[100px] w-full flex items-center justify-center overflow-hidden">
           <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}${card.image.url}`}
-            height={100}
-            width={100}
+            width={200}
+            height={200}
             alt={card.image.alternativeText || ''}
-            className="h-full w-auto"
+            className="h-full w-auto object-contain"
           />
         </div>
 
         <div className="lg:col-span-2 flex h-full flex-col">
           <div className="flex min-h-[60px] items-center lg:items-start">
-            <p className="w-[90%] xl:w-[80%] md:text-center mb-2 lg:text-start md:text-xs text-lg lg:text-xl font-bold">
+            <p className="w-[90%] xl:w-[80%] xl:text-start md:text-center mb-2 lg:text-start md:text-sm text-lg lg:text-xl font-bold">
               {card.title}
             </p>
           </div>
