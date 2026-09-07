@@ -1,7 +1,7 @@
 'use client';
 
 import { SimpleSection } from '@/types/DinamicLanding';
-
+import CardMarkdown from './CardMarkdown';
 interface Props {
   section: SimpleSection;
 }
@@ -18,17 +18,18 @@ export default function MoreInfo({ section }: Props) {
             className={`md:px-[1rem] lg:py-7 !min-h-fit px-[.7rem] py-5 md:py-10 border border-[#2098A1] hover:bg-[#2098A1] cursor-pointer h-full text-[#3C3C3B] hover:text-white bg-white rounded-tl-[6px] rounded-tr-[20px] rounded-br-[6px] rounded-bl-[20px] place-items-start ${
               index === section.cards.length - 1
                 ? 'col-span-2'
-                : 'md:aspect-[1.1/1] aspect-[1/1.1]'
+                : 'lg:aspect-[1.1/1] aspect-auto'
             }`}
             key={c.id}
           >
             <div className="w-full h-full">
-              <p className="font-bold text-xs md:text-sm xl:text-xl">
+              <p className="font-bold text-[1rem] md:text-[1.3rem] md:text-[1.1rem] lg:text-[1rem] xl:text-[1.3rem] 2xl:text-[1.2rem]">
                 {c.title}
               </p>
-              <p className="md:text-sm text-xs xl:text-xl font-light h-full pt-3 md:pt-5 leading-none md:leading-tight">
-                {c.description}
-              </p>
+              <CardMarkdown
+                content={c.description}
+                className="md:text-[1.2rem] lg:text-[.9rem] text-[.9rem] xl:text-[1.2rem] 2xl:text-[1rem] font-light h-full pt-3 md:pt-3 lg:pt-1 xl:pt-3 leading-none md:leading-tight"
+              />
             </div>
           </div>
         ))}

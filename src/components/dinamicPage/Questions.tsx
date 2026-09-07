@@ -3,9 +3,7 @@
 import { SectionWithImage } from '@/types/DinamicLanding';
 import Image from 'next/image';
 import Accordion from '../invierta/Accordion';
-import remarkGfm from 'remark-gfm';
-import ReactMarkdown from 'react-markdown';
-import remarkBreaks from 'remark-breaks';
+import CardMarkdown from './CardMarkdown';
 interface Props {
   section: SectionWithImage;
 }
@@ -37,9 +35,7 @@ export default function Questions({ section }: Props) {
           <div className="md:pl-[33%] flex gap-2 flex-col md:pr-10">
             {section.cards.map((c) => (
               <Accordion title={c.title} key={c.id} defaultOpen={false}>
-                <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
-                  {c.description}
-                </ReactMarkdown>
+                <CardMarkdown content={c.description} />
               </Accordion>
             ))}
           </div>

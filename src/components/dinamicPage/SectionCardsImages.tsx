@@ -5,9 +5,7 @@ import Button from '@/components/shared/Button';
 import { ImageCard, SectionWithButtons } from '@/types/DinamicLanding';
 import Image from 'next/image';
 import Link from 'next/link';
-import remarkGfm from 'remark-gfm';
-import ReactMarkdown from 'react-markdown';
-import remarkBreaks from 'remark-breaks';
+import CardMarkdown from './CardMarkdown';
 
 interface Props {
   section: SectionWithButtons;
@@ -67,10 +65,11 @@ function Card({ card }: { card: ImageCard }) {
             style={{ gridTemplateRows: open ? '1fr' : '0fr' }}
           >
             <div className="overflow-hidden">
-              <div className="text-sm text-left pt-2">
-                <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
-                  {card.description}
-                </ReactMarkdown>
+              <div className="pt-2">
+                <CardMarkdown
+                  content={card.description}
+                  className="text-sm text-left"
+                />
               </div>
             </div>
           </div>
@@ -114,11 +113,10 @@ function Card({ card }: { card: ImageCard }) {
             </p>
           </div>
 
-          <div className="text-md lg:text-sm">
-            <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
-              {card.description}
-            </ReactMarkdown>
-          </div>
+          <CardMarkdown
+            content={card.description}
+            className="text-md lg:text-sm"
+          />
         </div>
       </div>
     </>

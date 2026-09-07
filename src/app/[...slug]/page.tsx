@@ -17,6 +17,7 @@ import Faqs from '@/components/dinamicPage/Faqs';
 import AvisoLegalSection from '@/components/institucional/AvisoLegalSection';
 
 import VideosComponent from '@/components/dinamicPage/Videos';
+import DescriptionDinamicPage from '@/components/dinamicPage/Description';
 
 //import mockData from '@/utils/mockData.json';
 
@@ -81,41 +82,56 @@ export default async function DynamicLandingPage({ params }: PageProps) {
   }
 
   // resto del componente...
-
+  console.log(landing.video_seccion_fondos.length, 'aaaaaaaaaaaaaaaaa');
   return (
     <main>
       <Navbar />
-      <div className="pt-12 dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl ">
-        {landing.description && landing.header && (
-          <HeaderDinamicPage
-            header={landing.header}
-            description={landing.description}
+      {/*
+        Todas las secciones son opcionales (dependen de qué esté publicado
+        en el backoffice). Para que la distancia entre secciones sea siempre
+        la misma sin importar cuáles estén presentes, la separación vive acá,
+        en un único `gap` del contenedor, y no como margin/padding suelto en
+        cada sección: un `gap` solo se aplica entre hijos que realmente se
+        renderizan, así que distintas combinaciones de secciones quedan
+        siempre espaciadas igual.
+      */}
+      <div className="pt-12 flex flex-col gap-16 md:gap-24 lg:gap-[15vh]">
+        {(landing.header || landing.description) && (
+          <div className="dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl gap-12 lg:gap-[15vh] flex flex-col">
+            {landing.header && <HeaderDinamicPage header={landing.header} />}
+            {landing.description && (
+              <DescriptionDinamicPage description={landing.description} />
+            )}
+          </div>
+        )}
+        {landing.sectionCardsImages && (
+          // sectionCardsImages tiene su propio fondo y debe quedar pegada a
+          // la sección siguiente para dar continuidad visual, así que acá
+          // cancelamos puntualmente el gap del contenedor (en vez de sacarla
+          // del flujo con gap, que rompería la separación uniforme del resto).
+          <div className="-mb-16 md:-mb-24 lg:-mb-[15vh]">
+            <SectionButtons section={landing.sectionCardsImages} />
+          </div>
+        )}
+        {landing.sectionQuestions && (
+          <Questions section={landing.sectionQuestions} />
+        )}
+        {landing.moreInfo && (
+          <div className="dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl flex items-center justify-center">
+            <MoreInfo section={landing.moreInfo} />
+          </div>
+        )}
+        {landing.faqs && <Faqs section={landing.faqs} />}
+        {landing.video_seccion_fondos.length > 0 && (
+          <VideosComponent videos={landing.video_seccion_fondos} />
+        )}
+        {landing.legal && (
+          <AvisoLegalSection
+            FULL_TEXT={landing.legal.description}
+            SHORT_TEXT={truncate(landing.legal.description)}
           />
         )}
       </div>
-      {landing.sectionCardsImages && (
-        <SectionButtons section={landing.sectionCardsImages} />
-      )}
-      {landing.sectionQuestions && (
-        <Questions section={landing.sectionQuestions} />
-      )}
-      <div className="md:pt-[15vh] pt-[10vh] dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl mb-10 flex items-center justify-center">
-        {landing.moreInfo && <MoreInfo section={landing.moreInfo} />}
-      </div>
-      <br />
-      {landing.faqs && <Faqs section={landing.faqs} />}
-      {landing.video_seccion_fondos && (
-        <div className="py-20">
-          <VideosComponent videos={landing.video_seccion_fondos} />
-        </div>
-      )}
-
-      {landing.legal && (
-        <AvisoLegalSection
-          FULL_TEXT={landing.legal.description}
-          SHORT_TEXT={truncate(landing.legal.description)}
-        />
-      )}
       {/* Franja blanca suficientemente alta */}
     </main>
   );
