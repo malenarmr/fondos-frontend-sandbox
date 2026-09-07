@@ -31,13 +31,15 @@ function Card({ card }: { card: ImageCard }) {
       >
         <div className="flex flex-col h-full items-center justify-between text-center gap-3">
           <div className="h-[80px] shrink-0 w-full flex justify-center">
-            <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}${card.image.url}`}
-              height={70}
-              width={70}
-              alt={card.image.alternativeText || ''}
-              className="h-full w-auto"
-            />
+            {card.image?.url && (
+              <Image
+                src={`${process.env.NEXT_PUBLIC_API_URL}${card.image.url}`}
+                height={70}
+                width={70}
+                alt={card.image.alternativeText || ''}
+                className="h-full w-auto"
+              />
+            )}
           </div>
           <p className="text-xs font-bold">{card.title}</p>
           <button
@@ -97,13 +99,15 @@ function Card({ card }: { card: ImageCard }) {
   "
       >
         <div className="h-[100px] w-full flex items-center justify-center overflow-hidden">
-          <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}${card.image.url}`}
-            width={200}
-            height={200}
-            alt={card.image.alternativeText || ''}
-            className="h-full w-auto object-contain"
-          />
+          {card.image?.url && (
+            <Image
+              src={`${process.env.NEXT_PUBLIC_API_URL}${card.image.url}`}
+              width={200}
+              height={200}
+              alt={card.image.alternativeText || ''}
+              className="h-full w-auto object-contain"
+            />
+          )}
         </div>
 
         <div className="lg:col-span-2 flex h-full flex-col">

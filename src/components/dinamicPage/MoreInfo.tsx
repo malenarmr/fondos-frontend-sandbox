@@ -18,17 +18,17 @@ export default function MoreInfo({ section }: Props) {
             className={`md:px-[1rem] lg:py-7 !min-h-fit px-[.7rem] py-5 md:py-10 border border-[#2098A1] hover:bg-[#2098A1] cursor-pointer h-full text-[#3C3C3B] hover:text-white bg-white rounded-tl-[6px] rounded-tr-[20px] rounded-br-[6px] rounded-bl-[20px] place-items-start ${
               index === section.cards.length - 1
                 ? 'col-span-2'
-                : 'lg:aspect-[1.1/1] aspect-auto'
+                : 'md:aspect-[1.1/1] aspect-auto'
             }`}
             key={c.id}
           >
             <div className="w-full h-full">
-              <p className="font-bold text-[1rem] md:text-[1.3rem] md:text-[1.1rem] lg:text-[1rem] xl:text-[1.3rem] 2xl:text-[1.2rem]">
+              <p className="font-bold text-[1rem] md:text-[1.1rem] md:text-[1.1rem] lg:text-[1.1rem] xl:text-[1.3rem] 2xl:text-[1.2rem]">
                 {c.title}
               </p>
               <CardMarkdown
                 content={c.description}
-                className="md:text-[1.2rem] lg:text-[.9rem] text-[.9rem] xl:text-[1.2rem] 2xl:text-[1rem] font-light h-full pt-3 md:pt-3 lg:pt-1 xl:pt-3 leading-none md:leading-tight"
+                className="md:text-[.9rem] lg:text-[1rem] text-[.9rem] xl:text-[1.2rem] 2xl:text-[1.3rem] font-light h-full pt-3 md:pt-3 lg:pt-4 xl:pt-3 leading-none md:leading-tight"
               />
             </div>
           </div>

@@ -81,8 +81,6 @@ export default async function DynamicLandingPage({ params }: PageProps) {
     return truncated.slice(0, truncated.lastIndexOf(' ')) + '...';
   }
 
-  // resto del componente...
-  console.log(landing.video_seccion_fondos.length, 'aaaaaaaaaaaaaaaaa');
   return (
     <main>
       <Navbar />
@@ -122,7 +120,7 @@ export default async function DynamicLandingPage({ params }: PageProps) {
           </div>
         )}
         {landing.faqs && <Faqs section={landing.faqs} />}
-        {landing.video_seccion_fondos.length > 0 && (
+        {landing.video_seccion_fondos?.length > 0 && (
           <VideosComponent videos={landing.video_seccion_fondos} />
         )}
         {landing.legal && (

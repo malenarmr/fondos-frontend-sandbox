@@ -18,12 +18,14 @@ export default function Questions({ section }: Props) {
         {/* Imagen: absoluta, ocupa el 100% de la altura del padre */}
         <div className="absolute hidden md:flex inset-y-0 left-0 w-1/3 p-5">
           <div className="relative w-full h-full flex items-center justify-center">
-            <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}${section.image.url}`}
-              alt={section.image.alternativeText || ''}
-              width={250}
-              height={250}
-            />
+            {section.image?.url && (
+              <Image
+                src={`${process.env.NEXT_PUBLIC_API_URL}${section.image.url}`}
+                alt={section.image.alternativeText || ''}
+                width={250}
+                height={250}
+              />
+            )}
           </div>
         </div>
 
