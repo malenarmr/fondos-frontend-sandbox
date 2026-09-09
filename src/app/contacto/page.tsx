@@ -1,7 +1,7 @@
 'use client';
 
 import ContactBox from '@/components/contacto/ContactBox';
-// import Form from '@/components/contacto/Form';
+import Form from '@/components/contacto/Form';
 import HeroSectionGenerico from '@/components/shared/HeroSectionGenerico';
 import Navbar from '@/components/shared/NavBar';
 import Spinner from '@/components/shared/Spinner';
@@ -36,7 +36,7 @@ export default function ContactoPage() {
             <ContactBox contacto={contacto} />
           </div>
         </div>
-        {/* <Form /> */}
+        <Form />
       </div>
     </div>
   );
