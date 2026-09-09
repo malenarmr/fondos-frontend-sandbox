@@ -31,18 +31,22 @@ export default function ContactBox({ contacto }: ContactBoxProps) {
       </div>
       {/* Email */}
       <div className="flex items-center gap-4">
-        <Mail
-          size={32}
-          strokeWidth={2}
-          color="#009B67"
-          className="min-w-[32px]"
-        />
-        <a
-          href={`mailto:${contacto.email.trim()}`}
-          className="text-secondary text-md md:text-lg underline"
-        >
-          {contacto.email.trim()}
-        </a>
+        {contacto.email && (
+          <>
+            <Mail
+              size={32}
+              strokeWidth={2}
+              color="#009B67"
+              className="min-w-[32px]"
+            />
+            <a
+              href={`mailto:${contacto.email.trim()}`}
+              className="text-secondary text-md md:text-lg underline"
+            >
+              {contacto.email.trim()}
+            </a>
+          </>
+        )}
       </div>
     </div>
   );

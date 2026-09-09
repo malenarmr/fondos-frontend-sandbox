@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
       email,
       message,
       motivo_consulta_fondo: motivoConsultaFondo,
+      state: 'Nuevo',
     };
     const response = await provinciaApiClient.fondos.form.createForm({
       jwtToken,

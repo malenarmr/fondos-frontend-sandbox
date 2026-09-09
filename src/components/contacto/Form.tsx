@@ -33,7 +33,13 @@ export default function Form() {
       const response = await fetch('/api/contacto', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message, motivoConsultaFondo }),
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          motivoConsultaFondo,
+          state: 'Nuevo',
+        }),
       });
 
       if (!response.ok) throw new Error('Error al enviar la consulta');
