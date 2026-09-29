@@ -12,6 +12,7 @@ export default function Form() {
       motivo: '';
       id: number;
       documentId: string;
+      cuit: boolean | null;
     }[]
   >([]);
 
@@ -19,9 +20,22 @@ export default function Form() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [motivoConsultaFondo, setMotivoConsultaFondo] = useState('');
+  const [cuit, setCuit] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  const requiereCuit = Boolean(
+    motivosConsulta.find((m) => m.documentId === motivoConsultaFondo)?.cuit
+  );
+
+  // Arma el formato XX-XXXXXXXX-X que valida Strapi a medida que se tipea
+  function formatCuit(value: string) {
+    const digits = value.replace(/\D/g, '').slice(0, 11);
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 10) return `${digits.slice(0, 2)}-${digits.slice(2)}`;
+    return `${digits.slice(0, 2)}-${digits.slice(2, 10)}-${digits.slice(10)}`;
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,6 +52,7 @@ export default function Form() {
           email,
           message,
           motivoConsultaFondo,
+          ...(requiereCuit && { cuit }),
           state: 'Nuevo',
         }),
       });
@@ -49,6 +64,7 @@ export default function Form() {
       setEmail('');
       setMessage('');
       setMotivoConsultaFondo('');
+      setCuit('');
     } catch {
       setSubmitError('No pudimos enviar tu consulta. Intentá nuevamente.');
     } finally {
@@ -143,7 +159,10 @@ export default function Form() {
               <select
                 required
                 value={motivoConsultaFondo}
-                onChange={(e) => setMotivoConsultaFondo(e.target.value)}
+                onChange={(e) => {
+                  setMotivoConsultaFondo(e.target.value);
+                  setCuit('');
+                }}
                 className="rounded-xl w-full px-4 py-[9px] border border-gray-300 rounded-lg font-encode-sans focus:outline-none focus:ring-2 focus:ring-[#008996] focus:border-transparent appearance-none bg-white"
               >
                 <option value="">Selecciona un tema</option>
@@ -159,6 +178,21 @@ export default function Form() {
                 ))}
               </select>
             </div>
+            {requiereCuit && (
+              <div className="w-full flex flex-col gap-2">
+                <h1 className="font-bold text-xl">¿Cuál es tu CUIT?</h1>
+                <input
+                  required
+                  inputMode="numeric"
+                  value={cuit}
+                  onChange={(e) => setCuit(formatCuit(e.target.value))}
+                  pattern="(20|23|24|25|26|27|30|33|34)-[0-9]{8}-[0-9]"
+                  title="Ingresá un CUIT válido con el formato XX-XXXXXXXX-X"
+                  placeholder="XX-XXXXXXXX-X"
+                  className="w-full p-2 rounded-xl shadow-xs ml-2 text-[18px]"
+                />
+              </div>
+            )}
             <div className="w-full flex flex-col gap-2">
               <h1 className="font-bold text-xl">Dejá tu mensaje</h1>
               <textarea

@@ -4,7 +4,8 @@ import { provinciaClient } from 'provincia-api-client';
 import { AxiosError } from 'axios';
 
 export async function POST(request: NextRequest) {
-  const { name, email, message, motivoConsultaFondo } = await request.json();
+  const { name, email, message, motivoConsultaFondo, cuit } =
+    await request.json();
 
   if (!name || !email || !message || !motivoConsultaFondo) {
     return NextResponse.json(
@@ -25,6 +26,7 @@ export async function POST(request: NextRequest) {
       email,
       message,
       motivo_consulta_fondo: motivoConsultaFondo,
+      ...(cuit && { cuit }),
       state: 'Nuevo',
     };
     const response = await provinciaApiClient.fondos.form.createForm({
