@@ -3,8 +3,12 @@
 import { useAppContext } from '@/context/AppContext';
 import Button from '../shared/Button';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 export default function Form() {
   const { provinciaApiClient } = useAppContext();
+  const searchParams = useSearchParams();
+  // /contacto?cuit=true fuerza el input de CUIT sin importar el motivo elegido
+  const cuitDesdeUrl = searchParams.get('cuit') === 'true';
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [motivosConsulta, setMotivosConsulta] = useState<
@@ -25,9 +29,11 @@ export default function Form() {
   const [submitError, setSubmitError] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const requiereCuit = Boolean(
-    motivosConsulta.find((m) => m.documentId === motivoConsultaFondo)?.cuit
-  );
+  const requiereCuit =
+    cuitDesdeUrl ||
+    Boolean(
+      motivosConsulta.find((m) => m.documentId === motivoConsultaFondo)?.cuit
+    );
 
   // Arma el formato XX-XXXXXXXX-X que valida Strapi a medida que se tipea
   function formatCuit(value: string) {
@@ -161,7 +167,7 @@ export default function Form() {
                 value={motivoConsultaFondo}
                 onChange={(e) => {
                   setMotivoConsultaFondo(e.target.value);
-                  setCuit('');
+                  if (!cuitDesdeUrl) setCuit('');
                 }}
                 className="rounded-xl w-full px-4 py-[9px] border border-gray-300 rounded-lg font-encode-sans focus:outline-none focus:ring-2 focus:ring-[#008996] focus:border-transparent appearance-none bg-white"
               >

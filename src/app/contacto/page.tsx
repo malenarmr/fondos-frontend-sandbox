@@ -6,6 +6,7 @@ import HeroSectionGenerico from '@/components/shared/HeroSectionGenerico';
 import Navbar from '@/components/shared/NavBar';
 import Spinner from '@/components/shared/Spinner';
 import { useContactoData } from '@/hooks/useContactoData';
+import { Suspense } from 'react';
 export default function ContactoPage() {
   const { contacto, loading } = useContactoData();
 
@@ -36,7 +37,10 @@ export default function ContactoPage() {
             <ContactBox contacto={contacto} />
           </div>
         </div>
-        <Form />
+        {/* Form lee ?cuit= con useSearchParams, que necesita un Suspense */}
+        <Suspense>
+          <Form />
+        </Suspense>
       </div>
     </div>
   );
