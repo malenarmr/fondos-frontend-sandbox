@@ -9,8 +9,11 @@ import { useAppContext } from '@/context/AppContext';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
+// El hero y los destacados comparten el carrusel; isDestacado permite estilarlos distinto
+type CarouselCard = HomeCard & { isDestacado?: boolean };
+
 export default function HeroCarousel() {
-  const [cards, setCards] = useState<HomeCard[]>([]);
+  const [cards, setCards] = useState<CarouselCard[]>([]);
   const { provinciaApiClient } = useAppContext();
 
   // Embla + Autoplay
@@ -63,6 +66,7 @@ export default function HeroCarousel() {
           ({ link1, ...rest }: any) => ({
             ...rest,
             link1: link1 ?? null,
+            isDestacado: true,
           })
         );
 
@@ -133,7 +137,9 @@ export default function HeroCarousel() {
                     <h1 className="font-encode-sans font-extrabold text-2xl mt-4 mb-2">
                       {card.title}
                     </h1>
-                    <p className="text-base whitespace-pre-line font-encode-sans mb-6">
+                    <p
+                      className={`${card.isDestacado ? 'text-xl' : 'text-base'} whitespace-pre-line font-encode-sans mb-6`}
+                    >
                       {card.description}
                     </p>
                     {card.link1 && (
@@ -166,7 +172,9 @@ export default function HeroCarousel() {
                     <h1 className="text-4xl font-extrabold mb-4">
                       {card.title}
                     </h1>
-                    <p className="text-lg mb-6 whitespace-pre-line">
+                    <p
+                      className={`${card.isDestacado ? 'text-3xl' : 'text-lg'} mb-6 whitespace-pre-line`}
+                    >
                       {card.description}
                     </p>
                     {card.link1 && (
