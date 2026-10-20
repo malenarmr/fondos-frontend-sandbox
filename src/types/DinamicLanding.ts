@@ -2,6 +2,8 @@ export type SimpleCard = {
   title: string;
   description: string;
   id: number;
+  button_text?: string;
+  button_link: string;
 };
 export type Image = {
   url: string;
@@ -20,6 +22,16 @@ export type SimpleSection = {
   title: string;
   description?: string;
   cards: SimpleCard[];
+};
+
+export type fondosInfo = {
+  id: number;
+  public: boolean;
+  backgroundColor: string;
+  textColor: string;
+  cardImage: ImageCard;
+  details: SimpleCard[];
+  cardPrincipal: SimpleCard;
 };
 export type SectionWithImage = {
   cards: SimpleCard[];
@@ -59,6 +71,7 @@ export type DynamicLanding = {
   faqs: SimpleSection;
   legal: SimpleCard;
   video_seccion_fondos: Videos[];
+  fondosInfo: fondosInfo[];
 };
 
 export type StrapiResponse = {

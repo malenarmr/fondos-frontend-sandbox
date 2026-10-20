@@ -18,6 +18,7 @@ import AvisoLegalSection from '@/components/institucional/AvisoLegalSection';
 
 import VideosComponent from '@/components/dinamicPage/Videos';
 import DescriptionDinamicPage from '@/components/dinamicPage/Description';
+import SectionFondosDetails from '@/components/dinamicPage/fondosDetalles/Section';
 
 //import mockData from '@/utils/mockData.json';
 
@@ -80,7 +81,7 @@ export default async function DynamicLandingPage({ params }: PageProps) {
 
     return truncated.slice(0, truncated.lastIndexOf(' ')) + '...';
   }
-  console.log(landing.sectionQuestions);
+  console.log(landing.fondosInfo);
   return (
     <main>
       <Navbar />
@@ -102,6 +103,14 @@ export default async function DynamicLandingPage({ params }: PageProps) {
             )}
           </div>
         )}
+        <div>
+          <SectionFondosDetails
+            section={landing.fondosInfo}
+            primaryColor="#009B67"
+            secondaryColor="#2098A1"
+          />
+        </div>
+
         {landing.sectionCardsImages && (
           // sectionCardsImages tiene su propio fondo y debe quedar pegada a
           // la sección siguiente para dar continuidad visual, así que acá

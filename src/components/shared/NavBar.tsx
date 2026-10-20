@@ -39,9 +39,8 @@ const Navbar: React.FC = () => {
     const fetchDynamicNavItems = async () => {
       try {
         const response = await fetch(
-          'https://provincia-prod-api.teocoop.site/api/dinamic-landings-navbar'
+          `${process.env.NEXT_PUBLIC_API_URL}/api/dinamic-landings-navbar`
         );
-
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
         }
@@ -57,8 +56,8 @@ const Navbar: React.FC = () => {
   }, []);
 
   // Items dinámicos cuya "relation" matchea el href de un item estático
-  const getRelatedItems = (label: string) =>
-    dynamicItems.filter((item) => item.relation === label);
+  const getRelatedItems = (href: string) =>
+    dynamicItems.filter((item) => item.relation === href);
 
   return (
     <header className="bg-navbar sticky top-0 z-50">
@@ -95,7 +94,7 @@ const Navbar: React.FC = () => {
         >
           <ul className="flex flex-col space-y-4 gap-8 text-secondary lg:flex-row lg:space-y-0 lg:space-x-5 lg:items-center lg:whitespace-nowrap">
             {NAV_ITEMS.map((navItem) => {
-              const related = getRelatedItems(navItem.label);
+              const related = getRelatedItems(navItem.href);
 
               // "Nuestros Fondos" ya es un select propio (filtro por moneda).
               // Le sumamos los items dinámicos que le correspondan.
