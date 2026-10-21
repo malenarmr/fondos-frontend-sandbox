@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import OverlappingCards from './CardsSuperpuestas';
-import Details from './Details';
+import Details, { detailsAnchorId } from './Details';
 import { fondosInfo } from '@/types/DinamicLanding';
 
 interface Props {
@@ -18,6 +18,7 @@ export default function SectionFondosDetails({
 }: Props) {
   const cards = section.map((f) => ({
     title: f.cardPrincipal.title,
+    id: f.id,
     description: f.cardPrincipal.description,
     bgColor: f.backgroundColor,
     textColor: f.textColor,
@@ -26,7 +27,7 @@ export default function SectionFondosDetails({
   }));
 
   return (
-    <div className="flex flex-col gap-16">
+    <div className="flex flex-col gap-[8rem]">
       <div className="padding-xxl px-4 md:px-[100px] xl:px-[145px]">
         <OverlappingCards
           background={
@@ -40,14 +41,13 @@ export default function SectionFondosDetails({
         {section.map((f, i) => (
           <Details
             key={f.id}
+            anchorId={detailsAnchorId(f.id)}
             cardImage={f.cardImage}
             details={f.details}
             bgColor={f.backgroundColor}
             textColor={f.textColor}
+            id={f.id}
             sectionColor={i % 2 === 0 ? primaryColor : secondaryColor}
-            prevSectionColor={
-              i === 0 ? undefined : i % 2 === 1 ? primaryColor : secondaryColor
-            }
             background={
               <Image
                 src={i % 2 === 0 ? '/trama-clara.svg' : '/trama.svg'}

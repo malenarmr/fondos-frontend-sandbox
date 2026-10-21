@@ -1,25 +1,35 @@
 import Image from 'next/image';
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { ImageCard, SimpleCard } from '@/types/DinamicLanding';
 
 type Props = {
   cardImage: ImageCard;
+  id: number;
   details: SimpleCard[];
   /** Color de la card principal */
   bgColor: string;
   /** Color del texto de la card principal */
   textColor: string;
-  /** Color de la franja de fondo de la sección (alterna primario/secundario) */
+  /** Color de fondo de la sección (alterna primario/secundario) */
   sectionColor: string;
   /** Trama del fondo (<Image fill /> o <svg>) */
   background?: ReactNode;
-  /** Cuánto empieza la card por encima del fondo */
+  /** Cuánto sobresale la card por encima del fondo de la sección */
   offset?: string;
-  /** Espacio vertical arriba y abajo de la sección (separación entre secciones) */
+  /** Separación entre el final de una sección y la card de la siguiente */
   spacing?: string;
-  prevSectionColor?: string;
+  /** id para poder navegar a la sección con un ancla (#id) */
+  anchorId?: string;
 };
 
+/** id del ancla de cada fondo, compartido con las cards que linkean acá */
+export const detailsAnchorId = (id: number | string) => `fondo-${id}`;
+
+/**
+ * Cada sección pinta solo su propio fondo (color + trama). El contenido se
+ * desplaza hacia arriba con un margin negativo, así la card invade el fondo
+ * de la sección anterior sin taparle la trama.
+ */
 export default function Details({
   cardImage,
   details,
@@ -28,41 +38,45 @@ export default function Details({
   sectionColor,
   background,
   offset = '8rem',
-  spacing = '5rem',
-  prevSectionColor,
+  spacing = '12rem',
+  anchorId,
 }: Props) {
-  // El fondo arranca donde empieza la card + el desplazamiento,
-  // así el solapamiento se mantiene aunque cambie el spacing.
-  const backgroundStart = `calc(${spacing} + ${offset})`;
-
   return (
     <section
-      className="relative isolate w-full"
-      style={{ paddingTop: spacing, paddingBottom: spacing }}
+      // flow-root evita que el margin negativo del contenido "arrastre" la sección.
+      // La primera sección deja lugar arriba para lo que sobresale su card.
+      // Abajo: lo que sobresale la card siguiente + la separación visible;
+      // la última no tiene card debajo, así que solo deja la separación.
+      className="relative isolate flow-root w-full pb-[calc(var(--details-spacing)_+_var(--details-offset))] first:mt-[var(--details-offset)] last:pb-[var(--details-spacing)]"
+      style={
+        {
+          '--details-offset': offset,
+          '--details-spacing': spacing,
+          backgroundColor: sectionColor,
+        } as CSSProperties
+      }
     >
-      {prevSectionColor && (
-        <div
-          aria-hidden
-          className="absolute inset-x-0 top-0 -z-0"
-          style={{ height: backgroundStart, backgroundColor: prevSectionColor }}
-        />
-      )}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0  -z-10 overflow-visible"
-        style={{ top: backgroundStart, backgroundColor: sectionColor }}
-      >
-        <div className="absolute inset-y-0 left-4 right-4 md:left-[100px] md:right-[100px] xl:left-[145px] xl:right-[145px]">
-          {/* Sobresale un poco a los lados del contenido */}
-          <div className="absolute inset-y-0 -inset-x-6 md:inset-x-10">
-            {background}
+      {background && (
+        <div aria-hidden className="absolute inset-0 -z-10 overflow-visible">
+          <div className="absolute inset-y-12 left-4 md:inset-y-[8rem] right-4 md:left-[100px] md:right-[100px] xl:left-[145px] xl:right-[145px]">
+            {/* Margen interno: achica la trama respecto del contenido */}
+            <div className="absolute inset-y-0 inset-x-6 md:inset-x-12">
+              {background}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      <div className="px-4 padding-xxl px-4 md:px-[100px] xl:px-[145px]">
+      {/* El ancla va en el contenido (no en la sección) para que el scroll
+          llegue a la card completa; scroll-mt deja lugar al navbar sticky
+          y a la ilustración que sobresale por arriba de la card. */}
+      <div
+        id={anchorId}
+        className="relative scroll-mt-40 px-4 padding-xxl md:px-[100px] xl:px-[145px]"
+        style={{ marginTop: `calc(-1 * ${offset})` }}
+      >
         <article
-          className="relative rounded-bl-[20px] rounded-br-[6px] rounded-tl-[6px] rounded-tr-[20px] p-8 shadow-xl lg:p-12"
+          className="relative rounded-bl-[20px] rounded-br-[6px] rounded-tl-[6px] rounded-tr-[20px] p-8 shadow-xl lg:p-12 mb-[8rem]"
           style={{ backgroundColor: bgColor, color: textColor }}
         >
           <div className="flex flex-col gap-5 md:w-[55%]">
@@ -89,7 +103,7 @@ export default function Details({
           {details.map((d, i) => (
             <li
               key={`${d.title}-${i}`}
-              className="rounded-sm bg-white p-6 shadow-md"
+              className="rounded-xl p-10 bg-white min-h-[181.38px] shadow-md"
             >
               <h4 className="font-bold text-neutral-900">{d.title}</h4>
               <p className="mt-2 leading-snug text-neutral-700">
