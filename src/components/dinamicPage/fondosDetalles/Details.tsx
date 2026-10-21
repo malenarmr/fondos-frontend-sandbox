@@ -15,6 +15,8 @@ type Props = {
   background?: ReactNode;
   /** Cuánto empieza la card por encima del fondo */
   offset?: string;
+  /** Espacio vertical arriba y abajo de la sección (separación entre secciones) */
+  spacing?: string;
   prevSectionColor?: string;
 };
 
@@ -26,24 +28,35 @@ export default function Details({
   sectionColor,
   background,
   offset = '8rem',
+  spacing = '5rem',
   prevSectionColor,
 }: Props) {
+  // El fondo arranca donde empieza la card + el desplazamiento,
+  // así el solapamiento se mantiene aunque cambie el spacing.
+  const backgroundStart = `calc(${spacing} + ${offset})`;
+
   return (
-    <section className={`relative isolate w-full py-10`}>
+    <section
+      className="relative isolate w-full"
+      style={{ paddingTop: spacing, paddingBottom: spacing }}
+    >
       {prevSectionColor && (
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 -z-10"
-          style={{ height: offset, backgroundColor: prevSectionColor }}
+          className="absolute inset-x-0 top-0 -z-0"
+          style={{ height: backgroundStart, backgroundColor: prevSectionColor }}
         />
       )}
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 -z-10 overflow-hidden"
-        style={{ top: offset, backgroundColor: sectionColor }}
+        className="absolute inset-x-0 bottom-0  -z-10 overflow-visible"
+        style={{ top: backgroundStart, backgroundColor: sectionColor }}
       >
         <div className="absolute inset-y-0 left-4 right-4 md:left-[100px] md:right-[100px] xl:left-[145px] xl:right-[145px]">
-          {background}
+          {/* Sobresale un poco a los lados del contenido */}
+          <div className="absolute inset-y-0 -inset-x-6 md:inset-x-10">
+            {background}
+          </div>
         </div>
       </div>
 

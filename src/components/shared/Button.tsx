@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 type CommonProps = {
-  variant?: 'primary' | 'secondary' | 'light' | 'sky';
+  variant?: 'primary' | 'secondary' | 'light' | 'sky' | 'white';
   children: React.ReactNode;
 };
 
@@ -38,6 +38,10 @@ const Button: React.FC<Props> = (props) => {
     bg-primary-light border border-primary-light text-white
     hover:bg-primary hover:border-primary focus:ring-primary
   `,
+    white: `
+    bg-white border border-white text-[#3C3C3B]
+    hover:bg-primary hover:border-primary hover:text-white focus:ring-primary
+  `,
     sky: `
     bg-sky border border-sky text-secondary font-semibold
     hover:bg-primary hover:border-primary focus:ring-primary
@@ -53,7 +57,7 @@ const Button: React.FC<Props> = (props) => {
   `,
   } as const;
 
-  const className = `${base} ${styles[variant]}`;
+  const className = `${base} ${styles[variant]} ${props.className ?? ''}`;
 
   // Rama <a> cuando viene href
   if ('href' in props) {
@@ -70,8 +74,8 @@ const Button: React.FC<Props> = (props) => {
         href={href}
         target={target}
         rel={rel}
-        className={className}
         {...rest}
+        className={className}
       >
         {children}
       </Link>
@@ -82,11 +86,11 @@ const Button: React.FC<Props> = (props) => {
   const { onClick, disabled, type = 'button', ...rest } = props;
   return (
     <button
-      className={className}
       onClick={onClick}
       disabled={disabled}
       type={type}
       {...rest}
+      className={className}
     >
       {children}
     </button>

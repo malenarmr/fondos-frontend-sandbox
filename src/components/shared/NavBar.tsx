@@ -95,7 +95,6 @@ const Navbar: React.FC = () => {
           <ul className="flex flex-col space-y-4 gap-8 text-secondary lg:flex-row lg:space-y-0 lg:space-x-5 lg:items-center lg:whitespace-nowrap">
             {NAV_ITEMS.map((navItem) => {
               const related = getRelatedItems(navItem.label);
-
               // "Nuestros Fondos" ya es un select propio (filtro por moneda).
               // Le sumamos los items dinámicos que le correspondan.
               if (navItem.key === 'fondos') {

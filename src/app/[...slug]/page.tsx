@@ -103,13 +103,13 @@ export default async function DynamicLandingPage({ params }: PageProps) {
             )}
           </div>
         )}
-        <div>
+        {landing.fondosInfo && (
           <SectionFondosDetails
             section={landing.fondosInfo}
             primaryColor="#009B67"
             secondaryColor="#2098A1"
           />
-        </div>
+        )}
 
         {landing.sectionCardsImages && (
           // sectionCardsImages tiene su propio fondo y debe quedar pegada a

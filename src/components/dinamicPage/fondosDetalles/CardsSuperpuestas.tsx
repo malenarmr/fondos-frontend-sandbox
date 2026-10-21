@@ -1,8 +1,12 @@
+import Button from '@/components/shared/Button';
 import type { CSSProperties, ReactNode } from 'react';
 
 export type OverlappingCard = {
   title: string;
   description: ReactNode;
+  button_text?: string;
+  button_link?: string;
+
   /** Color de fondo de la tarjeta (hex, rgb, var(--x)...) */
   bgColor: string;
   /** Color del texto de la tarjeta */
@@ -68,6 +72,19 @@ export default function OverlappingCards({
               >
                 {card.description}
               </p>
+              {card.button_link && (
+                <div
+                  className={`flex mt-10 w-full ${right ? 'justify-end' : 'justify-start'}`}
+                >
+                  <Button
+                    variant="white"
+                    className="w-[30%]"
+                    href={card.button_link}
+                  >
+                    {card.button_text}
+                  </Button>
+                </div>
+              )}
             </li>
           );
         })}

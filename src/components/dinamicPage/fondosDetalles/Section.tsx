@@ -21,6 +21,8 @@ export default function SectionFondosDetails({
     description: f.cardPrincipal.description,
     bgColor: f.backgroundColor,
     textColor: f.textColor,
+    button_text: f.cardPrincipal.button_text,
+    button_link: f.cardPrincipal.button_link,
   }));
 
   return (
@@ -48,17 +50,10 @@ export default function SectionFondosDetails({
             }
             background={
               <Image
-                src={
-                  i === 0
-                    ? '/trama-clara.svg'
-                    : i % 2 === 1
-                      ? './trama.svg'
-                      : './trama-clara.svg'
-                }
+                src={i % 2 === 0 ? '/trama-clara.svg' : '/trama.svg'}
                 alt=""
-                width={400}
-                height={400}
-                className="opacity-20 w-auto h-full"
+                fill
+                className="object-cover object-center"
               />
             }
           />
