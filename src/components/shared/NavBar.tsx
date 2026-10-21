@@ -56,8 +56,8 @@ const Navbar: React.FC = () => {
   }, []);
 
   // Items dinámicos cuya "relation" matchea el href de un item estático
-  const getRelatedItems = (href: string) =>
-    dynamicItems.filter((item) => item.relation === href);
+  const getRelatedItems = (label: string) =>
+    dynamicItems.filter((item) => item.relation === label);
 
   return (
     <header className="bg-navbar sticky top-0 z-50">
@@ -94,7 +94,7 @@ const Navbar: React.FC = () => {
         >
           <ul className="flex flex-col space-y-4 gap-8 text-secondary lg:flex-row lg:space-y-0 lg:space-x-5 lg:items-center lg:whitespace-nowrap">
             {NAV_ITEMS.map((navItem) => {
-              const related = getRelatedItems(navItem.href);
+              const related = getRelatedItems(navItem.label);
 
               // "Nuestros Fondos" ya es un select propio (filtro por moneda).
               // Le sumamos los items dinámicos que le correspondan.
