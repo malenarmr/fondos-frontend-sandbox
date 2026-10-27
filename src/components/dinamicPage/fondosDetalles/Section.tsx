@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import OverlappingCards from './CardsSuperpuestas';
-import Details, { detailsAnchorId } from './Details';
+import Details from './Details';
 import { fondosInfo } from '@/types/DinamicLanding';
-
+import { detailsAnchorId } from '@/utils/detailsAnchorId';
 interface Props {
   section: fondosInfo[];
   /** Fondo de las secciones impares (1ª, 3ª, ...) */
@@ -28,7 +28,7 @@ export default function SectionFondosDetails({
 
   return (
     <div className="flex flex-col gap-[8rem]">
-      <div className="padding-xxl px-4 md:px-[100px] xl:px-[145px]">
+      <div className="padding-xxl px-4 md:px-[100px] xl:px-[145px] hidden md:flex">
         <OverlappingCards
           background={
             <Image src="/trama.svg" alt="" fill className="object-fill" />

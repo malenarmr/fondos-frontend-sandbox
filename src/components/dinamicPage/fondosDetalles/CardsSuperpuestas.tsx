@@ -1,6 +1,6 @@
 import Button from '@/components/shared/Button';
 import type { CSSProperties, ReactNode } from 'react';
-import { detailsAnchorId } from './Details';
+import { detailsAnchorId } from '@/utils/detailsAnchorId';
 import ScrollToLink from './ScrollToLink';
 
 export type OverlappingCard = {
@@ -58,7 +58,7 @@ export default function OverlappingCards({
               key={`${card.title}-${i}`}
               style={style}
               className={[
-                'relative w-full cursor-pointer rounded-bl-[20px] rounded-br-[6px] rounded-tl-[6px] rounded-tr-[20px] px-8 py-8 shadow-[0_8px_24px_rgba(0,0,0,0.18)] md:w-[70%] md:px-20 md:py-14',
+                'relative w-full cursor-pointer rounded-bl-[20px] rounded-br-[6px] rounded-tl-[6px] rounded-tr-[20px] px-8 py-8 shadow-[0_8px_24px_rgba(0,0,0,0.18)] md:w-[80%] lg:w-[70%] lg:px-20 lg:py-14 md:px-10 md:py-10',
                 right
                   ? 'justify-self-end text-right'
                   : 'justify-self-start text-left',
@@ -73,11 +73,11 @@ export default function OverlappingCards({
                 aria-label={card.title}
                 className="absolute inset-0 rounded-[inherit]"
               />
-              <h3 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+              <h3 className="text-4xl font-bold leading-tight tracking-tight md:text-3xl lg:text-6xl">
                 {card.title}
               </h3>
               <p
-                className={`mt-5 max-w-6xl text-base leading-snug md:text-lg ${right ? 'ml-auto' : ''}`}
+                className={`mt-5 max-w-6xl text-base leading-snug md:text-md lg:text-lg ${right ? 'ml-auto' : ''}`}
               >
                 {card.description}
               </p>
@@ -87,7 +87,7 @@ export default function OverlappingCards({
                 >
                   <Button
                     variant="white"
-                    className="w-[30%]"
+                    className="lg:w-[30%] w-[80%]"
                     href={card.button_link}
                   >
                     {card.button_text}

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import type { CSSProperties, ReactNode } from 'react';
 import { ImageCard, SimpleCard } from '@/types/DinamicLanding';
-
+import { DetailsGrid } from '../DetailItem';
 type Props = {
   cardImage: ImageCard;
   id: number;
@@ -18,12 +18,12 @@ type Props = {
   offset?: string;
   /** Separación entre el final de una sección y la card de la siguiente */
   spacing?: string;
+  /** Versiones mobile (< md) de offset y spacing */
+  mobileOffset?: string;
+  mobileSpacing?: string;
   /** id para poder navegar a la sección con un ancla (#id) */
   anchorId?: string;
 };
-
-/** id del ancla de cada fondo, compartido con las cards que linkean acá */
-export const detailsAnchorId = (id: number | string) => `fondo-${id}`;
 
 /**
  * Cada sección pinta solo su propio fondo (color + trama). El contenido se
@@ -39,6 +39,8 @@ export default function Details({
   background,
   offset = '8rem',
   spacing = '12rem',
+  mobileOffset = '3rem',
+  mobileSpacing = '4rem',
   anchorId,
 }: Props) {
   return (
@@ -47,11 +49,13 @@ export default function Details({
       // La primera sección deja lugar arriba para lo que sobresale su card.
       // Abajo: lo que sobresale la card siguiente + la separación visible;
       // la última no tiene card debajo, así que solo deja la separación.
-      className="relative isolate flow-root w-full pb-[calc(var(--details-spacing)_+_var(--details-offset))] first:mt-[var(--details-offset)] last:pb-[var(--details-spacing)]"
+      className="relative isolate flow-root w-full pb-[calc(var(--details-spacing)_+_var(--details-offset))] first:mt-[var(--details-offset)] last:pb-[var(--details-spacing)] [--details-offset:var(--details-offset-sm)] [--details-spacing:var(--details-spacing-sm)] md:[--details-offset:var(--details-offset-md)] md:[--details-spacing:var(--details-spacing-md)]"
       style={
         {
-          '--details-offset': offset,
-          '--details-spacing': spacing,
+          '--details-offset-sm': mobileOffset,
+          '--details-spacing-sm': mobileSpacing,
+          '--details-offset-md': offset,
+          '--details-spacing-md': spacing,
           backgroundColor: sectionColor,
         } as CSSProperties
       }
@@ -73,10 +77,10 @@ export default function Details({
       <div
         id={anchorId}
         className="relative scroll-mt-40 px-4 padding-xxl md:px-[100px] xl:px-[145px]"
-        style={{ marginTop: `calc(-1 * ${offset})` }}
+        style={{ marginTop: 'calc(-1 * var(--details-offset))' }}
       >
         <article
-          className="relative rounded-bl-[20px] rounded-br-[6px] rounded-tl-[6px] rounded-tr-[20px] p-8 shadow-xl lg:p-12 mb-[8rem]"
+          className="relative rounded-bl-[20px] rounded-br-[6px] rounded-tl-[6px] rounded-tr-[20px] p-8 shadow-xl lg:p-12 lg:mb-[8rem]"
           style={{ backgroundColor: bgColor, color: textColor }}
         >
           <div className="flex flex-col gap-5 md:w-[55%]">
@@ -99,19 +103,7 @@ export default function Details({
           </div>
         </article>
 
-        <ul className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {details.map((d, i) => (
-            <li
-              key={`${d.title}-${i}`}
-              className="rounded-xl p-10 bg-white min-h-[181.38px] shadow-md"
-            >
-              <h4 className="font-bold text-neutral-900">{d.title}</h4>
-              <p className="mt-2 leading-snug text-neutral-700">
-                {d.description}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <DetailsGrid details={details} />
       </div>
     </section>
   );
