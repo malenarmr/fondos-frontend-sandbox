@@ -44,7 +44,7 @@ function DetailItem({
   onToggle: () => void;
 }) {
   return (
-    <li className="flex flex-col items-center rounded-md bg-white px-2 py-3 text-center shadow-md md:min-h-[181.38px] md:items-start md:p-10 md:text-left">
+    <li className="flex flex-col items-center rounded-[5px] md:rounded-xl bg-white px-2 py-3 text-center shadow-md md:min-h-[181.38px] md:items-start md:p-10 md:text-left">
       <h4 className="font-bold text-neutral-900">{detail.title}</h4>
 
       {/* Colapsable en mobile, siempre visible en >=768px */}
