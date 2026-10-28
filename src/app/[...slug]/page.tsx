@@ -19,6 +19,7 @@ import AvisoLegalSection from '@/components/institucional/AvisoLegalSection';
 import VideosComponent from '@/components/dinamicPage/Videos';
 import DescriptionDinamicPage from '@/components/dinamicPage/Description';
 import SectionFondosDetails from '@/components/dinamicPage/fondosDetalles/Section';
+import SectionTest from '@/components/dinamicPage/SectionTest';
 
 //import mockData from '@/utils/mockData.json';
 
@@ -110,7 +111,7 @@ export default async function DynamicLandingPage({ params }: PageProps) {
             secondaryColor="#2098A1"
           />
         )}
-
+        {landing.test && <SectionTest section={landing.test} />}
         {landing.sectionCardsImages && (
           <div
             className={`-mb-16 md:-mb-24 lg:-mb-[15vh] ${landing.sectionQuestions == undefined && '!mb-2'}`}

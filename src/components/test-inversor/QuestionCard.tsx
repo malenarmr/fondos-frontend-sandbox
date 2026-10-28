@@ -16,7 +16,7 @@ export default function QuestionCard({
       onClick={onClick}
       className={`
         flex items-center justify-center
-        p-4 rounded-xl shadow-sm cursor-pointer transition-all h-60 text-center
+        p-4 rounded-xl shadow-sm cursor-pointer transition-all h-60 text-center w-full
         border
         ${
           isSelected

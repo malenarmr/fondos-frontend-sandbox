@@ -66,6 +66,26 @@ export type Videos = {
   categories_video_fondos?: { categoryName: string }[];
 };
 
+export type Answer = {
+  id: number;
+  answer: string;
+  point: number;
+};
+
+export type Question = {
+  id: number;
+  question: string;
+  answer: Answer[];
+};
+
+export type Test = {
+  id: number;
+  title: string;
+  description: string;
+  public: boolean;
+  question: Question[];
+};
+
 export type DynamicLanding = {
   id: number;
   path: string;
@@ -79,6 +99,7 @@ export type DynamicLanding = {
   legal: SimpleCard;
   video_seccion_fondos: Videos[];
   fondosInfo: fondosInfo[];
+  test?: Test;
 };
 
 export type StrapiResponse = {
