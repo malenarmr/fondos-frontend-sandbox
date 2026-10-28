@@ -26,6 +26,9 @@ export default function SectionFondosDetails({
     button_link: f.cardPrincipal.button_link,
   }));
 
+  // Solo se renderizan los detalles publicados (el back omite fondoDetail si no es público)
+  const sectionWithDetail = section.filter((f) => f.fondoDetail);
+
   return (
     <div className="flex flex-col gap-[8rem]">
       <div className="padding-xxl px-4 md:px-[100px] xl:px-[145px] hidden md:flex">
@@ -38,12 +41,12 @@ export default function SectionFondosDetails({
       </div>
 
       <div className="flex flex-col">
-        {section.map((f, i) => (
+        {sectionWithDetail.map((f, i) => (
           <Details
             key={f.id}
             anchorId={detailsAnchorId(f.id)}
-            cardImage={f.cardImage}
-            details={f.details}
+            cardImage={f.fondoDetail!.cardImage}
+            details={f.fondoDetail!.details}
             bgColor={f.backgroundColor}
             textColor={f.textColor}
             id={f.id}

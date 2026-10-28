@@ -4,6 +4,7 @@ export type SimpleCard = {
   id: number;
   button_text?: string;
   button_link: string;
+  public: boolean;
 };
 export type Image = {
   url: string;
@@ -24,13 +25,19 @@ export type SimpleSection = {
   cards: SimpleCard[];
 };
 
+export type FondoDetail = {
+  id: number;
+  public: boolean;
+  cardImage: ImageCard;
+  details: SimpleCard[];
+};
+
 export type fondosInfo = {
   id: number;
   public: boolean;
   backgroundColor: string;
   textColor: string;
-  cardImage: ImageCard;
-  details: SimpleCard[];
+  fondoDetail?: FondoDetail;
   cardPrincipal: SimpleCard;
 };
 export type SectionWithImage = {

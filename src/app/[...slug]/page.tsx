@@ -112,10 +112,6 @@ export default async function DynamicLandingPage({ params }: PageProps) {
         )}
 
         {landing.sectionCardsImages && (
-          // sectionCardsImages tiene su propio fondo y debe quedar pegada a
-          // la sección siguiente para dar continuidad visual, así que acá
-          // cancelamos puntualmente el gap del contenedor (en vez de sacarla
-          // del flujo con gap, que rompería la separación uniforme del resto).
           <div
             className={`-mb-16 md:-mb-24 lg:-mb-[15vh] ${landing.sectionQuestions == undefined && '!mb-2'}`}
           >
