@@ -11,7 +11,7 @@ export default function SectionTest({ section }: Props) {
   // Solo se renderizan los detalles publicados (el back omite fondoDetail si no es público)
 
   return (
-    <div className="dark:bg-dark md:px-[100px] xl:px-[145px] padding-xxl flex flex-col gap-20">
+    <div className="dark:bg-dark md:px-[100px] xl:px-[145px] px-[1rem] flex flex-col gap-20">
       <div className="w-full">
         <h1 className="w-full text-start lg:text-left font-encode-sans font-extrabold xl:font-black text-4xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-primary-light mb-4 lg:mb-7 xl:mb-6  lg:px-0">
           {_capitalize(section.title || '')}

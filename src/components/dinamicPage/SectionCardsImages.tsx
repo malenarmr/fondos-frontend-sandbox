@@ -129,7 +129,7 @@ function Card({ card }: { card: ImageCard }) {
 
 export default function SectionButtons({ section }: Props) {
   return (
-    <div className="min-h-fit flex !px-0 flex-col items-center gap-[3vh] md:gap-[3vh] ">
+    <div className="min-h-fit flex !px-0 flex-col items-center gap-[3vh] md:gap-[3vh]">
       <h1 className="w-[50%] md:w-full text-center font-encode-sans font-bold text-xl md:text-2xl xl:text-[40px] leading-[30px] xl:leading-[60px] text-[#3C3C3B]/99">
         {section.title}
       </h1>

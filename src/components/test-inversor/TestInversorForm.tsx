@@ -129,7 +129,8 @@ export default function TestInversorForm({
     border-[#2F755E]
     rounded-xl
     shadow-sm
-    p-20
+    p-8
+    lg:p-20
     flex flex-col
     justify-center
     items-center"
