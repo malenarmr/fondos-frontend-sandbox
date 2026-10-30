@@ -187,7 +187,7 @@ export default function TestInversorForm({
 
       {isResultStep && finalResult ? (
         // TODO: el resultado de este test va a venir de la dinamic-landing
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 w-full">
           <div>
             <p className="text-gray-500 text-sm text-end">Resultado</p>
             <p className="w-full text-right font-encode-sans font-bold text-2xl xl:text-[35px] leading-[30px] xl:leading-[60px] text-[#3C3C3B]">
