@@ -3,13 +3,14 @@
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { getTestInversorFondo } from '@/services/testInversorService';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Button from '../shared/Button';
 import Spinner from '../shared/Spinner';
 import ProgressIndicator from './ProgressIndicator';
 import QuestionCard from './QuestionCard';
 import ResultadoContentBase from './ResultadoContentBase';
-import type { Question as ApiQuestion } from '@/types/DinamicLanding';
+import type { Question as ApiQuestion, Results } from '@/types/DinamicLanding';
+import Link from 'next/link';
 
 interface Option {
   id: string;
@@ -41,11 +42,15 @@ interface Props {
   questions?: ApiQuestion[];
   /** Muestra el resultado como un paso más del test en vez de redireccionar o abrir el modal */
   showResultInline?: boolean;
+  result?: Results[];
+  resultTitle?: string;
 }
 
 export default function TestInversorForm({
   questions: initialQuestions,
   showResultInline = false,
+  result,
+  resultTitle,
 }: Props) {
   const router = useRouter();
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -67,6 +72,19 @@ export default function TestInversorForm({
       .catch(() => setError('No se pudieron cargar las preguntas'))
       .finally(() => setLoading(false));
   }, [initialQuestions]);
+
+  const finalResult = useMemo(() => {
+    if (!result?.length) return null;
+
+    return (
+      [...result]
+        .sort((a, b) => b.point - a.point)
+        .find((r) => totalPoints >= r.point) ?? null
+    );
+  }, [result, totalPoints]);
+
+  // recién después:
+  if (loading) return <Spinner />;
 
   if (loading) {
     return (
@@ -120,6 +138,30 @@ export default function TestInversorForm({
     if (currentStep > 0) setCurrentStep((s) => s - 1);
   }
 
+  function renderResultCard(res: Results) {
+    return (
+      <div
+        className={`
+          flex items-center justify-between flex-col !shadow-[5px_5px_44px_rgba(0,0,0,0.10)]
+          p-14 rounded-xl shadow-sm text-center w-full
+          border gap-5 ${res.link ? 'cursor-pointer' : ''}
+        `}
+      >
+        <h2 className="font-bold">{res.recomendadoTitle}</h2>
+        <h1 className="w-full text-center font-encode-sans font-extrabold xl:font-black text-4xl xl:text-[45px] leading-[30px] xl:leading-[60px] text-[#3C3C3B]">
+          {res.title}
+        </h1>
+        <p>{res.description}</p>
+      </div>
+    );
+  }
+
+  function handleRestart() {
+    setAnswersByQuestion({});
+    setTotalPoints(0);
+    setCurrentStep(0);
+  }
+
   return (
     <div
       className="    mx-auto
@@ -133,17 +175,34 @@ export default function TestInversorForm({
     lg:p-20
     flex flex-col
     justify-center
+    relative
     items-center"
     >
-      <ProgressIndicator
-        totalSteps={showResultInline ? totalSteps + 1 : totalSteps}
-        currentStep={currentStep + 1}
-      />
+      <div className="sticky top-10 w-full">
+        <ProgressIndicator
+          totalSteps={showResultInline ? totalSteps + 1 : totalSteps}
+          currentStep={currentStep + 1}
+        />
+      </div>
 
-      {isResultStep ? (
+      {isResultStep && finalResult ? (
         // TODO: el resultado de este test va a venir de la dinamic-landing
-        <div className="mt-8 w-full flex justify-center">
-          <h2 className="text-2xl font-bold text-gray-800">Próximamente</h2>
+        <div className="flex flex-col gap-10">
+          <div>
+            <p className="text-gray-500 text-sm text-end">Resultado</p>
+            <p className="w-full text-right font-encode-sans font-bold text-2xl xl:text-[35px] leading-[30px] xl:leading-[60px] text-[#3C3C3B]">
+              {resultTitle}
+            </p>
+          </div>
+          {/* La card solo es clickeable si el resultado trae link */}
+          {finalResult.link ? (
+            <Link href={finalResult.link}>{renderResultCard(finalResult)}</Link>
+          ) : (
+            renderResultCard(finalResult)
+          )}
+          <div className="w-full flex justify-end">
+            <Button onClick={handleRestart}>Volver a hacer el test</Button>
+          </div>
         </div>
       ) : (
         <div className="mt-8 w-full">

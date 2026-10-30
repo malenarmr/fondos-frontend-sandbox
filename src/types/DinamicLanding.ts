@@ -77,6 +77,14 @@ export type Question = {
   question: string;
   answer: Answer[];
 };
+export type Results = {
+  id: number;
+  title: string;
+  description: string;
+  link: string | null;
+  point: number;
+  recomendadoTitle: string;
+};
 
 export type Test = {
   id: number;
@@ -84,6 +92,8 @@ export type Test = {
   description: string;
   public: boolean;
   question: Question[];
+  result: Results[];
+  resultTitle: string;
 };
 
 export type DynamicLanding = {
