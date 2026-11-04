@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import { SimpleCard } from '@/types/DinamicLanding';
-
+import remarkGfm from 'remark-gfm';
+import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
 /** Columnas de la grilla: los items de una misma fila se abren juntos */
 const COLUMNS = 2;
 
@@ -54,9 +56,9 @@ function DetailItem({
         }`}
       >
         <div className="overflow-hidden">
-          <p className="mt-2 text-center text-[.8rem]  md:text-[1rem] md:text-left leading-snug text-neutral-700">
+          <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
             {detail.description}
-          </p>
+          </ReactMarkdown>
         </div>
       </div>
 

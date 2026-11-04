@@ -2,10 +2,12 @@ import Button from '@/components/shared/Button';
 import type { CSSProperties, ReactNode } from 'react';
 import { detailsAnchorId } from '@/utils/detailsAnchorId';
 import ScrollToLink from './ScrollToLink';
-
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 export type OverlappingCard = {
   title: string;
-  description: ReactNode;
+  description: string;
   button_text?: string;
   button_link?: string;
   id: number;
@@ -76,11 +78,13 @@ export default function OverlappingCards({
               <h3 className="text-4xl font-bold leading-tight tracking-tight md:text-3xl lg:text-6xl">
                 {card.title}
               </h3>
-              <p
+              <div
                 className={`mt-5 max-w-6xl text-base leading-snug md:text-md lg:text-lg ${right ? 'ml-auto' : ''}`}
               >
-                {card.description}
-              </p>
+                <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+                  {card.description}
+                </ReactMarkdown>
+              </div>
               {card.button_link && (
                 <div
                   className={`relative mt-10 flex w-full ${right ? 'justify-end' : 'justify-start'}`}

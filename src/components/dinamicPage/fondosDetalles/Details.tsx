@@ -2,6 +2,9 @@ import Image from 'next/image';
 import type { CSSProperties, ReactNode } from 'react';
 import { ImageCard, SimpleCard } from '@/types/DinamicLanding';
 import { DetailsGrid } from '../DetailItem';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 type Props = {
   cardImage: ImageCard;
   id: number;
@@ -87,9 +90,11 @@ export default function Details({
             <h3 className="text-4xl font-bold leading-tight lg:text-6xl">
               {cardImage.title}
             </h3>
-            <p className="text-base leading-snug lg:text-xl">
-              {cardImage.description}
-            </p>
+            <div className="text-base leading-snug lg:text-xl">
+              <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+                {cardImage.description}
+              </ReactMarkdown>
+            </div>
           </div>
 
           {/* Ilustración: apoyada abajo, sobresale por arriba de la card */}
