@@ -26,9 +26,11 @@ export default function HeaderDinamicPage({ header }: Props) {
           </div>
         </div>
         <div className="pb-8 flex justify-end lg:justify-end w-full pt-8 lg:pt-0 ">
-          <Link href={header.button_link}>
-            <Button variant="light"> {header.button_text}</Button>
-          </Link>
+          {header.button_link && (
+            <Link href={header.button_link}>
+              <Button variant="light"> {header.button_text}</Button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
